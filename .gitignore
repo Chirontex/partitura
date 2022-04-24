@@ -1,2 +1,4 @@
 /git-clone.sh
 /logs
+/.env
+/app/.env
