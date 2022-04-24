@@ -18,7 +18,7 @@ ENTRYPOINT service php8.1-fpm start \
     && service nginx start \
     && service mariadb start \
     && mysql_secure_installation < /mysql_secure_installation_answers.txt \
-    && rm mysql_secure_installation_answers.txt \
+    && rm /mysql_secure_installation_answers.txt \
     && sudo -i mysql -uroot -proot < /www/docker_initial.sql \
     && rm -rf /temp \
     && echo "SUCCESSFULLY FINISHED!" \
