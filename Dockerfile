@@ -4,7 +4,7 @@ RUN mkdir /www \
     mkdir /temp
 
 COPY git-clone.sh /temp/git-clone.sh
-COPY chirontex.conf /etc/nginx/conf.d/partitura.conf
+COPY partitura.conf /etc/nginx/conf.d/partitura.conf
 
 ENTRYPOINT service php8.1-fpm start \
     && php -r "file_put_contents('/etc/hosts', \"127.0.0.1\tpartitura.loc\n\".file_get_contents('/etc/hosts'));" \
