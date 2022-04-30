@@ -35,7 +35,7 @@ class Kernel extends BaseKernel
             return $app->getKernel();
         }
 
-        throw new SystemException("Kernel doesn't initialize properly.");
+        throw new SystemException("Kernel doesn't initialized properly.");
     }
 
     /**
