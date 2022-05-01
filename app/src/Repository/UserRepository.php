@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Partitura\Repository;
 
@@ -8,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Users repository.
+ * @package Partitura\Repository
  * @extends Repository<User>
  *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
