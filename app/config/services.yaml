@@ -18,7 +18,13 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
+            - '../src/Event/'
+            - '../src/Exception/'
+            - '../src/Interfaces/PasswordUpgradableUserInterface.php'
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    Symfony\Component\Security\Core\User\PasswordUpgraderInterface:
+        class: Partitura\Service\PasswordUpgradeService

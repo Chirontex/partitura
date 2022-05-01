@@ -5,8 +5,8 @@ namespace Partitura\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Partitura\Interfaces\PasswordUpgradableUserInterface;
 use Partitura\Repository\UserRepository;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name=User::TABLE_NAME)
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordUpgradableUserInterface
 {
     public const TABLE_NAME = "p_users";
 
@@ -119,7 +119,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * A visual identifier that represents this user.
-     *
+     * {@inheritDoc}
      * @see UserInterface
      */
     public function getUserIdentifier() : string
@@ -128,6 +128,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * {@inheritDoc}
      * @see UserInterface
      */
     public function getRoles() : array
@@ -153,6 +154,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * {@inheritDoc}
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword() : string
@@ -161,7 +163,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param string $password
+     * {@inheritDoc}
      *
      * @return $this
      */
@@ -233,6 +235,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * {@inheritDoc}
      * @see UserInterface
      */
     public function eraseCredentials()
