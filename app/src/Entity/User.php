@@ -2,6 +2,7 @@
 
 namespace Partitura\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -61,6 +62,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * )
      */
     protected $password;
+
+    /**
+     * @var int
+     * 
+     * @ORM\Column(
+     *     type="smallint",
+     *     name="ACTIVE",
+     *     options={"default":1}
+     * )
+     */
+    protected $active;
+
+    /**
+     * @var DateTime
+     * 
+     * @ORM\Column(type="datetime", name="DATETIME_CREATED")
+     */
+    protected $datetimeCreated;
+
+    /**
+     * @var null|DateTime
+     * 
+     * @ORM\Column(type="datetime", name="DATETIME_UPDATED", nullable=true)
+     */
+    protected $datetimeUpdated;
 
     /**
      * @return int
@@ -133,9 +159,74 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     *
+     * @return $this
+     */
     public function setPassword(string $password) : static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getActive() : bool
+    {
+        return $this->active === 1;
+    }
+
+    /**
+     * @param bool $active
+     *
+     * @return $this
+     */
+    public function setActive(bool $active) : static
+    {
+        $this->active = $active ? 1 : 0;
+
+        return $this;
+    }
+
+    /**
+     * @return null|DateTime
+     */
+    public function getDatetimeCreated() : ?DateTime
+    {
+        return $this->datetimeCreated;
+    }
+
+    /**
+     * @param DateTime $datetimeCreated
+     *
+     * @return $this
+     */
+    public function setDateTimeCreated(DateTime $datetimeCreated) : static
+    {
+        $this->datetimeCreated = $datetimeCreated;
+
+        return $this;
+    }
+
+    /**
+     * @return null|DateTime
+     */
+    public function getDatetimeUpdated() : ?DateTime
+    {
+        return $this->datetimeUpdated;
+    }
+
+    /**
+     * @param DateTime $datetimeUpdated
+     *
+     * @return $this
+     */
+    public function setDatetimeUpdated(DateTime $datetimeUpdated) : static
+    {
+        $this->datetimeUpdated = $datetimeUpdated;
 
         return $this;
     }
