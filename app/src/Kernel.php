@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Partitura;
 
+use Partitura\Exception\SystemException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Partitura\Exception\SystemException;
 
 /**
  * Class Kernel
