@@ -20,6 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Event/'
             - '../src/Exception/'
+            - '../src/Interfaces/PartituraExceptionInterface.php'
             - '../src/Interfaces/PasswordUpgradableUserInterface.php'
             - '../src/Kernel.php'
 
