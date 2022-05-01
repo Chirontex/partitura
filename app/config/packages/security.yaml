@@ -20,6 +20,11 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 86400
+                token_provider:
+                    doctrine: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
