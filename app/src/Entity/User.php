@@ -2,8 +2,8 @@
 
 namespace Partitura\Entity;
 
-use Partitura\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
