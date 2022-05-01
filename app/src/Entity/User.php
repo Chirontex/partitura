@@ -5,6 +5,7 @@ namespace Partitura\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Interfaces\PasswordUpgradableUserInterface;
 use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,16 +19,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordUpgradableUserInterface
 {
-    public const TABLE_NAME = "p_users";
+    use HasIdTrait;
 
-    /**
-     * @var int
-     * 
-     * @ORM\Id
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer", name="ID")
-     */
-    protected $id;
+    public const TABLE_NAME = "p_users";
 
     /**
      * @var string
@@ -88,14 +82,6 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      * @ORM\Column(type="datetime", name="DATETIME_UPDATED", nullable=true)
      */
     protected $datetimeUpdated;
-
-    /**
-     * @return int
-     */
-    public function getId() : int
-    {
-        return (int)$this->id;
-    }
 
     /**
      * @return string
