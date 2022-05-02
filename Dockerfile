@@ -21,6 +21,7 @@ ENTRYPOINT service php8.1-fpm start \
     && rm /mysql_secure_installation_answers.txt \
     && sudo -i mysql -uroot -proot < /www/docker_initial.sql \
     && rm -rf /temp \
+    && bin/console doctrine:migrations:migrate --no-interaction \
     && echo "SUCCESSFULLY FINISHED!" \
     && touch /var/log/container.log \
     && tail -F /var/log/container.log
