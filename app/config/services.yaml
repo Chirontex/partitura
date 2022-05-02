@@ -18,6 +18,7 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
+            - '../src/Enum/'
             - '../src/Event/'
             - '../src/Exception/'
             - '../src/Interfaces/PartituraExceptionInterface.php'
