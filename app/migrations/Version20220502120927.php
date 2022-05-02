@@ -26,7 +26,7 @@ final class Version20220502120927 extends AbstractMigration
     {
         $this->addSql(sprintf(
             'CREATE TABLE %s (
-                ID INT AUTO_INCREMENT NOT NULL,
+                ID BIGINT AUTO_INCREMENT UNSIGNED NOT NULL,
                 CODE VARCHAR(180) NOT NULL,
                 NAME VARCHAR(180) NOT NULL,
                 UNIQUE INDEX UNIQ_5C91D9394180DD2C (CODE),
@@ -38,7 +38,7 @@ final class Version20220502120927 extends AbstractMigration
         ));
         $this->addSql(sprintf(
             'CREATE TABLE %s (
-                ID INT AUTO_INCREMENT NOT NULL,
+                ID BIGINT AUTO_INCREMENT UNSIGNED NOT NULL,
                 CODE VARCHAR(180) NOT NULL,
                 UNIQUE INDEX UNIQ_31F83B74180DD2C (CODE),
                 PRIMARY KEY(ID)
@@ -61,7 +61,7 @@ final class Version20220502120927 extends AbstractMigration
         ));
         $this->addSql(sprintf(
             'CREATE TABLE %s (
-                ID INT AUTO_INCREMENT NOT NULL,
+                ID BIGINT AUTO_INCREMENT UNSIGNED NOT NULL,
                 USERNAME VARCHAR(180) NOT NULL,
                 PASSWORD_HASH VARCHAR(180) NOT NULL,
                 ACTIVE SMALLINT DEFAULT 1 NOT NULL,
