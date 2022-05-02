@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     options={"default":1}
      * )
      */
-    protected $active;
+    protected $active = 1;
 
     /**
      * @var DateTime
