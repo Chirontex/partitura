@@ -38,6 +38,10 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * @var Role
      * 
+     * @ORM\JoinColumn(
+     *     name="ROLE_ID",
+     *     referencedColumnName="ID"
+     * )
      * @ORM\ManyToOne(
      *     targetEntity="\Partitura\Entity\Role",
      *     fetch="EAGER",

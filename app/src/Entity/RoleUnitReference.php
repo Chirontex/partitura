@@ -17,6 +17,11 @@ class RoleUnitReference
      * @var Role
      * 
      * @ORM\Id
+     * @ORM\JoinColumn(
+     *     name="ROLE_ID",
+     *     referencedColumnName="ID",
+     *     nullable=false
+     * )
      * @ORM\ManyToOne(
      *     targetEntity="\Partitura\Entity\Role",
      *     inversedBy="unitReferences"
@@ -28,6 +33,11 @@ class RoleUnitReference
      * @var Unit
      * 
      * @ORM\Id
+     * @ORM\JoinColumn(
+     *     name="UNIT_ID",
+     *     referencedColumnName="ID",
+     *     nullable=false
+     * )
      * @ORM\ManyToOne(
      *     targetEntity="\Partitura\Entity\Unit",
      *     inversedBy="roleReferences"
