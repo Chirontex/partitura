@@ -6,6 +6,7 @@ namespace Partitura\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Partitura\Entity\Role;
+use Partitura\Exception\EntityNotFoundException;
 
 /**
  * Roles repository.
@@ -22,5 +23,25 @@ class RoleRepository extends Repository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Role::class);
+    }
+
+    /**
+     * @param string $code
+     *
+     * @throws EntityNotFoundException
+     * @return Role
+     */
+    public function findByCode(string $code) : Role
+    {
+        $role = $this->findOneBy(["code" => $code]);
+
+        if ($role === null) {
+            throw new EntityNotFoundException(sprintf(
+                "Role with code %s was not found.",
+                $code
+            ));
+        }
+
+        return $role;
     }
 }
