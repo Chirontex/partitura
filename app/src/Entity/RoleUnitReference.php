@@ -4,10 +4,14 @@ declare(strict_types=1);
 namespace Partitura\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Partitura\Repository\RoleUnitReferenceRepository;
 
 /**
  * Role unit reference entity.
  * @package Partitura\Entity
+ * 
+ * @ORM\Entity(repositoryClass=RoleUnitReferenceRepository::class)
+ * @ORM\Table(name=RoleUnitReference::TABLE_NAME)
  */
 class RoleUnitReference
 {
