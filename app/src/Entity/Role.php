@@ -5,6 +5,7 @@ namespace Partitura\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Partitura\Entity\Trait\HasCodeTrait;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Repository\RoleRepository;
 
@@ -17,21 +18,10 @@ use Partitura\Repository\RoleRepository;
  */
 class Role
 {
-    use HasIdTrait;
+    use HasIdTrait,
+        HasCodeTrait;
 
     public const TABLE_NAME = "p_roles";
-
-    /**
-     * @var string
-     * 
-     * @ORM\Column(
-     *     type="string",
-     *     name="CODE",
-     *     length=180,
-     *     unique=true
-     * )
-     */
-    protected $code;
 
     /**
      * @var string
@@ -57,26 +47,6 @@ class Role
     public function __construct()
     {
         $this->users = new ArrayCollection();
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode() : string
-    {
-        return (string)$this->code;
-    }
-
-    /**
-     * @param string $code
-     *
-     * @return $this
-     */
-    public function setCode(string $code) : static
-    {
-        $this->code = $code;
-
-        return $this;
     }
 
     /**
