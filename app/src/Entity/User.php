@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
 {
     use HasIdTrait;
 
-    public const TABLE_NAME = "p_users";
+    public const TABLE_NAME = "pt_users";
 
     /**
      * @var string

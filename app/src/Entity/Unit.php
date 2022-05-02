@@ -21,7 +21,7 @@ class Unit
     use HasIdTrait,
         HasCodeTrait;
 
-    public const TABLE_NAME = "p_units";
+    public const TABLE_NAME = "pt_units";
 
     /**
      * @var ArrayCollection<RoleUnitReference>

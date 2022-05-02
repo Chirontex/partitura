@@ -15,7 +15,7 @@ use Partitura\Repository\RoleUnitReferenceRepository;
  */
 class RoleUnitReference
 {
-    public const TABLE_NAME = "p_role_unit_references";
+    public const TABLE_NAME = "pt_role_unit_references";
 
     /**
      * @var Role

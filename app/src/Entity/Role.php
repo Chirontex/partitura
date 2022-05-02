@@ -21,7 +21,7 @@ class Role
     use HasIdTrait,
         HasCodeTrait;
 
-    public const TABLE_NAME = "p_roles";
+    public const TABLE_NAME = "pt_roles";
 
     /**
      * @var string
