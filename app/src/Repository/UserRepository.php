@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Partitura\Repository;
 
-use Partitura\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
+use Partitura\Entity\User;
 
 /**
  * Users repository.
