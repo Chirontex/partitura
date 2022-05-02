@@ -86,6 +86,11 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      */
     protected $datetimeUpdated;
 
+    public function __construct()
+    {
+        $this->datetimeCreated = new DateTime();
+    }
+
     /**
      * @return string
      */
