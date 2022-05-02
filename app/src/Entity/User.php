@@ -36,13 +36,12 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     protected $username;
 
     /**
-     * @var int
+     * @var Role
      * 
-     * @ORM\Column(
-     *     type="integer",
-     *     name="ROLE",
-     *     length=8,
-     *     nullable=true
+     * @ORM\ManyToOne(
+     *     targetEntity="\Partitura\Entity\Role",
+     *     fetch="EAGER",
+     *     inversedBy="users"
      * )
      */
     protected $role;
@@ -119,20 +118,27 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      */
     public function getRoles() : array
     {
-        // TODO: доработать метод после создания сущности роли и связи между пользователем и ролью
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        if ($this->role !== null) {
+            return [$this->role->getCode()];
+        }
 
-        return array_unique($roles);
+        return ["ROLE_USER"];
     }
 
     /**
-     * TODO: доработать метод после создания сущности роли и связи между пользователем и ролью
-     * @param int $role
+     * @return Role
+     */
+    public function getRole() : Role
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param Role $role
      *
      * @return $this
      */
-    public function setRole(int $role) : static
+    public function setRole(Role $role) : static
     {
         $this->role = $role;
 

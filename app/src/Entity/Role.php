@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Repository\RoleRepository;
@@ -44,6 +45,21 @@ class Role
     protected $name;
 
     /**
+     * @var ArrayCollection<User>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\User",
+     *     mappedBy="role"
+     * )
+     */
+    protected $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
+    /**
      * @return string
      */
     public function getCode() : string
@@ -79,6 +95,30 @@ class Role
     public function setName(string $name) : static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<User>
+     */
+    public function getUsers() : ArrayCollection
+    {
+        return $this->users;
+    }
+
+    /**
+     * Remove user from old role's list and add to this role.
+     * @param User $user
+     *
+     * @return $this
+     */
+    public function addUser(User $user) : static
+    {
+        $user->getRole()->getUsers()->removeElement($user);
+        $user->setRole($this);
+
+        $this->users->add($user);
 
         return $this;
     }
