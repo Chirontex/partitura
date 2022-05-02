@@ -33,8 +33,8 @@ security:
             # switch_user: true
 
     role_hierarchy:
-        ROLE_REDACTOR: ROLE_USER
-        ROLE_MODERATOR: ROLE_REDACTOR
+        ROLE_EDITOR: ROLE_USER
+        ROLE_MODERATOR: ROLE_EDITOR
         ROLE_ADMINISTRATOR: ROLE_MODERATOR
         ROLE_ROOT: ROLE_ADMINISTRATOR
 
