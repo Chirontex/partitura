@@ -131,7 +131,7 @@ final class Version20220502120927 extends AbstractMigration
         
         foreach (RoleEnum::cases() as $role) {
             $objectManager->persist(
-                (new Role)
+                (new Role())
                     ->setCode($role->value)
                     ->setName($role->getName())
             );
