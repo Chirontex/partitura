@@ -44,9 +44,20 @@ class Role
      */
     protected $users;
 
+    /**
+     * @var ArrayCollection<RoleUnitReference>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="Partitura\Entity\RoleUnitReference",
+     *     mappedBy="role"
+     * )
+     */
+    protected $unitReferences;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->unitReferences = new ArrayCollection();
     }
 
     /**
@@ -91,5 +102,13 @@ class Role
         $this->users->add($user);
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection<RoleUnitReference>
+     */
+    public function getUnitReferences() : ArrayCollection
+    {
+        return $this->unitReferences;
     }
 }
