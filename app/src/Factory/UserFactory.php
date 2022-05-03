@@ -40,8 +40,8 @@ class UserFactory
     public function createUser(
         string $username,
         string $plainPassword,
-        string $roleCode = "") : User
-    {
+        string $roleCode = ""
+    ) : User {
         if (empty($roleCode)) {
             $roleCode = RoleEnum::ROLE_USER->value;
         }
