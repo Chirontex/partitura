@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DoctrineMigrations;
@@ -13,7 +14,7 @@ use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
 use Partitura\Kernel;
 
-final class Version20220502120927 extends AbstractMigration
+final class Version20220502235855 extends AbstractMigration
 {
     /** {@inheritDoc} */
     public function getDescription() : string
@@ -26,9 +27,9 @@ final class Version20220502120927 extends AbstractMigration
     {
         $this->addSql(sprintf(
             'CREATE TABLE %s (
-                ID BIGINT AUTO_INCREMENT UNSIGNED NOT NULL,
+                ID BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
                 CODE VARCHAR(180) NOT NULL,
-                NAME VARCHAR(180) NOT NULL,
+                `NAME` VARCHAR(180) NOT NULL,
                 UNIQUE INDEX UNIQ_5C91D9394180DD2C (CODE),
                 PRIMARY KEY(ID)
             )
@@ -38,7 +39,7 @@ final class Version20220502120927 extends AbstractMigration
         ));
         $this->addSql(sprintf(
             'CREATE TABLE %s (
-                ID BIGINT AUTO_INCREMENT UNSIGNED NOT NULL,
+                ID BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
                 CODE VARCHAR(180) NOT NULL,
                 UNIQUE INDEX UNIQ_31F83B74180DD2C (CODE),
                 PRIMARY KEY(ID)
@@ -49,8 +50,8 @@ final class Version20220502120927 extends AbstractMigration
         ));
         $this->addSql(sprintf(
             'CREATE TABLE %s (
-                ROLE_ID INT NOT NULL,
-                UNIT_ID INT NOT NULL,
+                ROLE_ID BIGINT UNSIGNED NOT NULL,
+                UNIT_ID BIGINT UNSIGNED NOT NULL,
                 INDEX IDX_6CDA33ADD10B9A56 (ROLE_ID),
                 INDEX IDX_6CDA33ADFFB5C8F7 (UNIT_ID),
                 PRIMARY KEY(ROLE_ID, UNIT_ID)
@@ -61,11 +62,11 @@ final class Version20220502120927 extends AbstractMigration
         ));
         $this->addSql(sprintf(
             'CREATE TABLE %s (
-                ID BIGINT AUTO_INCREMENT UNSIGNED NOT NULL,
+                ID BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
                 USERNAME VARCHAR(180) NOT NULL,
                 PASSWORD_HASH VARCHAR(180) NOT NULL,
+                ROLE_ID BIGINT UNSIGNED DEFAULT NULL,
                 ACTIVE SMALLINT DEFAULT 1 NOT NULL,
-                ROLE_ID INT DEFAULT NULL,
                 DATETIME_CREATED DATETIME NOT NULL,
                 DATETIME_UPDATED DATETIME DEFAULT NULL,
                 UNIQUE INDEX UNIQ_FE2C52173E6D9A3B (USERNAME),
@@ -96,7 +97,7 @@ final class Version20220502120927 extends AbstractMigration
         $this->addSql(
             'CREATE TABLE rememberme_token (
                 series VARCHAR(88) NOT NULL,
-                `value` VARCHAR(88) NOT NULL,
+                value VARCHAR(88) NOT NULL,
                 lastUsed DATETIME NOT NULL,
                 class VARCHAR(100) NOT NULL,
                 username VARCHAR(200) NOT NULL,
