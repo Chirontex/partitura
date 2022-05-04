@@ -1,4 +1,4 @@
-FROM chirontex/lemp:1.0.0
+FROM chirontex/lemp:1.0.1
 
 RUN mkdir /www \
     mkdir /temp
@@ -14,6 +14,7 @@ ENTRYPOINT service php8.1-fpm start \
     && cp /temp/.env /www/app/.env \
     && cd /www/app \
     && composer install \
+    && npm install \
     && mkdir /www/logs \
     && service nginx start \
     && service mariadb start \
