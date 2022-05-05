@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Controller;
 
+use Partitura\Interfaces\CsrfTokenBaseFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,6 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
  */
 abstract class Controller extends AbstractController
 {
+    /** @var CsrfTokenBaseFactoryInterface */
+    protected $csrfTokenBaseFactory;
+
+    public function __construct(CsrfTokenBaseFactoryInterface $csrfTokenBaseFactory)
+    {
+        $this->csrfTokenBaseFactory = $csrfTokenBaseFactory;
+    }
+
     /**
      * @param null|Request $request
      *
@@ -19,14 +28,6 @@ abstract class Controller extends AbstractController
      */
     protected function getCsrfTokenBase(?Request $request = null) : array
     {
-        if ($request === null) {
-            $request = Request::createFromGlobals();
-        }
-
-        return ["token_base" => sprintf(
-            "%s || %s",
-            (string)$request->server->get("HTTP_USER_AGENT"),
-            (string)$request->attributes->get("_route")
-        )];
+        return $this->csrfTokenBaseFactory->create($request)->toArray();
     }
 }
