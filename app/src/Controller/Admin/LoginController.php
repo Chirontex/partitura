@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Controller\Admin;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * 
  * @Route("/admin/login")
  */
-class LoginController
+class LoginController extends AbstractController
 {
     /**
      * @return Response
@@ -21,6 +22,6 @@ class LoginController
      */
     public function loginForm() : Response
     {
-        return new Response("<html><body>test</body></html>");
+        return $this->render("genesis/admin/login.html.twig");
     }
 }

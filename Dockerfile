@@ -23,6 +23,7 @@ ENTRYPOINT service php8.1-fpm start \
     && sudo -i mysql -uroot -proot < /www/docker_initial.sql \
     && rm -rf /temp \
     && bin/console doctrine:migrations:migrate --no-interaction \
+    && npm run build \
     && echo "SUCCESSFULLY FINISHED!" \
     && touch /var/log/container.log \
     && tail -F /var/log/container.log
