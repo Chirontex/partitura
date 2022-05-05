@@ -18,7 +18,7 @@ class LoginController extends AbstractController
     /**
      * @return Response
      * 
-     * @Route("/", methods={"GET"})
+     * @Route("/", name="partitura_admin_login_form", methods={"GET"})
      */
     public function loginForm() : Response
     {
