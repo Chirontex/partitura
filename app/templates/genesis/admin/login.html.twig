@@ -24,25 +24,25 @@
         <link href="{{ asset('build/admin/login.css') }}" rel="stylesheet">
     </head>
     <body class="text-center">
-        <main class="form-signin">
-            <form>
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <main class="form-login">
+            <form method="POST">
+                <h1 class="h3 mb-3 fw-normal">Пожалуйста, авторизуйтесь</h1>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
+                    <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Имя">
+                    <label for="floatingInput">Имя</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
+                    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Пароль">
+                    <label for="floatingPassword">Пароль</label>
                 </div>
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" name="remember_me" value="remember-me"> Запомнить меня
                     </label>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+                <p class="mt-5 mb-3 text-muted">Partitura, 2022</p>
             </form>
         </main>
     </body>
