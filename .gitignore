@@ -2,3 +2,4 @@
 /logs
 /.env
 /app/.env
+/.vscode
