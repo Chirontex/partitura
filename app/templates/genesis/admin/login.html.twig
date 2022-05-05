@@ -10,6 +10,7 @@
     <body class="text-center">
         <main class="form-login">
             <form method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token(token_base) }}">
                 <h1 class="h3 mb-3 fw-normal">Пожалуйста, авторизуйтесь</h1>
                 <div class="form-floating">
                     <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Имя">

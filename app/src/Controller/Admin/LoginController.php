@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Partitura\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Partitura\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,15 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
  * 
  * @Route("/admin/login")
  */
-class LoginController extends AbstractController
+class LoginController extends Controller
 {
     /**
      * @return Response
      * 
      * @Route("/", name="partitura_admin_login_form", methods={"GET"})
      */
-    public function loginForm() : Response
+    public function loginForm(Request $request) : Response
     {
-        return $this->render("genesis/admin/login.html.twig");
+        return $this->render("genesis/admin/login.html.twig", $this->getCsrfTokenBase($request));
     }
 }
