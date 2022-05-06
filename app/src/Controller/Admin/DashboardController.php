@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Partitura\Controller\Admin;
 
-use Partitura\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/admin/dashboard")
  * @IsGranted("ROLE_EDITOR")
  */
-class DashboardController extends Controller
+class DashboardController extends AbstractController
 {
     public const ROUTE_DASHBOARD = "partitura_admin_dashboard";
 

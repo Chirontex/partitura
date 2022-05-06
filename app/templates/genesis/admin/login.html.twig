@@ -10,7 +10,7 @@
     <body class="text-center">
         <main class="form-login">
             <form action="{{ path(route_name) }}" method="POST">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token(token_base) }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
                 {% if error %}
                 <div class="alert alert-danger" role="alert">
                     {{ error.messageKey|trans(error.messageData, 'security') }}
