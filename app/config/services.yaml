@@ -17,7 +17,6 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Dto/'
             - '../src/Entity/'
             - '../src/Enum/'
             - '../src/Event/'
