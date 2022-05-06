@@ -10,14 +10,19 @@
     <body class="text-center">
         <main class="form-login">
             <form action="{{ path(route_name) }}" method="POST">
-                <input type="hidden" name="_token" value="{{ csrf_token(token_base) }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token(token_base) }}">
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+                {% endif %}
                 <h1 class="h3 mb-3 fw-normal">Пожалуйста, авторизуйтесь</h1>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" name="_username" placeholder="Имя">
+                    <input type="text" class="form-control" id="floatingInput" name="_username" placeholder="Имя" value="{{ last_username }}" required="true">
                     <label for="floatingInput">Имя</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" name="_password" placeholder="Пароль">
+                    <input type="password" class="form-control" id="floatingPassword" name="_password" placeholder="Пароль" required="true">
                     <label for="floatingPassword">Пароль</label>
                 </div>
                 <div class="checkbox mb-3">

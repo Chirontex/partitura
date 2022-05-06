@@ -7,6 +7,7 @@ use Partitura\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class LoginController
@@ -23,14 +24,18 @@ class LoginController extends Controller
      * 
      * @return Response
      * 
-     * @Route("/", name=LoginController::ROUTE_LOGIN, methods={"GET"})
+     * @Route("/", name=LoginController::ROUTE_LOGIN, methods={"GET", "POST"})
      */
-    public function login(Request $request) : Response
+    public function login(Request $request, AuthenticationUtils $authenticationUtils) : Response
     {
         return $this->render(
             "genesis/admin/login.html.twig",
             array_merge(
-                ["route_name" => static::ROUTE_LOGIN],
+                [
+                    "route_name" => static::ROUTE_LOGIN,
+                    "last_username" => $authenticationUtils->getLastUsername(),
+                    "error" => $authenticationUtils->getLastAuthenticationError(),
+                ],
                 $this->getCsrfTokenBase($request)
             )
         );
