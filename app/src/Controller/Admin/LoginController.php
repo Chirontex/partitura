@@ -16,17 +16,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class LoginController extends Controller
 {
-    public const ROUTE_LOGIN_FORM = "partitura_admin_login_form";
+    public const ROUTE_LOGIN = "partitura_admin_login";
 
     /**
      * @param Request $request
      * 
      * @return Response
      * 
-     * @Route("/", name=LoginController::ROUTE_LOGIN_FORM, methods={"GET"})
+     * @Route("/", name=LoginController::ROUTE_LOGIN, methods={"GET"})
      */
-    public function loginForm(Request $request) : Response
+    public function login(Request $request) : Response
     {
-        return $this->render("genesis/admin/login.html.twig", $this->getCsrfTokenBase($request));
+        return $this->render(
+            "genesis/admin/login.html.twig",
+            array_merge(
+                ["route_name" => static::ROUTE_LOGIN],
+                $this->getCsrfTokenBase($request)
+            )
+        );
     }
 }

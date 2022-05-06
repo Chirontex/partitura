@@ -9,20 +9,20 @@
 {% block body %}
     <body class="text-center">
         <main class="form-login">
-            <form method="POST">
+            <form action="{{ path(route_name) }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token(token_base) }}">
                 <h1 class="h3 mb-3 fw-normal">Пожалуйста, авторизуйтесь</h1>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Имя">
+                    <input type="text" class="form-control" id="floatingInput" name="_username" placeholder="Имя">
                     <label for="floatingInput">Имя</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Пароль">
+                    <input type="password" class="form-control" id="floatingPassword" name="_password" placeholder="Пароль">
                     <label for="floatingPassword">Пароль</label>
                 </div>
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" name="remember_me" value="remember-me"> Запомнить меня
+                        <input type="checkbox" name="_remember_me" value="remember-me"> Запомнить меня
                     </label>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
