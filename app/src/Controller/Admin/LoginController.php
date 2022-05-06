@@ -16,10 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class LoginController extends Controller
 {
+    public const ROUTE_LOGIN_FORM = "partitura_admin_login_form";
+
     /**
+     * @param Request $request
+     * 
      * @return Response
      * 
-     * @Route("/", name="partitura_admin_login_form", methods={"GET"})
+     * @Route("/", name=LoginController::ROUTE_LOGIN_FORM, methods={"GET"})
      */
     public function loginForm(Request $request) : Response
     {
