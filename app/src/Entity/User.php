@@ -178,7 +178,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * @return bool
      */
-    public function getActive() : bool
+    public function isActive() : bool
     {
         return $this->active === 1;
     }
