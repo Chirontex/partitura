@@ -27,6 +27,10 @@ class LoginController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils) : Response
     {
+        if ($this->getUser() !== null) {
+            return $this->redirectToRoute(DashboardController::ROUTE_DASHBOARD);
+        }
+
         return $this->render(
             "genesis/admin/login.html.twig",
             [
