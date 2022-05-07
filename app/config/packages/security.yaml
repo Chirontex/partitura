@@ -26,6 +26,8 @@ security:
                 enable_csrf: true
                 csrf_token_id: "login"
                 default_target_path: !php/const \Partitura\Controller\Admin\DashboardController::ROUTE_DASHBOARD
+            logout:
+                path: !php/const \Partitura\Controller\Profile\LogoutController::ROUTE_LOGOUT
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 86400
