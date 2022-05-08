@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
 use Partitura\Entity\Trait\HasDatetimeUpdatedTrait;
@@ -76,9 +77,31 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      */
     protected $active = 1;
 
+    /**
+     * @var ArrayCollection<Post>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\Post",
+     *     mappedBy="author"
+     * )
+     */
+    protected $createdPosts;
+
+    /**
+     * @var ArrayCollection<Post>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\Post",
+     *     mappedBy="lastEditor"
+     * )
+     */
+    protected $lastEditedPosts;
+
     public function __construct()
     {
         $this->datetimeCreated = new DateTime();
+        $this->createdPosts = new ArrayCollection();
+        $this->lastEditedPosts = new ArrayCollection();
     }
 
     /**
@@ -181,6 +204,50 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     public function setActive(bool $active) : static
     {
         $this->active = $active ? 1 : 0;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Post>
+     */
+    public function getCreatedPosts() : ArrayCollection
+    {
+        return $this->createdPosts;
+    }
+
+    /**
+     * @param Post $post
+     *
+     * @return $this
+     */
+    public function addCreatedPost(Post $post) : static
+    {
+        if (!$this->createdPosts->contains($post)) {
+            $this->createdPosts->add($post);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Post>
+     */
+    public function getLastEditedPosts() : ArrayCollection
+    {
+        return $this->lastEditedPosts;
+    }
+
+    /**
+     * @param Post $post
+     *
+     * @return $this
+     */
+    public function addLastEditedPost(Post $post) : static
+    {
+        if (!$this->lastEditedPosts->contains($post)) {
+            $this->lastEditedPosts->add($post);
+        }
 
         return $this;
     }
