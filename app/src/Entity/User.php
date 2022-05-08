@@ -5,6 +5,8 @@ namespace Partitura\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
+use Partitura\Entity\Trait\HasDatetimeUpdatedTrait;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Interfaces\PasswordUpgradableUserInterface;
 use Partitura\Repository\UserRepository;
@@ -19,7 +21,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordUpgradableUserInterface
 {
-    use HasIdTrait;
+    use HasIdTrait,
+        HasDatetimeCreatedTrait,
+        HasDatetimeUpdatedTrait;
 
     public const TABLE_NAME = "pt_users";
 
@@ -71,20 +75,6 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      * )
      */
     protected $active = 1;
-
-    /**
-     * @var DateTime
-     * 
-     * @ORM\Column(type="datetime", name="DATETIME_CREATED")
-     */
-    protected $datetimeCreated;
-
-    /**
-     * @var null|DateTime
-     * 
-     * @ORM\Column(type="datetime", name="DATETIME_UPDATED", nullable=true)
-     */
-    protected $datetimeUpdated;
 
     public function __construct()
     {
@@ -191,46 +181,6 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     public function setActive(bool $active) : static
     {
         $this->active = $active ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * @return null|DateTime
-     */
-    public function getDatetimeCreated() : ?DateTime
-    {
-        return $this->datetimeCreated;
-    }
-
-    /**
-     * @param DateTime $datetimeCreated
-     *
-     * @return $this
-     */
-    public function setDateTimeCreated(DateTime $datetimeCreated) : static
-    {
-        $this->datetimeCreated = $datetimeCreated;
-
-        return $this;
-    }
-
-    /**
-     * @return null|DateTime
-     */
-    public function getDatetimeUpdated() : ?DateTime
-    {
-        return $this->datetimeUpdated;
-    }
-
-    /**
-     * @param DateTime $datetimeUpdated
-     *
-     * @return $this
-     */
-    public function setDatetimeUpdated(DateTime $datetimeUpdated) : static
-    {
-        $this->datetimeUpdated = $datetimeUpdated;
 
         return $this;
     }

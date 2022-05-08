@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Entity\Trait\HasCodeTrait;
 use Partitura\Entity\Trait\HasIdTrait;
+use Partitura\Entity\Trait\HasNameTrait;
 use Partitura\Repository\RoleRepository;
 
 /**
@@ -19,20 +20,10 @@ use Partitura\Repository\RoleRepository;
 class Role
 {
     use HasIdTrait,
-        HasCodeTrait;
+        HasCodeTrait,
+        HasNameTrait;
 
     public const TABLE_NAME = "pt_roles";
-
-    /**
-     * @var string
-     * 
-     * @ORM\Column(
-     *     type="string",
-     *     name="NAME",
-     *     length=180
-     * )
-     */
-    protected $name;
 
     /**
      * @var ArrayCollection<User>
@@ -58,26 +49,6 @@ class Role
     {
         $this->users = new ArrayCollection();
         $this->unitReferences = new ArrayCollection();
-    }
-
-    /**
-     * @return string
-     */
-    public function getName() : string
-    {
-        return (string)$this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName(string $name) : static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
