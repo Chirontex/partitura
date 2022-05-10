@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Entity\Trait\HasContentTrait;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
@@ -101,9 +102,20 @@ class Post
      */
     protected $type;
 
+    /**
+     * @var ArrayCollection<ArchivedPost>
+     * 
+     * @OneToMany(
+     *     targetEntity="\Partitura\Entity\ArchivedPost",
+     *     mappedBy="post"
+     * )
+     */
+    protected $archive;
+
     public function __construct()
     {
         $this->type = PostTypeEnum::DRAFT->value;
+        $this->archive = new ArrayCollection();
     }
 
     /**
@@ -215,5 +227,13 @@ class Post
         $this->type = $type->value;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection<ArchivedPost>
+     */
+    public function getArchive() : ArrayCollection
+    {
+        return $this->archive;
     }
 }

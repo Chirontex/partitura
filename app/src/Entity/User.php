@@ -97,11 +97,22 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      */
     protected $lastEditedPosts;
 
+    /**
+     * @var ArrayCollection<ArchivedPost>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\ArchivedPost",
+     *     mappedBy="author"
+     * )
+     */
+    protected $archivedPosts;
+
     public function __construct()
     {
         $this->datetimeCreated = new DateTime();
         $this->createdPosts = new ArrayCollection();
         $this->lastEditedPosts = new ArrayCollection();
+        $this->archivedPosts = new ArrayCollection();
     }
 
     /**
@@ -250,6 +261,14 @@ class User implements UserInterface, PasswordUpgradableUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection<ArchivedPost>
+     */
+    public function getArchivedPosts() : ArrayCollection
+    {
+        return $this->archivedPosts;
     }
 
     /**
