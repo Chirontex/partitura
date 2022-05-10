@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace DoctrineMigrations;
@@ -108,18 +107,21 @@ final class Version20220502235855 extends AbstractMigration
         );
         $this->addSql(sprintf(
             'ALTER TABLE %s
-                ADD CONSTRAINT FK_6CDA33ADD10B9A56 FOREIGN KEY (ROLE_ID) REFERENCES pt_roles (ID)',
-            RoleUnitReference::TABLE_NAME
+                ADD CONSTRAINT FK_6CDA33ADD10B9A56 FOREIGN KEY (ROLE_ID) REFERENCES %s (ID)',
+            RoleUnitReference::TABLE_NAME,
+            Role::TABLE_NAME
         ));
         $this->addSql(sprintf(
             'ALTER TABLE %s
-                ADD CONSTRAINT FK_6CDA33ADFFB5C8F7 FOREIGN KEY (UNIT_ID) REFERENCES pt_units (ID)',
-            RoleUnitReference::TABLE_NAME
+                ADD CONSTRAINT FK_6CDA33ADFFB5C8F7 FOREIGN KEY (UNIT_ID) REFERENCES %s (ID)',
+            RoleUnitReference::TABLE_NAME,
+            Unit::TABLE_NAME
         ));
         $this->addSql(sprintf(
             'ALTER TABLE %s
-                ADD CONSTRAINT FK_FE2C5217D10B9A56 FOREIGN KEY (ROLE_ID) REFERENCES pt_roles (ID)',
-            User::TABLE_NAME
+                ADD CONSTRAINT FK_FE2C5217D10B9A56 FOREIGN KEY (ROLE_ID) REFERENCES %s (ID)',
+            User::TABLE_NAME,
+            Role::TABLE_NAME
         ));
     }
 
