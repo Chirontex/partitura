@@ -50,12 +50,6 @@ class Post
 
     /**
      * @var null|static
-     * 
-     * @ORM\OneToOne(
-     *     targetEntity="\Partitura\Entity\Post",
-     *     fetch="EAGER",
-     *     inversedBy="parent"
-     * )
      */
     protected $child;
 
