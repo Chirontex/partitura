@@ -105,7 +105,7 @@ class Post
     /**
      * @var ArrayCollection<ArchivedPost>
      * 
-     * @OneToMany(
+     * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\ArchivedPost",
      *     mappedBy="post"
      * )
