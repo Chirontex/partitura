@@ -11,6 +11,7 @@ use Partitura\Entity\User;
 
 final class Version20220510232206 extends AbstractMigration
 {
+    /** {@inheritDoc} */
     public function getDescription(): string
     {
         return 'Add posts and posts archive.';
