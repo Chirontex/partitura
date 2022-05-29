@@ -1,0 +1,17 @@
+{% extends 'genesis/admin/form.html.twig' %}
+
+{% block title %}Вы заблокированы{% endblock %}
+
+{% block styles %}
+        <link href="{{ asset('build/admin/login.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <body class="text-center">
+        <main class="form-login">
+            <div class="alert alert-danger" role="alert">
+                Ваша учётная запись была деактивирована.
+            </div>
+        </main>
+    </body>
+{% endblock %}
