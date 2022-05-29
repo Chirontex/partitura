@@ -5,6 +5,7 @@ namespace Partitura\Service;
 
 use Partitura\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
@@ -19,12 +20,27 @@ class UserService
     /** @var PasswordUpgraderInterface */
     protected $passwordUpgrader;
 
+    /** @var Security */
+    protected $securityHelper;
+
     public function __construct(
         UserPasswordHasherInterface $passwordHasher,
-        PasswordUpgraderInterface $passwordUpgrader
+        PasswordUpgraderInterface $passwordUpgrader,
+        Security $securityHelper
     ) {
         $this->passwordHasher = $passwordHasher;
         $this->passwordUpgrader = $passwordUpgrader;
+        $this->securityHelper = $securityHelper;
+    }
+
+    /**
+     * @return null|User
+     */
+    public function getCurrentUser() : ?User
+    {
+        $user = $this->securityHelper->getUser();
+
+        return $user instanceof User ? $user : null;
     }
 
     /**
