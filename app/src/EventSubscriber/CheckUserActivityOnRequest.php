@@ -50,6 +50,12 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
             return;
         }
 
+        $request = $event->getRequest();
+        
+        if (!$this->isRequestAbleToCheck($request)) {
+            return;
+        }
+
         $user = $this->userService->getCurrentUser();
 
         if (!($user instanceof User)) {
@@ -60,14 +66,35 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
             return;
         }
 
-        $request = $event->getRequest();
-        $response = $request->headers->get("Accept") === "application/json"
-            ? $this->createJsonResponse()
-            : $this->createRedirectResponse($request);
+        $event->setResponse(
+            $request->headers->get("Accept") === "application/json"
+                ? $this->createJsonResponse()
+                : $this->createRedirectResponse()
+        );
+    }
 
-        if ($response !== null) {
-            $event->setResponse($response);
-        }
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    protected function isRequestAbleToCheck(Request $request) : bool
+    {
+        $requestUri = $request->getRequestUri();
+        $bannedUri = $this->getRouteUri(BannedController::ROUTE_BANNED);
+        $logoutUri = $this->getRouteUri(LogoutController::ROUTE_LOGOUT);
+
+        return $requestUri !== $bannedUri && $requestUri !== $logoutUri;
+    }
+
+    /**
+     * @param string $routeName
+     * 
+     * @return string
+     */
+    protected function getRouteUri(string $routeName) : string
+    {
+        return $this->router->generate($routeName);
     }
 
     /**
@@ -85,17 +112,10 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
     }
 
     /**
-     * @param Request $request
-     *
-     * @return null|RedirectResponse
+     * @return RedirectResponse
      */
-    protected function createRedirectResponse(Request $request) : ?RedirectResponse
+    protected function createRedirectResponse() : RedirectResponse
     {
-        $redirectUri = $this->router->generate(BannedController::ROUTE_BANNED);
-        $requestUri = $request->getRequestUri();
-
-        return $requestUri === $redirectUri || $requestUri === $this->router->generate(LogoutController::ROUTE_LOGOUT)
-            ? null
-            : new RedirectResponse($redirectUri);
+        return new RedirectResponse($this->getRouteUri(BannedController::ROUTE_BANNED));
     }
 }
