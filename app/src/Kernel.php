@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace Partitura;
 
+use Partitura\DependencyInjection\RequestDtoFactoryCompilerPass;
 use Partitura\Exception\SystemException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
@@ -59,5 +61,13 @@ class Kernel extends BaseKernel
     public function getParameter(string $name) : mixed
     {
         return $this->getContainer()->getParameter($name);
+    }
+
+    /** {@inheritDoc} */
+    protected function build(ContainerBuilder $container) : void
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RequestDtoFactoryCompilerPass());
     }
 }
