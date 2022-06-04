@@ -1,15 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Partitura\Factory\RequestDto;
+namespace Partitura\Factory\RequestDto\Api;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Dto\Api\BlogRequestDto;
+use Partitura\Factory\RequestDto\AbstractRequestDtoFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class BlogRequestDtoFactory
- * @package Partitura\Factory\RequestDto
+ * @package Partitura\Factory\RequestDto\Api
  */
 class BlogRequestDtoFactory extends AbstractRequestDtoFactory
 {
