@@ -35,7 +35,14 @@ services:
         class: Partitura\Service\PasswordUpgradeService
 
     JMS\Serializer\ArrayTransformerInterface:
-        class: JMS\Serializer\Serializer
+        alias: JMS\Serializer\Serializer
 
     JMS\Serializer\SerializerInterface:
-        class: JMS\Serializer\Serializer
+        alias: JMS\Serializer\Serializer
+
+    JMS\Serializer\Serializer:
+        factory: ['JMS\Serializer\SerializerBuilder', 'build']
+
+    serializer:
+        alias: JMS\Serializer\Serializer
+        public: true
