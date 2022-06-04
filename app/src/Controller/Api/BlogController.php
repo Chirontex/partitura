@@ -27,6 +27,7 @@ class BlogController extends AbstractController
      */
     public function blog(BlogRequestDto $request) : JsonResponse
     {
+        // TODO: Реализовать DTO и фабрику ответа, заменить пустой ответ.
         return $this->json(["data" => []]);
     }
 }
