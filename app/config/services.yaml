@@ -17,12 +17,14 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
+            - '../src/Dto/'
             - '../src/Entity/'
             - '../src/Enum/'
             - '../src/Event/'
             - '../src/Exception/'
             - '../src/Interfaces/PartituraExceptionInterface.php'
             - '../src/Interfaces/PasswordUpgradableUserInterface.php'
+            - '../src/Interfaces/RequestDtoFactoryInterface.php'
             - '../src/Kernel.php'
             - '../src/Repository/Repository.php'
 
