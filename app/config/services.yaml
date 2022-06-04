@@ -34,15 +34,18 @@ services:
     Symfony\Component\Security\Core\User\PasswordUpgraderInterface:
         class: Partitura\Service\PasswordUpgradeService
 
+    JMS\Serializer\SerializerBuilder:
+        factory: ['JMS\Serializer\SerializerBuilder', 'create']
+
+    JMS\Serializer\Serializer:
+        factory: ['@JMS\Serializer\SerializerBuilder', 'build']
+
     JMS\Serializer\ArrayTransformerInterface:
         alias: JMS\Serializer\Serializer
 
     JMS\Serializer\SerializerInterface:
         alias: JMS\Serializer\Serializer
 
-    JMS\Serializer\Serializer:
-        factory: ['JMS\Serializer\SerializerBuilder', 'build']
-
-    serializer:
+    jms_serializer:
         alias: JMS\Serializer\Serializer
         public: true
