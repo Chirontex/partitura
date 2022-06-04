@@ -15,6 +15,11 @@ class RequestDtoFactoryLocator
     /** @var ArrayCollection<string, RequestDtoFactoryInterface> */
     protected $factories;
 
+    public function __construct()
+    {
+        $this->factories = new ArrayCollection();
+    }
+
     /**
      * @param string $dtoClassName
      * @param RequestDtoFactoryInterface $dtoFactory
