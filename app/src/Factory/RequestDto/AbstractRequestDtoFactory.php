@@ -31,6 +31,7 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
         $this->arrayTransformer = $arrayTransformer;
     }
 
+    /** {@inheritDoc} */
     public function createFromRequest(Request $request) : object
     {
         $dto = $this->createDto($this->prepareDataFromRequest($request));
