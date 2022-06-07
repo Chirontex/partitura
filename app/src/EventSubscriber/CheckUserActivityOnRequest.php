@@ -6,6 +6,7 @@ namespace Partitura\EventSubscriber;
 use Partitura\Controller\Profile\BannedController;
 use Partitura\Controller\Profile\LogoutController;
 use Partitura\Entity\User;
+use Partitura\EventSubscriber\Trait\RequestEventSubscriberTrait;
 use Partitura\Kernel;
 use Partitura\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
  */
 class CheckUserActivityOnRequest implements EventSubscriberInterface
 {
+    use RequestEventSubscriberTrait;
+
     /** @var UserService */
     protected $userService;
 
@@ -67,7 +70,7 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
         }
 
         $event->setResponse(
-            $request->headers->get("Accept") === "application/json"
+            $this->isNeedJsonResponse($request)
                 ? $this->createJsonResponse()
                 : $this->createRedirectResponse()
         );

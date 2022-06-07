@@ -21,6 +21,7 @@ services:
             - '../src/Entity/'
             - '../src/Enum/'
             - '../src/Event/'
+            - '../src/EventSubscriber/Trait/'
             - '../src/Exception/'
             - '../src/Interfaces/PartituraExceptionInterface.php'
             - '../src/Interfaces/PasswordUpgradableUserInterface.php'
