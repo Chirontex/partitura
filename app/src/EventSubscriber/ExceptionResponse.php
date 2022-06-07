@@ -12,10 +12,10 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Throwable;
 
 /**
- * Class PartituraExceptionEventSubscriber
+ * Class ExceptionResponse
  * @package Partitura\EventSubscriber
  */
-class PartituraExceptionEventSubscriber implements EventSubscriberInterface
+class ExceptionResponse implements EventSubscriberInterface
 {
     use RequestEventSubscriberTrait;
 
