@@ -5,6 +5,7 @@ namespace Partitura\Factory\RequestDto;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\ArrayTransformerInterface;
+use JMS\Serializer\SerializationContext;
 use Partitura\Exception\ArgumentException;
 use Partitura\Interfaces\RequestDtoFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,9 +54,31 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
     }
 
     /**
+     * @return string[]
+     */
+    protected function getFieldNames() : array
+    {
+        $dto = $this->arrayTransformer->toArray(
+            new (static::getDtoClass()),
+            (new SerializationContext())->setSerializeNull(true)
+        );
+
+        return array_keys($dto);
+    }
+
+    /**
      * @param Request $request
      *
      * @return ArrayCollection<string, mixed>
      */
-    abstract protected function prepareDataFromRequest(Request $request) : ArrayCollection;
+    protected function prepareDataFromRequest(Request $request) : ArrayCollection
+    {
+        $result = new ArrayCollection();
+
+        foreach ($this->getFieldNames() as $fieldName) {
+            $result->set($fieldName, $request->get($fieldName));
+        }
+
+        return $result;
+    }
 }
