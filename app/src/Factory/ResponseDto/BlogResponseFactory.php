@@ -9,7 +9,9 @@ use Partitura\Dto\Api\BlogPostDto;
 use Partitura\Dto\Api\BlogRequestDto;
 use Partitura\Entity\Post;
 use Partitura\Enum\PostTypeEnum;
+use Partitura\Event\BlogViewEvent;
 use Partitura\Repository\PostRepository;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class BlogResponseFactory
@@ -20,9 +22,15 @@ class BlogResponseFactory
     /** @var PostRepository */
     protected $postRepository;
 
-    public function __construct(ManagerRegistry $registry)
-    {
+    /** @var EventDispatcherInterface */
+    protected $eventDispatcher;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->postRepository = $registry->getRepository(Post::class);
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -51,6 +59,8 @@ class BlogResponseFactory
                     ->setDateCreated($post->getDatetimeCreated())
             );
         }
+
+        $this->eventDispatcher->dispatch(new BlogViewEvent($result));
 
         return $result;
     }
