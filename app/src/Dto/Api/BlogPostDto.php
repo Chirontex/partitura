@@ -40,6 +40,14 @@ class BlogPostDto
      * @var string
      * 
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("uri")
+     */
+    protected $uri;
+
+    /**
+     * @var string
+     * 
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("date_created")
      */
     protected $dateCreated;
@@ -100,6 +108,26 @@ class BlogPostDto
     public function setAuthor(string $author) : static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUri() : string
+    {
+        return (string)$this->uri;
+    }
+
+    /**
+     * @param string $uri
+     *
+     * @return $this
+     */
+    public function setUri(string $uri) : static
+    {
+        $this->uri = $uri;
 
         return $this;
     }

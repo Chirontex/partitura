@@ -56,6 +56,7 @@ class BlogResponseFactory
                     ->setTitle($post->getTitle())
                     ->setContent($this->handleContent($post->getContent()))
                     ->setAuthor((string)$post->getAuthor()?->getUsername())
+                    ->setUri($post->getUri())
                     ->setDateCreated($post->getDatetimeCreated())
             );
         }

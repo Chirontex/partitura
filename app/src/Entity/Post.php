@@ -236,4 +236,21 @@ class Post
     {
         return $this->archive;
     }
+
+    /**
+     * @return string
+     */
+    public function getUri() : string
+    {
+        $names = [];
+        $post = $this;
+
+        while ($post !== null) {
+            array_unshift($names, $post->getName());
+
+            $post = $post->getParent();
+        }
+
+        return sprintf("/%s", implode("/", $names));
+    }
 }
