@@ -103,6 +103,17 @@ class Post
     protected $type;
 
     /**
+     * @var int
+     * 
+     * @ORM\Column(
+     *     type="smallint",
+     *     name="IN_BLOG",
+     *     options={"default":1}
+     * )
+     */
+    protected $inBlog = 1;
+
+    /**
      * @var ArrayCollection<ArchivedPost>
      * 
      * @ORM\OneToMany(
@@ -225,6 +236,26 @@ class Post
     public function setType(PostTypeEnum $type) : static
     {
         $this->type = $type->value;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInBlog() : bool
+    {
+        return $this->inBlog === 1;
+    }
+
+    /**
+     * @param bool $isInBlog
+     *
+     * @return $this
+     */
+    public function setInBlog(bool $isInBlog) : static
+    {
+        $this->inBlog = $isInBlog ? 1 : 0;
 
         return $this;
     }
