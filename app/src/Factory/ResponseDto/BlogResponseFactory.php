@@ -44,7 +44,10 @@ class BlogResponseFactory
         $offset = $requestDto->getOffset();
 
         $posts = $this->postRepository->findBy(
-            ["type" => PostTypeEnum::PUBLISHED->value],
+            [
+                "type" => PostTypeEnum::PUBLISHED->value,
+                "inBlog" => 1,
+            ],
             ["datetimeCreated" => "DESC"],
             $requestDto->getLimit(),
             $offset > 0 ? $offset : null
