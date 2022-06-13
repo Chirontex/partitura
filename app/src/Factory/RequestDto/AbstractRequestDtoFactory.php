@@ -9,6 +9,7 @@ use JMS\Serializer\SerializationContext;
 use Partitura\Exception\ArgumentException;
 use Partitura\Interfaces\RequestDtoFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -31,17 +32,28 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
         $this->arrayTransformer = $arrayTransformer;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * 
+     * @throws ArgumentException
+     */
     public function createFromRequest(Request $request) : object
     {
         $dto = $this->createDto($this->prepareDataFromRequest($request));
         $errors = $this->validator->validate($dto);
 
-        if (count($errors) > 0) {
-            throw new ArgumentException((string)$errors);
+        if (count($errors) <= 0) {
+            return $dto;
         }
 
-        return $dto;
+        $errorMessages = [];
+
+        /** @var ConstraintViolationInterface $error */
+        foreach ($errors as $error) {
+            $errorMessages[] = $error->getMessage();
+        }
+
+        throw new ArgumentException(implode(" ", $errorMessages));
     }
 
     /**
