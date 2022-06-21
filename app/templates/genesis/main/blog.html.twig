@@ -1,7 +1,20 @@
 {% extends 'genesis/main/main.html.twig' %}
 
-{% block title %}{{ title|e }}{% endblock %}
-{% block sitename %}{{ sitename|e }}{% endblock %}
+{% block title %}
+    {% if title is defined %}
+        {{ title|e }}
+    {% else %}
+        Blog
+    {% endif %}
+{% endblock %}
+
+{% block sitename %}
+    {% if sitename is defined %}
+        {{ sitename|e }}
+    {% else %}
+        Partitura
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     <body>
