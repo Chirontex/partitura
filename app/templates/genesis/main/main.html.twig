@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <title>
+            {% block title %}{% endblock %} | {% block sitename %}Partitura{% endblock %}
+        </title>
+        <link href="{{ asset('build/862.css') }}" rel="stylesheet">
+        {% block styles %}{% endblock %}
+    </head>
+    {% block body %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</html>
