@@ -23,10 +23,15 @@ class StyleHandler
 
         for (let keyValue in content)
         {
-            [key, value] = keyValue.split(":")
+            keyValue = keyValue.split(":")
                 .map(entry => entry.trim());
 
-            result[key] = value;
+            if (keyValue[0] == undefined || keyValue[1] == undefined)
+            {
+                continue;
+            }
+
+            result[keyValue[0]] = keyValue[1];
         }
 
         return result;
@@ -39,6 +44,11 @@ class StyleHandler
      * @returns {string}
      */
     static implodeStyle = (style) => {
+        if (style == {})
+        {
+            return "";
+        }
+
         const styleKeys = Object.keys(style);
         const styleList = [];
 

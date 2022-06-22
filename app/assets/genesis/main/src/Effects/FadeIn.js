@@ -61,7 +61,7 @@ class FadeIn
     }
 
     #delay = () => {
-        setTimeout(this.#handle, 100);
+        setTimeout(this.#handle, 10);
     }
 }
 
