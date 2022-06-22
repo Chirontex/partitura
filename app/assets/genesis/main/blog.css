@@ -13,3 +13,7 @@
 .blog-text {
     text-align: justify;
 }
+
+.blog-pagination {
+    padding-bottom: 25px;
+}
