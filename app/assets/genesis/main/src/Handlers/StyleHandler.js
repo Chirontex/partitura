@@ -51,7 +51,7 @@ class StyleHandler
 
         for (let i = 0; i < styleList.length; i++)
         {
-            result = result == "" ? styleList[i] : ";"+styleList[i];
+            result += result == "" ? styleList[i] : ";"+styleList[i];
         }
 
         return result;
