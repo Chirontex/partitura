@@ -16,7 +16,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@fontsource/montserrat": "^4.5.11",
+        "@fontsource/ubuntu": "^4.5.10",
         "bootstrap": "^5.1.3"
     }
 }

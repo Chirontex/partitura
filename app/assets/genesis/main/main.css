@@ -1,5 +1,5 @@
 body {
-    font-family: 'Montserrat';
+    font-family: 'Ubuntu';
     background-color: #f5f5f5;
 }
 
@@ -9,11 +9,11 @@ h1 {
 }
 
 p {
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .main-text {
-    font-size: 2rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 200;
 }
