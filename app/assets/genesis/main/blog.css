@@ -1,0 +1,15 @@
+.main-blog {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px;
+    margin: auto;
+}
+
+.blog-post {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.blog-text {
+    text-align: justify;
+}
