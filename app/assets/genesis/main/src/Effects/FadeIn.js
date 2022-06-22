@@ -14,10 +14,11 @@ class FadeIn
     /** @var {int} */
     #opacity;
 
-    constructor(element)
+    constructor(element, delay = 0)
     {
         this.#element = element;
-        this.run();
+
+        setTimeout(this.run, delay);
     }
 
     run = () => {

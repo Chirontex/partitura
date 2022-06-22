@@ -7,6 +7,6 @@ const FadeIn = require('../main/src/Effects/FadeIn');
 
     for (let i = 0; i < posts.length; i++)
     {
-        (new FadeIn(posts[i]));
+        (new FadeIn(posts[i], 500 * i));
     }
 })()
