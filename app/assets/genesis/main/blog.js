@@ -1,6 +1,6 @@
 import './blog.css'
 
-const FadeIn = require('../main/src/Effects/FadeIn');
+const FadeIn = require('./src/Effects/FadeIn');
 
 (() => {
     const posts = document.getElementsByClassName("blog-post");
