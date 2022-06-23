@@ -18,9 +18,17 @@ class FadeIn
     {
         this.#element = element;
 
+        if (delay < 0)
+        {
+            delay = 0;
+        }
+
         setTimeout(this.run, delay);
     }
 
+    /**
+     * Runs fading-in.
+     */
     run = () => {
         this.#opacity = 0;
         this.#delay();

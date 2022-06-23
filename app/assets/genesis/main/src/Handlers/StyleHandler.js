@@ -7,6 +7,7 @@
 class StyleHandler
 {
     /**
+     * Splits element style string by semicolons.
      * 
      * @param {string} styleContent 
      * 
@@ -38,6 +39,7 @@ class StyleHandler
     }
 
     /**
+     * Compile style string from object.
      * 
      * @param {object} style
      * 
