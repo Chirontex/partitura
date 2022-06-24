@@ -114,6 +114,13 @@ class Post
     protected $inBlog = 1;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(type="text", name="PREVIEW")
+     */
+    protected $preview;
+
+    /**
      * @var ArrayCollection<ArchivedPost>
      * 
      * @ORM\OneToMany(
@@ -256,6 +263,26 @@ class Post
     public function setInBlog(bool $isInBlog) : static
     {
         $this->inBlog = $isInBlog ? 1 : 0;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreview() : string
+    {
+        return (string)$this->preview;
+    }
+
+    /**
+     * @param string $preview
+     *
+     * @return $this
+     */
+    public function setPreview(string $preview) : static
+    {
+        $this->preview = $preview;
 
         return $this;
     }
