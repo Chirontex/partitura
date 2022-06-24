@@ -44,7 +44,7 @@ class BlogResponseFactory
         $postsCount = $this->postRepository->count(["inBlog" => 1]);
         
         if ($requestDto->getLimit() > 0) {
-            $fullPages = $postsCount / $requestDto->getLimit();
+            $fullPages = (int)($postsCount / $requestDto->getLimit());
             $pages = $postsCount % $requestDto->getLimit() > 0 ? $fullPages + 1 : $fullPages;
         } else {
             $pages = 1;
