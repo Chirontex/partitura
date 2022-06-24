@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Partitura\Dto\Api\BlogPostDto;
 use Partitura\Dto\Api\BlogRequestDto;
+use Partitura\Dto\Api\BlogResponseDto;
 use Partitura\Entity\Post;
 use Partitura\Enum\PostTypeEnum;
 use Partitura\Event\BlogViewEvent;
@@ -36,12 +37,34 @@ class BlogResponseFactory
     /**
      * @param BlogRequestDto $requestDto
      *
+     * @return BlogResponseDto
+     */
+    public function createBlogResponseDto(BlogRequestDto $requestDto) : BlogResponseDto
+    {
+        $postsCount = $this->postRepository->count(["inBlog" => 1]);
+        $fullPages = $postsCount/$requestDto->getLimit();
+
+        $responseDto = (new BlogResponseDto())
+            ->setPages(
+                $postsCount % $requestDto->getLimit() === 0 ? $fullPages : $fullPages + 1
+            )
+            ->setPosts($this->createBlogPostCollection($requestDto));
+
+        $this->eventDispatcher->dispatch(new BlogViewEvent($responseDto));
+
+        return $responseDto;
+    }
+
+    /**
+     * @param BlogRequestDto $requestDto
+     *
      * @return ArrayCollection<BlogPostDto>
      */
-    public function createBlogPostCollection(BlogRequestDto $requestDto) : ArrayCollection
+    protected function createBlogPostCollection(BlogRequestDto $requestDto) : ArrayCollection
     {
         $result = new ArrayCollection();
-        $offset = $requestDto->getOffset();
+        $limit = $requestDto->getLimit();
+        $offset = $limit * ($requestDto->getPage() - 1);
 
         $posts = $this->postRepository->findBy(
             [
@@ -49,7 +72,7 @@ class BlogResponseFactory
                 "inBlog" => 1,
             ],
             ["datetimeCreated" => "DESC"],
-            $requestDto->getLimit(),
+            $limit > 0 ? $limit : null,
             $offset > 0 ? $offset : null
         );
 
@@ -57,25 +80,13 @@ class BlogResponseFactory
             $result->add(
                 (new BlogPostDto())
                     ->setTitle($post->getTitle())
-                    ->setContent($this->handleContent($post->getContent()))
+                    ->setPreview($post->getPreview())
                     ->setAuthor((string)$post->getAuthor()?->getUsername())
                     ->setUri($post->getUri())
                     ->setDateCreated($post->getDatetimeCreated())
             );
         }
 
-        $this->eventDispatcher->dispatch(new BlogViewEvent($result));
-
         return $result;
-    }
-
-    /**
-     * @param string $content
-     *
-     * @return string
-     */
-    protected function handleContent(string $content) : string
-    {
-        return strlen($content) > 300 ? sprintf("%s...", substr($content, 0, 300)) : $content;
     }
 }

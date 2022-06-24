@@ -43,10 +43,6 @@ class BlogController extends AbstractController
      */
     public function blog(BlogRequestDto $request) : JsonResponse
     {
-        return $this->json(
-            ["data" => $this->arrayTransformer->toArray(
-                $this->blogResponseFactory->createBlogPostCollection($request)
-            )]
-        );
+        return $this->json($this->blogResponseFactory->createBlogResponseDto($request));
     }
 }

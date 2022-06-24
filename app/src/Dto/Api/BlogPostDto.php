@@ -24,9 +24,9 @@ class BlogPostDto
      * @var string
      * 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("content")
+     * @Serializer\SerializedName("preview")
      */
-    protected $content;
+    protected $preview;
 
     /**
      * @var string
@@ -75,19 +75,19 @@ class BlogPostDto
     /**
      * @return string
      */
-    public function getContent() : string
+    public function getPreview() : string
     {
-        return (string)$this->content;
+        return (string)$this->preview;
     }
 
     /**
-     * @param string $content
+     * @param string $preview
      *
      * @return $this
      */
-    public function setContent(string $content) : static
+    public function setPreview(string $preview) : static
     {
-        $this->content = $content;
+        $this->preview = $preview;
 
         return $this;
     }

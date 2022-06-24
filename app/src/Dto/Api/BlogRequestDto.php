@@ -15,23 +15,43 @@ class BlogRequestDto
     /**
      * @var int
      * 
-     * @Assert\NotBlank(message="Limit cannot be empty.")
-     * @Assert\Positive(message="Invalid limit value.")
+     * @Assert\NotBlank(message="Page cannot be empty.")
+     * @Assert\Positive(message="Invalid page value.")
      * 
      * @Serializer\Type("int")
-     * @Serializer\SerializedName("limit")
+     * @Serializer\SerializedName("page")
      */
-    protected $limit;
+    protected $page = 1;
 
     /**
      * @var int
      * 
-     * @Assert\PositiveOrZero(message="Invalid offset value.")
+     * @Assert\PositiveOrZero(message="Invalid limit value.")
      * 
      * @Serializer\Type("int")
-     * @Serializer\SerializedName("offset")
+     * @Serializer\SerializedName("limit")
      */
-    protected $offset;
+    protected $limit = 0;
+
+    /**
+     * @return int
+     */
+    public function getPage() : int
+    {
+        return (int)$this->page;
+    }
+
+    /**
+     * @param int $limit
+     *
+     * @return $this
+     */
+    public function setPage(int $page) : static
+    {
+        $this->page = $page;
+
+        return $this;
+    }
 
     /**
      * @return int
@@ -49,26 +69,6 @@ class BlogRequestDto
     public function setLimit(int $limit) : static
     {
         $this->limit = $limit;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOffset() : int
-    {
-        return (int)$this->offset;
-    }
-
-    /**
-     * @param int $offset
-     *
-     * @return $this
-     */
-    public function setOffset(int $offset) : static
-    {
-        $this->offset = $offset;
 
         return $this;
     }

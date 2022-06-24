@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Event;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Partitura\Dto\Api\BlogPostDto;
+use Partitura\Dto\Api\BlogResponseDto;
 use Partitura\Exception\ArgumentException;
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -14,28 +14,19 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class BlogViewEvent extends Event
 {
-    /** @var ArrayCollection<BlogPostDto> */
-    protected $blogPostDtoCollection;
+    /** @var BlogResponseDto */
+    protected $blogResponseDto;
 
-    /**
-     * @throws ArgumentException
-     */
-    public function __construct(ArrayCollection $blogPostDtoCollection)
+    public function __construct(BlogResponseDto $blogResponseDto)
     {
-        foreach ($blogPostDtoCollection as $blogPostDto) {
-            if (!($blogPostDto instanceof BlogPostDto)) {
-                throw new ArgumentException("Invalid collection given.");
-            }
-        }
-
-        $this->blogPostDtoCollection = $blogPostDtoCollection;
+        $this->blogResponseDto = $blogResponseDto;
     }
 
     /**
-     * @return ArrayCollection<BlogPostDto>
+     * @return BlogResponseDto
      */
-    public function getBlogPostDtoCollection() : ArrayCollection
+    public function getBlogResponseDto() : BlogResponseDto
     {
-        return $this->blogPostDtoCollection;
+        return $this->blogResponseDto;
     }
 }
