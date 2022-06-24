@@ -17,3 +17,12 @@
 .blog-pagination {
     padding-bottom: 25px;
 }
+
+.page-disabled {
+    color: #808080;
+}
+
+.page-active {
+    color: #e0e0e0 !important;
+    background-color: #303030 !important;
+}
