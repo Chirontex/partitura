@@ -42,12 +42,16 @@ class BlogResponseFactory
     public function createBlogResponseDto(BlogRequestDto $requestDto) : BlogResponseDto
     {
         $postsCount = $this->postRepository->count(["inBlog" => 1]);
-        $fullPages = $postsCount/$requestDto->getLimit();
+        
+        if ($requestDto->getLimit() > 0) {
+            $fullPages = $postsCount / $requestDto->getLimit();
+            $pages = $postsCount % $requestDto->getLimit() > 0 ? $fullPages + 1 : $fullPages;
+        } else {
+            $pages = 1;
+        }
 
         $responseDto = (new BlogResponseDto())
-            ->setPages(
-                $postsCount % $requestDto->getLimit() === 0 ? $fullPages : $fullPages + 1
-            )
+            ->setPages($pages)
             ->setPosts($this->createBlogPostCollection($requestDto));
 
         $this->eventDispatcher->dispatch(new BlogViewEvent($responseDto));
