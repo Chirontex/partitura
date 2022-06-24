@@ -89,7 +89,11 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
         $result = new ArrayCollection();
 
         foreach ($this->getFieldNames() as $fieldName) {
-            $result->set($fieldName, $request->get($fieldName));
+            $value = $request->get($fieldName);
+
+            if ($value !== null) {
+                $result->set($fieldName, $value);
+            }
         }
 
         return $result;
