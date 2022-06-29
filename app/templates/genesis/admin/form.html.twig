@@ -25,6 +25,7 @@
         {% block styles %}{% endblock %}
     </head>
     {% block body %}{% endblock %}
+    <script src="{{ asset('build/runtime.js') }}"></script>
     <script src="{{ asset('build/admin/form.js') }}"></script>
     {% block scripts %}{% endblock %}
 </html>
