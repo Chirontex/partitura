@@ -84,7 +84,7 @@ class BlogClient
                     return response.json();
                 },
                 () => {
-                    return {posts: []};
+                    return {posts: [], pages: 0};
                 }
             )
             .then((data) => {
