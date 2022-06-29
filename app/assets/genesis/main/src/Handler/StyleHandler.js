@@ -2,7 +2,7 @@
 
 /**
  * Class StyleHandler
- * @package Partitura.Genesis.Main.Handlers
+ * @package Partitura.Genesis.Main.Handler
  */
 class StyleHandler
 {

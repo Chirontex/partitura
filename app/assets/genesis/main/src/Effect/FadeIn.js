@@ -1,10 +1,10 @@
 'use strict';
 
-const StyleHandler = require('../Handlers/StyleHandler');
+const StyleHandler = require('../Handler/StyleHandler');
 
 /**
  * Class FadeIn
- * @package Partitura.Genesis.Main.Effects
+ * @package Partitura.Genesis.Main.Effect
  */
 class FadeIn
 {
