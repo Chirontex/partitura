@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <title>{% block title %}Форма в админпанели{% endblock %} | Partitura</title>
+        <link href="{{ asset('build/app.css') }}" rel="stylesheet">
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -25,6 +26,7 @@
     </head>
     {% block body %}{% endblock %}
     <script src="{{ asset('build/runtime.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
     <script src="{{ asset('build/admin/form.js') }}"></script>
     {% block scripts %}{% endblock %}
 </html>

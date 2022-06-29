@@ -7,6 +7,7 @@
         <title>
             {% block title %}{% endblock %} | {% block sitename %}Partitura{% endblock %}
         </title>
+        <link href="{{ asset('build/app.css') }}" rel="stylesheet">
         <style>
             @font-face {
                 font-family: 'Ubuntu';
@@ -22,6 +23,7 @@
     </head>
     {% block body %}{% endblock %}
     <script src="{{ asset('build/runtime.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
     <script src="{{ asset('build/main/main.js') }}"></script>
     {% block scripts %}{% endblock %}
 </html>
