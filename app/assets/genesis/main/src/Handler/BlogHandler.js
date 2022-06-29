@@ -147,6 +147,7 @@ class BlogHandler
             throw new Error("Main block not found.");
         }
 
+        this.#main.setAttribute("class", "main-blog");
         this.#main.innerHTML = "";
     }
 }
