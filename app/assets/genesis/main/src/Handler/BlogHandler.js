@@ -15,10 +15,36 @@ class BlogHandler
     /** @var {number} */
     #page;
 
+    /** @var {number} */
+    #limit;
+
+    /** @var {Function} */
+    #requestPostsFunc;
+
     constructor(page)
     {
         this.#page = page;
         this.#initializeMain();
+    }
+
+    /**
+     * @param {number} limit
+     * @returns {this}
+     */
+    setLimit = (limit) => {
+        this.#limit = limit;
+
+        return this;
+    }
+
+    /**
+     * @param {string} requestPostsFuncName
+     * @returns {this}
+     */
+    setRequestPostsFunc = (requestPostsFunc) => {
+        this.#requestPostsFunc = requestPostsFunc;
+
+        return this;
     }
 
     /**
@@ -115,12 +141,13 @@ class BlogHandler
         ul.setAttribute("class", "pagination justify-content-center");
 
         /**
-         * @param {boolean} isActive 
-         * @param {boolean} isDisabled 
-         * @param {*} content 
+         * @param {boolean} isActive
+         * @param {boolean} isDisabled
+         * @param {string} content
+         * @param {number} pageLink
          * @returns {HTMLElement}
          */
-        const createLi = (isActive, isDisabled, content) => {
+        const createLi = (isActive, isDisabled, content, pageLink) => {
             const li = document.createElement("li");
             let liClass = "page-item";
             const a = document.createElement("a");
@@ -137,6 +164,14 @@ class BlogHandler
                 aClass += " page-disabled";
             }
 
+            if (!isActive && !isDisabled)
+            {
+                a.setAttribute("href", "javascript:void(0)");
+                a.onclick = () => {
+                    this.#requestPostsFunc(pageLink, this.#limit);
+                };
+            }
+
             a.setAttribute("class", aClass);
             a.innerHTML = content;
 
@@ -146,15 +181,14 @@ class BlogHandler
             return li;
         };
 
-        ul.appendChild(createLi(false, page == 1, "«"));
+        ul.appendChild(createLi(false, page == 1, "«", page - 1));
 
         for (let i = 1; i <= pages; i++)
         {
-            ul.appendChild(createLi(i == page, false, i));
+            ul.appendChild(createLi(i == page, false, i, i));
         }
 
-        ul.appendChild(createLi(false, page == pages, "»"));
-
+        ul.appendChild(createLi(false, page == pages, "»", page + 1));
         nav.appendChild(ul);
 
         return nav;
