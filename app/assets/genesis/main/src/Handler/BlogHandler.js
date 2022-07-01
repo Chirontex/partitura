@@ -21,6 +21,9 @@ class BlogHandler
     /** @var {Function} */
     #requestPostsFunc;
 
+    /** @var {string} */
+    static preloader = "";
+
     constructor(page)
     {
         this.#page = page;
@@ -168,6 +171,11 @@ class BlogHandler
             {
                 a.setAttribute("href", "javascript:void(0)");
                 a.onclick = () => {
+                    const mainClasses = ClassHandler.explodeClass(this.#main.getAttribute("class"));
+                    mainClasses.push("text-center");
+                    this.#main.setAttribute("class", ClassHandler.implodeClass(mainClasses));
+                    this.#main.innerHTML = BlogHandler.preloader;
+
                     this.#requestPostsFunc(pageLink, this.#limit);
                 };
             }
@@ -215,6 +223,7 @@ class BlogHandler
                     return value != "text-center";
                 }
             )));
+        BlogHandler.preloader = this.#main.innerHTML;
         this.#main.innerHTML = "";
     }
 }
