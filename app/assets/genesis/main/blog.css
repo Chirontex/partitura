@@ -26,3 +26,7 @@
     color: #e0e0e0 !important;
     background-color: #303030 !important;
 }
+
+.blog-empty {
+    font-style: italic;
+}

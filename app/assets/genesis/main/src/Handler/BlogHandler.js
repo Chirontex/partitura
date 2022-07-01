@@ -26,6 +26,14 @@ class BlogHandler
      */
     handleBlog = (blogResponse) => {
         const posts = this.#handlePostCollection(blogResponse.posts);
+
+        if (posts.length == 0)
+        {
+            this.#setEmptyBlog();
+
+            return;
+        }
+
         const pagination = this.#createPagination(this.#page, blogResponse.pages);
         let lastPostDelay;
 
@@ -38,6 +46,20 @@ class BlogHandler
 
         this.#main.appendChild(pagination);
         (new FadeIn(pagination, lastPostDelay));
+    }
+
+    #setEmptyBlog = () => {
+        const message = document.createElement("p");
+        message.setAttribute("class", "blog-empty");
+        message.setAttribute("style", "opacity: 0%");
+        message.innerHTML = "Записи не найдены.";
+
+        const mainClasses = ClassHandler.explodeClass(this.#main.getAttribute("class"));
+        mainClasses.push("text-center");
+
+        this.#main.setAttribute("class", ClassHandler.implodeClass(mainClasses));
+        this.#main.appendChild(message);
+        (new FadeIn(message));
     }
 
     /**
