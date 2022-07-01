@@ -10,6 +10,8 @@ class BlogHandler
 {
     /** @var {HTMLElement} */
     #main;
+
+    /** @var {number} */
     #page;
 
     constructor(page)
