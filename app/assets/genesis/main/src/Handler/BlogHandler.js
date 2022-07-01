@@ -1,6 +1,7 @@
 'use strict'
 
 const FadeIn = require('../Effect/FadeIn');
+const ClassHandler = require('./ClassHandler');
 
 /**
  * Class BlogHandler
@@ -149,7 +150,15 @@ class BlogHandler
             throw new Error("Main block not found.");
         }
 
-        this.#main.setAttribute("class", "main-blog");
+        const mainClass = ClassHandler.explodeClass(this.#main.getAttribute("class"));
+
+        this.#main.setAttribute(
+            "class",
+            ClassHandler.implodeClass(mainClass.filter(
+                (value) => {
+                    return value != "text-center";
+                }
+            )));
         this.#main.innerHTML = "";
     }
 }
