@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const FadeIn = require('../Effect/FadeIn');
 const ClassHandler = require('./ClassHandler');
@@ -63,7 +63,7 @@ class BlogHandler
     }
 
     /**
-     * @param {*} postCollection 
+     * @param {object[]} postCollection 
      * @returns {HTMLElement[]}
      */
     #handlePostCollection = (postCollection) => {
