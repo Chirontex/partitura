@@ -3,6 +3,7 @@
 const ElementClass = require('../Repository/ElementClass');
 const ElementStyle = require('../Repository/ElementStyle');
 const FadeIn = require('../Effect/FadeIn');
+const Highlighter = require('../Effect/Highlighter');
 
 /**
  * Class BlogHandler
@@ -128,6 +129,13 @@ class BlogHandler
 
         blogPost.appendChild(postHeader);
         blogPost.appendChild(postPreview);
+
+        blogPost.onmouseenter = () => {
+            (new Highlighter(blogPost, "blog-post")).invoke();
+        };
+        blogPost.onmouseleave = () => {
+            (new Highlighter(blogPost, "blog-post")).revoke();
+        };
 
         return blogPost;
     }
