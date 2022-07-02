@@ -14,7 +14,7 @@ class ClassHandler
     static explodeClass = (classContent) => {
         if (classContent == "" || classContent == null)
         {
-            return {};
+            return [];
         }
 
         return classContent.split(" ");
