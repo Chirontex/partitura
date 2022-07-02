@@ -142,7 +142,50 @@ class BlogHandler
             window.location = postObject.uri;
         }
 
+        blogPost.appendChild(this.#createPostFooter(postObject));
+
         return blogPost;
+    }
+
+    /**
+     * @param {object} postObject 
+     * @returns {HTMLElement}
+     */
+    #createPostFooter = (postObject) => {
+        const postFooter = document.createElement("div");
+        (new ElementClass(postFooter)).addClass("row").apply();
+
+        const authorCol = document.createElement("div");
+        (new ElementClass(authorCol))
+            .addClass("col-xs-12")
+            .addClass("col-sm-12")
+            .addClass("col-md-auto")
+            .addClass("col-lg-auto")
+            .apply();
+
+        const authorPar = document.createElement("p");
+        (new ElementClass(authorPar)).addClass("main-text").apply();
+        authorPar.innerHTML = "Автор: "+postObject.author;
+
+        authorCol.appendChild(authorPar);
+        postFooter.appendChild(authorCol);
+
+        const dateCreatedCol = document.createElement("div");
+        (new ElementClass(dateCreatedCol))
+            .addClass("col-xs-12")
+            .addClass("col-sm-12")
+            .addClass("col-md-auto")
+            .addClass("col-lg-auto")
+            .apply();
+
+        const dateCreatedPar = document.createElement("p");
+        (new ElementClass(dateCreatedPar)).addClass("main-text").apply();
+        dateCreatedPar.innerHTML = "Дата публикации: "+postObject.date_created;
+
+        dateCreatedCol.appendChild(dateCreatedPar);
+        postFooter.appendChild(dateCreatedCol);
+
+        return postFooter;
     }
 
     /**
