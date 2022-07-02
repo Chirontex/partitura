@@ -131,7 +131,9 @@ class BlogHandler
         blogPost.appendChild(postPreview);
 
         blogPost.onmouseenter = () => {
-            (new Highlighter(blogPost, "blog-post")).invoke();
+            (new Highlighter(blogPost, "blog-post"))
+                .setFooterContent("Читать далее →")
+                .invoke();
         };
         blogPost.onmouseleave = () => {
             (new Highlighter(blogPost, "blog-post")).revoke();

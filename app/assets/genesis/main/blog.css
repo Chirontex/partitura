@@ -30,3 +30,7 @@
 .blog-empty {
     font-style: italic;
 }
+
+.blog-post-footer {
+    color: #303030;
+}
