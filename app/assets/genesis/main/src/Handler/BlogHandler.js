@@ -138,6 +138,9 @@ class BlogHandler
         blogPost.onmouseleave = () => {
             (new Highlighter(blogPost, "blog-post")).revoke();
         };
+        blogPost.onclick = () => {
+            window.location = postObject.uri;
+        }
 
         return blogPost;
     }
