@@ -1,6 +1,6 @@
 'use strict';
 
-const StyleHandler = require('../Handler/StyleHandler');
+const ElementStyle = require('../Repository/ElementStyle');
 
 /**
  * Class FadeIn
@@ -37,36 +37,20 @@ class FadeIn
     #handle = () => {
         this.#opacity++;
 
-        const style = StyleHandler
-            .explodeStyle(this.#element.getAttribute("style"));
+        const style = new ElementStyle(this.#element);
 
         if (this.#opacity < 100)
         {
-            style["opacity"] = this.#opacity+"%";
+            style
+                .setStyle("opacity", this.#opacity+"%")
+                .apply();
 
-            this.#element.setAttribute("style", StyleHandler.implodeStyle(style));
             this.#delay();
 
             return;
         }
-        
-        let newStyle = {};
-        const styleKeys = Object.keys(style);
 
-        for (let i = 0; i < styleKeys.length; i++)
-        {
-            let key = styleKeys[i];
-            let value = style[styleKeys[i]];
-
-            if (key == "opacity")
-            {
-                continue;
-            }
-
-            newStyle[key] = value;
-        }
-
-        this.#element.setAttribute("style", StyleHandler.implodeStyle(newStyle));
+        style.removeStyle("opacity").apply();
     }
 
     #delay = () => {

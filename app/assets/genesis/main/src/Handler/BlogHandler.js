@@ -1,7 +1,8 @@
 'use strict';
 
+const ElementClass = require('../Repository/ElementClass');
+const ElementStyle = require('../Repository/ElementStyle');
 const FadeIn = require('../Effect/FadeIn');
-const ClassHandler = require('./ClassHandler');
 
 /**
  * Class BlogHandler
@@ -79,14 +80,12 @@ class BlogHandler
 
     #setEmptyBlog = () => {
         const message = document.createElement("p");
-        message.setAttribute("class", "blog-empty");
-        message.setAttribute("style", "opacity: 0%");
+        (new ElementClass(message)).addClass("blog-empty").apply();
+        (new ElementStyle(message)).setStyle("opacity", "0%").apply();
         message.innerHTML = "Записи не найдены.";
 
-        const mainClasses = ClassHandler.explodeClass(this.#main.getAttribute("class"));
-        mainClasses.push("text-center");
+        (new ElementClass(this.#main)).addClass("text-center").apply();
 
-        this.#main.setAttribute("class", ClassHandler.implodeClass(mainClasses));
         this.#main.appendChild(message);
         (new FadeIn(message));
     }
@@ -113,14 +112,18 @@ class BlogHandler
      */
     #createBlogPostElement = (postObject) => {
         const blogPost = document.createElement("div");
-        blogPost.setAttribute("class", "blog-post");
-        blogPost.setAttribute("style", "opacity: 0%");
+        (new ElementClass(blogPost)).addClass("blog-post").apply();
+        (new ElementStyle(blogPost)).setStyle("opacity", "0%").apply();
 
         const postHeader = document.createElement("h1");
         postHeader.innerHTML = postObject.title;
 
         const postPreview = document.createElement("p");
-        postPreview.setAttribute("class", "main-text blog-text");
+        (new ElementClass(postPreview))
+            .addClass("main-text")
+            .addClass("blog-text")
+            .apply();
+
         postPreview.innerHTML = postObject.preview;
 
         blogPost.appendChild(postHeader);
@@ -137,11 +140,14 @@ class BlogHandler
     #createPagination = (page, pages) => {
         const nav = document.createElement("nav");
         nav.setAttribute("aria-label", "Blog pagination");
-        nav.setAttribute("class", "blog-pagination");
-        nav.setAttribute("style", "opacity: 0%");
+        (new ElementClass(nav)).addClass("blog-pagination").apply();
+        (new ElementStyle(nav)).setStyle("opacity", "0%").apply();
 
         const ul = document.createElement("ul");
-        ul.setAttribute("class", "pagination justify-content-center");
+        (new ElementClass(ul))
+            .addClass("pagination")
+            .addClass("justify-content-center")
+            .apply();
 
         /**
          * @param {boolean} isActive
@@ -152,38 +158,38 @@ class BlogHandler
          */
         const createLi = (isActive, isDisabled, content, pageLink) => {
             const li = document.createElement("li");
-            let liClass = "page-item";
+            let liClass = (new ElementClass(li)).addClass("page-item");
             const a = document.createElement("a");
-            let aClass = "page-link";
+            let aClass = (new ElementClass(a)).addClass("page-link");
 
             if (isActive)
             {
-                aClass += " page-active";
+                aClass.addClass("page-active");
             }
 
             if (isDisabled)
             {
-                liClass += " disabled";
-                aClass += " page-disabled";
+                liClass.addClass("disabled");
+                aClass.addClass("page-disabled");
             }
 
             if (!isActive && !isDisabled)
             {
                 a.setAttribute("href", "javascript:void(0)");
                 a.onclick = () => {
-                    const mainClasses = ClassHandler.explodeClass(this.#main.getAttribute("class"));
-                    mainClasses.push("text-center");
-                    this.#main.setAttribute("class", ClassHandler.implodeClass(mainClasses));
-                    this.#main.innerHTML = BlogHandler.preloader;
+                    (new ElementClass(this.#main))
+                        .addClass("text-center")
+                        .apply();
 
+                    this.#main.innerHTML = BlogHandler.preloader;
                     this.#requestPostsFunc(pageLink, this.#limit);
                 };
             }
 
-            a.setAttribute("class", aClass);
+            aClass.apply();
             a.innerHTML = content;
 
-            li.setAttribute("class", liClass);
+            liClass.apply();
             li.appendChild(a);
 
             return li;
@@ -214,15 +220,8 @@ class BlogHandler
             throw new Error("Main block not found.");
         }
 
-        const mainClass = ClassHandler.explodeClass(this.#main.getAttribute("class"));
+        (new ElementClass(this.#main)).removeClass("text-center").apply();
 
-        this.#main.setAttribute(
-            "class",
-            ClassHandler.implodeClass(mainClass.filter(
-                (value) => {
-                    return value != "text-center";
-                }
-            )));
         BlogHandler.preloader = this.#main.innerHTML;
         this.#main.innerHTML = "";
     }
