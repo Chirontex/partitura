@@ -184,6 +184,8 @@ class BlogHandler
                     this.#main.innerHTML = BlogHandler.preloader;
                     this.#requestPostsFunc(pageLink, this.#limit);
                 };
+
+                aClass.addClass("text-dark");
             }
 
             aClass.apply();
