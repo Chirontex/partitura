@@ -6,6 +6,7 @@ namespace Partitura\Entity\Trait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Trait HasTitleTrait
  * @package Partitura\Entity\Trait
  */
 trait HasTitleTrait

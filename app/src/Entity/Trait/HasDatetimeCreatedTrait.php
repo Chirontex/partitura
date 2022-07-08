@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Trait HasDatetimeCreatedTrait
  * @package Partitura\Entity\Trait
  */
 trait HasDatetimeCreatedTrait

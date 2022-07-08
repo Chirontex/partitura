@@ -6,6 +6,7 @@ namespace Partitura\EventSubscriber\Trait;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
+ * Trait RequestEventSubscriberTrait
  * @package Partitura\EventSubscriber\Trait
  */
 trait RequestEventSubscriberTrait
