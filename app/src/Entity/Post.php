@@ -130,6 +130,16 @@ class Post
      */
     protected $archive;
 
+    /**
+     * @var ArrayCollection<PostView>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\PostView",
+     *     mappedBy="post"
+     * )
+     */
+    protected $views;
+
     public function __construct()
     {
         $this->type = PostTypeEnum::DRAFT->value;

@@ -107,6 +107,16 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      */
     protected $archivedPosts;
 
+    /**
+     * @var ArrayCollection<PostView>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\PostView",
+     *     mappedBy="user"
+     * )
+     */
+    protected $postsViews;
+
     public function __construct()
     {
         $this->datetimeCreated = new DateTime();
