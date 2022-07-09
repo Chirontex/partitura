@@ -9,7 +9,7 @@ use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
 use Partitura\Exception\EntityNotFoundException;
 use Partitura\Repository\RoleRepository;
-use Partitura\Service\UserService;
+use Partitura\Service\User\PasswordSettingService;
 
 /**
  * Class UserFactory
@@ -17,16 +17,18 @@ use Partitura\Service\UserService;
  */
 class UserFactory
 {
-    /** @var UserService */
-    protected $userService;
-
     /** @var RoleRepository */
     protected $roleRepository;
 
-    public function __construct(ManagerRegistry $registry, UserService $userService)
-    {
+    /** @var PasswordSettingService */
+    protected $passwordSettingService;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        PasswordSettingService $passwordSettingService
+    ) {
         $this->roleRepository = $registry->getRepository(Role::class);
-        $this->userService = $userService;
+        $this->passwordSettingService = $passwordSettingService;
     }
 
     /**
@@ -50,7 +52,7 @@ class UserFactory
             ->setUsername($username)
             ->setRole($this->getRole($roleCode));
 
-        $this->userService->updatePassword($user, $plainPassword);
+        $this->passwordSettingService->setNewPassword($user, $plainPassword);
 
         return $user;
     }
