@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Service\User;
 
 use Partitura\Entity\User;
+use Partitura\Exception\PasswordUpgradeException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -30,6 +31,8 @@ class PasswordSettingService
     /**
      * @param User $user
      * @param string $newPassword
+     * 
+     * @throws PasswordUpgradeException
      */
     public function setNewPassword(User $user, string $newPassword) : void
     {
