@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Partitura\Service;
+namespace Partitura\Service\User;
 
 use Partitura\Entity\User;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * Class UserService
- * @package Partitura\Service
+ * Class CurrentUserService
+ * @package Partitura\Service\User
  */
-class UserService
+class CurrentUserService
 {
     /** @var Security */
     protected $securityHelper;

@@ -8,7 +8,7 @@ use Partitura\Controller\Profile\LogoutController;
 use Partitura\Entity\User;
 use Partitura\EventSubscriber\Trait\RequestEventSubscriberTrait;
 use Partitura\Kernel;
-use Partitura\Service\UserService;
+use Partitura\Service\User\CurrentUserService;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,15 +24,15 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
 {
     use RequestEventSubscriberTrait;
 
-    /** @var UserService */
-    protected $userService;
+    /** @var CurrentUserService */
+    protected $currentUserService;
 
     /** @var Router */
     protected $router;
 
-    public function __construct(UserService $userService)
+    public function __construct(CurrentUserService $currentUserService)
     {
-        $this->userService = $userService;
+        $this->currentUserService = $currentUserService;
         $this->router = Kernel::getInstance()->getService("router");
     }
 
@@ -59,7 +59,7 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
             return;
         }
 
-        $user = $this->userService->getCurrentUser();
+        $user = $this->currentUserService->getCurrentUser();
 
         if (!($user instanceof User)) {
             return;
