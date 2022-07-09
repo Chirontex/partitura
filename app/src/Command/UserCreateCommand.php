@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Partitura\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Partitura\Enum\RoleEnum;
 use Partitura\Factory\UserFactory;
+use Partitura\Service\User\UserSavingService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,15 +21,15 @@ class UserCreateCommand extends Command
     protected const PASSWORD = "password";
     protected const ROLE = "role";
 
-    /** @var EntityManagerInterface */
-    protected $entityManager;
+    /** @var UserSavingService */
+    protected $userSavingService;
 
     /** @var UserFactory */
     protected $userFactory;
 
-    public function __construct(EntityManagerInterface $entityManager, UserFactory $userFactory)
+    public function __construct(UserSavingService $userSavingService, UserFactory $userFactory)
     {
-        $this->entityManager = $entityManager;
+        $this->userSavingService = $userSavingService;
         $this->userFactory = $userFactory;
 
         parent::__construct();
@@ -59,8 +59,7 @@ class UserCreateCommand extends Command
             empty($roleCode) ? RoleEnum::ROLE_USER->value : $roleCode
         );
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->userSavingService->saveUser($user, true);
 
         $output->writeln("User created successfully!");
 
