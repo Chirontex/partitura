@@ -20,10 +20,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class UserSavingService
 {
     /** @var ArrayCollection<User> */
-    protected $persistedUsers;
+    protected $newUsers;
 
     /** @var ArrayCollection<User> */
-    protected $detachedUsers;
+    protected $updatedUsers;
 
     /** @var EntityManagerInterface */
     protected $entityManager;
@@ -47,7 +47,7 @@ class UserSavingService
      */
     public function saveUser(User $user, bool $flush = false) : void
     {
-        $user->getId() === 0 ? $this->persist($user) : $this->detach($user);
+        $user->getId() === 0 ? $this->add($user) : $this->update($user);
 
         if ($flush) {
             $this->flush();
@@ -72,8 +72,8 @@ class UserSavingService
             }
         };
 
-        $dispatchEventsFn($this->persistedUsers, AfterAddEvent::class);
-        $dispatchEventsFn($this->detachedUsers, AfterUpdateEvent::class);
+        $dispatchEventsFn($this->newUsers, AfterAddEvent::class);
+        $dispatchEventsFn($this->updatedUsers, AfterUpdateEvent::class);
 
         $this->initializeCollections();
     }
@@ -81,30 +81,28 @@ class UserSavingService
     /**
      * @param User $user
      */
-    protected function persist(User $user) : void
+    protected function add(User $user) : void
     {
         $this->entityManager->persist($user);
 
-        $this->persistedUsers->add($user);
+        $this->newUsers->add($user);
         $this->eventDispatcher->dispatch(new BeforeAddEvent($user));
     }
 
     /**
      * @param User $user
      */
-    protected function detach(User $user) : void
+    protected function update(User $user) : void
     {
         $user->setDatetimeUpdated(new DateTime());
 
-        $this->entityManager->detach($user);
-
-        $this->detachedUsers->add($user);
+        $this->updatedUsers->add($user);
         $this->eventDispatcher->dispatch(new BeforeUpdateEvent($user));
     }
 
     protected function initializeCollections() : void
     {
-        $this->persistedUsers = new ArrayCollection();
-        $this->detachedUsers = new ArrayCollection();
+        $this->newUsers = new ArrayCollection();
+        $this->updatedUsers = new ArrayCollection();
     }
 }
