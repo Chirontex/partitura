@@ -3,13 +3,15 @@ declare(strict_types=1);
 
 namespace Partitura\Command;
 
-use Partitura\Enum\RoleEnum;
+use Partitura\Dto\CreateUserDto;
+use Partitura\Factory\CreateUserDtoFactory;
 use Partitura\Factory\UserFactory;
 use Partitura\Service\User\UserSavingService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 /**
  * Class UserCreateCommand
@@ -17,22 +19,25 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class UserCreateCommand extends Command
 {
-    protected const USERNAME = "username";
-    protected const PASSWORD = "password";
-    protected const ROLE = "role";
-
     /** @var UserSavingService */
     protected $userSavingService;
 
     /** @var UserFactory */
     protected $userFactory;
 
-    public function __construct(UserSavingService $userSavingService, UserFactory $userFactory)
-    {
+    /** @var CreateUserDtoFactory */
+    protected $createUserDtoFactory;
+
+    public function __construct(
+        UserSavingService $userSavingService,
+        UserFactory $userFactory,
+        CreateUserDtoFactory $createUserDtoFactory
+    ) {
+        parent::__construct();
+
         $this->userSavingService = $userSavingService;
         $this->userFactory = $userFactory;
-
-        parent::__construct();
+        $this->createUserDtoFactory = $createUserDtoFactory;
     }
 
     /** {@inheritDoc} */
@@ -44,22 +49,25 @@ class UserCreateCommand extends Command
             ->setHidden(false)
             ->setAliases(["user:create", "create:user", "partitura:create:user"])
             ->setHelp("This command helps you to create a new user. Firstly must be used to create a root user.")
-            ->addArgument(static::USERNAME, InputArgument::REQUIRED, "Username. Required. Must be unique.")
-            ->addArgument(static::PASSWORD, InputArgument::REQUIRED, "Users's password. Required.")
-            ->addArgument(static::ROLE, InputArgument::OPTIONAL, "User's role code. Optional. ROLE_USER by default.");
+            ->addArgument(CreateUserDto::USERNAME, InputArgument::REQUIRED, "Username. Required. Must be unique.")
+            ->addArgument(CreateUserDto::PASSWORD, InputArgument::REQUIRED, "Users's password. Required.")
+            ->addArgument(CreateUserDto::ROLE, InputArgument::OPTIONAL, "User's role code. Optional. ROLE_USER by default.");
     }
 
     /** {@inheritDoc} */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $roleCode = (string)$input->getArgument(static::ROLE);
-        $user = $this->userFactory->createUser(
-            (string)$input->getArgument(static::USERNAME),
-            (string)$input->getArgument(static::PASSWORD),
-            empty($roleCode) ? RoleEnum::ROLE_USER->value : $roleCode
-        );
+        try {
+            $user = $this->userFactory->createUser(
+                $this->createUserDtoFactory->createByConsoleInput($input)
+            );
 
-        $this->userSavingService->saveUser($user, true);
+            $this->userSavingService->saveUser($user, true);
+        } catch (Throwable $e) {
+            $output->writeln($e->getMessage());
+
+            return static::FAILURE;
+        }
 
         $output->writeln("User created successfully!");
 
