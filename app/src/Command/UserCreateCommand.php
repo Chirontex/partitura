@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Command;
 
 use Partitura\Dto\CreateUserDto;
+use Partitura\Event\UserCreateCommandExecuteEvent;
 use Partitura\Factory\CreateUserDtoFactory;
 use Partitura\Factory\UserFactory;
 use Partitura\Service\User\UserSavingService;
@@ -11,6 +12,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
 /**
@@ -28,16 +30,21 @@ class UserCreateCommand extends Command
     /** @var CreateUserDtoFactory */
     protected $createUserDtoFactory;
 
+    /** @var EventDispatcherInterface */
+    protected $eventDispatcher;
+
     public function __construct(
         UserSavingService $userSavingService,
         UserFactory $userFactory,
-        CreateUserDtoFactory $createUserDtoFactory
+        CreateUserDtoFactory $createUserDtoFactory,
+        EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct();
 
         $this->userSavingService = $userSavingService;
         $this->userFactory = $userFactory;
         $this->createUserDtoFactory = $createUserDtoFactory;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /** {@inheritDoc} */
@@ -58,9 +65,13 @@ class UserCreateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         try {
-            $user = $this->userFactory->createUser(
-                $this->createUserDtoFactory->createByConsoleInput($input)
+            $dto = $this->createUserDtoFactory->createByConsoleInput($input);
+
+            $this->eventDispatcher->dispatch(
+                new UserCreateCommandExecuteEvent($dto)
             );
+
+            $user = $this->userFactory->createUser($dto);
 
             $this->userSavingService->saveUser($user, true);
         } catch (Throwable $e) {
