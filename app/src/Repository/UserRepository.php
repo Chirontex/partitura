@@ -6,6 +6,7 @@ namespace Partitura\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Partitura\Entity\User;
+use Partitura\Exception\EntityNotFoundException;
 
 /**
  * Users repository.
@@ -22,5 +23,24 @@ class UserRepository extends Repository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return User
+     */
+    public function findByUsername(string $username) : User
+    {
+        $user = $this->findOneBy(["username" => $username]);
+
+        if ($user === null) {
+            throw new EntityNotFoundException(sprintf(
+                "User with username \"%s\" was not found.",
+                $username
+            ));
+        }
+
+        return $user;
     }
 }
