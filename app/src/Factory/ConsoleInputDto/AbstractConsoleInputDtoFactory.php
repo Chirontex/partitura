@@ -1,20 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Partitura\Factory;
+namespace Partitura\Factory\ConsoleInputDto;
 
 use JMS\Serializer\ArrayTransformerInterface;
 use JMS\Serializer\SerializationContext;
-use Partitura\Dto\CreateUserDto;
 use Partitura\Exception\ArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Class CreateUserDtoFactory
- * @package Partitura\Factory
+ * Class AbstractConsoleInputDtoFactory
+ * @package Partitura\Factory\ConsoleInputDto
  */
-class CreateUserDtoFactory
+abstract class AbstractConsoleInputDtoFactory
 {
     /** @var ArrayTransformerInterface */
     protected $arrayTransformer;
@@ -35,25 +34,17 @@ class CreateUserDtoFactory
      * 
      * @throws ArgumentException
      *
-     * @return CreateUserDto
+     * @return object
      */
-    public function createByConsoleInput(InputInterface $input) : CreateUserDto
+    public function createByConsoleInput(InputInterface $input) : object
     {
         $dtoArr = [];
 
         foreach ($this->getKeys() as $key) {
-            $value = $input->getArgument($key);
-
-            if ($key === CreateUserDto::ROLE && empty($value)) {
-                continue;
-            }
-
-            $dtoArr[$key] = $value;
+            $dtoArr[$key] = $input->getArgument($key);
         }
 
-        /** @var CreateUserDto */
-        $dto = $this->arrayTransformer->fromArray($dtoArr, CreateUserDto::class);
-
+        $dto = $this->arrayTransformer->fromArray($dtoArr, $this->getDtoClass());
         $validationErrors = $this->validator->validate($dto);
 
         if (count($validationErrors) <= 0 ) {
@@ -69,8 +60,13 @@ class CreateUserDtoFactory
     protected function getKeys() : array
     {
         return array_keys($this->arrayTransformer->toArray(
-            new CreateUserDto(),
+            new ($this->getDtoClass()),
             (new SerializationContext())->setSerializeNull(true)
         ));
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getDtoClass() : string;
 }

@@ -5,7 +5,7 @@ namespace Partitura\Command;
 
 use Partitura\Dto\CreateUserDto;
 use Partitura\Event\UserCreateCommandExecuteEvent;
-use Partitura\Factory\CreateUserDtoFactory;
+use Partitura\Factory\ConsoleInputDto\CreateUserDtoFactory;
 use Partitura\Factory\UserFactory;
 use Partitura\Service\User\UserSavingService;
 use Symfony\Component\Console\Command\Command;
@@ -65,6 +65,7 @@ class UserCreateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         try {
+            /** @var CreateUserDto */
             $dto = $this->createUserDtoFactory->createByConsoleInput($input);
 
             $this->eventDispatcher->dispatch(
