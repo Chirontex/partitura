@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Enum;
 
-use Partitura\Enum\Traits\GetInstanceByValueTrait;
+use Partitura\Enum\Trait\GetInstanceByValueTrait;
 
 /**
  * @package Partitura\Enum

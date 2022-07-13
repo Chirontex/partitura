@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Partitura\Enum\Traits;
+namespace Partitura\Enum\Trait;
 
 use Partitura\Exception\CaseNotFoundException;
 
 /**
  * Trait GetInstanceByValueTrait
- * @package Partitura\Enum\Traits
+ * @package Partitura\Enum\Trait
  * 
  * @method static[] cases()
  */
