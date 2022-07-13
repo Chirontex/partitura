@@ -24,8 +24,16 @@ docker run --rm -it -p 80:80/tcp -p 3306:3306/tcp -p 9003:9003/tcp partitura:lat
 ```
 После этого можно подключаться к docker-контейнеру.
 
-### Создание пользователя через CLI
+## Команды CLI
+
+### Создание пользователя
 
 Команда: `app/bin/console partitura:user:create <username> <password> [role]`
 
 Роль обозначается кодом роли (значение поля __CODE__ в таблице __pt_roles__). Если не задано, то будет использоваться по умолчанию __ROLE_USER__.
+
+### Смена пароля пользователя
+
+Команда: `app/bin/console partitura:user:change-password <username> <password>`
+
+В качестве значения аргумента __password__ передаётся новый пароль.
