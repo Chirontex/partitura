@@ -27,6 +27,7 @@ services:
             - '../src/Interfaces/PasswordUpgradableUserInterface.php'
             - '../src/Interfaces/RequestDtoFactoryInterface.php'
             - '../src/Kernel.php'
+            - '../src/Log/Trait/'
             - '../src/Repository/Repository.php'
 
     # add more service definitions when explicit configuration is needed
@@ -50,3 +51,11 @@ services:
     jms_serializer:
         alias: JMS\Serializer\Serializer
         public: true
+
+    Partitura\Command\UserCreateCommand:
+        calls:
+            - ['setLogger', ['@monolog.logger.user_create_command']]
+
+    Partitura\Command\UserChangePasswordCommand:
+        calls:
+            - ['setLogger', ['@monolog.logger.user_change_password_command']]

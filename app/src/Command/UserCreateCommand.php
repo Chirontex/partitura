@@ -7,7 +7,9 @@ use Partitura\Dto\CreateUserDto;
 use Partitura\Event\UserCreateCommandExecuteEvent;
 use Partitura\Factory\ConsoleInputDto\CreateUserDtoFactory;
 use Partitura\Factory\UserFactory;
+use Partitura\Log\Trait\LoggerAwareTrait;
 use Partitura\Service\User\UserSavingService;
+use Psr\Log\LoggerAwareInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,8 +21,12 @@ use Throwable;
  * Class UserCreateCommand
  * @package Partitura\Command
  */
-class UserCreateCommand extends Command
+class UserCreateCommand extends Command implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
+    protected const COMMAND_NAME = "partitura:user:create";
+
     /** @var UserSavingService */
     protected $userSavingService;
 
@@ -51,7 +57,7 @@ class UserCreateCommand extends Command
     protected function configure() : void
     {
         $this
-            ->setName("partitura:user:create")
+            ->setName(self::COMMAND_NAME)
             ->setDescription("Creates a new user.")
             ->setHidden(false)
             ->setAliases(["user:create", "create:user", "partitura:create:user"])
@@ -75,6 +81,13 @@ class UserCreateCommand extends Command
             $user = $this->userFactory->createUser($dto);
 
             $this->userSavingService->saveUser($user, true);
+            $this->logger->warning(sprintf(
+                "User \"%s\" with role \"%s\" has been created by \"%s\" command at %s.",
+                $user->getUsername(),
+                $dto->getRole(),
+                self::COMMAND_NAME,
+                $user->getDatetimeCreated()?->format("Y-m-d H:i:s")
+            ));
         } catch (Throwable $e) {
             $output->writeln($e->getMessage());
 
