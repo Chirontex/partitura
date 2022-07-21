@@ -23,4 +23,14 @@ class PostRepository extends Repository
     {
         parent::__construct($registry, Post::class);
     }
+
+    /**
+     * @param string $name
+     *
+     * @return ArrayCollection<Post>
+     */
+    public function findByName(string $name) : ArrayCollection
+    {
+        return $this->findBy(["name" => $name]);
+    }
 }
