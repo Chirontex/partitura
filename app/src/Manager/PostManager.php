@@ -33,7 +33,7 @@ class PostManager
             throw new EntityNotFoundException("Post cannot be found by empty namespace.");
         }
 
-        $supposedPosts = $this->postRepository->findByName(
+        $supposedPosts = $this->postRepository->findPublishedByName(
             $namespace[count($namespace) - 1]
         );
 

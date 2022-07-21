@@ -6,6 +6,7 @@ namespace Partitura\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Partitura\Entity\Post;
+use Partitura\Enum\PostTypeEnum;
 
 /**
  * Posts repository.
@@ -29,8 +30,11 @@ class PostRepository extends Repository
      *
      * @return ArrayCollection<Post>
      */
-    public function findByName(string $name) : ArrayCollection
+    public function findPublishedByName(string $name) : ArrayCollection
     {
-        return $this->findBy(["name" => $name]);
+        return $this->findBy([
+            "name" => $name,
+            "type" => PostTypeEnum::PUBLISHED->value,
+        ]);
     }
 }
