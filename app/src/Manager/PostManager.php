@@ -64,7 +64,11 @@ class PostManager
         for ($i = count($namespace) - 2; $i >= 0; $i--) {
             $post = $post->getParent();
 
-            if ($post === null || $post->getName() !== $namespace[$i]) {
+            if ($post === null) {
+                return false;
+            }
+
+            if ($post->getName() !== $namespace[$i]) {
                 return false;
             }
         }
