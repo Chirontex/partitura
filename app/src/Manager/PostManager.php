@@ -23,56 +23,29 @@ class PostManager
     }
 
     /**
-     * @param string[] $namespace
+     * @param string $uri
+     * 
+     * @throws EntityNotFoundException
      *
      * @return Post
      */
-    public function getPostByNamespace(array $namespace) : Post
+    public function getPostByUri(string $uri) : Post
     {
-        if (empty($namespace)) {
-            throw new EntityNotFoundException("Post cannot be found by empty namespace.");
+        if (empty($uri)) {
+            throw new EntityNotFoundException("Post cannot be found by empty uri.");
         }
 
+        $namespace = explode("/", $uri);
         $supposedPosts = $this->postRepository->findPublishedByName(
             $namespace[count($namespace) - 1]
         );
 
         foreach ($supposedPosts as $supposedPost) {
-            if ($this->checkPostNamespace($supposedPost, $namespace)) {
+            if ($supposedPost->getUri() === $uri) {
                 return $supposedPost;
             }
         }
 
-        throw new EntityNotFoundException(sprintf(
-            "Post with namespace \"%s\" was not found.",
-            sprintf("/%s", implode("/", $namespace))
-        ));
-    }
-
-    /**
-     * @param Post $post
-     * @param string[] $namespace
-     *
-     * @return bool
-     */
-    protected function checkPostNamespace(Post $post, array $namespace) : bool
-    {
-        if ($post->getName() !== $namespace[count($namespace) - 1]) {
-            return false;
-        }
-
-        for ($i = count($namespace) - 2; $i >= 0; $i--) {
-            $post = $post->getParent();
-
-            if ($post === null) {
-                return false;
-            }
-
-            if ($post->getName() !== $namespace[$i]) {
-                return false;
-            }
-        }
-
-        return true;
+        throw new EntityNotFoundException(sprintf("Post with uri \"%s\" was not found.", $uri));
     }
 }

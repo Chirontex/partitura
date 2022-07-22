@@ -35,9 +35,7 @@ class PostController extends AbstractController
     {
         try {
             // TODO: Убрать это в фабрику DTO после добавления шаблона для постов.
-            $post = $this->postManager->getPostByNamespace(
-                explode("/", $request->getPathInfo())
-            );
+            $post = $this->postManager->getPostByUri($request->getPathInfo());
 
             return new Response($post->getContent());
         } catch (EntityNotFoundException $e) {
