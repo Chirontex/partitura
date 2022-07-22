@@ -12,6 +12,7 @@ use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use Throwable;
 
 /**
  * Class PostsLoader
@@ -42,7 +43,12 @@ class PostsLoader extends Loader
         }
 
         $routes = new RouteCollection();
-        $posts = $this->postRepository->findAllPublished();
+
+        try {
+            $posts = $this->postRepository->findAllPublished();
+        } catch (Throwable) {
+            return $routes;
+        }
 
         foreach ($posts as $post) {
             $route = new Route(
