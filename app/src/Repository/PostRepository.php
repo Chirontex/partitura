@@ -37,4 +37,12 @@ class PostRepository extends Repository
             "type" => PostTypeEnum::PUBLISHED->value,
         ]);
     }
+
+    /**
+     * @return ArrayCollection<Post>
+     */
+    public function findAllPublished() : ArrayCollection
+    {
+        return $this->findBy(["type" => PostTypeEnum::PUBLISHED->value]);
+    }
 }

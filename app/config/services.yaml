@@ -59,3 +59,6 @@ services:
     Partitura\Command\UserChangePasswordCommand:
         calls:
             - ['setLogger', ['@monolog.logger.user_change_password_command']]
+
+    Partitura\Loader\PostsLoader:
+        tags: [routing.loader]
