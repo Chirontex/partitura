@@ -14,8 +14,8 @@
 
 {% block body %}
     <body>
-        <h1>{{ title|e }}</h1>
-        <main class="main-post">
+        <main class="main-post main-text">
+            <h1>{{ title|e }}</h1>
             <div class="post-metadata row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     {{ author|e }}
@@ -24,7 +24,7 @@
                     {{ date_created|e }}
                 </div>
             </div>
-            <div class="post-content main-text">{{ content|e }}</div>
+            <div class="post-content">{{ content|e }}</div>
         </main>
     </body>
 {% endblock %}
