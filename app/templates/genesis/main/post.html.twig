@@ -1,0 +1,38 @@
+{% extends 'genesis/main/main.html.twig' %}
+
+{% block title %}
+    {{ title|e }}
+{% endblock %}
+
+{% block sitename %}
+    {% if sitename is defined %}
+        {{ sitename|e }}
+    {% else %}
+        Partitura
+    {% endif %}
+{% endblock %}
+
+{% block styles %}
+        <link href="{{ asset('build/main/post.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <body>
+        <h1>{{ title|e }}</h1>
+        <main class="main-post">
+            <div class="post-metadata row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    {{ author|e }}
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    {{ date_created|e }}
+                </div>
+            </div>
+            <div class="post-content main-text">{{ content|e }}</div>
+        </main>
+    </body>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset('build/main/post.js') }}"></script>
+{% endblock %}
