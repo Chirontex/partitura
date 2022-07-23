@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Partitura\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * 
  * @Route("/")
  */
-class MainController extends AbstractController
+class MainController extends Controller
 {
     public const ROUTE_INDEX = "partitura_main_index";
 
@@ -24,8 +23,11 @@ class MainController extends AbstractController
      */
     public function index() : Response
     {
-        // TODO: Добавить title и sitename для шаблона.
+        // TODO: Добавить title для шаблона.
         // TODO: Добавить определение страницы по умолчанию из настроек, когда настройки будут реализованы.
-        return $this->render("genesis/main/blog.html.twig");
+        return $this->render(
+            "genesis/main/blog.html.twig",
+            ["sitename" => $this->getSitename()]
+        );
     }
 }

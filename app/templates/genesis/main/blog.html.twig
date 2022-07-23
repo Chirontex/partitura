@@ -9,11 +9,7 @@
 {% endblock %}
 
 {% block sitename %}
-    {% if sitename is defined %}
-        {{ sitename|e }}
-    {% else %}
-        Partitura
-    {% endif %}
+    {{ sitename|e }}
 {% endblock %}
 
 {% block styles %}

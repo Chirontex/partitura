@@ -5,7 +5,6 @@ namespace Partitura\Controller;
 
 use Partitura\Exception\EntityNotFoundException;
 use Partitura\Manager\PostManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Class PostController
  * @package Partitura\Controller
  */
-class PostController extends AbstractController
+class PostController extends Controller
 {
     /** @var PostManager */
     protected $postManager;
