@@ -24,6 +24,8 @@ class MainController extends AbstractController
      */
     public function index() : Response
     {
+        // TODO: Добавить title и sitename для шаблона.
+        // TODO: Добавить определение страницы по умолчанию из настроек, когда настройки будут реализованы.
         return $this->render("genesis/main/blog.html.twig");
     }
 }
