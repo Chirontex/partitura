@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace Partitura\Controller;
 
 use Partitura\Exception\EntityNotFoundException;
-use Partitura\Manager\PostManager;
+use Partitura\Factory\ResponseDto\PostResponseFactory;
+use JMS\Serializer\ArrayTransformerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -15,12 +16,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class PostController extends Controller
 {
-    /** @var PostManager */
-    protected $postManager;
+    /** @var PostResponseFactory */
+    protected $postResponseFactory;
 
-    public function __construct(PostManager $postManager)
-    {
-        $this->postManager = $postManager;
+    /** @var ArrayTransformerInterface */
+    protected $arrayTransformer;
+
+    public function __construct(
+        PostResponseFactory $postResponseFactory,
+        ArrayTransformerInterface $arrayTransformer
+    ) {
+        $this->postResponseFactory = $postResponseFactory;
+        $this->arrayTransformer = $arrayTransformer;
     }
 
     /**
@@ -33,10 +40,15 @@ class PostController extends Controller
     public function showPost(Request $request) : Response
     {
         try {
-            // TODO: Убрать это в фабрику DTO после добавления шаблона для постов.
-            $post = $this->postManager->getPostByUri($request->getPathInfo());
-
-            return new Response($post->getContent());
+            return $this->render(
+                "genesis/main/post.html.twig",
+                array_merge(
+                    $this->arrayTransformer->toArray(
+                        $this->postResponseFactory->createResponseByUri($request->getPathInfo())
+                    ),
+                    ["sitename" => $this->getSitename()]
+                )
+            );
         } catch (EntityNotFoundException $e) {
             throw $this->createNotFoundException($e->getMessage());
         }
