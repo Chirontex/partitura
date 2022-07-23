@@ -14,14 +14,10 @@ class PostHandler
     }
 
     #handlePost = () => {
-        const headers = document.getElementsByTagName("h1");
-        const metadata = document.getElementsByClassName("post-metadata");
-        const content = document.getElementsByClassName("post-content");
+        const mainCollection = document.getElementsByTagName("main");
+        const main = mainCollection[0];
 
-        let delay = this.#fadeInElementCollection(headers);
-        delay = this.#fadeInElementCollection(metadata, delay);
-
-        this.#fadeInElementCollection(content, delay);
+        this.#fadeInElementCollection(main.children);
     }
 
     /**
@@ -31,14 +27,15 @@ class PostHandler
      * @return {number} last delay
      */
     #fadeInElementCollection = (collection, delay = 0) => {
+        let lastDelay = delay;
         for (let i = 0; i < collection.length; i++)
         {
-            new FadeIn(collection[i], delay);
+            new FadeIn(collection[i], lastDelay);
 
-            delay = 500 * i;
+            lastDelay = 500 * i;
         }
 
-        return delay;
+        return lastDelay;
     }
 }
 
