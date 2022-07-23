@@ -81,10 +81,12 @@ class BlogResponseFactory
         );
 
         foreach ($posts as $post) {
+            $preview = $post->getPreview();
+
             $result->add(
                 (new BlogPostDto())
                     ->setTitle($post->getTitle())
-                    ->setPreview($post->getPreview())
+                    ->setPreview(empty($preview) ? $post->getContent() : $preview)
                     ->setAuthor((string)$post->getAuthor()?->getUsername())
                     ->setUri($post->getUri())
                     ->setDateCreated($post->getDatetimeCreated())
