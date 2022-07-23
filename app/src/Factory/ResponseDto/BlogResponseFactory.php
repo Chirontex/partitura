@@ -41,7 +41,10 @@ class BlogResponseFactory
      */
     public function createBlogResponseDto(BlogRequestDto $requestDto) : BlogResponseDto
     {
-        $postsCount = $this->postRepository->count(["inBlog" => 1]);
+        $postsCount = $this->postRepository->count([
+            "type" => PostTypeEnum::PUBLISHED->value,
+            "inBlog" => 1,
+        ]);
         
         if ($requestDto->getLimit() > 0) {
             $fullPages = (int)($postsCount / $requestDto->getLimit());
