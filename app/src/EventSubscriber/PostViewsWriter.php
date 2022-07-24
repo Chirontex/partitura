@@ -61,6 +61,11 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
     {
         $post = $event->getPost();
         $request = Request::createFromGlobals();
+
+        if ($this->isItBotViewing($request)) {
+            return;
+        }
+
         $clientIp = $request->getClientIp();
         $currentUser = $this->currentUserService->getCurrentUser();
 
@@ -90,5 +95,70 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         } catch (PostViewException $e) {
             $this->logger->error($e->getMessage());
         }
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    protected function isItBotViewing(Request $request) : bool
+    {
+        $userAgent = (string)$request->server->get("HTTP_USER_AGENT");
+
+        if (empty($userAgent)) {
+            return false;
+        }
+
+        // TODO: Возможно, имеет смысл в будущем положить это в БД и дать пользователю возможность редактировать в админке.
+        $botMarkers = [
+            "APIs-Google",
+            "AdsBot-Google",
+            "Googlebot",
+            "Mediapartners-Google",
+            "YandexBot",
+            "YandexAccessibilityBot",
+            "YandexMobileBot",
+            "YandexDirectDyn",
+            "YandexImages",
+            "YandexVideo",
+            "YandexVideoParser",
+            "YandexMedia",
+            "YandexBlogs",
+            "YandexFavicons",
+            "YandexWebmaster",
+            "YandexPagechecker",
+            "YandexImageResizer",
+            "YandexAdNet",
+            "YandexDirect",
+            "YaDirectFetcher",
+            "YandexCalendar",
+            "YandexSitelinks",
+            "YandexMetrika",
+            "YandexNews",
+            "YandexCatalog",
+            "YandexMarket",
+            "YandexVertis",
+            "YandexForDomain",
+            "YandexSpravBot",
+            "YandexSearchShop",
+            "YandexMedianaBot",
+            "YandexOntoDB",
+            "YandexOntoDBAPI",
+            "YandexVerticals",
+            "Mail.RU_Bot",
+            "StackRambler",
+            "Yahoo! Slurp",
+            "msnbot",
+            "bingbot",
+        ];
+
+        foreach ($botMarkers as $marker) {
+            if (strpos($userAgent, $marker) !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
