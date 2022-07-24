@@ -69,25 +69,27 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         $clientIp = $request->getClientIp();
         $currentUser = $this->currentUserService->getCurrentUser();
 
+        if (empty($clientIp) && !($currentUser instanceof User)) {
+            $this->logger->error("Cannot find a previously wrote post views because client IP and current user are not found.");
+
+            return;
+        }
+
+        $criteria = ["post" => $post];
+
+        if ($currentUser instanceof User) {
+            $criteria["user"] = $currentUser;
+        } else {
+            $criteria["ipAddress"] = $clientIp;
+        }
+
+        $postViews = $this->postViewRepository->findBy($criteria);
+
+        if (!$postViews->isEmpty()) {
+            return;
+        }
+
         try {
-            if (empty($clientIp) && !($currentUser instanceof User)) {
-                throw new PostViewException("Cannot find a previously wrote post views because client IP and current user are not found.");
-            }
-
-            $criteria = ["post" => $post];
-
-            if ($currentUser instanceof User) {
-                $criteria["user"] = $currentUser;
-            } else {
-                $criteria["ipAddress"] = $clientIp;
-            }
-
-            $postViews = $this->postViewRepository->findBy($criteria);
-
-            if (!$postViews->isEmpty()) {
-                return;
-            }
-
             $this->objectManager->persist(
                 $this->postViewFactory->createByPostRequest($post, $request)
             );
