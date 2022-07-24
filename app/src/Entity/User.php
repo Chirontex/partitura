@@ -279,6 +279,14 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     }
 
     /**
+     * @return null|PersistentCollection<PostView>
+     */
+    public function getPostsViews() : ?PersistentCollection
+    {
+        return $this->postsViews;
+    }
+
+    /**
      * {@inheritDoc}
      * @see UserInterface
      */

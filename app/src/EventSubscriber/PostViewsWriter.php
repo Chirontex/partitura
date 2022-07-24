@@ -71,16 +71,30 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
             $postView = $this->postViewFactory->createByPostRequest($post, $request);
 
             $this->objectManager->persist($postView);
-
-            $views = $post->getViews();
-
-            if ($views !== null && $views->isInitialized()) {
-                $views->add($postView);
-            }
-
+            $this->updateRelateCollections($post, $postView);
             $this->objectManager->flush();
         } catch (PostViewException $e) {
             $this->logger->error($e->getMessage());
+        }
+    }
+
+    /**
+     * @param Post $post
+     * @param PostView $postView
+     */
+    protected function updateRelateCollections(Post $post, PostView $postView) : void
+    {
+        $collections = [$post->getViews()];
+        $currentUser = $this->currentUserService->getCurrentUser();
+
+        if ($currentUser instanceof User) {
+            $collections[] = $currentUser->getPostsViews();
+        }
+
+        foreach ($collections as $collection) {
+            if ($collection !== null && $collection->isInitialized()) {
+                $collection->add($postView);
+            }
         }
     }
 
