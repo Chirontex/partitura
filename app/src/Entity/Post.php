@@ -144,6 +144,7 @@ class Post
     {
         $this->type = PostTypeEnum::DRAFT->value;
         $this->archive = new ArrayCollection();
+        $this->views = new ArrayCollection();
     }
 
     /**
@@ -303,6 +304,14 @@ class Post
     public function getArchive() : ArrayCollection
     {
         return $this->archive;
+    }
+
+    /**
+     * @return ArrayCollection<PostView>
+     */
+    public function getViews() : ArrayCollection
+    {
+        return $this->views;
     }
 
     /**
