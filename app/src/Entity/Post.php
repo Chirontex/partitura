@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Partitura\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Entity\Trait\HasContentTrait;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
@@ -121,7 +123,7 @@ class Post
     protected $preview;
 
     /**
-     * @var ArrayCollection<ArchivedPost>
+     * @var Collection<ArchivedPost>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\ArchivedPost",
@@ -131,7 +133,7 @@ class Post
     protected $archive;
 
     /**
-     * @var ArrayCollection<PostView>
+     * @var Collection<PostView>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\PostView",
@@ -299,17 +301,17 @@ class Post
     }
 
     /**
-     * @return ArrayCollection<ArchivedPost>
+     * @return Collection<ArchivedPost>
      */
-    public function getArchive() : ArrayCollection
+    public function getArchive() : Collection
     {
         return $this->archive;
     }
 
     /**
-     * @return ArrayCollection<PostView>
+     * @return Collection<PostView>
      */
-    public function getViews() : ArrayCollection
+    public function getViews() : Collection
     {
         return $this->views;
     }
