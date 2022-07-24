@@ -18,7 +18,7 @@ trait RequestEventSubscriberTrait
      */
     protected function isNeedJsonResponse(Request $request) : bool
     {
-        return $request->get("Accept") === "application/json"
+        return $request->server->get("HTTP_ACCEPT") === "application/json"
             || explode("/", trim($request->getPathInfo(), "/"))[0] === "api";
     }
 }
