@@ -13,14 +13,6 @@ use JMS\Serializer\Annotation as Serializer;
 class PostResponseDto
 {
     /**
-     * @var int
-     * 
-     * @Serializer\Type("int")
-     * @Serializer\SerializedName("post_id")
-     */
-    protected $postId;
-
-    /**
      * @var string
      * 
      * @Serializer\Type("string")
@@ -51,26 +43,6 @@ class PostResponseDto
      * @Serializer\SerializedName("content")
      */
     protected $content;
-
-    /**
-     * @return int
-     */
-    public function getPostId() : int
-    {
-        return (int)$this->postId;
-    }
-
-    /**
-     * @param int $postId
-     *
-     * @return $this
-     */
-    public function setPostId(int $postId) : static
-    {
-        $this->postId = $postId;
-
-        return $this;
-    }
 
     /**
      * @return string
