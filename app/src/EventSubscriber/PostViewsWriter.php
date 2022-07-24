@@ -5,6 +5,7 @@ namespace Partitura\EventSubscriber;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
+use Partitura\Entity\Post;
 use Partitura\Entity\PostView;
 use Partitura\Entity\User;
 use Partitura\Event\PostViewEvent;
@@ -62,8 +63,30 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         $post = $event->getPost();
         $request = Request::createFromGlobals();
 
-        if ($this->isItBotViewing($request)) {
+        if (!$this->isPostViewWritingAvailable($post, $request)) {
             return;
+        }
+
+        try {
+            $this->objectManager->persist(
+                $this->postViewFactory->createByPostRequest($post, $request)
+            );
+            $this->objectManager->flush();
+        } catch (PostViewException $e) {
+            $this->logger->error($e->getMessage());
+        }
+    }
+
+    /**
+     * @param Post $post
+     * @param Request $request
+     *
+     * @return bool
+     */
+    protected function isPostViewWritingAvailable(Post $post, Request $request) : bool
+    {
+        if ($this->isItBotViewing($request)) {
+            return false;
         }
 
         $clientIp = $request->getClientIp();
@@ -72,7 +95,7 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         if (empty($clientIp) && !($currentUser instanceof User)) {
             $this->logger->error("Cannot find a previously wrote post views because client IP and current user are not found.");
 
-            return;
+            return false;
         }
 
         $criteria = ["post" => $post];
@@ -86,17 +109,10 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         $postViews = $this->postViewRepository->findBy($criteria);
 
         if (!$postViews->isEmpty()) {
-            return;
+            return false;
         }
 
-        try {
-            $this->objectManager->persist(
-                $this->postViewFactory->createByPostRequest($post, $request)
-            );
-            $this->objectManager->flush();
-        } catch (PostViewException $e) {
-            $this->logger->error($e->getMessage());
-        }
+        return true;
     }
 
     /**
