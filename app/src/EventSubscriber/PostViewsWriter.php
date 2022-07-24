@@ -72,7 +72,11 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
 
             $this->objectManager->persist($postView);
 
-            $post->getViews()->add($postView);
+            $views = $post->getViews();
+
+            if ($views !== null && $views->isInitialized()) {
+                $views->add($postView);
+            }
 
             $this->objectManager->flush();
         } catch (PostViewException $e) {

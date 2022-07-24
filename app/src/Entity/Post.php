@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Partitura\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Entity\Trait\HasContentTrait;
@@ -123,7 +121,7 @@ class Post
     protected $preview;
 
     /**
-     * @var Collection<ArchivedPost>
+     * @var PersistentCollection<ArchivedPost>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\ArchivedPost",
@@ -133,7 +131,7 @@ class Post
     protected $archive;
 
     /**
-     * @var Collection<PostView>
+     * @var PersistentCollection<PostView>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\PostView",
@@ -145,8 +143,6 @@ class Post
     public function __construct()
     {
         $this->type = PostTypeEnum::DRAFT->value;
-        $this->archive = new ArrayCollection();
-        $this->views = new ArrayCollection();
     }
 
     /**
@@ -301,17 +297,17 @@ class Post
     }
 
     /**
-     * @return Collection<ArchivedPost>
+     * @return null|PersistentCollection<ArchivedPost>
      */
-    public function getArchive() : Collection
+    public function getArchive() : ?PersistentCollection
     {
         return $this->archive;
     }
 
     /**
-     * @return Collection<PostView>
+     * @return null|PersistentCollection<PostView>
      */
-    public function getViews() : Collection
+    public function getViews() : ?PersistentCollection
     {
         return $this->views;
     }
