@@ -53,13 +53,15 @@ class BlogResponseFactory
             $pages = 1;
         }
 
-        $responseDto = (new BlogResponseDto())
-            ->setPages($pages)
-            ->setPosts($this->createBlogPostCollection($requestDto));
+        $blogViewEvent = new BlogViewEvent(
+            (new BlogResponseDto())
+                ->setPages($pages)
+                ->setPosts($this->createBlogPostCollection($requestDto))
+        );
 
-        $this->eventDispatcher->dispatch(new BlogViewEvent($responseDto));
+        $this->eventDispatcher->dispatch($blogViewEvent);
 
-        return $responseDto;
+        return $blogViewEvent->getBlogResponseDto();
     }
 
     /**

@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Event;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Dto\Api\BlogResponseDto;
-use Partitura\Exception\ArgumentException;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -28,5 +26,17 @@ class BlogViewEvent extends Event
     public function getBlogResponseDto() : BlogResponseDto
     {
         return $this->blogResponseDto;
+    }
+
+    /**
+     * @param BlogResponseDto $blogResponseDto
+     *
+     * @return $this
+     */
+    public function setBlogResponseDto(BlogResponseDto $blogResponseDto) : static
+    {
+        $this->blogResponseDto = $blogResponseDto;
+
+        return $this;
     }
 }
