@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
 use Partitura\Entity\Trait\HasIdTrait;
@@ -62,6 +63,11 @@ class PostView
      * )
      */
     protected $ipAddress;
+
+    public function __construct()
+    {
+        $this->datetimeCreated = new DateTime();
+    }
 
     /**
      * @return null|Post
