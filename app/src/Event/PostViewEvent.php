@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Event;
 
 use Partitura\Dto\PostResponseDto;
+use Partitura\Entity\Post;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -12,12 +13,24 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class PostViewEvent extends Event
 {
+    /** @var Post */
+    protected $post;
+
     /** @var PostResponseDto */
     protected $postResponseDto;
 
-    public function __construct(PostResponseDto $postResponseDto)
+    public function __construct(Post $post, PostResponseDto $postResponseDto)
     {
+        $this->post = $post;
         $this->postResponseDto = $postResponseDto;
+    }
+
+    /**
+     * @return Post
+     */
+    public function getPost() : Post
+    {
+        return $this->post;
     }
 
     /**

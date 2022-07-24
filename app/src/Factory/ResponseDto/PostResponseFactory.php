@@ -40,6 +40,7 @@ class PostResponseFactory
     {
         $post = $this->postManager->getPostByUri($uri);
         $postViewEvent = new PostViewEvent(
+            $post,
             (new PostResponseDto())
                 ->setTitle($post->getTitle())
                 ->setAuthor((string)$post->getAuthor()?->getUsername())
