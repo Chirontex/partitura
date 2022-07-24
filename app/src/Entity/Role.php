@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Partitura\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasCodeTrait;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Entity\Trait\HasNameTrait;
@@ -26,7 +26,7 @@ class Role
     public const TABLE_NAME = "pt_roles";
 
     /**
-     * @var ArrayCollection<User>
+     * @var null|PersistentCollection<User>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\User",
@@ -36,7 +36,7 @@ class Role
     protected $users;
 
     /**
-     * @var ArrayCollection<RoleUnitReference>
+     * @var null|PersistentCollection<RoleUnitReference>
      * 
      * @ORM\OneToMany(
      *     targetEntity="Partitura\Entity\RoleUnitReference",
@@ -45,16 +45,10 @@ class Role
      */
     protected $unitReferences;
 
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-        $this->unitReferences = new ArrayCollection();
-    }
-
     /**
-     * @return ArrayCollection<User>
+     * @return null|PersistentCollection<User>
      */
-    public function getUsers() : ArrayCollection
+    public function getUsers() : ?PersistentCollection
     {
         return $this->users;
     }
@@ -76,9 +70,9 @@ class Role
     }
 
     /**
-     * @return ArrayCollection<RoleUnitReference>
+     * @return null|PersistentCollection<RoleUnitReference>
      */
-    public function getUnitReferences() : ArrayCollection
+    public function getUnitReferences() : ?PersistentCollection
     {
         return $this->unitReferences;
     }

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Partitura\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasCodeTrait;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Repository\UnitRepository;
@@ -24,7 +24,7 @@ class Unit
     public const TABLE_NAME = "pt_units";
 
     /**
-     * @var ArrayCollection<RoleUnitReference>
+     * @var null|PersistentCollection<UnitRoleReferences>
      * 
      * @ORM\OneToMany(
      *     targetEntity="Partitura\Entity\RoleUnitReference",
@@ -33,15 +33,10 @@ class Unit
      */
     protected $roleReferences;
 
-    public function __construct()
-    {
-        $this->roleReferences = new ArrayCollection();
-    }
-
     /**
-     * @return ArrayCollection<UnitRoleReferences>
+     * @return null|PersistentCollection<UnitRoleReferences>
      */
-    public function getRoleReferences() : ArrayCollection
+    public function getRoleReferences() : ?PersistentCollection
     {
         return $this->roleReferences;
     }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Partitura\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
 use Partitura\Entity\Trait\HasDatetimeUpdatedTrait;
 use Partitura\Entity\Trait\HasIdTrait;
@@ -78,7 +78,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     protected $active = 1;
 
     /**
-     * @var ArrayCollection<Post>
+     * @var null|PersistentCollection<Post>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\Post",
@@ -88,7 +88,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     protected $createdPosts;
 
     /**
-     * @var ArrayCollection<Post>
+     * @var null|PersistentCollection<Post>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\Post",
@@ -98,7 +98,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     protected $lastEditedPosts;
 
     /**
-     * @var ArrayCollection<ArchivedPost>
+     * @var null|PersistentCollection<ArchivedPost>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\ArchivedPost",
@@ -108,7 +108,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     protected $archivedPosts;
 
     /**
-     * @var ArrayCollection<PostView>
+     * @var null|PersistentCollection<PostView>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\PostView",
@@ -120,9 +120,6 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     public function __construct()
     {
         $this->datetimeCreated = new DateTime();
-        $this->createdPosts = new ArrayCollection();
-        $this->lastEditedPosts = new ArrayCollection();
-        $this->archivedPosts = new ArrayCollection();
     }
 
     /**
@@ -230,9 +227,9 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     }
 
     /**
-     * @return ArrayCollection<Post>
+     * @return null|PersistentCollection<Post>
      */
-    public function getCreatedPosts() : ArrayCollection
+    public function getCreatedPosts() : ?PersistentCollection
     {
         return $this->createdPosts;
     }
@@ -252,9 +249,9 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     }
 
     /**
-     * @return ArrayCollection<Post>
+     * @return null|PersistentCollection<Post>
      */
-    public function getLastEditedPosts() : ArrayCollection
+    public function getLastEditedPosts() : ?PersistentCollection
     {
         return $this->lastEditedPosts;
     }
@@ -274,9 +271,9 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     }
 
     /**
-     * @return ArrayCollection<ArchivedPost>
+     * @return null|PersistentCollection<ArchivedPost>
      */
-    public function getArchivedPosts() : ArrayCollection
+    public function getArchivedPosts() : ?PersistentCollection
     {
         return $this->archivedPosts;
     }

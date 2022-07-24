@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Partitura\Entity;
 
-use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasContentTrait;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
 use Partitura\Entity\Trait\HasDatetimeUpdatedTrait;
@@ -121,7 +121,7 @@ class Post
     protected $preview;
 
     /**
-     * @var PersistentCollection<ArchivedPost>
+     * @var null|PersistentCollection<ArchivedPost>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\ArchivedPost",
@@ -131,7 +131,7 @@ class Post
     protected $archive;
 
     /**
-     * @var PersistentCollection<PostView>
+     * @var null|PersistentCollection<PostView>
      * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\PostView",
