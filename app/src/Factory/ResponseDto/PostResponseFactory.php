@@ -42,6 +42,7 @@ class PostResponseFactory
         $postViewEvent = new PostViewEvent(
             $post,
             (new PostResponseDto())
+                ->setPostId($post->getId())
                 ->setTitle($post->getTitle())
                 ->setAuthor((string)$post->getAuthor()?->getUsername())
                 ->setContent($post->getContent())
