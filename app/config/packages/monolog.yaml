@@ -3,6 +3,7 @@ monolog:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
         - user_create_command
         - user_change_password_command
+        - post_views_writer
 
 when@dev:
     monolog:

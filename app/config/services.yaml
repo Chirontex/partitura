@@ -62,3 +62,7 @@ services:
 
     Partitura\Loader\PostsLoader:
         tags: [routing.loader]
+
+    Partitura\EventSubscriber\PostViewsWriter:
+        calls:
+            - ['setLogger', ['@monolog.logger.post_views_writer']]
