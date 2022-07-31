@@ -9,7 +9,7 @@
 {% block body %}
     <body class="text-center">
         <main class="form-login">
-            <form action="{{ path(route_name) }}" method="POST">
+            <form action="{{ path(route_name) }}" method="POST" id="login_form">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
                 {% if error %}
                 <div class="alert alert-danger" role="alert">
@@ -30,7 +30,7 @@
                         <input type="checkbox" name="_remember_me" value="true"> Запомнить меня
                     </label>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+                <button class="w-100 btn btn-lg btn-primary" type="submit" id="login_submit_button">Войти</button>
                 <p class="mt-5 mb-3 text-muted">Partitura, 2022</p>
             </form>
         </main>
