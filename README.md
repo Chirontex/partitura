@@ -9,6 +9,7 @@
 
 ### Быстрое создание dev-среды в docker-контейнере
 
+0. Создать форк этого репозитория.
 1. Создать пустую директорию (например, __/partitura__) и клонировать в неё репозиторий: `git clone https://github.com/chirontex/partitura /partitura`.
 2. Создать файл __/partitura/git-clone.sh__ следующего вида:
 ```bash
@@ -23,6 +24,8 @@ docker build -t partitura:latest .
 docker run --rm -it -p 80:80/tcp -p 3306:3306/tcp -p 9003:9003/tcp partitura:latest
 ```
 После этого можно подключаться к docker-контейнеру.
+
+__P.S.__ Оригинальный адрес репозитория везде заменяем на адрес своего форка, конечно же.
 
 ## Команды CLI
 
