@@ -9,6 +9,7 @@ use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
 use Partitura\Entity\Trait\HasDatetimeUpdatedTrait;
 use Partitura\Entity\Trait\HasIdTrait;
+use Partitura\Exception\NotImplementedException;
 use Partitura\Interfaces\PasswordUpgradableUserInterface;
 use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -288,12 +289,11 @@ class User implements UserInterface, PasswordUpgradableUserInterface
 
     /**
      * {@inheritDoc}
-     * @see UserInterface
+     * 
+     * @throws NotImplementedException
      */
-    public function eraseCredentials()
+    public function eraseCredentials() : void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-        // TODO: доработать метод после добавления функционала запоминания
+        throw new NotImplementedException("Nothing to erase.");
     }
 }
