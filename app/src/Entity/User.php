@@ -118,6 +118,16 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      */
     protected $postsViews;
 
+    /**
+     * @var null|PersistentCollection<UserFieldValue>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\UserFieldValue",
+     *     mappedBy="user"
+     * )
+     */
+    protected $additionalFields;
+
     public function __construct()
     {
         $this->datetimeCreated = new DateTime();
@@ -285,6 +295,14 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     public function getPostsViews() : ?PersistentCollection
     {
         return $this->postsViews;
+    }
+
+    /**
+     * @return null|PersistentCollection<UserFieldValue>
+     */
+    public function getAdditionalFields() : ?PersistentCollection
+    {
+        return $this->additionalFields;
     }
 
     /**

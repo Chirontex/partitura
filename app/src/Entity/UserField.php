@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasCodeTrait;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Repository\UserFieldRepository;
@@ -21,4 +22,22 @@ class UserField
         HasCodeTrait;
 
     public const TABLE_NAME = "pt_user_fields";
+
+    /**
+     * @var null|PersistentCollection<UserFieldValue>
+     * 
+     * @ORM\OneToMany(
+     *     targetEntity="\Partitura\Entity\UserFieldValue",
+     *     mappedBy="userField"
+     * )
+     */
+    protected $values;
+
+    /**
+     * @return null|PersistentCollection<UserFieldValue>
+     */
+    public function getValues() : ?PersistentCollection
+    {
+        return $this->values;
+    }
 }
