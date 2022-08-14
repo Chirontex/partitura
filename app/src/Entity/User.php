@@ -9,7 +9,6 @@ use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
 use Partitura\Entity\Trait\HasDatetimeUpdatedTrait;
 use Partitura\Entity\Trait\HasIdTrait;
-use Partitura\Exception\NotImplementedException;
 use Partitura\Interfaces\PasswordUpgradableUserInterface;
 use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -305,13 +304,9 @@ class User implements UserInterface, PasswordUpgradableUserInterface
         return $this->additionalFields;
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @throws NotImplementedException
-     */
+    /** {@inheritDoc} */
     public function eraseCredentials() : void
     {
-        throw new NotImplementedException("Nothing to erase.");
+        /** Nothing to erase. */
     }
 }
