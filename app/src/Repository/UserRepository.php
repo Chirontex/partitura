@@ -28,6 +28,7 @@ class UserRepository extends Repository
     /**
      * @param string $username
      *
+     * @throws EntityNotFoundException
      * @return User
      */
     public function findByUsername(string $username) : User
