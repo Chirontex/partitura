@@ -21,11 +21,11 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: !php/const \Partitura\Controller\Admin\LoginController::ROUTE_LOGIN
-                check_path: !php/const \Partitura\Controller\Admin\LoginController::ROUTE_LOGIN
+                login_path: !php/const \Partitura\Controller\LoginController::ROUTE_LOGIN
+                check_path: !php/const \Partitura\Controller\LoginController::ROUTE_LOGIN
                 enable_csrf: true
                 csrf_token_id: "login"
-                default_target_path: !php/const \Partitura\Controller\Admin\DashboardController::ROUTE_DASHBOARD
+                default_target_path: !php/const \Partitura\Controller\MainController::ROUTE_INDEX
             logout:
                 path: !php/const \Partitura\Controller\Profile\LogoutController::ROUTE_LOGOUT
             remember_me:
