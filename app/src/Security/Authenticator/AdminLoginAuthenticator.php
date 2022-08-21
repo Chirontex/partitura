@@ -6,14 +6,17 @@ namespace Partitura\Security\Authenticator;
 use Partitura\Controller\Admin\LoginController;
 use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
+use Partitura\Event\AdminLogin\BeforePasswordValidationEvent;
 use Partitura\Exception\AuthenticationException;
 use Partitura\Factory\AuthenticationDtoFactory;
 use Partitura\Factory\UserBadgeFactory;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException as SymfonyAuthenticationException;
+use Symfony\Component\Security\Core\Exception\LogicException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
@@ -35,14 +38,19 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     /** @var UserBadgeFactory */
     protected $userBadgeFactory;
 
+    /** @var EventDispatcherInterface */
+    protected $eventDispatcher;
+
     public function __construct(
         AuthenticationDtoFactory $authenticationDtoFactory,
         UserPasswordHasherInterface $passwordHasher,
-        UserBadgeFactory $userBadgeFactory
+        UserBadgeFactory $userBadgeFactory,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->authenticationDtoFactory = $authenticationDtoFactory;
         $this->passwordHasher = $passwordHasher;
         $this->userBadgeFactory = $userBadgeFactory;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /** {@inheritDoc} */
@@ -59,17 +67,25 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
 
         /** @var User */
         $user = $userBadge->getUser();
+        $credentialsBadge = new PasswordCredentials($authneticationDto->getPassword());
+
+        $this->eventDispatcher->dispatch(new BeforePasswordValidationEvent($user, $credentialsBadge));
+
+        try {
+            if (!$this->passwordHasher->isPasswordValid($user, $credentialsBadge->getPassword())) {
+                throw new AuthenticationException("Incorrect password.");
+            }
+        } catch (LogicException) {
+            // считаем, что пароль уже был провалидирован
+        }
+
+        if (!$credentialsBadge->isResolved()) {
+            $credentialsBadge->markResolved();
+        }
 
         if (!in_array(RoleEnum::ROLE_EDITOR->value, $user->getRoles())) {
             throw new AuthenticationException("Access is forbidden for this user.");
         }
-
-        if (!$this->passwordHasher->isPasswordValid($user, $authneticationDto->getPassword())) {
-            throw new AuthenticationException("Incorrect password.");
-        }
-
-        $credentialsBadge = new PasswordCredentials($authneticationDto->getPassword());
-        $credentialsBadge->markResolved();
 
         $passport = new Passport($userBadge, $credentialsBadge);
 
