@@ -9,6 +9,7 @@ use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
 use Partitura\Entity\Trait\HasDatetimeUpdatedTrait;
 use Partitura\Entity\Trait\HasIdTrait;
+use Partitura\Enum\RoleEnum;
 use Partitura\Interfaces\PasswordUpgradableUserInterface;
 use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -168,11 +169,23 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      */
     public function getRoles() : array
     {
-        if ($this->role !== null) {
-            return [$this->role->getCode()];
+        if ($this->role === null) {
+            return [RoleEnum::ROLE_USER->value];
         }
 
-        return ["ROLE_USER"];
+        $roleCode = $this->role->getCode();
+        $roles = [$roleCode];
+
+        /** @var RoleEnum */
+        $roleEnum = RoleEnum::getInstanceByValue($roleCode);
+        $parentRoleEnum = $roleEnum->getParent();
+
+        while ($parentRoleEnum !== null) {
+            $roles[] = $parentRoleEnum->value;
+            $parentRoleEnum = $parentRoleEnum->getParent();
+        }
+
+        return array_unique($roles);
     }
 
     /**

@@ -6,6 +6,7 @@ namespace Partitura\Security\Authenticator;
 use Doctrine\Persistence\ManagerRegistry;
 use Partitura\Controller\Admin\LoginController;
 use Partitura\Entity\User;
+use Partitura\Enum\RoleEnum;
 use Partitura\Exception\AuthenticationException;
 use Partitura\Exception\EntityNotFoundException;
 use Partitura\Factory\AuthenticationDtoFactory;
@@ -72,11 +73,13 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
             throw new AuthenticationException($e->getMessage(), 0, $e);
         }
 
+        if (!in_array(RoleEnum::ROLE_EDITOR->value, $user->getRoles())) {
+            throw new AuthenticationException("Access is forbidden for this user.");
+        }
+
         if (!$this->passwordHasher->isPasswordValid($user, $authneticationDto->getPassword())) {
             throw new AuthenticationException("Incorrect password.");
         }
-
-        // TODO: добавить проверку группы прав
 
         $credentialsBadge = new PasswordCredentials($authneticationDto->getPassword());
         $credentialsBadge->markResolved();

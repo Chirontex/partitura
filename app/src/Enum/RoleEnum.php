@@ -6,6 +6,7 @@ namespace Partitura\Enum;
 use Partitura\Enum\Trait\GetInstanceByValueTrait;
 
 /**
+ * Enum RoleEnum
  * @package Partitura\Enum
  */
 enum RoleEnum : string
@@ -29,6 +30,20 @@ enum RoleEnum : string
             self::ROLE_MODERATOR => "Модератор",
             self::ROLE_ADMIN => "Администратор",
             self::ROLE_ROOT => "Суперадминистратор",
+        };
+    }
+
+    /**
+     * @return null|self
+     */
+    public function getParent() : ?self
+    {
+        return match ($this) {
+            self::ROLE_USER => null,
+            self::ROLE_EDITOR => self::ROLE_USER,
+            self::ROLE_MODERATOR => self::ROLE_EDITOR,
+            self::ROLE_ADMIN => self::ROLE_MODERATOR,
+            self::ROLE_ROOT => self::ROLE_ADMIN,
         };
     }
 }
