@@ -17,6 +17,10 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin_login:
+            pattern: ^/admin/login/*
+            custom_authenticators:
+                - Partitura\Security\Authenticator\AdminLoginAuthenticator
         main:
             lazy: true
             provider: app_user_provider
