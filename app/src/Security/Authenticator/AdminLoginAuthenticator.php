@@ -8,6 +8,7 @@ use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
 use Partitura\Event\AdminLogin\BeforePasswordValidationEvent;
 use Partitura\Exception\AuthenticationException;
+use Partitura\Exception\SkipAuthenticationException;
 use Partitura\Factory\AuthenticationDtoFactory;
 use Partitura\Factory\UserBadgeFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -127,7 +128,9 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     /** {@inheritDoc} */
     public function onAuthenticationFailure(Request $request, SymfonyAuthenticationException $exception) : ?Response
     {
-        $request->attributes->set(Security::AUTHENTICATION_ERROR, $exception);
+        if ((!$exception instanceof SkipAuthenticationException)) {
+            $request->attributes->set(Security::AUTHENTICATION_ERROR, $exception);
+        }
 
         // возвращаем null, чтобы обработка запроса продолжилась
         return null;
