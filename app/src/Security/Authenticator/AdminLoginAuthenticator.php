@@ -22,6 +22,7 @@ use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Throwable;
 
 /**
  * Class AdminLoginAuthenticator
@@ -69,7 +70,13 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
         $user = $userBadge->getUser();
         $credentialsBadge = new PasswordCredentials($authneticationDto->getPassword());
 
-        $this->eventDispatcher->dispatch(new BeforePasswordValidationEvent($user, $credentialsBadge));
+        try {
+            $this->eventDispatcher->dispatch(new BeforePasswordValidationEvent($user, $credentialsBadge));
+        } catch (Throwable $e) {
+            $e instanceof AuthenticationException
+                ? throw $e
+                : throw new AuthenticationException($e->getMessage(), 0, $e);
+        }
 
         try {
             if (!$this->passwordHasher->isPasswordValid($user, $credentialsBadge->getPassword())) {
