@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace Partitura\Factory;
 
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use Partitura\Dto\AuthenticationDto;
 use Partitura\Entity\User;
 use Partitura\Exception\AuthenticationException;
 use Partitura\Exception\EntityNotFoundException;
+use Partitura\Kernel;
 use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
@@ -17,14 +18,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
  */
 class UserBadgeFactory
 {
-    /** @var UserRepository */
-    protected $userRepository;
-
-    public function __construct(ManagerRegistry $registry)
-    {
-        $this->userRepository = $registry->getRepository(User::class);
-    }
-
     /**
      * @param AuthenticationDto $authenticationDto
      *
@@ -34,9 +27,15 @@ class UserBadgeFactory
     {
         return new UserBadge(
             $authenticationDto->getUsername(),
-            function (string $username) : User {
+            static function (string $username) : User {
                 try {
-                    return $this->userRepository->findByUsername($username);
+                    /** @var ObjectManager */
+                    $objectManager = Kernel::getInstance()->getService("doctrine");
+
+                    /** @var UserRepository */
+                    $userRepository = $objectManager->getRepository(User::class);
+
+                    return $userRepository->findByUsername($username);
                 } catch (EntityNotFoundException $e) {
                     throw new AuthenticationException($e->getMessage(), 0, $e);
                 }
