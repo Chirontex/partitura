@@ -18,6 +18,8 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException as SymfonyAuthenticationException;
 use Symfony\Component\Security\Core\Exception\LogicException;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
@@ -42,16 +44,21 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
+    /** @var CsrfTokenManagerInterface */
+    protected $csrfTokenManager;
+
     public function __construct(
         AuthenticationDtoFactory $authenticationDtoFactory,
         UserPasswordHasherInterface $passwordHasher,
         UserBadgeFactory $userBadgeFactory,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager
     ) {
         $this->authenticationDtoFactory = $authenticationDtoFactory;
         $this->passwordHasher = $passwordHasher;
         $this->userBadgeFactory = $userBadgeFactory;
         $this->eventDispatcher = $eventDispatcher;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /** {@inheritDoc} */
@@ -65,6 +72,13 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     {
         $authneticationDto = $this->authenticationDtoFactory->createAuthenticationDto($request);
         $userBadge = $this->userBadgeFactory->createUserBadge($authneticationDto);
+
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken(
+            LoginController::CSRF_TOKEN_ID,
+            $request->get("_csrf_token")
+        ))) {
+            throw new AuthenticationException("Invalid CSRF token.");
+        }
 
         /** @var User */
         $user = $userBadge->getUser();
