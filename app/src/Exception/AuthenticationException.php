@@ -12,4 +12,10 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException as Symfony
  */
 class AuthenticationException extends SymfonyAuthenticationException implements PartituraExceptionInterface
 {
+    /** {@inheritDoc} */
+    public function getMessageKey() : string
+    {
+        // TODO: реализовать перевод сообщений
+        return $this->getMessage();
+    }
 }
