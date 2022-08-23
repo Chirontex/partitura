@@ -42,7 +42,6 @@ class AuthenticationDtoFactory
 
         return (new AuthenticationDto())
             ->setUsername($username)
-            ->setPassword($password)
-            ->setNeedToRemember(!empty($request->get("_remember_me")));
+            ->setPassword($password);
     }
 }

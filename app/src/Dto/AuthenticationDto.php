@@ -15,9 +15,6 @@ class AuthenticationDto
     /** @var string */
     protected $password;
 
-    /** @var bool */
-    protected $needToRemember;
-
     /**
      * @return string
      */
@@ -54,26 +51,6 @@ class AuthenticationDto
     public function setPassword(string $password) : static
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isNeedToRemember() : bool
-    {
-        return (bool)$this->needToRemember;
-    }
-
-    /**
-     * @param bool $needToRemember
-     *
-     * @return $this
-     */
-    public function setNeedToRemember(bool $needToRemember) : static
-    {
-        $this->needToRemember = $needToRemember;
 
         return $this;
     }
