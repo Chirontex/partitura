@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Partitura\Controller\Admin;
 
+use Partitura\Entity\User;
+use Partitura\Enum\RoleEnum;
+use Partitura\Exception\AuthenticationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,16 +31,23 @@ class LoginController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils) : Response
     {
-        if ($this->getUser() !== null) {
+        /** @var null|User */
+        $user = $this->getUser();
+
+        if ($user !== null && $user->hasRole(RoleEnum::ROLE_EDITOR)) {
             return $this->redirectToRoute(DashboardController::ROUTE_DASHBOARD);
         }
+
+        $error = $user !== null
+            ? new AuthenticationException("Access is forbidden for this user.")
+            : $authenticationUtils->getLastAuthenticationError();
 
         return $this->render(
             "genesis/admin/login.html.twig",
             [
                 "route_name" => static::ROUTE_LOGIN,
                 "last_username" => $authenticationUtils->getLastUsername(),
-                "error" => $authenticationUtils->getLastAuthenticationError(),
+                "error" => $error,
                 "csrf_token_id" => static::CSRF_TOKEN_ID,
             ]
         );

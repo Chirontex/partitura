@@ -105,7 +105,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
             $credentialsBadge->markResolved();
         }
 
-        if (!in_array(RoleEnum::ROLE_EDITOR->value, $user->getRoles())) {
+        if (!$user->hasRole(RoleEnum::ROLE_EDITOR)) {
             throw new AuthenticationException("Access is forbidden for this user.");
         }
 

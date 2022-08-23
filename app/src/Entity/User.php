@@ -164,6 +164,16 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     }
 
     /**
+     * @param RoleEnum $roleEnum
+     *
+     * @return bool
+     */
+    public function hasRole(RoleEnum $roleEnum) : bool
+    {
+        return in_array($roleEnum->value, $this->getRoles(), true);
+    }
+
+    /**
      * {@inheritDoc}
      * @see UserInterface
      */
