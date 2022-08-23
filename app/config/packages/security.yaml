@@ -18,7 +18,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
-            pattern: ^/admin/*
+            pattern: ^/admin
             custom_authenticators:
                 - Partitura\Security\Authenticator\AdminLoginAuthenticator
             lazy: true
@@ -40,8 +40,8 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: !php/const \Partitura\Controller\LoginController::ROUTE_LOGIN
-                check_path: !php/const \Partitura\Controller\LoginController::ROUTE_LOGIN
+                login_path: !php/const \Partitura\Controller\Profile\LoginController::ROUTE_LOGIN
+                check_path: !php/const \Partitura\Controller\Profile\LoginController::ROUTE_LOGIN
                 enable_csrf: true
                 csrf_token_id: "login"
                 default_target_path: !php/const \Partitura\Controller\MainController::ROUTE_INDEX
@@ -68,8 +68,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_EDITOR }
+        - { path: ^/profile/login, roles: PUBLIC_ACCESS }
+        - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
     security:

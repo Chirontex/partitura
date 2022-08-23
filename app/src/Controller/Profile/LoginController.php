@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Partitura\Controller;
+namespace Partitura\Controller\Profile;
 
+use Partitura\Controller\MainController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,9 +11,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class LoginController
- * @package Partitura\Controller
+ * @package Partitura\Controller\Profile
  * 
- * @Route("/login")
+ * @Route("/profile/login")
  */
 class LoginController extends AbstractController
 {
