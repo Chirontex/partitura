@@ -109,13 +109,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
             throw new AuthenticationException("Access is forbidden for this user.");
         }
 
-        $passport = new Passport($userBadge, $credentialsBadge);
-
-        if ($authneticationDto->isNeedToRemember()) {
-            $passport->addBadge(new RememberMeBadge());
-        }
-
-        return $passport;
+        return (new Passport($userBadge, $credentialsBadge));
     }
 
     /** {@inheritDoc} */
