@@ -23,8 +23,8 @@ security:
             custom_authenticators:
                 - Partitura\Security\Authenticator\AdminLoginAuthenticator
             form_login:
-                login_path: !php/const \Partitura\Controller\Profile\LoginController::ROUTE_LOGIN
-                check_path: !php/const \Partitura\Controller\Profile\LoginController::ROUTE_LOGIN
+                login_path: !php/const \Partitura\Controller\LoginController::ROUTE_LOGIN
+                check_path: !php/const \Partitura\Controller\LoginController::ROUTE_LOGIN
                 enable_csrf: true
                 csrf_token_id: "login"
                 default_target_path: !php/const \Partitura\Controller\MainController::ROUTE_INDEX
@@ -53,7 +53,6 @@ security:
     access_control:
         - { path: ^/admin/login, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_EDITOR }
-        - { path: ^/profile/login, roles: PUBLIC_ACCESS }
         - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
