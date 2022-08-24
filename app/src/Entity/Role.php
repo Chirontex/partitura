@@ -9,6 +9,7 @@ use Partitura\Entity\Trait\HasCodeTrait;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Entity\Trait\HasNameTrait;
 use Partitura\Enum\RoleEnum;
+use Partitura\Exception\CaseNotFoundException;
 use Partitura\Repository\RoleRepository;
 
 /**
@@ -79,6 +80,7 @@ class Role
     }
 
     /**
+     * @throws CaseNotFoundException
      * @return RoleEnum
      */
     public function getEnumInstance() : RoleEnum
