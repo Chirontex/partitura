@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasDatetimeCreatedTrait;
@@ -183,16 +184,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
             return [RoleEnum::ROLE_USER->value];
         }
 
-        $roleEnum = $this->getRole()->getEnumInstance();
-        $roles = [$roleEnum->value];
-        $parentRoleEnum = $roleEnum->getParent();
-
-        while ($parentRoleEnum !== null) {
-            $roles[] = $parentRoleEnum->value;
-            $parentRoleEnum = $parentRoleEnum->getParent();
-        }
-
-        return array_unique($roles);
+        return $this->prepareRoles();
     }
 
     /**
@@ -328,5 +320,31 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     public function eraseCredentials() : void
     {
         /** Nothing to erase. */
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function prepareRoles() : array
+    {
+        /** @var ArrayCollection<string> */
+        $roles = new ArrayCollection();
+
+        $this->handleParentRoles([$this->getRole()->getEnumInstance()], $roles);
+
+        return array_unique($roles->toArray());
+    }
+
+    /**
+     * @param RoleEnum[] $parentRoles
+     * @param ArrayCollection<string> $roles
+     */
+    private function handleParentRoles(array $parentRoles, ArrayCollection $roles) : void
+    {
+        foreach ($parentRoles as $parentRole) {
+            $roles->add($parentRole->value);
+
+            $this->handleParentRoles($parentRole->getParents(), $roles);
+        }
     }
 }

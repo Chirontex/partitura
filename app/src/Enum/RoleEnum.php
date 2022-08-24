@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Partitura\Enum;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Enum\Trait\GetInstanceByValueTrait;
+use Partitura\Kernel;
 
 /**
  * Enum RoleEnum
@@ -34,16 +36,25 @@ enum RoleEnum : string
     }
 
     /**
-     * @return null|self
+     * @return self[]
      */
-    public function getParent() : ?self
+    public function getParents() : array
     {
-        return match ($this) {
-            self::ROLE_USER => null,
-            self::ROLE_EDITOR => self::ROLE_USER,
-            self::ROLE_MODERATOR => self::ROLE_EDITOR,
-            self::ROLE_ADMIN => self::ROLE_MODERATOR,
-            self::ROLE_ROOT => self::ROLE_ADMIN,
-        };
+        /** @var ArrayCollection<string, string[]> */
+        $roleHierarchy = new ArrayCollection(
+            Kernel::getInstance()->getParameter("security.role_hierarchy.roles")
+        );
+
+        if (!$roleHierarchy->containsKey($this->value)) {
+            return [];
+        }
+
+        $parents = [];
+
+        foreach ($roleHierarchy->get($this->value) as $roleEnumValue) {
+            $parents[] = self::getInstanceByValue($roleEnumValue);
+        }
+
+        return $parents;
     }
 }
