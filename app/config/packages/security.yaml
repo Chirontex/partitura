@@ -17,28 +17,11 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        admin:
-            pattern: ^/admin
-            custom_authenticators:
-                - Partitura\Security\Authenticator\AdminLoginAuthenticator
-            lazy: true
-            provider: app_user_provider
-            form_login:
-                login_path: !php/const \Partitura\Controller\Admin\LoginController::ROUTE_LOGIN
-                check_path: !php/const \Partitura\Controller\Admin\LoginController::ROUTE_LOGIN
-                enable_csrf: true
-                csrf_token_id: "admin_login"
-                default_target_path: !php/const \Partitura\Controller\Admin\DashboardController::ROUTE_DASHBOARD
-            logout:
-                path: !php/const \Partitura\Controller\Profile\LogoutController::ROUTE_LOGOUT
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 86400
-                token_provider:
-                    doctrine: true
         main:
             lazy: true
             provider: app_user_provider
+            custom_authenticators:
+                - Partitura\Security\Authenticator\AdminLoginAuthenticator
             form_login:
                 login_path: !php/const \Partitura\Controller\Profile\LoginController::ROUTE_LOGIN
                 check_path: !php/const \Partitura\Controller\Profile\LoginController::ROUTE_LOGIN
