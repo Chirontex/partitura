@@ -16,6 +16,7 @@ trait GetInstanceByValueTrait
     /**
      * @param mixed $value
      *
+     * @throws CaseNotFoundException
      * @return self
      */
     public static function getInstanceByValue($value) : self
