@@ -107,7 +107,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
                 throw new InvalidCredentialsException();
             }
         } catch (LogicException) {
-            // считаем, что пароль уже был провалидирован
+            // считаем, что пароль уже был провалидирован, поэтому здесь ничего не делаем
         }
 
         if (!$credentialsBadge->isResolved()) {
@@ -118,7 +118,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
             throw new ForbiddenAccessException();
         }
 
-        return (new Passport($userBadge, $credentialsBadge));
+        return new Passport($userBadge, $credentialsBadge);
     }
 
     /** {@inheritDoc} */
