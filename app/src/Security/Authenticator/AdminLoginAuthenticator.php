@@ -9,6 +9,7 @@ use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
 use Partitura\Event\AdminLogin\BeforePasswordValidationEvent;
 use Partitura\Exception\AuthenticationException;
+use Partitura\Exception\ForbiddenAccessException;
 use Partitura\Exception\SkipAuthenticationException;
 use Partitura\Factory\AuthenticationDtoFactory;
 use Partitura\Factory\UserBadgeFactory;
@@ -113,7 +114,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
         }
 
         if (!$user->hasRole(RoleEnum::ROLE_EDITOR)) {
-            throw new AuthenticationException("Access is forbidden for this user.");
+            throw new ForbiddenAccessException();
         }
 
         return (new Passport($userBadge, $credentialsBadge));

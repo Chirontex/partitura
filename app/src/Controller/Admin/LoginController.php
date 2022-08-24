@@ -5,7 +5,7 @@ namespace Partitura\Controller\Admin;
 
 use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
-use Partitura\Exception\AuthenticationException;
+use Partitura\Exception\ForbiddenAccessException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,7 +39,7 @@ class LoginController extends AbstractController
         }
 
         $error = $user !== null
-            ? new AuthenticationException("Access is forbidden for this user.")
+            ? new ForbiddenAccessException()
             : $authenticationUtils->getLastAuthenticationError();
 
         return $this->render(
