@@ -6,8 +6,8 @@ namespace Partitura\Factory;
 use Doctrine\Persistence\ObjectManager;
 use Partitura\Dto\AuthenticationDto;
 use Partitura\Entity\User;
-use Partitura\Exception\AuthenticationException;
 use Partitura\Exception\EntityNotFoundException;
+use Partitura\Exception\InvalidCredentialsException;
 use Partitura\Kernel;
 use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
@@ -21,6 +21,7 @@ class UserBadgeFactory
     /**
      * @param AuthenticationDto $authenticationDto
      *
+     * @throws InvalidCredentialsException
      * @return UserBadge
      */
     public function createUserBadge(AuthenticationDto $authenticationDto) : UserBadge
@@ -37,7 +38,7 @@ class UserBadgeFactory
 
                     return $userRepository->findByUsername($username);
                 } catch (EntityNotFoundException $e) {
-                    throw new AuthenticationException($e->getMessage(), 0, $e);
+                    throw new InvalidCredentialsException("Invalid credentials.", 0, $e);
                 }
             }
         );

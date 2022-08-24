@@ -10,6 +10,7 @@ use Partitura\Enum\RoleEnum;
 use Partitura\Event\AdminLogin\BeforePasswordValidationEvent;
 use Partitura\Exception\AuthenticationException;
 use Partitura\Exception\ForbiddenAccessException;
+use Partitura\Exception\InvalidCredentialsException;
 use Partitura\Exception\SkipAuthenticationException;
 use Partitura\Factory\AuthenticationDtoFactory;
 use Partitura\Factory\UserBadgeFactory;
@@ -103,7 +104,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
 
         try {
             if (!$this->passwordHasher->isPasswordValid($user, $credentialsBadge->getPassword())) {
-                throw new AuthenticationException("Incorrect password.");
+                throw new InvalidCredentialsException();
             }
         } catch (LogicException) {
             // считаем, что пароль уже был провалидирован
