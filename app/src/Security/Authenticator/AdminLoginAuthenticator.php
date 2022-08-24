@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Security\Authenticator;
 
+use Partitura\Controller\Admin\DashboardController;
 use Partitura\Controller\Admin\LoginController;
 use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
@@ -13,8 +14,10 @@ use Partitura\Factory\AuthenticationDtoFactory;
 use Partitura\Factory\UserBadgeFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException as SymfonyAuthenticationException;
 use Symfony\Component\Security\Core\Exception\LogicException;
@@ -47,18 +50,23 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     /** @var CsrfTokenManagerInterface */
     protected $csrfTokenManager;
 
+    /** @var RouterInterface */
+    protected $router;
+
     public function __construct(
         AuthenticationDtoFactory $authenticationDtoFactory,
         UserPasswordHasherInterface $passwordHasher,
         UserBadgeFactory $userBadgeFactory,
         EventDispatcherInterface $eventDispatcher,
-        CsrfTokenManagerInterface $csrfTokenManager
+        CsrfTokenManagerInterface $csrfTokenManager,
+        RouterInterface $router
     ) {
         $this->authenticationDtoFactory = $authenticationDtoFactory;
         $this->passwordHasher = $passwordHasher;
         $this->userBadgeFactory = $userBadgeFactory;
         $this->eventDispatcher = $eventDispatcher;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->router = $router;
     }
 
     /** {@inheritDoc} */
@@ -114,8 +122,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     /** {@inheritDoc} */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName) : ?Response
     {
-        // возвращаем null, чтобы обработка запроса продолжилась
-        return null;
+        return new RedirectResponse($this->router->generate(DashboardController::ROUTE_DASHBOARD));
     }
 
     /** {@inheritDoc} */
