@@ -183,11 +183,8 @@ class User implements UserInterface, PasswordUpgradableUserInterface
             return [RoleEnum::ROLE_USER->value];
         }
 
-        $roleCode = $this->role->getCode();
-        $roles = [$roleCode];
-
-        /** @var RoleEnum */
-        $roleEnum = RoleEnum::getInstanceByValue($roleCode);
+        $roleEnum = $this->getRole()->getEnumInstance();
+        $roles = [$roleEnum->value];
         $parentRoleEnum = $roleEnum->getParent();
 
         while ($parentRoleEnum !== null) {

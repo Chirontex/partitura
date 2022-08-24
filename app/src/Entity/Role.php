@@ -8,6 +8,7 @@ use Doctrine\ORM\PersistentCollection;
 use Partitura\Entity\Trait\HasCodeTrait;
 use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Entity\Trait\HasNameTrait;
+use Partitura\Enum\RoleEnum;
 use Partitura\Repository\RoleRepository;
 
 /**
@@ -75,5 +76,13 @@ class Role
     public function getUnitReferences() : ?PersistentCollection
     {
         return $this->unitReferences;
+    }
+
+    /**
+     * @return RoleEnum
+     */
+    public function getEnumInstance() : RoleEnum
+    {
+        return RoleEnum::getInstanceByValue($this->getCode());
     }
 }
