@@ -12,8 +12,7 @@
         <link href="{{ asset('build/main/post.css') }}" rel="stylesheet">
 {% endblock %}
 
-{% block body %}
-    <body>
+{% block content %}
         <main class="main-post main-text">
             <h1 style="opacity: 0%">{{ title|e }}</h1>
             <div class="post-metadata row" style="opacity: 0%">
@@ -26,7 +25,6 @@
             </div>
             <div class="post-content" style="opacity: 0%">{{ content|e }}</div>
         </main>
-    </body>
 {% endblock %}
 
 {% block scripts %}

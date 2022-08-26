@@ -1,15 +1,18 @@
 body {
-    display: flex;
-    align-items: center;
     font-family: 'Ubuntu';
     background-color: #f0f0f0;
 }
 
 main {
+    align-items: center;
     width: 100%;
     max-width: 1000px;
     padding: 25px;
     margin: auto;
+}
+
+header {
+    margin-top: 25px;
 }
 
 h1 {

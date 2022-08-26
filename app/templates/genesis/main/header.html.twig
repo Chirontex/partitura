@@ -1,0 +1,21 @@
+        <header>
+        {% if is_user_panel_available %}
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <div class="col-xs-0 col-sm-6 col-md-11 col-lg-11">
+                        <!-- additional features will be here -->
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1 dropdown text-end">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg class="rounded-circle" width="32" height="32"><use xlink:href="#people-circle"/></svg>
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="#">Профиль</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Выйти</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        </header>

@@ -46,7 +46,10 @@ class PostController extends Controller
                     $this->arrayTransformer->toArray(
                         $this->postResponseFactory->createResponseByUri($request->getPathInfo())
                     ),
-                    ["sitename" => $this->getSitename()]
+                    [
+                        "is_user_panel_available" => $this->isUserPanelAvailable(),
+                        "sitename" => $this->getSitename(),
+                    ]
                 )
             );
         } catch (EntityNotFoundException $e) {

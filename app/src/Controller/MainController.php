@@ -27,7 +27,10 @@ class MainController extends Controller
         // TODO: Добавить определение страницы по умолчанию из настроек, когда настройки будут реализованы.
         return $this->render(
             "genesis/main/blog.html.twig",
-            ["sitename" => $this->getSitename()]
+            [
+                "is_user_panel_available" => $this->isUserPanelAvailable(),
+                "sitename" => $this->getSitename(),
+            ]
         );
     }
 }

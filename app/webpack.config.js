@@ -24,6 +24,7 @@ Encore
     .addEntry('admin/form', './assets/genesis/admin/form/form.js')
     .addEntry('admin/login', './assets/genesis/admin/login/login.js')
     .addEntry('main/main', './assets/genesis/main/main.js')
+    .addEntry('main/header', './assets/genesis/main/header.js')
     .addEntry('main/blog', './assets/genesis/main/blog.js')
     .addEntry('main/post', './assets/genesis/main/post.js')
 
