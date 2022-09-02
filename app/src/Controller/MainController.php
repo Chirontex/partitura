@@ -24,13 +24,6 @@ class MainController extends Controller
     public function index() : Response
     {
         // TODO: Добавить title для шаблона.
-        // TODO: Добавить определение страницы по умолчанию из настроек, когда настройки будут реализованы.
-        return $this->render(
-            "genesis/main/blog.html.twig",
-            [
-                "is_user_panel_available" => $this->isUserPanelAvailable(),
-                "sitename" => $this->getSitename(),
-            ]
-        );
+        return $this->render("genesis/main/blog.html.twig");
     }
 }

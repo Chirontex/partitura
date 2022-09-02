@@ -42,14 +42,8 @@ class PostController extends Controller
         try {
             return $this->render(
                 "genesis/main/post.html.twig",
-                array_merge(
-                    $this->arrayTransformer->toArray(
-                        $this->postResponseFactory->createResponseByUri($request->getPathInfo())
-                    ),
-                    [
-                        "is_user_panel_available" => $this->isUserPanelAvailable(),
-                        "sitename" => $this->getSitename(),
-                    ]
+                $this->arrayTransformer->toArray(
+                    $this->postResponseFactory->createResponseByUri($request->getPathInfo())
                 )
             );
         } catch (EntityNotFoundException $e) {

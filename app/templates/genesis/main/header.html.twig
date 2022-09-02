@@ -5,16 +5,24 @@
                     <div class="col-xs-0 col-sm-6 col-md-11 col-lg-11">
                         <!-- additional features will be here -->
                     </div>
+                {% if user is empty %}
+                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+                        <a href="{{ path(routes.login|e) }}" class="btn btn-primary">Войти</a>
+                    </div>
+                {% else %}
                     <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1 dropdown text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <svg class="rounded-circle" width="32" height="32"><use xlink:href="#people-circle"/></svg>
                         </a>
                         <ul class="dropdown-menu text-small">
+                            <li><span class="dropdown-item disabled">{{ user.identifier|e }}</span></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Профиль</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Выйти</a></li>
+                            <li><a class="dropdown-item" href="{{ path(routes.logout|e) }}">Выйти</a></li>
                         </ul>
                     </div>
+                {% endif %}
                 </div>
             </div>
         {% endif %}
