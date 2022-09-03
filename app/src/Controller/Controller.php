@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Partitura\Controller;
 
-use Partitura\Controller\Profile\LogoutController;
-use Partitura\Entity\User;
+use JMS\Serializer\Serializer;
+use Partitura\Factory\SettingsDtoFactory;
+use Partitura\Kernel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,49 +35,21 @@ abstract class Controller extends AbstractController
     }
 
     /**
+     * @return Serializer
+     */
+    protected function getSerializer() : Serializer
+    {
+        return Kernel::getInstance()->getService("jms_serializer");
+    }
+
+    /**
      * @return array<string, mixed>
      */
     protected function getSettings() : array
     {
-        return [
-            "sitename" => $this->getSitename(),
-            "is_user_panel_available" => $this->isUserPanelAvailable(),
-            "routes" => [
-                "login" => LoginController::ROUTE_LOGIN,
-                "logout" => LogoutController::ROUTE_LOGOUT,
-            ],
-            "user" => $this->getUserData(),
-        ];
-    }
+        /** @var SettingsDtoFactory */
+        $settingsDtoFactory = Kernel::getInstance()->getService(SettingsDtoFactory::class);
 
-    /**
-     * @return string
-     */
-    protected function getSitename() : string
-    {
-        // TODO: Реализовать получение имени сайта из настроек, когда настройки будут реализованы.
-        return "Partitura";
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isUserPanelAvailable() : bool
-    {
-        // TODO: Реализовать получение этой настройки из БД.
-        return true;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getUserData() : array
-    {
-        /** @var null|User */
-        $user = $this->getUser();
-
-        return $user === null ? [] : [
-            "identifier" => $user->getUserIdentifier(),
-        ];
+        return $this->getSerializer()->toArray($settingsDtoFactory->createDto());
     }
 }

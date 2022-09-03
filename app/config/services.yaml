@@ -66,3 +66,6 @@ services:
     Partitura\EventSubscriber\PostViewsWriter:
         calls:
             - ['setLogger', ['@monolog.logger.post_views_writer']]
+
+    Partitura\Factory\SettingsDtoFactory:
+        public: true
