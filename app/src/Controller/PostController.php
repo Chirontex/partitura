@@ -5,7 +5,6 @@ namespace Partitura\Controller;
 
 use Partitura\Exception\EntityNotFoundException;
 use Partitura\Factory\ResponseDto\PostResponseFactory;
-use JMS\Serializer\ArrayTransformerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,15 +18,9 @@ class PostController extends Controller
     /** @var PostResponseFactory */
     protected $postResponseFactory;
 
-    /** @var ArrayTransformerInterface */
-    protected $arrayTransformer;
-
-    public function __construct(
-        PostResponseFactory $postResponseFactory,
-        ArrayTransformerInterface $arrayTransformer
-    ) {
+    public function __construct(PostResponseFactory $postResponseFactory)
+    {
         $this->postResponseFactory = $postResponseFactory;
-        $this->arrayTransformer = $arrayTransformer;
     }
 
     /**
@@ -42,7 +35,7 @@ class PostController extends Controller
         try {
             return $this->render(
                 "genesis/main/post.html.twig",
-                $this->arrayTransformer->toArray(
+                $this->getSerializer()->toArray(
                     $this->postResponseFactory->createResponseByUri($request->getPathInfo())
                 )
             );
