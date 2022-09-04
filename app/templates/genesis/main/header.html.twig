@@ -2,9 +2,10 @@
         {% if is_user_panel_available %}
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <div class="col-xs-0 col-sm-6 col-md-11 col-lg-11">
-                        <!-- additional features will be here -->
+                    <div class="col-xs-12 col-sm-6 col-md-11 col-lg-11">
+                        <span><a href="/">{{ sitename|e }}</a></span>
                     </div>
+                    <!-- additional features will be here -->
                 {% if user is empty %}
                     <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
                         <a href="{{ path(routes.login|e) }}" class="btn btn-primary">Войти</a>
