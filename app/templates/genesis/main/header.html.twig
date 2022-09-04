@@ -1,10 +1,10 @@
         <header>
-        {% if is_user_panel_available %}
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <div class="col-xs-12 col-sm-6 col-md-11 col-lg-11">
                         <span><a href="/">{{ sitename|e }}</a></span>
                     </div>
+            {% if is_user_panel_available %}
                     <!-- additional features will be here -->
                 {% if user is empty %}
                     <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
@@ -24,7 +24,7 @@
                         </ul>
                     </div>
                 {% endif %}
+            {% endif %}
                 </div>
             </div>
-        {% endif %}
         </header>
