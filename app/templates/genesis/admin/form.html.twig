@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
-        <title>{% block title %}Форма в админпанели{% endblock %} | Partitura</title>
+        <title>{% block title %}{% endblock %} | {% block sitename %}{% endblock %}</title>
         <link href="{{ asset('build/app.css') }}" rel="stylesheet">
         <style>
             .bd-placeholder-img {
@@ -22,11 +22,16 @@
             }
         </style>
         <link href="{{ asset('build/admin/form.css') }}" rel="stylesheet">
+        <link href="{{ asset('build/main/header.css') }}" rel="stylesheet">
         {% block styles %}{% endblock %}
     </head>
-    {% block body %}{% endblock %}
+    <body>
+    {{ include('genesis/main/header.html.twig') }}
+    {% block content %}{% endblock %}
+    </body>
     <script src="{{ asset('build/runtime.js') }}"></script>
     <script src="{{ asset('build/app.js') }}"></script>
     <script src="{{ asset('build/admin/form.js') }}"></script>
+    <script src="{{ asset('build/main/header.js') }}"></script>
     {% block scripts %}{% endblock %}
 </html>

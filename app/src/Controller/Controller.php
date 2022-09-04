@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Controller;
 
 use JMS\Serializer\Serializer;
+use Partitura\Dto\SettingsDto;
 use Partitura\Factory\SettingsDtoFactory;
 use Partitura\Kernel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,13 +44,26 @@ abstract class Controller extends AbstractController
     }
 
     /**
+     * @return SettingsDtoFactory
+     */
+    protected function getSettingsDtoFactory() : SettingsDtoFactory
+    {
+        return Kernel::getInstance()->getService(SettingsDtoFactory::class);
+    }
+
+    /**
+     * @return SettingsDto
+     */
+    protected function createSettingsDto() : SettingsDto
+    {
+        return $this->getSettingsDtoFactory()->createDto();
+    }
+
+    /**
      * @return array<string, mixed>
      */
     protected function getSettings() : array
     {
-        /** @var SettingsDtoFactory */
-        $settingsDtoFactory = Kernel::getInstance()->getService(SettingsDtoFactory::class);
-
-        return $this->getSerializer()->toArray($settingsDtoFactory->createDto());
+        return $this->getSerializer()->toArray($this->createSettingsDto());
     }
 }

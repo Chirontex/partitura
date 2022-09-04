@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Partitura\Controller\Admin;
 
+use Partitura\Controller\AbstractLoginController;
 use Partitura\Entity\User;
 use Partitura\Enum\RoleEnum;
 use Partitura\Exception\ForbiddenAccessException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -17,7 +17,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  * 
  * @Route("/admin/login")
  */
-class LoginController extends AbstractController
+class LoginController extends AbstractLoginController
 {
     public const ROUTE_LOGIN = "partitura_admin_login";
     public const CSRF_TOKEN_ID = "admin_login";
@@ -51,5 +51,11 @@ class LoginController extends AbstractController
                 "csrf_token_id" => static::CSRF_TOKEN_ID,
             ]
         );
+    }
+
+    /** {@inheritDoc} */
+    protected function getActionRoute() : string
+    {
+        return static::ROUTE_LOGIN;
     }
 }

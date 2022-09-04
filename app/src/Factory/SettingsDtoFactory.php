@@ -44,4 +44,19 @@ class SettingsDtoFactory
                 $user === null ? [] : ["identifier" => $user->getUserIdentifier()]
             ));
     }
+
+    /**
+     * @param string $actionRoute
+     *
+     * @return SettingsDto
+     */
+    public function createDtoForLoginForm(string $actionRoute) : SettingsDto
+    {
+        $dto = $this->createDto();
+
+        $dto->getRoutes()->set("action", $actionRoute);
+        $dto->setUserPanelAvailable(false);
+
+        return $dto;
+    }
 }

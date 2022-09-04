@@ -2,39 +2,39 @@
 
 {% block title %}Войти{% endblock %}
 
+{% block sitename %}{{ sitename|e }}{% endblock %}
+
 {% block styles %}
         <link href="{{ asset('build/admin/login.css') }}" rel="stylesheet">
 {% endblock %}
 
-{% block body %}
-    <body class="text-center">
-        <main class="form-login">
-            <form action="{{ path(route_name|e) }}" method="POST" id="login_form">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
-                {% if error %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error.messageKey|trans(error.messageData, 'security') }}
-                </div>
-                {% endif %}
-                <h1 class="h3 mb-3 fw-normal">Пожалуйста, авторизуйтесь</h1>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" name="_username" placeholder="Имя" value="{{ last_username|e }}" required="true">
-                    <label for="floatingInput">Имя</label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" name="_password" placeholder="Пароль" required="true">
-                    <label for="floatingPassword">Пароль</label>
-                </div>
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me" value="true"> Запомнить меня
-                    </label>
-                </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit" id="login_submit_button">Войти</button>
-                <p class="mt-5 mb-3 text-muted">Partitura, 2022</p>
-            </form>
-        </main>
-    </body>
+{% block content %}
+    <main class="form-login text-center">
+        <form action="{{ path(routes.action|e) }}" method="POST" id="login_form">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+            {% endif %}
+            <h1 class="h3 mb-3 fw-normal">Пожалуйста, авторизуйтесь</h1>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" name="_username" placeholder="Имя" value="{{ last_username|e }}" required="true">
+                <label for="floatingInput">Имя</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="_password" placeholder="Пароль" required="true">
+                <label for="floatingPassword">Пароль</label>
+            </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me" value="true"> Запомнить меня
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" id="login_submit_button">Войти</button>
+            <p class="mt-5 mb-3 text-muted">Partitura, 2022</p>
+        </form>
+    </main>
 {% endblock %}
 
 {% block scripts %}

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Partitura\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -14,7 +13,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  * 
  * @Route("/login")
  */
-class LoginController extends AbstractController
+class LoginController extends AbstractLoginController
 {
     public const ROUTE_LOGIN = "partitura_login";
 
@@ -40,5 +39,11 @@ class LoginController extends AbstractController
                 "csrf_token_id" => "login",
             ]
         );
+    }
+
+    /** {@inheritDoc} */
+    protected function getActionRoute() : string
+    {
+        return static::ROUTE_LOGIN;
     }
 }
