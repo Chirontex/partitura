@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@fontsource/ubuntu": "^4.5.10",
-        "bootstrap": "^5.1.3"
+        "bootstrap": "^5.1.3",
+        "feather-icons": "^4.29.0"
     }
 }

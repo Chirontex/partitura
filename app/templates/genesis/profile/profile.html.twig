@@ -1,0 +1,43 @@
+{% extends 'genesis/main/main.html.twig' %}
+
+{% block title %}Ваш профиль{% endblock %}
+
+{% block sitename %}{{ sitename|e }}{% endblock %}
+
+{% block styles %}
+        <link href="{{ asset('build/profile/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                    <div class="position-sticky pt-3 sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="#">
+                                    <span data-feather="file-text" class="align-text-bottom"></span>
+                                    Основная информация
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="#">
+                                    <span data-feather="users" class="align-text-bottom"></span>
+                                    Безопасность
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <main>
+                    <!-- will be soon -->
+                </main>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset('build/profile/profile.js') }}"></script>
+{% endblock %}

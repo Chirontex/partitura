@@ -27,6 +27,7 @@ Encore
     .addEntry('main/header', './assets/genesis/main/header.js')
     .addEntry('main/blog', './assets/genesis/main/blog.js')
     .addEntry('main/post', './assets/genesis/main/post.js')
+    .addEntry('profile/profile', './assets/genesis/profile/profile.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     //.enableStimulusBridge('./assets/controllers.json')
