@@ -24,6 +24,6 @@ class ProfileController extends Controller
      */
     public function profile() : Response
     {
-        return $this->render("genesis/profile/profile.html.twig");
+        return $this->render("genesis/profile/main_info.html.twig");
     }
 }

@@ -15,7 +15,11 @@
                     <div class="position-sticky pt-3 sidebar-sticky">
                         <ul class="nav flex-column ms-1">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">
+                                <a class="nav-link
+                                {% if app.request.attributes.get('_route') == routes.profile %}
+                                    active
+                                {% endif %}
+                                " aria-current="page" href="{{ path(routes.profile|e) }}">
                                     <span data-feather="file-text" class="align-text-bottom"></span>
                                     Основная информация
                                 </a>
@@ -29,9 +33,7 @@
                         </ul>
                     </div>
                 </nav>
-                <main>
-                    <!-- will be soon -->
-                </main>
+                {% block content_profile %}{% endblock %}
             </div>
         </div>
 {% endblock %}
