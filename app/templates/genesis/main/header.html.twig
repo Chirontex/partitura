@@ -1,17 +1,19 @@
-        <header>
+        <header class="sticky-top flex-md-nowrap">
             <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <div class="col-xs-12 col-sm-6 col-md-11 col-lg-11">
-                        <span><a href="/">{{ sitename|e }}</a></span>
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start main-header">
+                    <div class="col-12 col-xs-11 col-sm-11 col-md-11 col-lg-11 mt-1 text-center">
+                        <span>
+                            <a href="/">{{ sitename|e }}</a>
+                        </span>
                     </div>
             {% if is_user_panel_available %}
                     <!-- additional features will be here -->
                 {% if user is empty %}
-                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+                    <div class="col-0 col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-1">
                         <a href="{{ path(routes.login|e) }}" class="btn btn-primary btn-sm">Войти</a>
                     </div>
                 {% else %}
-                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1 dropdown text-end">
+                    <div class="col-0 col-xs-1 col-sm-1 col-md-1 col-lg-1 dropdown text-end mt-1">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <svg class="rounded-circle" width="32" height="32"><use xlink:href="#people-circle"/></svg>
                         </a>

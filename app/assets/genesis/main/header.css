@@ -5,3 +5,7 @@
 .dropdown-toggle {
     outline: 0;
 }
+
+.main-header {
+    margin-left: 6rem;
+}
