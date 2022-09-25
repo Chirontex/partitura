@@ -20,7 +20,7 @@
                         <ul class="dropdown-menu text-small">
                             <li><span class="dropdown-item disabled">{{ user.identifier|e }}</span></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Профиль</a></li>
+                            <li><a class="dropdown-item" href="{{ path(routes.profile) }}">Профиль</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ path(routes.logout|e) }}">Выйти</a></li>
                         </ul>

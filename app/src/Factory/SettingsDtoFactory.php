@@ -6,6 +6,7 @@ namespace Partitura\Factory;
 use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Controller\LoginController;
 use Partitura\Controller\Profile\LogoutController;
+use Partitura\Controller\Profile\ProfileController;
 use Partitura\Dto\SettingsDto;
 use Partitura\Entity\User;
 use Partitura\Service\User\CurrentUserService;
@@ -39,6 +40,7 @@ class SettingsDtoFactory
             ->setRoutes(new ArrayCollection([
                 "login" => LoginController::ROUTE_LOGIN,
                 "logout" => LogoutController::ROUTE_LOGOUT,
+                "profile" => ProfileController::ROUTE_PROFILE,
             ]))
             ->setUserData(new ArrayCollection(
                 $user === null ? [] : ["identifier" => $user->getUserIdentifier()]
