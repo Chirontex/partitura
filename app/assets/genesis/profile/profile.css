@@ -46,3 +46,12 @@
 .sidebar-heading {
     font-size: .75rem;
 }
+
+.profile-content {
+    font-size: .900rem;
+}
+
+.feather {
+    width: 18px;
+    height: 18px;
+}
