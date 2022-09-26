@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <title>
-            {% block title %}{% endblock %} | {% block sitename %}{% endblock %}
+            {% block title %}{% endblock %} | {{ sitename|e }}
         </title>
         <link href="{{ asset('build/app.css') }}" rel="stylesheet">
         <style>
