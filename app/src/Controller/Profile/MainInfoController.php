@@ -8,19 +8,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class ProfileController
+ * Class MainInfoController
  * @package Partitura\Controller\Profile
  * 
  * @Route("/profile")
  */
-class ProfileController extends Controller
+class MainInfoController extends Controller
 {
-    public const ROUTE_PROFILE = "partitura_profile";
+    public const ROUTE_MAIN_INFO = "partitura_main_info";
 
     /**
      * @return Response
      * 
-     * @Route("/", name=ProfileController::ROUTE_PROFILE, methods={"GET"})
+     * @Route("/", name=MainInfoController::ROUTE_MAIN_INFO, methods={"GET"})
      */
     public function profile() : Response
     {
