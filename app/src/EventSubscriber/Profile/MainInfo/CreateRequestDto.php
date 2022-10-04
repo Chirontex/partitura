@@ -35,6 +35,10 @@ class CreateRequestDto implements EventSubscriberInterface
      */
     public function setRequestDtoToEvent(MainInfoHandlingStartEvent $event) : void
     {
+        if ($event->getRequestDto() !== null) {
+            return;
+        }
+
         $event->setRequestDto(
             $this->requestDtoFactory->createFromRequest($event->getSymfonyRequest())
         );
