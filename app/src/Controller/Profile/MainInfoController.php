@@ -6,6 +6,7 @@ namespace Partitura\Controller\Profile;
 use Partitura\Controller\Controller;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
 use Partitura\Event\Form\Profile\MainInfoHandlingStartEvent;
+use Partitura\Exception\ForbiddenAccessException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,7 +49,11 @@ class MainInfoController extends Controller
         if ($requestDto !== null) {
             $processEvent = new MainInfoHandlingProcessEvent($requestDto);
 
-            $this->eventDispatcher->dispatch($processEvent);
+            try {
+                $this->eventDispatcher->dispatch($processEvent);
+            } catch (ForbiddenAccessException $e) {
+                throw $this->createAccessDeniedException($e->getMessage());
+            }
 
             $parameters = $processEvent->getResponseParameters()->toArray();
         } else {
