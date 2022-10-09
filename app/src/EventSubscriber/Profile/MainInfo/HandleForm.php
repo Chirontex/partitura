@@ -87,7 +87,9 @@ class HandleForm implements EventSubscriberInterface
 
         $this->userFieldValuesSavingService->saveFromCollection($currentUser, $formFieldsCollection);
 
-        $event->setResponseParameters(new ArrayCollection(["fields" => $formFieldsCollection]));
+        $event->setResponseParameters(new ArrayCollection(
+            ["fields" => $formFieldsCollection->toArray()]
+        ));
     }
 
     /**
