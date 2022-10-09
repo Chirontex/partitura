@@ -40,4 +40,9 @@ abstract class AbstractFormRequestDto
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    abstract public function getCsrfTokenId() : string;
 }

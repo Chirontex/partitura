@@ -5,16 +5,14 @@ namespace Partitura\EventSubscriber\Profile\MainInfo;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\ArrayTransformerInterface;
-use Partitura\Controller\Profile\MainInfoController;
 use Partitura\Dto\Form\AbstractFormRequestDto;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
 use Partitura\Exception\ForbiddenAccessException;
 use Partitura\Exception\LogicException;
+use Partitura\Service\CsrfTokenValidationService;
 use Partitura\Service\User\CurrentUserService;
 use Partitura\Service\User\UserFieldValuesSavingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * Class HandleForm
@@ -28,22 +26,22 @@ class HandleForm implements EventSubscriberInterface
     /** @var UserFieldValuesSavingService */
     protected $userFieldValuesSavingService;
 
-    /** @var CsrfTokenManagerInterface */
-    protected $csrfTokenManager;
-
     /** @var CurrentUserService */
     protected $currentUserService;
+
+    /** @var CsrfTokenValidationService */
+    protected $csrfTokenValidationService;
 
     public function __construct(
         ArrayTransformerInterface $arrayTransformer,
         UserFieldValuesSavingService $userFieldValuesSavingService,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        CurrentUserService $currentUserService
+        CurrentUserService $currentUserService,
+        CsrfTokenValidationService $csrfTokenValidationService
     ) {
         $this->arrayTransformer = $arrayTransformer;
         $this->userFieldValuesSavingService = $userFieldValuesSavingService;
-        $this->csrfTokenManager = $csrfTokenManager;
         $this->currentUserService = $currentUserService;
+        $this->csrfTokenValidationService = $csrfTokenValidationService;
     }
 
     /** {@inheritDoc} */
@@ -69,7 +67,7 @@ class HandleForm implements EventSubscriberInterface
         }
 
         try {
-            if (!$this->isCsrfTokenValid($requestDto)) {
+            if (!$this->csrfTokenValidationService->isFormRequestDtoTokenValid($requestDto)) {
                 throw new ForbiddenAccessException("CSRF token isn't valid.");
             }
         } catch (LogicException) {
@@ -88,23 +86,6 @@ class HandleForm implements EventSubscriberInterface
         $this->userFieldValuesSavingService->saveFromCollection($currentUser, $formFieldsCollection);
 
         $event->setResponseParameters($$formFieldsCollection);
-    }
-
-    /**
-     * @param AbstractFormRequestDto $requestDto
-     *
-     * @throws LogicException
-     * @return bool
-     */
-    protected function isCsrfTokenValid(AbstractFormRequestDto $requestDto) : bool
-    {
-        $token = $requestDto->getCsrfToken();
-
-        if (empty($token)) {
-            throw new LogicException("CSRF token is empty.");
-        }
-
-        return $this->csrfTokenManager->isTokenValid(new CsrfToken(MainInfoController::CSRF_TOKEN, $requestDto->getCsrfToken()));
     }
 
     /**
