@@ -52,7 +52,7 @@ class MainInfoController extends Controller
             try {
                 $this->eventDispatcher->dispatch($processEvent);
             } catch (ForbiddenAccessException $e) {
-                throw $this->createAccessDeniedException($e->getMessage());
+                throw $this->createAccessDeniedException($e->getMessage(), $e);
             }
 
             $parameters = $processEvent->getResponseParameters()->toArray();
