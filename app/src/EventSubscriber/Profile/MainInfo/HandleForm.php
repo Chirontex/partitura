@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\ArrayTransformerInterface;
 use Partitura\Dto\Form\AbstractFormRequestDto;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
+use Partitura\Exception\EntityNotFoundException;
 use Partitura\Exception\ForbiddenAccessException;
 use Partitura\Exception\LogicException;
 use Partitura\Service\CsrfTokenValidationService;
@@ -53,6 +54,7 @@ class HandleForm implements EventSubscriberInterface
     /**
      * @param MainInfoHandlingProcessEvent $event
      * 
+     * @throws EntityNotFoundException
      * @throws ForbiddenAccessException
      */
     public function handleEvent(MainInfoHandlingProcessEvent $event) : void
