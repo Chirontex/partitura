@@ -17,7 +17,7 @@ class MainInfoRequestDto extends AbstractFormRequestDto
      * @var string
      * 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("_first_name")
+     * @Serializer\SerializedName("first_name")
      */
     protected $firstName;
 
@@ -25,7 +25,7 @@ class MainInfoRequestDto extends AbstractFormRequestDto
      * @var string
      * 
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("_last_name")
+     * @Serializer\SerializedName("last_name")
      */
     protected $lastName;
 
