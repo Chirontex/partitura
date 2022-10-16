@@ -40,4 +40,20 @@ class UserField
     {
         return $this->values;
     }
+
+    /**
+     * @param int $userId
+     *
+     * @return null|UserFieldValue
+     */
+    public function findValueByUserId(int $userId) : ?UserFieldValue
+    {
+        foreach ($this->getValues() as $userFieldValue) {
+            if ($userFieldValue->getUser()->getId() === $userId) {
+                return $userFieldValue;
+            }
+        }
+
+        return null;
+    }
 }

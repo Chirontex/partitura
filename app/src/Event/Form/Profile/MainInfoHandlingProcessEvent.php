@@ -44,6 +44,18 @@ class MainInfoHandlingProcessEvent extends FormEvent
     }
 
     /**
+     * @param array<string, string> $fields
+     *
+     * @return $this
+     */
+    public function setFieldsToResponseParameters(array $fields) : static
+    {
+        $this->responseParameters->set("fields", $fields);
+
+        return $this;
+    }
+
+    /**
      * {@inheritDoc}
      * 
      * @throws NotImplementedException

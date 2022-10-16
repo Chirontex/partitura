@@ -12,6 +12,7 @@ use Partitura\Exception\ForbiddenAccessException;
 use Partitura\Exception\LogicException;
 use Partitura\Service\CsrfTokenValidationService;
 use Partitura\Service\User\CurrentUserService;
+use Partitura\Service\User\UserFieldValuesGettingService;
 use Partitura\Service\User\UserFieldValuesSavingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -33,16 +34,21 @@ class HandleForm implements EventSubscriberInterface
     /** @var CsrfTokenValidationService */
     protected $csrfTokenValidationService;
 
+    /** @var UserFieldValuesGettingService */
+    protected $userFieldValuesGettingService;
+
     public function __construct(
         ArrayTransformerInterface $arrayTransformer,
         UserFieldValuesSavingService $userFieldValuesSavingService,
         CurrentUserService $currentUserService,
-        CsrfTokenValidationService $csrfTokenValidationService
+        CsrfTokenValidationService $csrfTokenValidationService,
+        UserFieldValuesGettingService $userFieldValuesGettingService
     ) {
         $this->arrayTransformer = $arrayTransformer;
         $this->userFieldValuesSavingService = $userFieldValuesSavingService;
         $this->currentUserService = $currentUserService;
         $this->csrfTokenValidationService = $csrfTokenValidationService;
+        $this->userFieldValuesGettingService = $userFieldValuesGettingService;
     }
 
     /** {@inheritDoc} */
@@ -68,28 +74,38 @@ class HandleForm implements EventSubscriberInterface
             return;
         }
 
-        try {
-            if (!$this->csrfTokenValidationService->isFormRequestDtoTokenValid($requestDto)) {
-                throw new ForbiddenAccessException("CSRF token isn't valid.");
-            }
-        } catch (LogicException) {
-            // Catch if CSRF token is empty. Form not need to be processed.
-            return;
-        }
-
         $currentUser = $this->currentUserService->getCurrentUser();
 
         if ($currentUser === null) {
             throw new ForbiddenAccessException("Unauthorized access is forbidden for this form.");
         }
 
+        $userFieldValues = $this->userFieldValuesGettingService->getValuesWithEmpty($currentUser);
+
+        try {
+            if (!$this->csrfTokenValidationService->isFormRequestDtoTokenValid($requestDto)) {
+                throw new ForbiddenAccessException("CSRF token isn't valid.");
+            }
+        } catch (LogicException) {
+            // Catch if CSRF token is empty. Form not need to be processed.
+            $event->setFieldsToResponseParameters($userFieldValues->toArray());
+
+            return;
+        }
+
         $formFieldsCollection = $this->createFormFieldsCollection($requestDto);
 
         $this->userFieldValuesSavingService->saveFromCollection($currentUser, $formFieldsCollection);
 
-        $event->setResponseParameters(new ArrayCollection(
-            ["fields" => $formFieldsCollection->toArray()]
-        ));
+        /** @var string $userFieldCode */
+        foreach (array_diff(
+            $userFieldValues->getKeys(),
+            $formFieldsCollection->getKeys()
+        ) as $code) {
+            $formFieldsCollection->set($code, $userFieldValues->get($code));
+        }
+
+        $event->setFieldsToResponseParameters($formFieldsCollection->toArray());
     }
 
     /**
