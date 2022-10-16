@@ -55,7 +55,7 @@ class UserFieldValuesSavingService
                 );
 
                 if ($existUserFieldValue !== null) {
-                    $existUserFieldValue->setValue((string)$value);
+                    $existUserFieldValue->setValue(trim((string)$value));
 
                     continue;
                 }
