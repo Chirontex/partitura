@@ -27,14 +27,4 @@ class Repository extends ServiceEntityRepository
     {
         return new ArrayCollection(parent::findBy($criteria, $orderBy, $limit, $offset));
     }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return ArrayCollection<int, object>
-     */
-    public function findAll() : ArrayCollection
-    {
-        return new ArrayCollection(parent::findAll());
-    }
 }
