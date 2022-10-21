@@ -36,7 +36,7 @@ class MainInfoController extends Controller
      *
      * @return Response
      * 
-     * @Route("/", name=MainInfoController::ROUTE_MAIN_INFO, methods={"GET"})
+     * @Route("/", name=MainInfoController::ROUTE_MAIN_INFO, methods={"GET", "POST"})
      */
     public function profile(Request $request) : Response
     {
@@ -61,5 +61,14 @@ class MainInfoController extends Controller
         }
 
         return $this->render("genesis/profile/main_info.html.twig", $parameters);
+    }
+
+    /** {@inheritDoc} */
+    protected function prepareParameters(array $parameters = []) : array
+    {
+        return array_merge(
+            parent::prepareParameters($parameters),
+            ["csrf_token_id" => static::CSRF_TOKEN]
+        );
     }
 }
