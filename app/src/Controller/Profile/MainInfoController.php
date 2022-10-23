@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainInfoController extends Controller
 {
     public const ROUTE_MAIN_INFO = "partitura_main_info";
-    public const CSRF_TOKEN = "main_info_csrf_token";
+    public const CSRF_TOKEN_ID = "main_info_csrf_token";
 
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
@@ -68,7 +68,7 @@ class MainInfoController extends Controller
     {
         return array_merge(
             parent::prepareParameters($parameters),
-            ["csrf_token_id" => static::CSRF_TOKEN]
+            ["csrf_token_id" => static::CSRF_TOKEN_ID]
         );
     }
 }

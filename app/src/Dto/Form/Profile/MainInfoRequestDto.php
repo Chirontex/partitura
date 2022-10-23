@@ -72,6 +72,6 @@ class MainInfoRequestDto extends AbstractFormRequestDto
     /** {@inheritDoc} */
     public function getCsrfTokenId() : string
     {
-        return MainInfoController::CSRF_TOKEN;
+        return MainInfoController::CSRF_TOKEN_ID;
     }
 }
