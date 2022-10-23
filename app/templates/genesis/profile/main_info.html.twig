@@ -10,7 +10,7 @@
         <div class="container">
             <form method="POST" id="main_info_form">
             {% if message is defined %}
-                <div class="alert alert-success">{{ message|e }}</div>
+                <div class="alert alert-success text-center">{{ message|e }}</div>
             {% endif %}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
                 <div class="row">
