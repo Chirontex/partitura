@@ -1,10 +1,14 @@
 {% extends 'genesis/profile/profile.html.twig' %}
 
+{% block styles %}
+<link href="{{ asset('build/profile/main_info.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <main class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div class="container">
-            <form method="POST">
+            <form method="POST" id="main_info_form">
             {% if message is defined %}
                 <div class="alert alert-success">{{ message|e }}</div>
             {% endif %}
@@ -19,11 +23,15 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-12 align-items-center">
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="submit" class="btn btn-primary width-fixed-button" id="main_info_submit_button">Сохранить</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('build/profile/main_info.js') }}"></script>
 {% endblock %}
