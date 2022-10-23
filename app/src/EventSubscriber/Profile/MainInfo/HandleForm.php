@@ -105,7 +105,9 @@ class HandleForm implements EventSubscriberInterface
             $formFieldsCollection->set($code, $userFieldValues->get($code));
         }
 
-        $event->setFieldsToResponseParameters($formFieldsCollection->toArray());
+        $event
+            ->setFieldsToResponseParameters($formFieldsCollection->toArray())
+            ->setResponseParameter("message", "Данные успешно сохранены!");
     }
 
     /**

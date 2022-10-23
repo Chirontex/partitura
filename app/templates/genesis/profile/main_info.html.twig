@@ -5,6 +5,9 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div class="container">
             <form method="POST">
+            {% if message is defined %}
+                <div class="alert alert-success">{{ message|e }}</div>
+            {% endif %}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
                 <div class="row">
                 {% for name, value in fields %}

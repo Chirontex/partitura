@@ -44,6 +44,19 @@ class MainInfoHandlingProcessEvent extends FormEvent
     }
 
     /**
+     * @param string $key
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setResponseParameter(string $key, string $value) : static
+    {
+        $this->responseParameters->set($key, $value);
+
+        return $this;
+    }
+
+    /**
      * @param array<string, string> $fields
      *
      * @return $this
