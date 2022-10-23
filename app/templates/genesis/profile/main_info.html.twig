@@ -12,7 +12,7 @@
                 <div class="row">
                 {% for name, value in fields %}
                     <div class="col">
-                        <label for="{{ name|e }}">{{ name|e }}</label>
+                        <p><label for="{{ name|e }}">{{ name|e }}</label></p>
                         <input type="text" id="{{ name|e }}" name="{{ name|e }}" value="{{ value|e }}">
                     </div>
                 {% endfor %}
