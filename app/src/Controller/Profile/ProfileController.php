@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends Controller
 {
     public const ROUTE_MAIN_INFO = "partitura_profile_main_info";
-    public const MAIN_INFO_CSRF_TOKEN_ID = "main_info_csrf_token";
+    public const MAIN_INFO_CSRF_TOKEN_ID = "profile_main_info_csrf_token";
 
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
