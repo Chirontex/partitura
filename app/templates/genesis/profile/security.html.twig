@@ -1,0 +1,44 @@
+{% extends 'genesis/profile/profile.html.twig' %}
+
+{% block content %}
+<main class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="container">
+        {% if message is defined %}
+            <div class="alert alert-success text-center">{{ message|e }}</div>
+        {% endif %}
+            <div class="row">
+                <div class="col">
+                    <h4>Сменить пароль</h4>
+                    <form method="POST" id="change_password_form">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
+                        <div class="mt-3">
+                            <p><label for="old_password">Старый пароль</label></p>
+                            <input type="password" id="old_password" name="old_password">
+                        </div>
+                        <div class="mt-3">
+                            <p><label for="new_password">Новый пароль</label></p>
+                            <input type="password" id="new_password" name="new_password">
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary width-fixed-button" id="change_password_submit_button">Сменить</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                    <form method="POST" id="drop_rememberme_tokens_form">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_id) }}">
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-danger width-fixed-button" id="drop_rememberme_tokens_submit_button">Удалить запомненные сессии</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('build/profile/security.js') }}"></script>
+{% endblock %}
