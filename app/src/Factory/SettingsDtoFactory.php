@@ -40,7 +40,7 @@ class SettingsDtoFactory
             ->setRoutes(new ArrayCollection([
                 "login" => LoginController::ROUTE_LOGIN,
                 "logout" => LogoutController::ROUTE_LOGOUT,
-                "profile" => ProfileController::ROUTE_MAIN_INFO,
+                "profile_main_info" => ProfileController::ROUTE_MAIN_INFO,
             ]))
             ->setUserData(new ArrayCollection(
                 $user === null ? [] : ["identifier" => $user->getUserIdentifier()]

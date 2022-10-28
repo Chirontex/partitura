@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <title>
             {% block title %}
-                {% if app.request.attributes.get('_route') == routes.profile %}
+                {% if app.request.attributes.get('_route') == routes.profile_main_info %}
                     Основная информация
                 {% else %}
                     Ваш профиль
@@ -31,10 +31,10 @@
                         <ul class="nav flex-column ms-1">
                             <li class="nav-item">
                                 <a class="nav-link
-                                {% if app.request.attributes.get('_route') == routes.profile %}
+                                {% if app.request.attributes.get('_route') == routes.profile_main_info %}
                                     active
                                 {% endif %}
-                                " aria-current="page" href="{{ path(routes.profile|e) }}">
+                                " aria-current="page" href="{{ path(routes.profile_main_info|e) }}">
                                     <span data-feather="file-text" class="align-text-bottom"></span>
                                     Основная информация
                                 </a>

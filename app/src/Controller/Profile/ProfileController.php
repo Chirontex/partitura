@@ -42,7 +42,7 @@ class ProfileController extends Controller
      * 
      * @Route("/", name=ProfileController::ROUTE_MAIN_INFO, methods={"GET", "POST"})
      */
-    public function profile(Request $request) : Response
+    public function mainInfo(Request $request) : Response
     {
         $startEvent = new MainInfoHandlingStartEvent($request);
 
