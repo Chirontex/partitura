@@ -60,3 +60,7 @@ header {
     width: 18px;
     height: 18px;
 }
+
+.width-fixed-button {
+    width: 150px;
+}
