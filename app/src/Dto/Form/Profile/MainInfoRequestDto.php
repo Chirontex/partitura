@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Dto\Form\Profile;
 
 use JMS\Serializer\Annotation as Serializer;
-use Partitura\Controller\Profile\MainInfoController;
+use Partitura\Controller\Profile\ProfileController;
 use Partitura\Dto\Form\AbstractFormRequestDto;
 
 /**
@@ -72,6 +72,6 @@ class MainInfoRequestDto extends AbstractFormRequestDto
     /** {@inheritDoc} */
     public function getCsrfTokenId() : string
     {
-        return MainInfoController::CSRF_TOKEN_ID;
+        return ProfileController::MAIN_INFO_CSRF_TOKEN_ID;
     }
 }

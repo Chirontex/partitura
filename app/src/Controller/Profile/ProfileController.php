@@ -13,15 +13,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class MainInfoController
+ * Class ProfileController
  * @package Partitura\Controller\Profile
  * 
  * @Route("/profile")
  */
-class MainInfoController extends Controller
+class ProfileController extends Controller
 {
     public const ROUTE_MAIN_INFO = "partitura_main_info";
-    public const CSRF_TOKEN_ID = "main_info_csrf_token";
+    public const MAIN_INFO_CSRF_TOKEN_ID = "main_info_csrf_token";
 
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
@@ -36,7 +36,7 @@ class MainInfoController extends Controller
      *
      * @return Response
      * 
-     * @Route("/", name=MainInfoController::ROUTE_MAIN_INFO, methods={"GET", "POST"})
+     * @Route("/", name=ProfileController::ROUTE_MAIN_INFO, methods={"GET", "POST"})
      */
     public function profile(Request $request) : Response
     {
@@ -68,7 +68,7 @@ class MainInfoController extends Controller
     {
         return array_merge(
             parent::prepareParameters($parameters),
-            ["csrf_token_id" => static::CSRF_TOKEN_ID]
+            ["csrf_token_id" => static::MAIN_INFO_CSRF_TOKEN_ID]
         );
     }
 }
