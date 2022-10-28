@@ -8,6 +8,8 @@
             {% block title %}
                 {% if app.request.attributes.get('_route') == routes.profile_main_info %}
                     Основная информация
+                {% elseif app.request.attributes.get('_route') == routes.profile_security %}
+                    Безопасность
                 {% else %}
                     Ваш профиль
                 {% endif %}
