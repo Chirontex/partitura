@@ -3,59 +3,14 @@ declare(strict_types=1);
 
 namespace Partitura\Event\Form\Profile;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Partitura\Dto\Form\AbstractFormRequestDto;
-use Partitura\Event\Form\FormEvent;
-use Partitura\Exception\NotImplementedException;
+use Partitura\Event\Form\RequestDtoHandleEvent;
 
 /**
  * Class MainInfoHandlingProcessEvent
  * @package Partitura\Event\Form\Profile
  */
-class MainInfoHandlingProcessEvent extends FormEvent
+class MainInfoHandlingProcessEvent extends RequestDtoHandleEvent
 {
-    /** @var ArrayCollection<string, mixed> */
-    protected $responseParameters;
-
-    public function __construct(AbstractFormRequestDto $requestDto)
-    {
-        $this->requestDto = $requestDto;
-        $this->responseParameters = new ArrayCollection();
-    }
-
-    /**
-     * @return ArrayCollection<string, mixed>
-     */
-    public function getResponseParameters() : ArrayCollection
-    {
-        return $this->responseParameters;
-    }
-
-    /**
-     * @param ArrayCollection<string, mixed> $responseParameters
-     *
-     * @return $this
-     */
-    public function setResponseParameters(ArrayCollection $responseParameters) : static
-    {
-        $this->responseParameters = $responseParameters;
-
-        return $this;
-    }
-
-    /**
-     * @param string $key
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setResponseParameter(string $key, string $value) : static
-    {
-        $this->responseParameters->set($key, $value);
-
-        return $this;
-    }
-
     /**
      * @param array<string, string> $fields
      *
@@ -66,15 +21,5 @@ class MainInfoHandlingProcessEvent extends FormEvent
         $this->responseParameters->set("fields", $fields);
 
         return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     * 
-     * @throws NotImplementedException
-     */
-    public function setRequestDto(AbstractFormRequestDto $requestDto) : static
-    {
-        throw new NotImplementedException("Cannot set request DTO in process event object.");
     }
 }
