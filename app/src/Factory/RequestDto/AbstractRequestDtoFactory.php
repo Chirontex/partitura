@@ -55,7 +55,7 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
     {
         $errors = $this->validator->validate($dto);
 
-        if (empty($errors)) {
+        if (count($errors) <= 0) {
             return;
         }
 
