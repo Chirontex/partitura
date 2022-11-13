@@ -40,10 +40,23 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
     public function createFromRequest(Request $request) : object
     {
         $dto = $this->createDto($this->prepareDataFromRequest($request));
+        
+        $this->validate($dto);
+
+        return $dto;
+    }
+
+    /**
+     * @param object $dto
+     * 
+     * @throws ArgumentException
+     */
+    protected function validate(object $dto) : void
+    {
         $errors = $this->validator->validate($dto);
 
-        if (count($errors) <= 0) {
-            return $dto;
+        if (empty($errors)) {
+            return;
         }
 
         $errorMessages = [];
