@@ -24,6 +24,7 @@ docker build -t partitura:latest .
 docker run --rm -it -p 80:80/tcp -p 3306:3306/tcp -p 9003:9003/tcp partitura:latest
 ```
 Проброс портов можно варьировать в зависимости от ваших технических возможностей и предпочтений.
+
 5. Добавить в файл hosts следующую запить:
 ```
 127.0.0.1 partitura.loc
