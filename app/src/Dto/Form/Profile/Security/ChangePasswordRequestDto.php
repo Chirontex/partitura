@@ -29,7 +29,7 @@ class ChangePasswordRequestDto extends SecurityRequestDto
      * @Assert\NotBlank(message="New password cannot be empty.")
      * @Assert\NotIdenticalTo(
      *     propertyPath="\Partitura\Dto\Form\Profile\Security\ChangePasswordRequestDto::$oldPassword",
-     * message="New password must not be the same as the old password."
+     *     message="New password must not be the same as the old password."
      * )
      * 
      * @Serializer\Type("string")
