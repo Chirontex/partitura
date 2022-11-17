@@ -5,6 +5,7 @@ namespace Partitura\Manager;
 
 use Partitura\Dto\Form\Profile\Security\SecurityRequestDto;
 use Partitura\Exception\ArgumentException;
+use Partitura\Exception\SecurityRequestDtoCreationException;
 use Partitura\Factory\RequestDto\AbstractRequestDtoFactory;
 use Partitura\Factory\RequestDto\Form\Profile\Security\ChangePasswordRequestDtoFactory;
 use Partitura\Factory\RequestDto\Form\Profile\Security\DropRememberMeTokensRequestDtoFactory;
@@ -32,7 +33,7 @@ class SecurityRequestDtoFactoryManager
     /**
      * @param Request $request
      *
-     * @throws ArgumentException
+     * @throws SecurityRequestDtoCreationException
      * @return SecurityRequestDto
      */
     public function createRequestDto(Request $request) : SecurityRequestDto
@@ -47,16 +48,6 @@ class SecurityRequestDtoFactoryManager
             }
         }
 
-        $message = "";
-
-        foreach ($errors as $dtoClass => $exceptionMessage) {
-            if (!empty($message)) {
-                $message .= " | ";
-            }
-
-            $message .= sprintf("%s: %s", $dtoClass, $exceptionMessage);
-        }
-
-        throw new ArgumentException($message);
+        throw new SecurityRequestDtoCreationException($errors);
     }
 }
