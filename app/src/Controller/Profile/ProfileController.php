@@ -7,6 +7,8 @@ use Partitura\Controller\AbstractFormController;
 use Partitura\Dto\SettingsDto;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
 use Partitura\Event\Form\Profile\MainInfoHandlingStartEvent;
+use Partitura\Event\Form\Profile\SecurityHandlingProcessEvent;
+use Partitura\Event\Form\Profile\SecurityHandlingStartEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,15 +49,22 @@ class ProfileController extends AbstractFormController
     }
 
     /**
+     * @param Request $request
+     *
      * @return Response
      * 
      * @Route("/security", name=ProfileController::ROUTE_SECURITY, methods={"GET", "POST"})
      */
-    public function security() : Response
+    public function security(Request $request) : Response
     {
-        // TODO: реализовать обработку форм
-
-        $parameters = ["csrf_token_id" => static::SECURITY_CSRF_TOKEN_ID];
+        $parameters = array_merge(
+            $this->processForm(
+                SecurityHandlingStartEvent::class,
+                SecurityHandlingProcessEvent::class,
+                $request
+            ),
+            ["csrf_token_id" => static::SECURITY_CSRF_TOKEN_ID]
+        );
 
         return $this->render("genesis/profile/security.html.twig", $parameters);
     }
