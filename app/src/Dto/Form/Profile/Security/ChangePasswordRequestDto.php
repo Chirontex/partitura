@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Partitura\Dto\Form\Profile\Security;
 
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,7 +17,7 @@ class ChangePasswordRequestDto extends SecurityRequestDto
      * @var string
      * 
      * @Assert\NotBlank(message="Old password cannot be empty.")
-     * @Assert\UserPassword(message="Invalid old password.")
+     * @SecurityAssert\UserPassword(message="Invalid old password.")
      * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("old_password")
