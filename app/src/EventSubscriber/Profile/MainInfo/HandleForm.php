@@ -6,11 +6,10 @@ namespace Partitura\EventSubscriber\Profile\MainInfo;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\ArrayTransformerInterface;
 use Partitura\Dto\Form\AbstractFormRequestDto;
+use Partitura\Enum\CsrfTokenValidationResultEnum;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
 use Partitura\Exception\EntityNotFoundException;
 use Partitura\Exception\ForbiddenAccessException;
-use Partitura\Exception\LogicException;
-use Partitura\Service\CsrfTokenValidationService;
 use Partitura\Service\User\CurrentUserService;
 use Partitura\Service\User\UserFieldValuesGettingService;
 use Partitura\Service\User\UserFieldValuesSavingService;
@@ -31,9 +30,6 @@ class HandleForm implements EventSubscriberInterface
     /** @var CurrentUserService */
     protected $currentUserService;
 
-    /** @var CsrfTokenValidationService */
-    protected $csrfTokenValidationService;
-
     /** @var UserFieldValuesGettingService */
     protected $userFieldValuesGettingService;
 
@@ -41,13 +37,11 @@ class HandleForm implements EventSubscriberInterface
         ArrayTransformerInterface $arrayTransformer,
         UserFieldValuesSavingService $userFieldValuesSavingService,
         CurrentUserService $currentUserService,
-        CsrfTokenValidationService $csrfTokenValidationService,
         UserFieldValuesGettingService $userFieldValuesGettingService
     ) {
         $this->arrayTransformer = $arrayTransformer;
         $this->userFieldValuesSavingService = $userFieldValuesSavingService;
         $this->currentUserService = $currentUserService;
-        $this->csrfTokenValidationService = $csrfTokenValidationService;
         $this->userFieldValuesGettingService = $userFieldValuesGettingService;
     }
 
@@ -81,13 +75,19 @@ class HandleForm implements EventSubscriberInterface
         }
 
         $userFieldValues = $this->userFieldValuesGettingService->getValuesWithEmpty($currentUser);
+        $csrfTokenValidationResult = $event->getCsrfTokenValidationResult();
 
-        try {
-            if (!$this->csrfTokenValidationService->isFormRequestDtoTokenValid($requestDto)) {
-                throw new ForbiddenAccessException("CSRF token isn't valid.");
-            }
-        } catch (LogicException) {
-            // Catch if CSRF token is empty. Form not need to be processed.
+        if (
+            $csrfTokenValidationResult === null
+            || ($csrfTokenValidationResult !== null
+                && $csrfTokenValidationResult === CsrfTokenValidationResultEnum::INVALID
+            )
+        ) {
+            throw new ForbiddenAccessException("CSRF token isn't valid.");
+        }
+
+        if ($csrfTokenValidationResult === CsrfTokenValidationResultEnum::EMPTY) {
+            // Form not need to be processed.
             $event->setFieldsToResponseParameters($userFieldValues->toArray());
 
             return;

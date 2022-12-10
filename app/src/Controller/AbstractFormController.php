@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Controller;
 
+use Partitura\Event\Form\CsrfTokenValidationEvent;
 use Partitura\Event\Form\RequestDtoCreateEvent;
 use Partitura\Event\Form\RequestDtoHandleEvent;
 use Partitura\Exception\ForbiddenAccessException;
@@ -54,8 +55,18 @@ abstract class AbstractFormController extends Controller
         $requestDto = $createEvent->getRequestDto();
         
         if ($requestDto !== null) {
+            $csrfTokenValidationEvent = new CsrfTokenValidationEvent($requestDto);
+
+            $this->eventDispatcher->dispatch($csrfTokenValidationEvent);
+
+            $csrfTokenValidationResult = $csrfTokenValidationEvent->getCsrfTokenValidationResult();
+
             /** @var RequestDtoHandleEvent */
             $processEvent = new $requestDtoHandleEventClass($requestDto);
+
+            if ($csrfTokenValidationResult !== null) {
+                $processEvent->setCsrfTokenValidationResult($csrfTokenValidationResult);
+            }
 
             try {
                 $this->eventDispatcher->dispatch($processEvent);

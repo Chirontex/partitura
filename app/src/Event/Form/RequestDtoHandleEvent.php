@@ -5,20 +5,20 @@ namespace Partitura\Event\Form;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Dto\Form\AbstractFormRequestDto;
-use Partitura\Exception\NotImplementedException;
 
 /**
  * Class RequestDtoHandleEvent
  * @package Partitura\Event\Form
  */
-abstract class RequestDtoHandleEvent extends FormEvent
+abstract class RequestDtoHandleEvent extends CsrfTokenValidationEvent
 {
     /** @var ArrayCollection<string, mixed> */
     protected $responseParameters;
 
     public function __construct(AbstractFormRequestDto $requestDto)
     {
-        $this->requestDto = $requestDto;
+        parent::__construct($requestDto);
+
         $this->responseParameters = new ArrayCollection();
     }
 
@@ -53,15 +53,5 @@ abstract class RequestDtoHandleEvent extends FormEvent
         $this->responseParameters->set($key, $value);
 
         return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     * 
-     * @throws NotImplementedException
-     */
-    public function setRequestDto(AbstractFormRequestDto $requestDto) : static
-    {
-        throw new NotImplementedException("Cannot set request DTO in handling event object.");
     }
 }
