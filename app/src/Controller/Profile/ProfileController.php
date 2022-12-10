@@ -4,12 +4,11 @@ declare(strict_types=1);
 namespace Partitura\Controller\Profile;
 
 use Partitura\Controller\AbstractFormController;
+use Partitura\Dto\Form\Profile\MainInfoRequestDto;
+use Partitura\Dto\Form\Profile\Security\SecurityRequestDto;
 use Partitura\Dto\SettingsDto;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
-use Partitura\Event\Form\Profile\MainInfoHandlingStartEvent;
 use Partitura\Event\Form\Profile\SecurityHandlingProcessEvent;
-use Partitura\Event\Form\Profile\SecurityHandlingStartEvent;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,20 +27,16 @@ class ProfileController extends AbstractFormController
     public const SECURITY_CSRF_TOKEN_ID = "profile_security_csrf_token";
 
     /**
-     * @param Request $request 
+     * @param MainInfoRequestDto $requestDto 
      *
      * @return Response
      * 
      * @Route("/", name=ProfileController::ROUTE_MAIN_INFO, methods={"GET", "POST"})
      */
-    public function mainInfo(Request $request) : Response
+    public function mainInfo(MainInfoRequestDto $requestDto) : Response
     {
         $parameters = array_merge(
-            $this->processForm(
-                MainInfoHandlingStartEvent::class,
-                MainInfoHandlingProcessEvent::class,
-                $request
-            ),
+            $this->processForm(new MainInfoHandlingProcessEvent($requestDto)),
             ["csrf_token_id" => static::MAIN_INFO_CSRF_TOKEN_ID]
         );
 
@@ -49,20 +44,16 @@ class ProfileController extends AbstractFormController
     }
 
     /**
-     * @param Request $request
+     * @param SecurityRequestDto $requestDto
      *
      * @return Response
      * 
      * @Route("/security", name=ProfileController::ROUTE_SECURITY, methods={"GET", "POST"})
      */
-    public function security(Request $request) : Response
+    public function security(SecurityRequestDto $requestDto) : Response
     {
         $parameters = array_merge(
-            $this->processForm(
-                SecurityHandlingStartEvent::class,
-                SecurityHandlingProcessEvent::class,
-                $request
-            ),
+            $this->processForm(new SecurityHandlingProcessEvent($requestDto)),
             ["csrf_token_id" => static::SECURITY_CSRF_TOKEN_ID]
         );
 
