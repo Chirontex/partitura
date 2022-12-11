@@ -1,4 +1,4 @@
-FROM chirontex/lemp:1.0.3
+FROM chirontex/lemp:1.0.4
 
 RUN mkdir /www \
     mkdir /temp
