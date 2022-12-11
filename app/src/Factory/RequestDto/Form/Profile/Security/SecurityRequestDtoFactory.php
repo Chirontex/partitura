@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Partitura\Factory\RequestDto\Form\Profile\Security;
 
 use JMS\Serializer\ArrayTransformerInterface;
+use Partitura\Dto\Form\AbstractFormRequestDto;
+use Partitura\Dto\Form\Profile\Security\DropRememberMeTokensRequestDto;
 use Partitura\Dto\Form\Profile\Security\EmptyRequestDto;
 use Partitura\Dto\Form\Profile\Security\SecurityRequestDto;
-use Partitura\Exception\ArgumentException;
 use Partitura\Factory\RequestDto\AbstractRequestDtoFactory;
 use Partitura\Factory\RequestDto\Form\Profile\Security\ChangePasswordRequestDtoFactory;
 use Partitura\Factory\RequestDto\Form\Profile\Security\DropRememberMeTokensRequestDtoFactory;
@@ -20,8 +21,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class SecurityRequestDtoFactory extends AbstractRequestDtoFactory
 {
-    /** @var AbstractRequestDtoFactory[] */
-    protected $requestDtoFactories = [];
+    protected ChangePasswordRequestDtoFactory $changePasswordRequestDtoFactory;
+
+    protected DropRememberMeTokensRequestDtoFactory $dropRememberMeTokensRequestDtoFactory;
 
     public function __construct(
         ValidatorInterface $validator,
@@ -31,21 +33,17 @@ class SecurityRequestDtoFactory extends AbstractRequestDtoFactory
     ) {
         parent::__construct($validator, $arrayTransformer);
 
-        $this->requestDtoFactories = [
-            $changePasswordRequestDtoFactory,
-            $dropRememberMeTokensRequestDtoFactory,
-        ];
+        $this->changePasswordRequestDtoFactory = $changePasswordRequestDtoFactory;
+        $this->dropRememberMeTokensRequestDtoFactory = $dropRememberMeTokensRequestDtoFactory;
     }
 
     /** {@inheritDoc} */
     public function createFromRequest(Request $request) : object
     {
-        foreach ($this->requestDtoFactories as $requestDtoFactory) {
-            try {
-                return $requestDtoFactory->createFromRequest($request);
-            } catch (ArgumentException) {
-                // nothing to do here
-            }
+        if ($this->isDropRememberMeTokensRequest($request)) {
+            return $this->dropRememberMeTokensRequestDtoFactory->createFromRequest($request);
+        } elseif ($request->get(AbstractFormRequestDto::CSRF_TOKEN_KEY) !== null) {
+            return $this->changePasswordRequestDtoFactory->createFromRequest($request);
         }
 
         return new EmptyRequestDto();
@@ -55,5 +53,16 @@ class SecurityRequestDtoFactory extends AbstractRequestDtoFactory
     public static function getDtoClass() : string
     {
         return SecurityRequestDto::class;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    protected function isDropRememberMeTokensRequest(Request $request) : bool
+    {
+        return $request->get(DropRememberMeTokensRequestDto::DROP_REMEMBERME_TOKENS_KEY) !== null
+            && $request->get(DropRememberMeTokensRequestDto::CSRF_TOKEN_KEY) !== null;
     }
 }
