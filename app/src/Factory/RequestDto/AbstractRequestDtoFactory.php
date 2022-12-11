@@ -66,7 +66,7 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
             $errorMessages[] = $error->getMessage();
         }
 
-        throw new ArgumentException(implode(" ", $errorMessages));
+        throw new ArgumentException($errorMessages);
     }
 
     /**

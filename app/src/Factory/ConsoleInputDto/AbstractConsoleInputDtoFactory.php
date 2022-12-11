@@ -51,7 +51,7 @@ abstract class AbstractConsoleInputDtoFactory
             return $dto;
         }
 
-        throw new ArgumentException((string)$validationErrors);
+        throw new ArgumentException([$validationErrors]);
     }
 
     /**
