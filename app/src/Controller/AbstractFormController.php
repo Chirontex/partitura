@@ -35,26 +35,26 @@ abstract class AbstractFormController extends Controller
     {
         $requestDto = $requestDtoHandleEvent->getRequestDto();
 
-        if ($requestDto !== null) {
-            $csrfTokenValidationEvent = new CsrfTokenValidationEvent($requestDto);
-
-            $this->eventDispatcher->dispatch($csrfTokenValidationEvent);
-
-            $csrfTokenValidationResult = $csrfTokenValidationEvent->getCsrfTokenValidationResult();
-
-            if ($csrfTokenValidationResult !== null) {
-                $requestDtoHandleEvent->setCsrfTokenValidationResult($csrfTokenValidationResult);
-            }
-
-            try {
-                $this->eventDispatcher->dispatch($requestDtoHandleEvent);
-            } catch (ForbiddenAccessException $e) {
-                throw $this->createAccessDeniedException($e->getMessage(), $e);
-            }
-
-            return $requestDtoHandleEvent->getResponseParameters()->toArray();
+        if ($requestDto === null) {
+            return [];
         }
 
-        return [];
+        $csrfTokenValidationEvent = new CsrfTokenValidationEvent($requestDto);
+
+        $this->eventDispatcher->dispatch($csrfTokenValidationEvent);
+
+        $csrfTokenValidationResult = $csrfTokenValidationEvent->getCsrfTokenValidationResult();
+
+        if ($csrfTokenValidationResult !== null) {
+            $requestDtoHandleEvent->setCsrfTokenValidationResult($csrfTokenValidationResult);
+        }
+
+        try {
+            $this->eventDispatcher->dispatch($requestDtoHandleEvent);
+        } catch (ForbiddenAccessException $e) {
+            throw $this->createAccessDeniedException($e->getMessage(), $e);
+        }
+
+        return $requestDtoHandleEvent->getResponseParameters()->toArray();
     }
 }
