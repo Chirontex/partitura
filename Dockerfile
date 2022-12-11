@@ -7,8 +7,8 @@ COPY git-clone.sh /temp/git-clone.sh
 COPY .env /temp/.env
 COPY partitura.conf /etc/nginx/conf.d/partitura.conf
 
-ENTRYPOINT service php8.1-fpm start \
-    && ln -sf /usr/bin/php8.1 /etc/alternatives/php \
+ENTRYPOINT service php8.2-fpm start \
+    && ln -sf /usr/bin/php8.2 /etc/alternatives/php \
     && php -r "file_put_contents('/etc/hosts', \"127.0.0.1\tpartitura.loc\n\".file_get_contents('/etc/hosts'));" \
     && php -r "file_put_contents('/etc/mysql/mariadb.conf.d/50-server.cnf', str_replace('bind-address', '#bind-address', file_get_contents('/etc/mysql/mariadb.conf.d/50-server.cnf')));" \
     && bash /temp/git-clone.sh \
