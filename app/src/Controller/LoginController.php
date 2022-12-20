@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Controller;
 
+use Partitura\Interfaces\ViewResolverInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -16,6 +17,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractLoginController
 {
     public const ROUTE_LOGIN = "partitura_login";
+
+    protected ViewResolverInterface $viewResolver;
+
+    public function __construct(ViewResolverInterface $viewResolver)
+    {
+        $this->viewResolver = $viewResolver;
+    }
 
     /**
      * @param AuthenticationUtils $authenticationUtils
@@ -31,7 +39,7 @@ class LoginController extends AbstractLoginController
         }
 
         return $this->render(
-            "genesis/admin/login.html.twig",
+            $this->viewResolver->resolveViewByRoute(static::ROUTE_LOGIN),
             [
                 "route_name" => static::ROUTE_LOGIN,
                 "last_username" => $authenticationUtils->getLastUsername(),

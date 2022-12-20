@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Partitura\Controller\Profile;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Partitura\Controller\Controller;
+use Partitura\Interfaces\ViewResolverInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,9 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
  * 
  * @Route("profile/banned")
  */
-class BannedController extends AbstractController
+class BannedController extends Controller
 {
     public const ROUTE_BANNED = "partitura_profile_banned";
+
+    protected ViewResolverInterface $viewResolver;
+
+    public function __construct(ViewResolverInterface $viewResolver)
+    {
+        $this->viewResolver = $viewResolver;
+    }
 
     /**
      * @return Response
@@ -24,6 +32,6 @@ class BannedController extends AbstractController
      */
     public function banned() : Response
     {
-        return $this->render("genesis/profile/banned.html.twig");
+        return $this->render($this->viewResolver->resolveViewByRoute(self::ROUTE_BANNED));
     }
 }

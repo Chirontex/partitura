@@ -9,6 +9,8 @@ use Partitura\Dto\Form\Profile\Security\SecurityRequestDto;
 use Partitura\Dto\SettingsDto;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
 use Partitura\Event\Form\Profile\SecurityHandlingProcessEvent;
+use Partitura\Interfaces\ViewResolverInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,6 +28,17 @@ class ProfileController extends AbstractFormController
     public const MAIN_INFO_CSRF_TOKEN_ID = "profile_main_info_csrf_token";
     public const SECURITY_CSRF_TOKEN_ID = "profile_security_csrf_token";
 
+    protected ViewResolverInterface $viewResolver;
+
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        ViewResolverInterface $viewResolver
+    ) {
+        parent::__construct($eventDispatcher);
+
+        $this->viewResolver = $viewResolver;
+    }
+
     /**
      * @param MainInfoRequestDto $requestDto 
      *
@@ -40,7 +53,10 @@ class ProfileController extends AbstractFormController
             ["csrf_token_id" => static::MAIN_INFO_CSRF_TOKEN_ID]
         );
 
-        return $this->render("genesis/profile/main_info.html.twig", $parameters);
+        return $this->render(
+            $this->viewResolver->resolveViewByRoute(static::ROUTE_MAIN_INFO),
+            $parameters
+        );
     }
 
     /**
@@ -57,7 +73,10 @@ class ProfileController extends AbstractFormController
             ["csrf_token_id" => static::SECURITY_CSRF_TOKEN_ID]
         );
 
-        return $this->render("genesis/profile/security.html.twig", $parameters);
+        return $this->render(
+            $this->viewResolver->resolveViewByRoute(static::ROUTE_SECURITY),
+            $parameters
+        );
     }
 
     /** {@inheritDoc} */

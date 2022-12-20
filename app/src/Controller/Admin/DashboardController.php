@@ -24,6 +24,7 @@ class DashboardController extends AbstractController
      */
     public function dashboard() : Response
     {
+        // TODO: брать представление через ViewResolver, когда будет заведено.
         return new Response("<html><body>dashboard</body></html>");
     }
 }
