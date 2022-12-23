@@ -9,7 +9,6 @@ use Partitura\Exception\CaseNotFoundException;
 use Partitura\Interfaces\ViewResolverInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Throwable;
 use Twig\Environment;
 
 /**
@@ -50,10 +49,7 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
         }
 
         // TODO: добавить получение параметров из контроллеров для проброса в рендер
-        $event->setResponse(new Response(
-            $this->twig->render($view, []),
-            $this->getResponseCode($event->getThrowable())
-        ));
+        $event->setResponse(new Response($this->twig->render($view, [])));
     }
 
     /** {@inheritDoc} */
@@ -61,16 +57,6 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
     {
         return $event->getResponse() === null
             && $event->getThrowable() instanceof ArgumentException;
-    }
-
-    /** {@inheritDoc} */
-    protected function getResponseCode(Throwable $exception) : int
-    {
-        if ($exception instanceof ArgumentException) {
-            return Response::HTTP_OK;
-        }
-
-        return parent::getResponseCode($exception);
     }
 
     /**
