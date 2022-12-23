@@ -6,6 +6,7 @@ namespace Partitura\EventSubscriber;
 use InvalidArgumentException;
 use Partitura\EventSubscriber\Trait\RequestEventSubscriberTrait;
 use Partitura\Exception\ArgumentException;
+use Partitura\Exception\CaseNotFoundException;
 use Partitura\Interfaces\ViewResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,13 +57,12 @@ class ExceptionResponse implements EventSubscriberInterface
                 $responseCode
             ));
         } elseif ($e instanceof ArgumentException) {
-            // TODO: добавить получение параметров из контроллеров для проброса в рендер
-            $event->setResponse(new Response($this->twig->render(
-                $this->viewResolver->resolveViewByRoute(
-                    $request->attributes->get("_route")
-                ),
-                []
-            )));
+            $view = $this->getView($request->attributes->get("_route"));
+
+            if (!empty($view)) {
+                // TODO: добавить получение параметров из контроллеров для проброса в рендер
+                $event->setResponse(new Response($this->twig->render($view, [])));
+            }
         }
     }
 
@@ -85,5 +85,19 @@ class ExceptionResponse implements EventSubscriberInterface
                 : Response::HTTP_OK,
             InvalidArgumentException::class => Response::HTTP_BAD_REQUEST,
         };
+    }
+
+    /**
+     * @param string $route
+     *
+     * @return null|string
+     */
+    protected function getView(string $route) : ?string
+    {
+        try {
+            return $this->viewResolver->resolveViewByRoute($route);
+        } catch (CaseNotFoundException) {
+            return null;
+        }
     }
 }
