@@ -10,8 +10,11 @@ use Partitura\Controller\LoginController;
 use Partitura\Controller\MainController;
 use Partitura\Controller\Profile\BannedController;
 use Partitura\Controller\Profile\ProfileController;
+use Partitura\Dto\RouteDataDto;
 use Partitura\Enum\Trait\GetInstanceByValueTrait;
 use Partitura\Exception\CaseNotFoundException;
+use Partitura\Factory\RouteDataDtoFactory;
+use Partitura\Kernel;
 
 /**
  * Enum RouteEnum
@@ -35,18 +38,23 @@ enum RouteEnum : string
      */
     public function getView() : string
     {
-        return match ($this) {
-            default => throw new CaseNotFoundException(sprintf(
-                "View by route \"%s\" was not found",
-                $this->value
-            )),
-            self::INDEX => "genesis/main/blog.html.twig",
-            self::MAIN_INFO => "genesis/profile/main_info.html.twig",
-            self::SECURITY => "genesis/profile/security.html.twig",
-            self::BANNED => "genesis/profile/banned.html.twig",
-            self::LOGIN => "genesis/admin/login.html.twig",
-            self::ADMIN_LOGIN => "genesis/admin/login.html.twig",
-            self::DASHBOARD => "",
-        };
+        /** @var RouteDataDtoFactory $routeDataDtoFactory */
+        $routeDataDtoFactory = Kernel::getInstance()->getService(RouteDataDtoFactory::class);
+        /** @var array<string, RouteDataDto> $routeDataDtoCollection */
+        $routeDataDtoCollection = $routeDataDtoFactory->createRouteDataDtoCollection();
+
+        foreach ($routeDataDtoCollection as $routeName => $routeDataDto) {
+            if (
+                $routeName === $this->value
+                || $routeDataDto->getName() === $this->value
+            ) {
+                return $routeDataDto->getView();
+            }
+        }
+
+        throw new CaseNotFoundException(sprintf(
+            "View by route \"%s\" was not found",
+            $this->value
+        ));
     }
 }
