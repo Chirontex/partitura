@@ -17,6 +17,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractLoginController
 {
     public const ROUTE_LOGIN = "partitura_login";
+    
+    public const LOGIN_CSRF_TOKEN_ID = "login";
 
     protected ViewResolverInterface $viewResolver;
 
@@ -44,7 +46,7 @@ class LoginController extends AbstractLoginController
                 "route_name" => static::ROUTE_LOGIN,
                 "last_username" => $authenticationUtils->getLastUsername(),
                 "error" => $authenticationUtils->getLastAuthenticationError(),
-                "csrf_token_id" => "login",
+                "csrf_token_id" => static::LOGIN_CSRF_TOKEN_ID,
             ]
         );
     }
