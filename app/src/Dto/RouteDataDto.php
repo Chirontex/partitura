@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Partitura\Dto;
 
+use Closure;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -23,6 +24,20 @@ class RouteDataDto
      * @Serializer\SerializedName("view")
      */
     protected string $view;
+
+    /**
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("csrf_token_id")
+     */
+    protected string $csrfTokenId;
+
+    /**
+     * @Serializer\Type("array")
+     * @Serializer\SerializedName("filler")
+     */
+    protected array $filler = [];
+
+    protected Closure $fillerCallback;
 
     /**
      * @return string
@@ -60,6 +75,66 @@ class RouteDataDto
     public function setView(string $view) : static
     {
         $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCsrfTokenId() : string
+    {
+        return (string)$this->csrfTokenId;
+    }
+
+    /**
+     * @param string $csrfTokenId
+     *
+     * @return $this
+     */
+    public function setCsrfTokenId(string $csrfTokenId) : static
+    {
+        $this->csrfTokenId = $csrfTokenId;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFiller() : array
+    {
+        return (array)$this->filler;
+    }
+
+    /**
+     * @param array $filler
+     *
+     * @return $this
+     */
+    public function setFiller(array $filler) : static
+    {
+        $this->filler = $filler;
+
+        return $this;
+    }
+
+    /**
+     * @return null|Closure
+     */
+    public function getFillerCallback() : ?Closure
+    {
+        return $this->fillerCallback;
+    }
+
+    /**
+     * @param Closure $fillerCallback
+     *
+     * @return $this
+     */
+    public function setFillerCallback(Closure $fillerCallback) : static
+    {
+        $this->fillerCallback = $fillerCallback;
 
         return $this;
     }
