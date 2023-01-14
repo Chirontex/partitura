@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Partitura\Filler;
+namespace Partitura\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Exception\ForbiddenAccessException;
+use Partitura\Interfaces\FillerValuesFactoryInterface;
 use Partitura\Service\User\CurrentUserService;
 use Partitura\Service\User\UserFieldValuesGettingService;
 
 /**
- * Class UserFieldValuesFiller
- * @package Partitura\Filler
+ * Class MainInfoFillerValuesFactory
+ * @package Partitura\Factory
  */
-class UserFieldValuesFiller
+class MainInfoFillerValuesFactory implements FillerValuesFactoryInterface
 {
     public function __construct(
         protected CurrentUserService $currentUserService,
@@ -22,10 +23,11 @@ class UserFieldValuesFiller
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @throws ForbiddenAccessException
-     * @return ArrayCollection<string, string>
      */
-    public function fillUserFieldValues() : ArrayCollection
+    public function getFillerValuesCollection(): ArrayCollection
     {
         $currentUser = $this->currentUserService->getCurrentUser();
 
@@ -34,5 +36,11 @@ class UserFieldValuesFiller
         }
 
         return $this->userFieldValuesGettingService->getValuesWithEmpty($currentUser);
+    }
+
+    /** {@inheritDoc} */
+    public static function getView() : string
+    {
+        return "genesis/profile/main_info.html.twig";
     }
 }

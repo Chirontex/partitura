@@ -11,7 +11,6 @@ parameters:
         partitura_profile_main_info:
             view: 'genesis/profile/main_info.html.twig'
             csrf_token_id: Partitura\Controller\Profile\ProfileController::MAIN_INFO_CSRF_TOKEN_ID
-            filler: [ 'Partitura\Filler\UserFieldValuesFiller', 'fillUserFieldValues' ]
         partitura_profile_security:
             view: 'genesis/profile/security.html.twig'
             csrf_token_id: Partitura\Controller\Profile\ProfileController::SECURITY_CSRF_TOKEN_ID
@@ -93,6 +92,3 @@ services:
 
     Partitura\Factory\RouteDataDtoFactory:
         public: true
-        arguments:
-            $fillerObjects:
-                - '@Partitura\Filler\UserFieldValuesFiller'

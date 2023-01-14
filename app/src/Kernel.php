@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura;
 
+use Partitura\DependencyInjection\FillerValuesFactoryCompilerPass;
 use Partitura\DependencyInjection\RequestDtoFactoryCompilerPass;
 use Partitura\Exception\SystemException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -68,6 +69,8 @@ class Kernel extends BaseKernel
     {
         parent::build($container);
 
-        $container->addCompilerPass(new RequestDtoFactoryCompilerPass());
+        $container
+            ->addCompilerPass(new RequestDtoFactoryCompilerPass())
+            ->addCompilerPass(new FillerValuesFactoryCompilerPass());
     }
 }
