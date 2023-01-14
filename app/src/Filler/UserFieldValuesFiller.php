@@ -22,6 +22,7 @@ class UserFieldValuesFiller
     }
 
     /**
+     * @throws ForbiddenAccessException
      * @return ArrayCollection<string, string>
      */
     public function fillUserFieldValues() : ArrayCollection
