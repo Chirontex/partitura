@@ -31,12 +31,6 @@ class RouteDataDto
      */
     protected string $csrfTokenId;
 
-    /**
-     * @Serializer\Type("array")
-     * @Serializer\SerializedName("filler")
-     */
-    protected array $filler = [];
-
     protected Closure $fillerCallback;
 
     /**
@@ -95,26 +89,6 @@ class RouteDataDto
     public function setCsrfTokenId(string $csrfTokenId) : static
     {
         $this->csrfTokenId = $csrfTokenId;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getFiller() : array
-    {
-        return (array)$this->filler;
-    }
-
-    /**
-     * @param array $filler
-     *
-     * @return $this
-     */
-    public function setFiller(array $filler) : static
-    {
-        $this->filler = $filler;
 
         return $this;
     }
