@@ -10,10 +10,9 @@ use Partitura\Controller\LoginController;
 use Partitura\Controller\MainController;
 use Partitura\Controller\Profile\BannedController;
 use Partitura\Controller\Profile\ProfileController;
-use Partitura\Dto\RouteDataDto;
 use Partitura\Enum\Trait\GetInstanceByValueTrait;
 use Partitura\Exception\CaseNotFoundException;
-use Partitura\Factory\RouteDataDtoFactory;
+use Partitura\Interfaces\RouteDataGettingServiceInterface;
 use Partitura\Kernel;
 
 /**
@@ -38,23 +37,17 @@ enum RouteEnum : string
      */
     public function getView() : string
     {
-        /** @var RouteDataDtoFactory $routeDataDtoFactory */
-        $routeDataDtoFactory = Kernel::getInstance()->getService(RouteDataDtoFactory::class);
-        /** @var array<string, RouteDataDto> $routeDataDtoCollection */
-        $routeDataDtoCollection = $routeDataDtoFactory->createRouteDataDtoCollection();
+        /** @var RouteDataGettingServiceInterface $routeDataGettingService */
+        $routeDataGettingService = Kernel::getInstance()->getService(RouteDataGettingServiceInterface::class);
+        $routeDataDto = $routeDataGettingService->getRouteDataByName($this->value);
 
-        foreach ($routeDataDtoCollection as $routeName => $routeDataDto) {
-            if (
-                $routeName === $this->value
-                || $routeDataDto->getName() === $this->value
-            ) {
-                return $routeDataDto->getView();
-            }
+        if ($routeDataDto === null) {
+            throw new CaseNotFoundException(sprintf(
+                "View by route \"%s\" was not found",
+                $this->value
+            ));
         }
 
-        throw new CaseNotFoundException(sprintf(
-            "View by route \"%s\" was not found",
-            $this->value
-        ));
+        return $routeDataDto->getView();
     }
 }

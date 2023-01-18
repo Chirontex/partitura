@@ -6,17 +6,14 @@ namespace Partitura\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Dto\RouteDataDto;
-use Partitura\Interfaces\RouteDataDtoFactoryInterface;
-use Partitura\Kernel;
 use JMS\Serializer\ArrayTransformerInterface;
 use Partitura\Interfaces\FillerValuesFactoryInterface;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * Class RouteDataDtoFactory
  * @package Partitura\Factory
  */
-class RouteDataDtoFactory implements RouteDataDtoFactoryInterface
+class RouteDataDtoFactory
 {
     protected ArrayTransformerInterface $arrayTransformer;
 
@@ -44,11 +41,14 @@ class RouteDataDtoFactory implements RouteDataDtoFactoryInterface
         return $this;
     }
 
-    /** {@inheritDoc} */
-    public function createRouteDataDtoCollection() : array
+    /**
+     * Возвращает коллекцию DTO, созданных на основе данных из параметра routes_data.
+     * @param array<string, array<string, mixed>> $data
+     *
+     * @return array<string, RouteDataDto> Имя маршрута также служит ключом для соответствующего DTO в массиве.
+     */
+    public function createRouteDataDtoCollection(array $data) : array
     {
-        $data = $this->getRoutesData();
-
         if (empty($data)) {
             return [];
         }
@@ -77,38 +77,5 @@ class RouteDataDtoFactory implements RouteDataDtoFactoryInterface
         }
 
         return $result;
-    }
-
-    /**
-     * @return array<string, array<string, mixed>>
-     */
-    protected function getRoutesData() : array
-    {
-        try {
-            $data = $this->getRawRoutesData();
-        } catch (InvalidArgumentException) {
-            return [];
-        }
-
-        foreach ($data as $routeName => $routeData) {
-            $data[$routeName] = array_merge(["name" => $routeName], $routeData);
-        }
-
-        return $data;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     * @return array<string, array<string, mixed>>
-     */
-    protected function getRawRoutesData() : array
-    {
-        $dataRaw = Kernel::getInstance()->getParameter("routes_data");
-
-        if (!is_array($dataRaw)) {
-            throw new InvalidArgumentException("Data must be an array.");
-        }
-
-        return $dataRaw;
     }
 }

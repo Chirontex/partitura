@@ -90,5 +90,6 @@ services:
     Partitura\Factory\SettingsDtoFactory:
         public: true
 
-    Partitura\Factory\RouteDataDtoFactory:
+    Partitura\Interfaces\RouteDataGettingServiceInterface:
         public: true
+        alias: Partitura\Service\RouteDataGettingService
