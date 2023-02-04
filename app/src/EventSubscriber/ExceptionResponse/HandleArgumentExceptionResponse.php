@@ -51,7 +51,6 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
             $context = array_merge($context, $fillerValues->toArray());
         }
 
-        // TODO: добавить получение параметров из контроллеров для проброса в рендер
         $event->setResponse(new Response(
             $this->twig->render($routeDataDto->getView(), $context)
         ));
