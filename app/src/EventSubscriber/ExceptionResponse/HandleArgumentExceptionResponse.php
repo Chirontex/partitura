@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Partitura\EventSubscriber\ExceptionResponse;
 
 use Partitura\Exception\ArgumentException;
-use Partitura\Exception\CaseNotFoundException;
-use Partitura\Interfaces\ViewResolverInterface;
+use Partitura\Service\RouteDataGettingService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Twig\Environment;
@@ -17,16 +16,10 @@ use Twig\Environment;
  */
 class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
 {
-    protected ViewResolverInterface $viewResolver;
-
-    protected Environment $twig;
-
     public function __construct(
-        ViewResolverInterface $viewResolver,
-        Environment $twig
+        protected RouteDataGettingService $routeDataGettingService,
+        protected Environment $twig
     ) {
-        $this->viewResolver = $viewResolver;
-        $this->twig = $twig;
     }
 
     /** {@inheritDoc} */
@@ -42,14 +35,19 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
             return;
         }
 
-        $view = $this->getView($event->getRequest()->attributes->get("_route"));
+        $routeDataDto = $this->routeDataGettingService->getRouteDataByName($event->getRequest()->attributes->get("_route"));
 
-        if (empty($view)) {
+        if ($routeDataDto === null) {
             return;
         }
 
+        $fillerCallback = $routeDataDto->getFillerCallback();
+
         // TODO: добавить получение параметров из контроллеров для проброса в рендер
-        $event->setResponse(new Response($this->twig->render($view, [])));
+        $event->setResponse(new Response($this->twig->render(
+            $routeDataDto->getView(),
+            $fillerCallback === null ? [] : $fillerCallback()
+        )));
     }
 
     /** {@inheritDoc} */
@@ -57,19 +55,5 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
     {
         return $event->getResponse() === null
             && $event->getThrowable() instanceof ArgumentException;
-    }
-
-    /**
-     * @param string $route
-     *
-     * @return null|string
-     */
-    protected function getView(string $route) : ?string
-    {
-        try {
-            return $this->viewResolver->resolveViewByRoute($route);
-        } catch (CaseNotFoundException) {
-            return null;
-        }
     }
 }
