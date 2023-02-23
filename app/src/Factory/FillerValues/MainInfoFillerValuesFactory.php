@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Partitura\Factory\FillerValues;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\ArrayTransformerInterface;
 use Partitura\Exception\ForbiddenAccessException;
-use Partitura\Interfaces\FillerValuesFactoryInterface;
+use Partitura\Factory\SettingsDtoFactory;
 use Partitura\Service\User\CurrentUserService;
 use Partitura\Service\User\UserFieldValuesGettingService;
 
@@ -14,12 +15,22 @@ use Partitura\Service\User\UserFieldValuesGettingService;
  * Class MainInfoFillerValuesFactory
  * @package Partitura\Factory\FillerValues
  */
-class MainInfoFillerValuesFactory implements FillerValuesFactoryInterface
+class MainInfoFillerValuesFactory extends ProfileFillerValuesFactory
 {
+    protected CurrentUserService $currentUserService;
+
+    protected UserFieldValuesGettingService $userFieldValuesGettingService;
+
     public function __construct(
-        protected CurrentUserService $currentUserService,
-        protected UserFieldValuesGettingService $userFieldValuesGettingService
+        SettingsDtoFactory $settingsDtoFactory,
+        ArrayTransformerInterface $arrayTransformer,
+        CurrentUserService $currentUserService,
+        UserFieldValuesGettingService $userFieldValuesGettingService
     ) {
+        parent::__construct($settingsDtoFactory, $arrayTransformer);
+
+        $this->currentUserService = $currentUserService;
+        $this->userFieldValuesGettingService = $userFieldValuesGettingService;
     }
 
     /**
@@ -35,7 +46,10 @@ class MainInfoFillerValuesFactory implements FillerValuesFactoryInterface
             throw new ForbiddenAccessException("Unauthorized access is forbidden.");
         }
 
-        return $this->userFieldValuesGettingService->getValuesWithEmpty($currentUser);
+        return new ArrayCollection(array_merge(
+            $this->userFieldValuesGettingService->getValuesWithEmpty($currentUser)->toArray(),
+            parent::getFillerValuesCollection()->toArray()
+        ));
     }
 
     /** {@inheritDoc} */

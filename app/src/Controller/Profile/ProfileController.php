@@ -79,13 +79,22 @@ class ProfileController extends AbstractFormController
         );
     }
 
+    /**
+     * @param SettingsDto $settingsDto
+     */
+    public static function completeSettingsDto(SettingsDto $settingsDto) : void
+    {
+        $routes = $settingsDto->getRoutes();
+
+        $routes->set("profile_security", static::ROUTE_SECURITY);
+    }
+
     /** {@inheritDoc} */
     protected function createSettingsDto() : SettingsDto
     {
         $settingsDto = parent::createSettingsDto();
-        $routes = $settingsDto->getRoutes();
 
-        $routes->set("profile_security", static::ROUTE_SECURITY);
+        static::completeSettingsDto($settingsDto);
 
         return $settingsDto;
     }
