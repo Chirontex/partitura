@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Partitura\Factory;
+namespace Partitura\Factory\FillerValues;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Exception\ForbiddenAccessException;
@@ -12,7 +12,7 @@ use Partitura\Service\User\UserFieldValuesGettingService;
 
 /**
  * Class MainInfoFillerValuesFactory
- * @package Partitura\Factory
+ * @package Partitura\Factory\FillerValues
  */
 class MainInfoFillerValuesFactory implements FillerValuesFactoryInterface
 {
