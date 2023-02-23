@@ -7,6 +7,15 @@
         {% if message is defined %}
             <div class="alert alert-success text-center">{{ message|e }}</div>
         {% endif %}
+        {% if errors is defined %}
+            <div class="alert alert-danger text-center">
+                <ul>
+                {% for error in errors %}
+                    <li>{{ error|e }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
             <div class="row">
                 <div class="col">
                     <h4>Сменить пароль</h4>
