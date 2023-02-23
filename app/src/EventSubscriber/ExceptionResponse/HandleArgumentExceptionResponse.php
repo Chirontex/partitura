@@ -42,7 +42,12 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
             return;
         }
 
-        $context = ["csrf_token_id" => $routeDataDto->getCsrfTokenId()];
+        /** @var ArgumentException $exception */
+        $exception = $event->getThrowable();
+        $context = [
+            "csrf_token_id" => $routeDataDto->getCsrfTokenId(),
+            "errors" => $exception->getErrorMessages(),
+        ];
         $fillerCallback = $routeDataDto->getFillerCallback();
 
         if ($fillerCallback !== null) {
