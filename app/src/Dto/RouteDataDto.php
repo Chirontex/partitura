@@ -31,7 +31,7 @@ class RouteDataDto
      */
     protected string $csrfTokenId;
 
-    protected Closure $fillerCallback;
+    protected ?Closure $fillerCallback = null;
 
     /**
      * @return string
