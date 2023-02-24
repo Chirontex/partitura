@@ -79,7 +79,8 @@ class HandleForm implements EventSubscriberInterface
 
         if (
             $csrfTokenValidationResult === null
-            || ($csrfTokenValidationResult !== null
+            || (
+                $csrfTokenValidationResult !== null
                 && $csrfTokenValidationResult === CsrfTokenValidationResultEnum::INVALID
             )
         ) {
