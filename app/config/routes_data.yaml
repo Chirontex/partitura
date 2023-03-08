@@ -1,21 +1,20 @@
 parameters:
     routes_data:
-    # TODO: перенести сюда значения csrf_token_id из контроллеров
         partitura_main_index:
             view: 'genesis/main/blog.html.twig'
         partitura_profile_main_info:
             view: 'genesis/profile/main_info.html.twig'
-            csrf_token_id: Partitura\Controller\Profile\ProfileController::MAIN_INFO_CSRF_TOKEN_ID
+            csrf_token_id: 'profile_main_info_csrf_token'
         partitura_profile_security:
             view: 'genesis/profile/security.html.twig'
-            csrf_token_id: Partitura\Controller\Profile\ProfileController::SECURITY_CSRF_TOKEN_ID
+            csrf_token_id: 'profile_security_csrf_token'
         partitura_profile_banned:
             view: 'genesis/profile/banned.html.twig'
         partitura_login:
             view: 'genesis/admin/login.html.twig'
-            csrf_token_id: Partitura\Controller\LoginController::LOGIN_CSRF_TOKEN_ID
+            csrf_token_id: 'login'
         partitura_admin_login:
             view: 'genesis/admin/login.html.twig'
-            csrf_token_id: Partitura\Controller\Admin\LoginController::CSRF_TOKEN_ID
+            csrf_token_id: 'admin_login'
         partitura_admin_dashboard:
             view: ''

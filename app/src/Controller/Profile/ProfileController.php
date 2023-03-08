@@ -9,6 +9,7 @@ use Partitura\Dto\Form\Profile\Security\SecurityRequestDto;
 use Partitura\Dto\SettingsDto;
 use Partitura\Event\Form\Profile\MainInfoHandlingProcessEvent;
 use Partitura\Event\Form\Profile\SecurityHandlingProcessEvent;
+use Partitura\Interfaces\CsrfTokenIdResolverInterface;
 use Partitura\Interfaces\ViewResolverInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,18 +26,12 @@ class ProfileController extends AbstractFormController
     public const ROUTE_MAIN_INFO = "partitura_profile_main_info";
     public const ROUTE_SECURITY = "partitura_profile_security";
 
-    public const MAIN_INFO_CSRF_TOKEN_ID = "profile_main_info_csrf_token";
-    public const SECURITY_CSRF_TOKEN_ID = "profile_security_csrf_token";
-
-    protected ViewResolverInterface $viewResolver;
-
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
-        ViewResolverInterface $viewResolver
+        protected ViewResolverInterface $viewResolver,
+        protected CsrfTokenIdResolverInterface $csrfTokenIdResolver
     ) {
         parent::__construct($eventDispatcher);
-
-        $this->viewResolver = $viewResolver;
     }
 
     /**
@@ -50,7 +45,7 @@ class ProfileController extends AbstractFormController
     {
         $parameters = array_merge(
             $this->processForm(new MainInfoHandlingProcessEvent($requestDto)),
-            ["csrf_token_id" => static::MAIN_INFO_CSRF_TOKEN_ID]
+            ["csrf_token_id" => $this->csrfTokenIdResolver->resolveCsrfTokenIdByRouteName(static::ROUTE_MAIN_INFO)]
         );
 
         return $this->render(
@@ -70,7 +65,7 @@ class ProfileController extends AbstractFormController
     {
         $parameters = array_merge(
             $this->processForm(new SecurityHandlingProcessEvent($requestDto)),
-            ["csrf_token_id" => static::SECURITY_CSRF_TOKEN_ID]
+            ["csrf_token_id" => $this->csrfTokenIdResolver->resolveCsrfTokenIdByRouteName(static::ROUTE_SECURITY)]
         );
 
         return $this->render(

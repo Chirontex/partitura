@@ -5,6 +5,7 @@ namespace Partitura\Service;
 
 use Partitura\Dto\Form\AbstractFormRequestDto;
 use Partitura\Exception\LogicException;
+use Partitura\Interfaces\CsrfTokenIdResolverInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -14,12 +15,10 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
  */
 class CsrfTokenValidationService
 {
-    /** @var CsrfTokenManagerInterface */
-    protected $csrfTokenManager;
-
-    public function __construct(CsrfTokenManagerInterface $csrfTokenManager)
-    {
-        $this->csrfTokenManager = $csrfTokenManager;
+    public function __construct(
+        protected CsrfTokenManagerInterface $csrfTokenManager,
+        protected CsrfTokenIdResolverInterface $csrfTokenIdResolver
+    ) {
     }
 
     /**
@@ -31,7 +30,7 @@ class CsrfTokenValidationService
     public function isFormRequestDtoTokenValid(AbstractFormRequestDto $requestDto) : bool
     {
         return $this->isTokenValid(
-            $requestDto->getCsrfTokenId(),
+            $this->csrfTokenIdResolver->resolveCsrfTokenIdByRouteName($requestDto->getRouteName()),
             $requestDto->getCsrfToken()
         );
     }

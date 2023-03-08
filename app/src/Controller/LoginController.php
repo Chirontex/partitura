@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Partitura\Controller;
 
+use Partitura\Interfaces\CsrfTokenIdResolverInterface;
 use Partitura\Interfaces\ViewResolverInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,14 +18,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractLoginController
 {
     public const ROUTE_LOGIN = "partitura_login";
-    
-    public const LOGIN_CSRF_TOKEN_ID = "login";
 
-    protected ViewResolverInterface $viewResolver;
-
-    public function __construct(ViewResolverInterface $viewResolver)
-    {
-        $this->viewResolver = $viewResolver;
+    public function __construct(
+        protected ViewResolverInterface $viewResolver,
+        protected CsrfTokenIdResolverInterface $csrfTokenIdResolver
+    ) {
     }
 
     /**
@@ -46,7 +44,7 @@ class LoginController extends AbstractLoginController
                 "route_name" => static::ROUTE_LOGIN,
                 "last_username" => $authenticationUtils->getLastUsername(),
                 "error" => $authenticationUtils->getLastAuthenticationError(),
-                "csrf_token_id" => static::LOGIN_CSRF_TOKEN_ID,
+                "csrf_token_id" => $this->csrfTokenIdResolver->resolveCsrfTokenIdByRouteName(static::ROUTE_LOGIN),
             ]
         );
     }

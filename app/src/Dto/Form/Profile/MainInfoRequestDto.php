@@ -70,8 +70,8 @@ class MainInfoRequestDto extends AbstractFormRequestDto
     }
 
     /** {@inheritDoc} */
-    public function getCsrfTokenId() : string
+    public function getRouteName() : string
     {
-        return ProfileController::MAIN_INFO_CSRF_TOKEN_ID;
+        return ProfileController::ROUTE_MAIN_INFO;
     }
 }

@@ -13,8 +13,8 @@ use Partitura\Dto\Form\AbstractFormRequestDto;
 abstract class SecurityRequestDto extends AbstractFormRequestDto
 {
     /** {@inheritDoc} */
-    public function getCsrfTokenId() : string
+    public function getRouteName() : string
     {
-        return ProfileController::SECURITY_CSRF_TOKEN_ID;
+        return ProfileController::ROUTE_SECURITY;
     }
 }

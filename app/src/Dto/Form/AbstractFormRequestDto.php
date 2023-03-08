@@ -44,5 +44,5 @@ abstract class AbstractFormRequestDto
     /**
      * @return string
      */
-    abstract public function getCsrfTokenId() : string;
+    abstract public function getRouteName() : string;
 }
