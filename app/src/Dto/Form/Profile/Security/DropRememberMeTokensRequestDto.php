@@ -15,14 +15,12 @@ class DropRememberMeTokensRequestDto extends SecurityRequestDto
     public const DROP_REMEMBERME_TOKENS_KEY = "drop_rememberme_tokens";
 
     /**
-     * @var bool
-     * 
      * @Assert\IsTrue
      * 
      * @Serializer\Type("bool")
      * @Serializer\SerializedName(\Partitura\Dto\Form\Profile\Security\DropRememberMeTokensRequestDto::DROP_REMEMBERME_TOKENS_KEY)
      */
-    protected $needToDropTokens = false;
+    protected bool $needToDropTokens = false;
 
     /**
      * @return bool

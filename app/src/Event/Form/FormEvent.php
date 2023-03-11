@@ -12,8 +12,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class FormEvent extends Event
 {
-    /** @var AbstractFormRequestDto */
-    protected $requestDto;
+    protected AbstractFormRequestDto $requestDto;
 
     /**
      * @return null|AbstractFormRequestDto

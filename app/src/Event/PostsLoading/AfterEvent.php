@@ -12,12 +12,8 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class AfterEvent extends Event
 {
-    /** @var RouteCollection */
-    protected $routes;
-
-    public function __construct(RouteCollection $routes)
+    public function __construct(protected RouteCollection $routes)
     {
-        $this->routes = $routes;
     }
 
     /**

@@ -21,20 +21,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class SecurityRequestDtoFactory extends AbstractRequestDtoFactory
 {
-    protected ChangePasswordRequestDtoFactory $changePasswordRequestDtoFactory;
-
-    protected DropRememberMeTokensRequestDtoFactory $dropRememberMeTokensRequestDtoFactory;
-
     public function __construct(
         ValidatorInterface $validator,
         ArrayTransformerInterface $arrayTransformer,
-        ChangePasswordRequestDtoFactory $changePasswordRequestDtoFactory,
-        DropRememberMeTokensRequestDtoFactory $dropRememberMeTokensRequestDtoFactory
+        protected ChangePasswordRequestDtoFactory $changePasswordRequestDtoFactory,
+        protected DropRememberMeTokensRequestDtoFactory $dropRememberMeTokensRequestDtoFactory
     ) {
         parent::__construct($validator, $arrayTransformer);
-
-        $this->changePasswordRequestDtoFactory = $changePasswordRequestDtoFactory;
-        $this->dropRememberMeTokensRequestDtoFactory = $dropRememberMeTokensRequestDtoFactory;
     }
 
     /** {@inheritDoc} */

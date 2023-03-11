@@ -24,14 +24,12 @@ class Unit
     public const TABLE_NAME = "pt_units";
 
     /**
-     * @var null|PersistentCollection<UnitRoleReferences>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="Partitura\Entity\RoleUnitReference",
      *     mappedBy="unit"
      * )
      */
-    protected $roleReferences;
+    protected ?PersistentCollection $roleReferences;
 
     /**
      * @return null|PersistentCollection<UnitRoleReferences>

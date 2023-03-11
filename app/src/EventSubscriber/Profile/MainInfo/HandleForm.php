@@ -21,28 +21,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class HandleForm implements EventSubscriberInterface
 {
-    /** @var ArrayTransformerInterface */
-    protected $arrayTransformer;
-
-    /** @var UserFieldValuesSavingService */
-    protected $userFieldValuesSavingService;
-
-    /** @var CurrentUserService */
-    protected $currentUserService;
-
-    /** @var UserFieldValuesGettingService */
-    protected $userFieldValuesGettingService;
-
     public function __construct(
-        ArrayTransformerInterface $arrayTransformer,
-        UserFieldValuesSavingService $userFieldValuesSavingService,
-        CurrentUserService $currentUserService,
-        UserFieldValuesGettingService $userFieldValuesGettingService
+        protected ArrayTransformerInterface $arrayTransformer,
+        protected UserFieldValuesSavingService $userFieldValuesSavingService,
+        protected CurrentUserService $currentUserService,
+        protected UserFieldValuesGettingService $userFieldValuesGettingService
     ) {
-        $this->arrayTransformer = $arrayTransformer;
-        $this->userFieldValuesSavingService = $userFieldValuesSavingService;
-        $this->currentUserService = $currentUserService;
-        $this->userFieldValuesGettingService = $userFieldValuesGettingService;
     }
 
     /** {@inheritDoc} */

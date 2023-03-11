@@ -16,12 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PostViewFactory
 {
-    /** @var CurrentUserService */
-    protected $currentUserService;
-
-    public function __construct(CurrentUserService $currentUserService)
+    public function __construct(protected CurrentUserService $currentUserService)
     {
-        $this->currentUserService = $currentUserService;
     }
 
     /**

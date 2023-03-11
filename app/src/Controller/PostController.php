@@ -15,12 +15,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class PostController extends Controller
 {
-    /** @var PostResponseFactory */
-    protected $postResponseFactory;
-
-    public function __construct(PostResponseFactory $postResponseFactory)
+    public function __construct(protected PostResponseFactory $postResponseFactory)
     {
-        $this->postResponseFactory = $postResponseFactory;
     }
 
     /**

@@ -23,21 +23,15 @@ use Throwable;
  */
 class PostsLoader extends Loader
 {
-    /** @var bool */
-    protected $loaded = false;
+    protected bool $loaded = false;
 
-    /** @var PostRepository */
-    protected $postRepository;
-
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
+    protected PostRepository $postRepository;
 
     public function __construct(
         ManagerRegistry $registry,
-        EventDispatcherInterface $eventDispatcher
+        protected EventDispatcherInterface $eventDispatcher
     ) {
         $this->postRepository = $registry->getRepository(Post::class);
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

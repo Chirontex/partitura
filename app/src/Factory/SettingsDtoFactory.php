@@ -17,12 +17,8 @@ use Partitura\Service\User\CurrentUserService;
  */
 class SettingsDtoFactory
 {
-    /** @var CurrentUserService */
-    protected $currentUserService;
-
-    public function __construct(CurrentUserService $currentUserService)
+    public function __construct(protected CurrentUserService $currentUserService)
     {
-        $this->currentUserService = $currentUserService;
     }
 
     /**

@@ -18,18 +18,13 @@ use Partitura\Service\User\PasswordSettingService;
  */
 class UserFactory
 {
-    /** @var RoleRepository */
-    protected $roleRepository;
-
-    /** @var PasswordSettingService */
-    protected $passwordSettingService;
+    protected RoleRepository $roleRepository;
 
     public function __construct(
         ManagerRegistry $registry,
-        PasswordSettingService $passwordSettingService
+        protected PasswordSettingService $passwordSettingService
     ) {
         $this->roleRepository = $registry->getRepository(Role::class);
-        $this->passwordSettingService = $passwordSettingService;
     }
 
     /**

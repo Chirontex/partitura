@@ -12,8 +12,7 @@ use Partitura\Dto\Form\AbstractFormRequestDto;
  */
 abstract class RequestDtoHandleEvent extends CsrfTokenValidationEvent
 {
-    /** @var ArrayCollection<string, mixed> */
-    protected $responseParameters;
+    protected ArrayCollection $responseParameters;
 
     public function __construct(AbstractFormRequestDto $requestDto)
     {

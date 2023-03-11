@@ -20,32 +20,26 @@ class CreateUserDto
     public const ROLE = "role";
 
     /**
-     * @var string
-     * 
      * @Assert\NotNull
      * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName(CreateUserDto::USERNAME)
      */
-    protected $username;
+    protected string $username;
 
     /**
-     * @var string
-     * 
      * @Assert\NotNull
      * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName(CreateUserDto::PASSWORD)
      */
-    protected $password;
+    protected string $password;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName(CreateUserDto::ROLE)
      */
-    protected $role;
+    protected string $role;
 
     /**
      * @return string

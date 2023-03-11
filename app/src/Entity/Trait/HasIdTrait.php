@@ -12,13 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasIdTrait
 {
     /**
-     * @var int
-     * 
      * @ORM\Id
      * @ORM\GeneratedValue()
      * @ORM\Column(type="bigint", name="ID", options={"unsigned":true})
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @return int

@@ -12,12 +12,8 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class UserCreateCommandExecuteEvent extends Event
 {
-    /** @var CreateUserDto */
-    protected $createUserDto;
-
-    public function __construct(CreateUserDto $createUserDto)
+    public function __construct(protected CreateUserDto $createUserDto)
     {
-        $this->createUserDto = $createUserDto;
     }
 
     /**

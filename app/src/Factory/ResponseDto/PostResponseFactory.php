@@ -15,18 +15,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class PostResponseFactory
 {
-    /** @var PostManager */
-    protected $postManager;
-
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
-
     public function __construct(
-        PostManager $postManager,
-        EventDispatcherInterface $eventDispatcher
+        protected PostManager $postManager,
+        protected EventDispatcherInterface $eventDispatcher
     ) {
-        $this->postManager = $postManager;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

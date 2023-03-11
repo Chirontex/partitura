@@ -28,24 +28,20 @@ class Role
     public const TABLE_NAME = "pt_roles";
 
     /**
-     * @var null|PersistentCollection<User>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\User",
      *     mappedBy="role"
      * )
      */
-    protected $users;
+    protected ?PersistentCollection $users;
 
     /**
-     * @var null|PersistentCollection<RoleUnitReference>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="Partitura\Entity\RoleUnitReference",
      *     mappedBy="role"
      * )
      */
-    protected $unitReferences;
+    protected ?PersistentCollection $unitReferences;
 
     /**
      * @return null|PersistentCollection<User>

@@ -9,8 +9,7 @@ namespace Partitura\Event\PostsLoading;
  */
 class BeforeEvent extends AfterEvent
 {
-    /** @var bool */
-    protected $skipPostsLoader = false;
+    protected bool $skipPostsLoader = false;
 
     /**
      * @return bool

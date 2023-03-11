@@ -13,20 +13,16 @@ use JMS\Serializer\Annotation as Serializer;
 class SettingsDto
 {
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("sitename")
      */
-    protected $sitename;
+    protected string $sitename;
 
     /**
-     * @var bool
-     * 
      * @Serializer\Type("bool")
      * @Serializer\SerializedName("is_user_panel_available")
      */
-    protected $isUserPanelAvailable;
+    protected bool $isUserPanelAvailable;
 
     /**
      * @var ArrayCollection<string, string>
@@ -34,7 +30,7 @@ class SettingsDto
      * @Serializer\Type("ArrayCollection")
      * @Serializer\SerializedName("routes")
      */
-    protected $routes;
+    protected ArrayCollection $routes;
 
     /**
      * @var ArrayCollection<string, mixed>
@@ -42,7 +38,7 @@ class SettingsDto
      * @Serializer\Type("ArrayCollection")
      * @Serializer\SerializedName("user")
      */
-    protected $userData;
+    protected ArrayCollection $userData;
 
     /**
      * @return string

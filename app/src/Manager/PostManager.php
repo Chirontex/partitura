@@ -14,8 +14,7 @@ use Partitura\Repository\PostRepository;
  */
 class PostManager
 {
-    /** @var PostRepository */
-    protected $postRepository;
+    protected PostRepository $postRepository;
 
     public function __construct(ManagerRegistry $registry)
     {

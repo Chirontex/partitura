@@ -15,14 +15,11 @@ use Partitura\Interfaces\FillerValuesFactoryInterface;
  */
 class RouteDataDtoFactory
 {
-    protected ArrayTransformerInterface $arrayTransformer;
-
     /** @var ArrayCollection<string, FillerValuesFactoryInterface> */
     protected ArrayCollection $fillerValuesFactoryCollection;
 
-    public function __construct(ArrayTransformerInterface $arrayTransformer)
+    public function __construct(protected ArrayTransformerInterface $arrayTransformer)
     {
-        $this->arrayTransformer = $arrayTransformer;
         $this->fillerValuesFactoryCollection = new ArrayCollection();
     }
 

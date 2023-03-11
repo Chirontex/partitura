@@ -12,11 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasContentTrait
 {
     /**
-     * @var string
-     * 
      * @ORM\Column(type="text", name="CONTENT")
      */
-    protected $content;
+    protected string $content;
 
     /**
      * @return string

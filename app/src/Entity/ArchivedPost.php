@@ -27,8 +27,6 @@ class ArchivedPost
     public const TABLE_NAME = "pt_posts_archive";
 
     /**
-     * @var Post
-     * 
      * @ORM\JoinColumn(
      *     name="POST_ID",
      *     referencedColumnName="ID",
@@ -40,11 +38,9 @@ class ArchivedPost
      *     inversedBy="archive"
      * )
      */
-    protected $post;
+    protected Post $post;
 
     /**
-     * @var User
-     * 
      * @ORM\JoinColumn(
      *     name="AUTHOR_ID",
      *     referencedColumnName="ID",
@@ -56,7 +52,7 @@ class ArchivedPost
      *     inversedBy="archivedPosts"
      * )
      */
-    protected $author;
+    protected User $author;
 
     /**
      * @return null|Post

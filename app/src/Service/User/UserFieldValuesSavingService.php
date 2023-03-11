@@ -20,20 +20,16 @@ use Partitura\Repository\UserFieldRepository;
  */
 class UserFieldValuesSavingService
 {
-    /** @var ObjectManager */
-    protected $objectManager;
+    protected ObjectManager $objectManager;
 
-    /** @var UserFieldValueFactory */
-    protected $userFieldValueFactory;
+    protected UserFieldRepository $userFieldRepository;
 
-    /** @var UserFieldRepository */
-    protected $userFieldRepository;
-
-    public function __construct(ManagerRegistry $registry, UserFieldValueFactory $userFieldValueFactory)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        protected UserFieldValueFactory $userFieldValueFactory
+    ) {
         $this->objectManager = $registry->getManager();
         $this->userFieldRepository = $registry->getRepository(UserField::class);
-        $this->userFieldValueFactory = $userFieldValueFactory;
     }
 
     /**

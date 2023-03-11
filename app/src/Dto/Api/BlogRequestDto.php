@@ -13,25 +13,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 class BlogRequestDto
 {
     /**
-     * @var int
-     * 
      * @Assert\NotBlank(message="Page cannot be empty.")
      * @Assert\Positive(message="Invalid page value.")
      * 
      * @Serializer\Type("int")
      * @Serializer\SerializedName("page")
      */
-    protected $page = 1;
+    protected int $page = 1;
 
     /**
-     * @var int
-     * 
      * @Assert\PositiveOrZero(message="Invalid limit value.")
      * 
      * @Serializer\Type("int")
      * @Serializer\SerializedName("limit")
      */
-    protected $limit = 0;
+    protected int $limit = 0;
 
     /**
      * @return int

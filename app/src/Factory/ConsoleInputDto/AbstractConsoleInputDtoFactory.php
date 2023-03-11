@@ -15,18 +15,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 abstract class AbstractConsoleInputDtoFactory
 {
-    /** @var ArrayTransformerInterface */
-    protected $arrayTransformer;
-
-    /** @var ValidatorInterface */
-    protected $validator;
-
     public function __construct(
-        ArrayTransformerInterface $arrayTransformer,
-        ValidatorInterface $validator
+        protected ArrayTransformerInterface $arrayTransformer,
+        protected ValidatorInterface $validator
     ) {
-        $this->arrayTransformer = $arrayTransformer;
-        $this->validator = $validator;
     }
 
     /**

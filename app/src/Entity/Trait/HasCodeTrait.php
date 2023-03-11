@@ -12,8 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasCodeTrait
 {
     /**
-     * @var string
-     * 
      * @ORM\Column(
      *     type="string",
      *     name="CODE",
@@ -21,7 +19,7 @@ trait HasCodeTrait
      *     unique=true
      * )
      */
-    protected $code;
+    protected string $code;
 
     /**
      * @return string

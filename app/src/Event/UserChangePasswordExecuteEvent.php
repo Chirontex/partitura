@@ -12,12 +12,8 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class UserChangePasswordExecuteEvent extends Event
 {
-    /** @var UserChangePasswordDto */
-    protected $userChangePasswordDto;
-
-    public function __construct(UserChangePasswordDto $userChangePasswordDto)
+    public function __construct(protected UserChangePasswordDto $userChangePasswordDto)
     {
-        $this->userChangePasswordDto = $userChangePasswordDto;
     }
 
     /**

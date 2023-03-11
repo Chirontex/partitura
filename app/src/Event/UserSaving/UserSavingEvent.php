@@ -12,12 +12,8 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class UserSavingEvent extends Event
 {
-    /** @var User */
-    protected $user;
-
-    public function __construct(User $user)
+    public function __construct(protected User $user)
     {
-        $this->user = $user;
     }
 
     /**

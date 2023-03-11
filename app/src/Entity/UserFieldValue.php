@@ -21,8 +21,6 @@ class UserFieldValue
     public const TABLE_NAME = "pt_user_fields_values";
 
     /**
-     * @var User
-     * 
      * @ORM\JoinColumn(
      *     name="USER_ID",
      *     referencedColumnName="ID",
@@ -34,11 +32,9 @@ class UserFieldValue
      *     inversedBy="additionalFields"
      * )
      */
-    protected $user;
+    protected User $user;
 
     /**
-     * @var UserField
-     * 
      * @ORM\JoinColumn(
      *     name="FIELD_ID",
      *     referencedColumnName="ID",
@@ -49,17 +45,15 @@ class UserFieldValue
      *     inversedBy="values"
      * )
      */
-    protected $userField;
+    protected UserField $userField;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(
      *     type="text",
      *     name="VALUE"
      * )
      */
-    protected $value;
+    protected string $value;
 
     /**
      * @return User

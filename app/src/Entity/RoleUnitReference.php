@@ -18,8 +18,6 @@ class RoleUnitReference
     public const TABLE_NAME = "pt_role_unit_references";
 
     /**
-     * @var Role
-     * 
      * @ORM\Id
      * @ORM\JoinColumn(
      *     name="ROLE_ID",
@@ -31,11 +29,9 @@ class RoleUnitReference
      *     inversedBy="unitReferences"
      * )
      */
-    protected $role;
+    protected Role $role;
 
     /**
-     * @var Unit
-     * 
      * @ORM\Id
      * @ORM\JoinColumn(
      *     name="UNIT_ID",
@@ -47,7 +43,7 @@ class RoleUnitReference
      *     inversedBy="roleReferences"
      * )
      */
-    protected $unit;
+    protected Unit $unit;
 
     /**
      * @return Role

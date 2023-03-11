@@ -12,12 +12,8 @@ use Symfony\Component\Security\Core\Security;
  */
 class CurrentUserService
 {
-    /** @var Security */
-    protected $securityHelper;
-
-    public function __construct(Security $securityHelper)
+    public function __construct(protected Security $securityHelper)
     {
-        $this->securityHelper = $securityHelper;
     }
 
     /**

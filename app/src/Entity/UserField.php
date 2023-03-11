@@ -24,14 +24,12 @@ class UserField
     public const TABLE_NAME = "pt_user_fields";
 
     /**
-     * @var null|PersistentCollection<UserFieldValue>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\UserFieldValue",
      *     mappedBy="userField"
      * )
      */
-    protected $values;
+    protected ?PersistentCollection $values;
 
     /**
      * @return null|PersistentCollection<UserFieldValue>

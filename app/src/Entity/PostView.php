@@ -24,8 +24,6 @@ class PostView
     public const TABLE_NAME = "pt_posts_views";
 
     /**
-     * @var Post
-     * 
      * @ORM\JoinColumn(
      *     name="POST_ID",
      *     referencedColumnName="ID",
@@ -37,11 +35,9 @@ class PostView
      *     inversedBy="views"
      * )
      */
-    protected $post;
+    protected Post $post;
 
     /**
-     * @var User
-     * 
      * @ORM\JoinColumn(
      *     name="USER_ID",
      *     referencedColumnName="ID"
@@ -52,17 +48,15 @@ class PostView
      *     inversedBy="postsViews"
      * )
      */
-    protected $user;
+    protected User $user;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(
      *     type="text",
      *     name="IP_ADDRESS"
      * )
      */
-    protected $ipAddress;
+    protected string $ipAddress;
 
     public function __construct()
     {

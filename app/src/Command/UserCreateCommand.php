@@ -27,30 +27,13 @@ class UserCreateCommand extends Command implements LoggerAwareInterface
 
     protected const COMMAND_NAME = "partitura:user:create";
 
-    /** @var UserSavingService */
-    protected $userSavingService;
-
-    /** @var UserFactory */
-    protected $userFactory;
-
-    /** @var CreateUserDtoFactory */
-    protected $createUserDtoFactory;
-
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
-
     public function __construct(
-        UserSavingService $userSavingService,
-        UserFactory $userFactory,
-        CreateUserDtoFactory $createUserDtoFactory,
-        EventDispatcherInterface $eventDispatcher
+        protected UserSavingService $userSavingService,
+        protected UserFactory $userFactory,
+        protected CreateUserDtoFactory $createUserDtoFactory,
+        protected EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct();
-
-        $this->userSavingService = $userSavingService;
-        $this->userFactory = $userFactory;
-        $this->createUserDtoFactory = $createUserDtoFactory;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /** {@inheritDoc} */

@@ -19,40 +19,30 @@ class RememberToken
     public const TABLE_NAME = "rememberme_token";
 
     /**
-     * @var string
-     * 
      * @ORM\Id
      * @ORM\Column(type="string", name="series", length=88)
      */
-    protected $series;
+    protected string $series;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(type="string", name="value", length=88)
      */
-    protected $value;
+    protected string $value;
 
     /**
-     * @var ?DateTime
-     * 
      * @ORM\Column(type="datetime", name="lastUsed")
      */
-    protected $lastUsed;
+    protected ?DateTime $lastUsed;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(type="string", name="class", length=100)
      */
-    protected $class;
+    protected string $class;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(type="string", name="username", length=200)
      */
-    protected $username;
+    protected string $username;
 
     /**
      * @return string

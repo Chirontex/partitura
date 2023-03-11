@@ -13,11 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasDatetimeUpdatedTrait
 {
     /**
-     * @var null|DateTime
-     * 
      * @ORM\Column(type="datetime", name="DATETIME_UPDATED", nullable=true)
      */
-    protected $datetimeUpdated;
+    protected ?DateTime $datetimeUpdated;
 
     /**
      * @return null|DateTime

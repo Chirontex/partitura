@@ -17,12 +17,8 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class PasswordUpgradeService implements PasswordUpgraderInterface
 {
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(protected EventDispatcherInterface $eventDispatcher)
     {
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

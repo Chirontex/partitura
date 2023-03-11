@@ -34,8 +34,6 @@ class Post
     public const TABLE_NAME = "pt_posts";
 
     /**
-     * @var null|static
-     * 
      * @ORM\JoinColumn(
      *     name="PARENT_ID",
      *     referencedColumnName="ID"
@@ -46,22 +44,18 @@ class Post
      *     inversedBy="child"
      * )
      */
-    protected $parent;
+    protected ?Post $parent;
 
     /**
-     * @var null|static
-     * 
      * @ORM\OneToOne(
      *     targetEntity="\Partitura\Entity\Post",
      *     fetch="EAGER",
      *     mappedBy="parent"
      * )
      */
-    protected $child;
+    protected ?Post $child;
 
     /**
-     * @var User
-     * 
      * @ORM\JoinColumn(
      *     name="AUTHOR_ID",
      *     referencedColumnName="ID",
@@ -73,11 +67,9 @@ class Post
      *     inversedBy="createdPosts"
      * )
      */
-    protected $author;
+    protected User $author;
 
     /**
-     * @var User
-     * 
      * @ORM\JoinColumn(
      *     name="LAST_EDITOR_ID",
      *     referencedColumnName="ID",
@@ -89,36 +81,30 @@ class Post
      *     inversedBy="lastEditedPosts"
      * )
      */
-    protected $lastEditor;
+    protected User $lastEditor;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(
      *     type="string",
      *     name="TYPE",
      *     length=180
      * )
      */
-    protected $type;
+    protected string $type;
 
     /**
-     * @var int
-     * 
      * @ORM\Column(
      *     type="smallint",
      *     name="IN_BLOG",
      *     options={"default":1}
      * )
      */
-    protected $inBlog = 1;
+    protected int $inBlog = 1;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(type="text", name="PREVIEW")
      */
-    protected $preview;
+    protected string $preview;
 
     /**
      * @var null|PersistentCollection<ArchivedPost>
@@ -128,7 +114,7 @@ class Post
      *     mappedBy="post"
      * )
      */
-    protected $archive;
+    protected ?PersistentCollection $archive;
 
     /**
      * @var null|PersistentCollection<PostView>
@@ -138,7 +124,7 @@ class Post
      *     mappedBy="post"
      * )
      */
-    protected $views;
+    protected ?PersistentCollection $views;
 
     public function __construct()
     {

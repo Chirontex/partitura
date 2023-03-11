@@ -9,11 +9,9 @@ namespace Partitura\Dto;
  */
 class AuthenticationDto
 {
-    /** @var string */
-    protected $username;
+    protected string $username;
 
-    /** @var string */
-    protected $password;
+    protected string $password;
 
     /**
      * @return string

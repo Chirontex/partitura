@@ -20,18 +20,10 @@ class BlogController extends AbstractController
 {
     public const ROUTE_API_BLOG = "partitura_api_blog";
 
-    /** @var BlogResponseFactory */
-    protected $blogResponseFactory;
-
-    /** @var ArrayTransformerInterface */
-    protected $arrayTransformer;
-
     public function __construct(
-        BlogResponseFactory $blogResponseFactory,
-        ArrayTransformerInterface $arrayTransformer
+        protected BlogResponseFactory $blogResponseFactory,
+        protected ArrayTransformerInterface $arrayTransformer
     ) {
-        $this->blogResponseFactory = $blogResponseFactory;
-        $this->arrayTransformer = $arrayTransformer;
     }
 
     /**

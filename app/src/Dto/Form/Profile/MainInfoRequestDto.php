@@ -14,20 +14,16 @@ use Partitura\Dto\Form\AbstractFormRequestDto;
 class MainInfoRequestDto extends AbstractFormRequestDto
 {
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("first_name")
      */
-    protected $firstName;
+    protected string $firstName;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("last_name")
      */
-    protected $lastName;
+    protected string $lastName;
 
     /**
      * @return string

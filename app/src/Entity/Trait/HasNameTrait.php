@@ -12,15 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasNameTrait
 {
     /**
-     * @var string
-     * 
      * @ORM\Column(
      *     type="string",
      *     name="NAME",
      *     length=180
      * )
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @return string

@@ -31,8 +31,6 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     public const TABLE_NAME = "pt_users";
 
     /**
-     * @var string
-     * 
      * @ORM\Column(
      *     type="string",
      *     name="USERNAME",
@@ -40,11 +38,9 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     unique=true
      * )
      */
-    protected $username;
+    protected string $username;
 
     /**
-     * @var Role
-     * 
      * @ORM\JoinColumn(
      *     name="ROLE_ID",
      *     referencedColumnName="ID"
@@ -55,79 +51,65 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     inversedBy="users"
      * )
      */
-    protected $role;
+    protected Role $role;
 
     /**
-     * @var string
-     * 
      * @ORM\Column(
      *     type="string",
      *     name="PASSWORD_HASH",
      *     length=180
      * )
      */
-    protected $password;
+    protected string $password;
 
     /**
-     * @var int
-     * 
      * @ORM\Column(
      *     type="smallint",
      *     name="ACTIVE",
      *     options={"default":1}
      * )
      */
-    protected $active = 1;
+    protected int $active = 1;
 
     /**
-     * @var null|PersistentCollection<Post>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\Post",
      *     mappedBy="author"
      * )
      */
-    protected $createdPosts;
+    protected ?PersistentCollection $createdPosts;
 
     /**
-     * @var null|PersistentCollection<Post>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\Post",
      *     mappedBy="lastEditor"
      * )
      */
-    protected $lastEditedPosts;
+    protected ?PersistentCollection $lastEditedPosts;
 
     /**
-     * @var null|PersistentCollection<ArchivedPost>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\ArchivedPost",
      *     mappedBy="author"
      * )
      */
-    protected $archivedPosts;
+    protected ?PersistentCollection $archivedPosts;
 
     /**
-     * @var null|PersistentCollection<PostView>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\PostView",
      *     mappedBy="user"
      * )
      */
-    protected $postsViews;
+    protected ?PersistentCollection $postsViews;
 
     /**
-     * @var null|PersistentCollection<UserFieldValue>
-     * 
      * @ORM\OneToMany(
      *     targetEntity="\Partitura\Entity\UserFieldValue",
      *     mappedBy="user"
      * )
      */
-    protected $additionalFields;
+    protected ?PersistentCollection $additionalFields;
 
     public function __construct()
     {

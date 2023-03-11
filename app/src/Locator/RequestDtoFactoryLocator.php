@@ -13,7 +13,7 @@ use Partitura\Interfaces\RequestDtoFactoryInterface;
 class RequestDtoFactoryLocator
 {
     /** @var ArrayCollection<string, RequestDtoFactoryInterface> */
-    protected $factories;
+    protected ArrayCollection $factories;
 
     public function __construct()
     {

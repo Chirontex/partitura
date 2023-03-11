@@ -26,27 +26,17 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    /** @var PostViewFactory */
-    protected $postViewFactory;
+    protected ObjectManager $objectManager;
 
-    /** @var ObjectManager */
-    protected $objectManager;
-
-    /** @var PostViewRepository */
-    protected $postViewRepository;
-
-    /** @var CurrentUserService */
-    protected $currentUserService;
+    protected PostViewRepository $postViewRepository;
 
     public function __construct(
-        PostViewFactory $postViewFactory,
+        protected PostViewFactory $postViewFactory,
         ManagerRegistry $registry,
-        CurrentUserService $currentUserService
+        protected CurrentUserService $currentUserService
     ) {
-        $this->postViewFactory = $postViewFactory;
         $this->objectManager = $registry->getManager();
         $this->postViewRepository = $registry->getRepository(PostView::class);
-        $this->currentUserService = $currentUserService;
     }
 
     /** {@inheritDoc} */

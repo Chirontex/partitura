@@ -16,12 +16,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class CheckCsrfToken implements EventSubscriberInterface
 {
-    /** @var CsrfTokenValidationService */
-    protected $csrfTokenValidationService;
-
-    public function __construct(CsrfTokenValidationService $csrfTokenValidationService)
+    public function __construct(protected CsrfTokenValidationService $csrfTokenValidationService)
     {
-        $this->csrfTokenValidationService = $csrfTokenValidationService;
     }
 
     /** {@inheritDoc} */

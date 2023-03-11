@@ -15,8 +15,7 @@ use Partitura\Repository\UserFieldRepository;
  */
 class UserFieldValuesGettingService
 {
-    /** @var UserFieldRepository */
-    protected $userFieldRepository;
+    protected UserFieldRepository $userFieldRepository;
 
     public function __construct(ManagerRegistry $registry)
     {

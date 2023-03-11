@@ -16,12 +16,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 abstract class AbstractFormController extends Controller
 {
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(protected EventDispatcherInterface $eventDispatcher)
     {
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

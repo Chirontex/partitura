@@ -20,24 +20,15 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class UserSavingService
 {
     /** @var ArrayCollection<User> */
-    protected $newUsers;
+    protected ArrayCollection $newUsers;
 
     /** @var ArrayCollection<User> */
-    protected $updatedUsers;
-
-    /** @var EntityManagerInterface */
-    protected $entityManager;
-
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
+    protected ArrayCollection $updatedUsers;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        EventDispatcherInterface $eventDispatcher
+        protected EntityManagerInterface $entityManager,
+        protected EventDispatcherInterface $eventDispatcher
     ) {
-        $this->entityManager = $entityManager;
-        $this->eventDispatcher = $eventDispatcher;
-
         $this->initializeCollections();
     }
 

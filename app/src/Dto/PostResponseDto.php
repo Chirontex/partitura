@@ -13,36 +13,28 @@ use JMS\Serializer\Annotation as Serializer;
 class PostResponseDto
 {
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("title")
      */
-    protected $title;
+    protected string $title;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("author")
      */
-    protected $author;
+    protected string $author;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("date_created")
      */
-    protected $dateCreated;
+    protected string $dateCreated;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("content")
      */
-    protected $content;
+    protected string $content;
 
     /**
      * @return string

@@ -37,38 +37,14 @@ use Throwable;
  */
 class AdminLoginAuthenticator extends AbstractAuthenticator
 {
-    /** @var AuthenticationDtoFactory */
-    protected $authenticationDtoFactory;
-
-    /** @var UserPasswordHasherInterface */
-    protected $passwordHasher;
-
-    /** @var UserBadgeFactory */
-    protected $userBadgeFactory;
-
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
-
-    /** @var RouterInterface */
-    protected $router;
-
-    /** @var CsrfTokenValidationService */
-    protected $csrfTokenValidationService;
-
     public function __construct(
-        AuthenticationDtoFactory $authenticationDtoFactory,
-        UserPasswordHasherInterface $passwordHasher,
-        UserBadgeFactory $userBadgeFactory,
-        EventDispatcherInterface $eventDispatcher,
-        RouterInterface $router,
-        CsrfTokenValidationService $csrfTokenValidationService
+        protected AuthenticationDtoFactory $authenticationDtoFactory,
+        protected UserPasswordHasherInterface $passwordHasher,
+        protected UserBadgeFactory $userBadgeFactory,
+        protected EventDispatcherInterface $eventDispatcher,
+        protected RouterInterface $router,
+        protected CsrfTokenValidationService $csrfTokenValidationService
     ) {
-        $this->authenticationDtoFactory = $authenticationDtoFactory;
-        $this->passwordHasher = $passwordHasher;
-        $this->userBadgeFactory = $userBadgeFactory;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->router = $router;
-        $this->csrfTokenValidationService = $csrfTokenValidationService;
     }
 
     /** {@inheritDoc} */

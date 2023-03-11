@@ -18,18 +18,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
 {
-    /** @var ValidatorInterface */
-    protected $validator;
-
-    /** @var ArrayTransformerInterface */
-    protected $arrayTransformer;
-
     public function __construct(
-        ValidatorInterface $validator,
-        ArrayTransformerInterface $arrayTransformer
+        protected ValidatorInterface $validator,
+        protected ArrayTransformerInterface $arrayTransformer
     ) {
-        $this->validator = $validator;
-        $this->arrayTransformer = $arrayTransformer;
     }
 
     /**

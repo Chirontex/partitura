@@ -14,18 +14,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class PasswordSettingService
 {
-    /** @var PasswordUpgraderInterface */
-    protected $passwordUpgrader;
-
-    /** @var UserPasswordHasherInterface */
-    protected $passwordHasher;
-
     public function __construct(
-        PasswordUpgraderInterface $passwordUpgrader,
-        UserPasswordHasherInterface $userPasswordHasher
+        protected PasswordUpgraderInterface $passwordUpgrader,
+        protected UserPasswordHasherInterface $passwordHasher
     ) {
-        $this->passwordHasher = $userPasswordHasher;
-        $this->passwordUpgrader = $passwordUpgrader;
     }
 
     /**

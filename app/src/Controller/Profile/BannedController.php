@@ -18,11 +18,8 @@ class BannedController extends Controller
 {
     public const ROUTE_BANNED = "partitura_profile_banned";
 
-    protected ViewResolverInterface $viewResolver;
-
-    public function __construct(ViewResolverInterface $viewResolver)
+    public function __construct(protected ViewResolverInterface $viewResolver)
     {
-        $this->viewResolver = $viewResolver;
     }
 
     /**

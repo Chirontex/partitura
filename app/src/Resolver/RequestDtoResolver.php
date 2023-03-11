@@ -14,12 +14,8 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
  */
 class RequestDtoResolver implements ArgumentValueResolverInterface
 {
-    /** @var RequestDtoFactoryLocator */
-    protected $factoryLocator;
-
-    public function __construct(RequestDtoFactoryLocator $factoryLocator)
+    public function __construct(protected RequestDtoFactoryLocator $factoryLocator)
     {
-        $this->factoryLocator = $factoryLocator;
     }
 
     /** {@inheritDoc} */

@@ -30,35 +30,19 @@ class UserChangePasswordCommand extends Command implements LoggerAwareInterface
 
     protected const COMMAND_NAME = "partitura:user:change-password";
 
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
-
-    /** @var UserChangePasswordDtoFactory */
-    protected $userChangePasswordDtoFactory;
-
     /** @var UserRepository */
     protected $userRepository;
 
-    /** @var PasswordSettingService */
-    protected $passwordSettingService;
-
-    /** @var UserSavingService */
-    protected $userSavingService;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        UserChangePasswordDtoFactory $userChangePasswordDtoFactory,
+        protected EventDispatcherInterface $eventDispatcher,
+        protected UserChangePasswordDtoFactory $userChangePasswordDtoFactory,
         ManagerRegistry $registry,
-        PasswordSettingService $passwordSettingService,
-        UserSavingService $userSavingService
+        protected PasswordSettingService $passwordSettingService,
+        protected UserSavingService $userSavingService
     ) {
         parent::__construct();
 
-        $this->eventDispatcher = $eventDispatcher;
-        $this->userChangePasswordDtoFactory = $userChangePasswordDtoFactory;
         $this->userRepository = $registry->getRepository(User::class);
-        $this->passwordSettingService = $passwordSettingService;
-        $this->userSavingService = $userSavingService;
     }
 
     /** {@inheritDoc} */

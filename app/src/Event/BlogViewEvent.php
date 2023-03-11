@@ -12,12 +12,8 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class BlogViewEvent extends Event
 {
-    /** @var BlogResponseDto */
-    protected $blogResponseDto;
-
-    public function __construct(BlogResponseDto $blogResponseDto)
+    public function __construct(protected BlogResponseDto $blogResponseDto)
     {
-        $this->blogResponseDto = $blogResponseDto;
     }
 
     /**

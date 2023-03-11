@@ -17,20 +17,13 @@ use Partitura\Service\User\UserFieldValuesGettingService;
  */
 class MainInfoFillerValuesFactory extends ProfileFillerValuesFactory
 {
-    protected CurrentUserService $currentUserService;
-
-    protected UserFieldValuesGettingService $userFieldValuesGettingService;
-
     public function __construct(
         SettingsDtoFactory $settingsDtoFactory,
         ArrayTransformerInterface $arrayTransformer,
-        CurrentUserService $currentUserService,
-        UserFieldValuesGettingService $userFieldValuesGettingService
+        protected CurrentUserService $currentUserService,
+        protected UserFieldValuesGettingService $userFieldValuesGettingService
     ) {
         parent::__construct($settingsDtoFactory, $arrayTransformer);
-
-        $this->currentUserService = $currentUserService;
-        $this->userFieldValuesGettingService = $userFieldValuesGettingService;
     }
 
     /**

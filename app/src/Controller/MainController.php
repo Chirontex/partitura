@@ -17,11 +17,8 @@ class MainController extends Controller
 {
     public const ROUTE_INDEX = "partitura_main_index";
 
-    protected ViewResolverInterface $viewResolver;
-
-    public function __construct(ViewResolverInterface $viewResolver)
+    public function __construct(protected ViewResolverInterface $viewResolver)
     {
-        $this->viewResolver = $viewResolver;
     }
 
     /**

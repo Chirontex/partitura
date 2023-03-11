@@ -13,16 +13,10 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class BeforePasswordValidationEvent extends Event
 {
-    /** @var User */
-    protected $user;
-
-    /** @var PasswordCredentials */
-    protected $passwordCredentials;
-
-    public function __construct(User $user, PasswordCredentials $passwordCredentials)
-    {
-        $this->user = $user;
-        $this->passwordCredentials = $passwordCredentials;
+    public function __construct(
+        protected User $user,
+        protected PasswordCredentials $passwordCredentials
+    ) {
     }
 
     /**

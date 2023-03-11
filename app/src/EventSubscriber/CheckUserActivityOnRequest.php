@@ -24,15 +24,10 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
 {
     use RequestEventSubscriberTrait;
 
-    /** @var CurrentUserService */
-    protected $currentUserService;
+    protected Router $router;
 
-    /** @var Router */
-    protected $router;
-
-    public function __construct(CurrentUserService $currentUserService)
+    public function __construct(protected CurrentUserService $currentUserService)
     {
-        $this->currentUserService = $currentUserService;
         $this->router = Kernel::getInstance()->getService("router");
     }
 

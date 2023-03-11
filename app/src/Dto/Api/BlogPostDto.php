@@ -13,44 +13,34 @@ use JMS\Serializer\Annotation as Serializer;
 class BlogPostDto
 {
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("title")
      */
-    protected $title;
+    protected string $title;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("preview")
      */
-    protected $preview;
+    protected string $preview;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("author")
      */
-    protected $author;
+    protected string $author;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("uri")
      */
-    protected $uri;
+    protected string $uri;
 
     /**
-     * @var string
-     * 
      * @Serializer\Type("string")
      * @Serializer\SerializedName("date_created")
      */
-    protected $dateCreated;
+    protected string $dateCreated;
 
     /**
      * @return string

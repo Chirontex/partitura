@@ -13,16 +13,10 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class PostViewEvent extends Event
 {
-    /** @var Post */
-    protected $post;
-
-    /** @var PostResponseDto */
-    protected $postResponseDto;
-
-    public function __construct(Post $post, PostResponseDto $postResponseDto)
-    {
-        $this->post = $post;
-        $this->postResponseDto = $postResponseDto;
+    public function __construct(
+        protected Post $post,
+        protected PostResponseDto $postResponseDto
+    ) {
     }
 
     /**

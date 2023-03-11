@@ -20,18 +20,13 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class BlogResponseFactory
 {
-    /** @var PostRepository */
-    protected $postRepository;
-
-    /** @var EventDispatcherInterface */
-    protected $eventDispatcher;
+    protected PostRepository $postRepository;
 
     public function __construct(
         ManagerRegistry $registry,
-        EventDispatcherInterface $eventDispatcher
+        protected EventDispatcherInterface $eventDispatcher
     ) {
         $this->postRepository = $registry->getRepository(Post::class);
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
