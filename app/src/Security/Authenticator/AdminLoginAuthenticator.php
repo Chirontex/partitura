@@ -15,6 +15,7 @@ use Partitura\Exception\LogicException as PartituraLogicException;
 use Partitura\Exception\SkipAuthenticationException;
 use Partitura\Factory\AuthenticationDtoFactory;
 use Partitura\Factory\UserBadgeFactory;
+use Partitura\Interfaces\CsrfTokenIdResolverInterface;
 use Partitura\Service\CsrfTokenValidationService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +44,8 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
         protected UserBadgeFactory $userBadgeFactory,
         protected EventDispatcherInterface $eventDispatcher,
         protected RouterInterface $router,
-        protected CsrfTokenValidationService $csrfTokenValidationService
+        protected CsrfTokenValidationService $csrfTokenValidationService,
+        protected CsrfTokenIdResolverInterface $csrfTokenIdResolver
     ) {
     }
 
@@ -61,7 +63,7 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
 
         try {
             if (!$this->csrfTokenValidationService->isTokenValid(
-                LoginController::CSRF_TOKEN_ID,
+                $this->csrfTokenIdResolver->resolveCsrfTokenIdByRouteName(LoginController::ROUTE_LOGIN),
                 (string)$request->get("_csrf_token")
             )) {
                 throw new PartituraLogicException("Invalid CSRF token.");
