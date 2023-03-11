@@ -35,7 +35,7 @@ class PostView
      *     inversedBy="views"
      * )
      */
-    protected Post $post;
+    protected ?Post $post = null;
 
     /**
      * @ORM\JoinColumn(
@@ -48,7 +48,7 @@ class PostView
      *     inversedBy="postsViews"
      * )
      */
-    protected User $user;
+    protected ?User $user = null;
 
     /**
      * @ORM\Column(
@@ -56,7 +56,7 @@ class PostView
      *     name="IP_ADDRESS"
      * )
      */
-    protected string $ipAddress;
+    protected ?string $ipAddress = null;
 
     public function __construct()
     {

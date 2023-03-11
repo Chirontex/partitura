@@ -33,7 +33,7 @@ class Role
      *     mappedBy="role"
      * )
      */
-    protected ?PersistentCollection $users;
+    protected ?PersistentCollection $users = null;
 
     /**
      * @ORM\OneToMany(
@@ -41,7 +41,7 @@ class Role
      *     mappedBy="role"
      * )
      */
-    protected ?PersistentCollection $unitReferences;
+    protected ?PersistentCollection $unitReferences = null;
 
     /**
      * @return null|PersistentCollection<User>

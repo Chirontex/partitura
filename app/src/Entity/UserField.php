@@ -29,7 +29,7 @@ class UserField
      *     mappedBy="userField"
      * )
      */
-    protected ?PersistentCollection $values;
+    protected ?PersistentCollection $values = null;
 
     /**
      * @return null|PersistentCollection<UserFieldValue>

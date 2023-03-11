@@ -25,7 +25,7 @@ class CreateUserDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName(CreateUserDto::USERNAME)
      */
-    protected string $username;
+    protected ?string $username = null;
 
     /**
      * @Assert\NotNull
@@ -33,13 +33,13 @@ class CreateUserDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName(CreateUserDto::PASSWORD)
      */
-    protected string $password;
+    protected ?string $password = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName(CreateUserDto::ROLE)
      */
-    protected string $role;
+    protected ?string $role = null;
 
     /**
      * @return string

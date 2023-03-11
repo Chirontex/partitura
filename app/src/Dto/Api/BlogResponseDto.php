@@ -16,7 +16,7 @@ class BlogResponseDto
      * @Serializer\Type("int")
      * @Serializer\SerializedName("pages")
      */
-    protected int $pages;
+    protected ?int $pages = null;
 
     /**
      * @var ArrayCollection<BlogPostDto>

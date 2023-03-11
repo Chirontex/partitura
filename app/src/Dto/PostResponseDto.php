@@ -16,25 +16,25 @@ class PostResponseDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName("title")
      */
-    protected string $title;
+    protected ?string $title = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("author")
      */
-    protected string $author;
+    protected ?string $author = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("date_created")
      */
-    protected string $dateCreated;
+    protected ?string $dateCreated = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("content")
      */
-    protected string $content;
+    protected ?string $content = null;
 
     /**
      * @return string

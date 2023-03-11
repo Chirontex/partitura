@@ -44,7 +44,7 @@ class Post
      *     inversedBy="child"
      * )
      */
-    protected ?Post $parent;
+    protected ?Post $parent = null;
 
     /**
      * @ORM\OneToOne(
@@ -53,7 +53,7 @@ class Post
      *     mappedBy="parent"
      * )
      */
-    protected ?Post $child;
+    protected ?Post $child = null;
 
     /**
      * @ORM\JoinColumn(
@@ -67,7 +67,7 @@ class Post
      *     inversedBy="createdPosts"
      * )
      */
-    protected User $author;
+    protected ?User $author = null;
 
     /**
      * @ORM\JoinColumn(
@@ -81,7 +81,7 @@ class Post
      *     inversedBy="lastEditedPosts"
      * )
      */
-    protected User $lastEditor;
+    protected ?User $lastEditor = null;
 
     /**
      * @ORM\Column(
@@ -90,7 +90,7 @@ class Post
      *     length=180
      * )
      */
-    protected string $type;
+    protected ?string $type = null;
 
     /**
      * @ORM\Column(
@@ -104,7 +104,7 @@ class Post
     /**
      * @ORM\Column(type="text", name="PREVIEW")
      */
-    protected string $preview;
+    protected ?string $preview = null;
 
     /**
      * @var null|PersistentCollection<ArchivedPost>

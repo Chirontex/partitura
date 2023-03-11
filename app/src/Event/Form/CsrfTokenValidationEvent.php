@@ -14,7 +14,7 @@ use Partitura\Exception\NotImplementedException;
  */
 class CsrfTokenValidationEvent extends FormEvent
 {
-    protected CsrfTokenValidationResultEnum $csrfTokenValidationResult;
+    protected ?CsrfTokenValidationResultEnum $csrfTokenValidationResult = null;
 
     public function __construct(AbstractFormRequestDto $requestDto)
     {

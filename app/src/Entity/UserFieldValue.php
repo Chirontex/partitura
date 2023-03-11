@@ -32,7 +32,7 @@ class UserFieldValue
      *     inversedBy="additionalFields"
      * )
      */
-    protected User $user;
+    protected ?User $user = null;
 
     /**
      * @ORM\JoinColumn(
@@ -45,7 +45,7 @@ class UserFieldValue
      *     inversedBy="values"
      * )
      */
-    protected UserField $userField;
+    protected ?UserField $userField = null;
 
     /**
      * @ORM\Column(
@@ -53,7 +53,7 @@ class UserFieldValue
      *     name="VALUE"
      * )
      */
-    protected string $value;
+    protected ?string $value = null;
 
     /**
      * @return User

@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     unique=true
      * )
      */
-    protected string $username;
+    protected ?string $username = null;
 
     /**
      * @ORM\JoinColumn(
@@ -51,7 +51,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     inversedBy="users"
      * )
      */
-    protected Role $role;
+    protected ?Role $role = null;
 
     /**
      * @ORM\Column(
@@ -60,7 +60,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     length=180
      * )
      */
-    protected string $password;
+    protected ?string $password = null;
 
     /**
      * @ORM\Column(
@@ -77,7 +77,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     mappedBy="author"
      * )
      */
-    protected ?PersistentCollection $createdPosts;
+    protected ?PersistentCollection $createdPosts = null;
 
     /**
      * @ORM\OneToMany(
@@ -85,7 +85,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     mappedBy="lastEditor"
      * )
      */
-    protected ?PersistentCollection $lastEditedPosts;
+    protected ?PersistentCollection $lastEditedPosts = null;
 
     /**
      * @ORM\OneToMany(
@@ -93,7 +93,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     mappedBy="author"
      * )
      */
-    protected ?PersistentCollection $archivedPosts;
+    protected ?PersistentCollection $archivedPosts = null;
 
     /**
      * @ORM\OneToMany(
@@ -101,7 +101,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     mappedBy="user"
      * )
      */
-    protected ?PersistentCollection $postsViews;
+    protected ?PersistentCollection $postsViews = null;
 
     /**
      * @ORM\OneToMany(
@@ -109,7 +109,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *     mappedBy="user"
      * )
      */
-    protected ?PersistentCollection $additionalFields;
+    protected ?PersistentCollection $additionalFields = null;
 
     public function __construct()
     {

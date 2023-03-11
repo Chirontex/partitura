@@ -9,9 +9,9 @@ namespace Partitura\Dto;
  */
 class AuthenticationDto
 {
-    protected string $username;
+    protected ?string $username = null;
 
-    protected string $password;
+    protected ?string $password = null;
 
     /**
      * @return string

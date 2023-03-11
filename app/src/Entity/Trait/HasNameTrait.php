@@ -18,7 +18,7 @@ trait HasNameTrait
      *     length=180
      * )
      */
-    protected string $name;
+    protected ?string $name = null;
 
     /**
      * @return string

@@ -38,7 +38,7 @@ class ArchivedPost
      *     inversedBy="archive"
      * )
      */
-    protected Post $post;
+    protected ?Post $post = null;
 
     /**
      * @ORM\JoinColumn(
@@ -52,7 +52,7 @@ class ArchivedPost
      *     inversedBy="archivedPosts"
      * )
      */
-    protected User $author;
+    protected ?User $author = null;
 
     /**
      * @return null|Post

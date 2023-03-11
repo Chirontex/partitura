@@ -29,7 +29,7 @@ class Unit
      *     mappedBy="unit"
      * )
      */
-    protected ?PersistentCollection $roleReferences;
+    protected ?PersistentCollection $roleReferences = null;
 
     /**
      * @return null|PersistentCollection<UnitRoleReferences>

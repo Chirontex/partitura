@@ -19,7 +19,7 @@ trait HasCodeTrait
      *     unique=true
      * )
      */
-    protected string $code;
+    protected ?string $code = null;
 
     /**
      * @return string

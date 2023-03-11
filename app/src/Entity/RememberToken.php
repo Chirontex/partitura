@@ -22,27 +22,27 @@ class RememberToken
      * @ORM\Id
      * @ORM\Column(type="string", name="series", length=88)
      */
-    protected string $series;
+    protected ?string $series = null;
 
     /**
      * @ORM\Column(type="string", name="value", length=88)
      */
-    protected string $value;
+    protected ?string $value = null;
 
     /**
      * @ORM\Column(type="datetime", name="lastUsed")
      */
-    protected ?DateTime $lastUsed;
+    protected ?DateTime $lastUsed = null;
 
     /**
      * @ORM\Column(type="string", name="class", length=100)
      */
-    protected string $class;
+    protected ?string $class = null;
 
     /**
      * @ORM\Column(type="string", name="username", length=200)
      */
-    protected string $username;
+    protected ?string $username = null;
 
     /**
      * @return string

@@ -20,7 +20,7 @@ class ChangePasswordRequestDto extends SecurityRequestDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName("old_password")
      */
-    protected string $oldPassword;
+    protected ?string $oldPassword = null;
 
     /**
      * @Assert\NotBlank(message="New password cannot be empty.")
@@ -32,7 +32,7 @@ class ChangePasswordRequestDto extends SecurityRequestDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName("new_password")
      */
-    protected string $newPassword;
+    protected ?string $newPassword = null;
 
     /**
      * @return string

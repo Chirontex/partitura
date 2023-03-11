@@ -16,31 +16,31 @@ class BlogPostDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName("title")
      */
-    protected string $title;
+    protected ?string $title = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("preview")
      */
-    protected string $preview;
+    protected ?string $preview = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("author")
      */
-    protected string $author;
+    protected ?string $author = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("uri")
      */
-    protected string $uri;
+    protected ?string $uri = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("date_created")
      */
-    protected string $dateCreated;
+    protected ?string $dateCreated = null;
 
     /**
      * @return string

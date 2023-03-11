@@ -29,7 +29,7 @@ class RoleUnitReference
      *     inversedBy="unitReferences"
      * )
      */
-    protected Role $role;
+    protected ?Role $role = null;
 
     /**
      * @ORM\Id
@@ -43,7 +43,7 @@ class RoleUnitReference
      *     inversedBy="roleReferences"
      * )
      */
-    protected Unit $unit;
+    protected ?Unit $unit = null;
 
     /**
      * @return Role

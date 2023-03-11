@@ -16,13 +16,13 @@ class SettingsDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName("sitename")
      */
-    protected string $sitename;
+    protected ?string $sitename = null;
 
     /**
      * @Serializer\Type("bool")
      * @Serializer\SerializedName("is_user_panel_available")
      */
-    protected bool $isUserPanelAvailable;
+    protected bool $isUserPanelAvailable = false;
 
     /**
      * @var ArrayCollection<string, string>

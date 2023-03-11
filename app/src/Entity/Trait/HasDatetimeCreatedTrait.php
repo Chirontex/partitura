@@ -15,7 +15,7 @@ trait HasDatetimeCreatedTrait
     /**
      * @ORM\Column(type="datetime", name="DATETIME_CREATED")
      */
-    protected DateTime $datetimeCreated;
+    protected ?DateTime $datetimeCreated = null;
 
     /**
      * @return null|DateTime

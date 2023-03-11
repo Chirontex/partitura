@@ -14,7 +14,7 @@ trait HasContentTrait
     /**
      * @ORM\Column(type="text", name="CONTENT")
      */
-    protected string $content;
+    protected ?string $content = null;
 
     /**
      * @return string

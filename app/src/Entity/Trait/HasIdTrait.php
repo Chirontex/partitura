@@ -16,7 +16,7 @@ trait HasIdTrait
      * @ORM\GeneratedValue()
      * @ORM\Column(type="bigint", name="ID", options={"unsigned":true})
      */
-    protected int $id;
+    protected int $id = 0;
 
     /**
      * @return int

@@ -21,7 +21,7 @@ class UserChangePasswordDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName(UserChangePasswordDto::USERNAME)
      */
-    protected string $username;
+    protected ?string $username = null;
 
     /**
      * @Assert\NotNull
@@ -29,7 +29,7 @@ class UserChangePasswordDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName(UserChangePasswordDto::PASSWORD)
      */
-    protected string $password;
+    protected ?string $password = null;
 
     /**
      * @return string
