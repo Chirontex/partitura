@@ -17,13 +17,13 @@ class MainInfoRequestDto extends AbstractFormRequestDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName("first_name")
      */
-    protected string $firstName;
+    protected ?string $firstName = null;
 
     /**
      * @Serializer\Type("string")
      * @Serializer\SerializedName("last_name")
      */
-    protected string $lastName;
+    protected ?string $lastName = null;
 
     /**
      * @return string
