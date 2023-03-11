@@ -17,7 +17,7 @@ abstract class AbstractFormRequestDto
      * @Serializer\Type("string")
      * @Serializer\SerializedName(\Partitura\Dto\Form\AbstractFormRequestDto::CSRF_TOKEN_KEY)
      */
-    protected string $csrfToken = "";
+    protected ?string $csrfToken = null;
 
     /**
      * @return string
