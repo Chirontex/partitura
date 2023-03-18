@@ -13,10 +13,8 @@ abstract class AbstractFormRequestDto
 {
     public const CSRF_TOKEN_KEY = "_csrf_token";
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName(\Partitura\Dto\Form\AbstractFormRequestDto::CSRF_TOKEN_KEY)
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName(\Partitura\Dto\Form\AbstractFormRequestDto::CSRF_TOKEN_KEY)]    
     protected ?string $csrfToken = null;
 
     /**

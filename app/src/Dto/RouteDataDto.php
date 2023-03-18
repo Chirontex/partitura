@@ -13,22 +13,16 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class RouteDataDto
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("name")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('name')]   
     protected ?string $name = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("view")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('view')]    
     protected ?string $view = null;
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("csrf_token_id")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('csrf_token_id')]    
     protected ?string $csrfTokenId = null;
 
     protected ?Closure $fillerCallback = null;

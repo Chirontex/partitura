@@ -12,18 +12,13 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class BlogResponseDto
 {
-    /**
-     * @Serializer\Type("int")
-     * @Serializer\SerializedName("pages")
-     */
+    #[Serializer\Type('int')]
+    #[Serializer\SerializedName('pages')]   
     protected ?int $pages = null;
 
-    /**
-     * @var ArrayCollection<BlogPostDto>
-     * 
-     * @Serializer\Type("ArrayCollection<Partitura\Dto\Api\BlogPostDto>")
-     * @Serializer\SerializedName("posts")
-     */
+    /** @var ArrayCollection<BlogPostDto> */
+    #[Serializer\Type('ArrayCollection<Partitura\Dto\Api\BlogPostDto>')]
+    #[Serializer\SerializedName('posts')]
     protected ArrayCollection $posts;
 
     public function __construct()

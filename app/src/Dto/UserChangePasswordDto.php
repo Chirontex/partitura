@@ -15,20 +15,14 @@ class UserChangePasswordDto
     public const USERNAME = "username";
     public const PASSWORD = "password";
 
-    /**
-     * @Assert\NotNull
-     * 
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName(UserChangePasswordDto::USERNAME)
-     */
+    #[Assert\NotNull]    
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName(UserChangePasswordDto::USERNAME)]
     protected ?string $username = null;
 
-    /**
-     * @Assert\NotNull
-     * 
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName(UserChangePasswordDto::PASSWORD)
-     */
+    #[Assert\NotNull]    
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName(UserChangePasswordDto::PASSWORD)]
     protected ?string $password = null;
 
     /**

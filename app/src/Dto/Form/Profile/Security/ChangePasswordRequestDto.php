@@ -13,25 +13,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ChangePasswordRequestDto extends SecurityRequestDto
 {
-    /**
-     * @Assert\NotBlank(message="Old password cannot be empty.")
-     * @SecurityAssert\UserPassword(message="Invalid old password.")
-     * 
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("old_password")
-     */
+    #[Assert\NotBlank(message: 'Old password cannot be empty.')]
+    #[SecurityAssert\UserPassword(message: 'Invalid old password.')]   
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('old_password')]
     protected ?string $oldPassword = null;
 
-    /**
-     * @Assert\NotBlank(message="New password cannot be empty.")
-     * @Assert\NotIdenticalTo(
-     *     propertyPath="oldPassword",
-     *     message="New password must not be the same as the old password."
-     * )
-     * 
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("new_password")
-     */
+    #[Assert\NotBlank(message: 'New password cannot be empty.')]
+    #[Assert\NotIdenticalTo(
+        propertyPath: 'oldPassword',
+        message: 'New password must not be the same as the old password.'
+    )]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('new_password')]
     protected ?string $newPassword = null;
 
     /**

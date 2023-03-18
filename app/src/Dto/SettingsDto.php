@@ -12,32 +12,22 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class SettingsDto
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("sitename")
-     */
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('sitename')]
     protected ?string $sitename = null;
 
-    /**
-     * @Serializer\Type("bool")
-     * @Serializer\SerializedName("is_user_panel_available")
-     */
+    #[Serializer\Type('bool')]
+    #[Serializer\SerializedName('is_user_panel_available')]
     protected bool $isUserPanelAvailable = false;
 
-    /**
-     * @var ArrayCollection<string, string>
-     * 
-     * @Serializer\Type("ArrayCollection")
-     * @Serializer\SerializedName("routes")
-     */
+    /** @var ArrayCollection<string, string> */
+    #[Serializer\Type('ArrayCollection')]
+    #[Serializer\SerializedName('routes')]
     protected ArrayCollection $routes;
 
-    /**
-     * @var ArrayCollection<string, mixed>
-     * 
-     * @Serializer\Type("ArrayCollection")
-     * @Serializer\SerializedName("user")
-     */
+    /** @var ArrayCollection<string, mixed> */
+    #[Serializer\Type('ArrayCollection')]
+    #[Serializer\SerializedName('user')]
     protected ArrayCollection $userData;
 
     /**
