@@ -10,38 +10,27 @@ use Partitura\Repository\RememberTokenRepository;
 /**
  * Remember-me-token entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=RememberTokenRepository::class)
- * @ORM\Table(name=RememberToken::TABLE_NAME)
- */
+ */ 
+#[ORM\Entity(repositoryClass: RememberTokenRepository::class)]
+#[ORM\Table(name: RememberToken::TABLE_NAME)]
 class RememberToken
 {
     public const TABLE_NAME = "rememberme_token";
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="string", name="series", length=88)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'string', name: 'series', length: 88)]    
     protected ?string $series = null;
 
-    /**
-     * @ORM\Column(type="string", name="value", length=88)
-     */
+    #[ORM\Column(type: 'string', name: 'value', length: 88)]    
     protected ?string $value = null;
 
-    /**
-     * @ORM\Column(type="datetime", name="lastUsed")
-     */
+    #[ORM\Column(type: 'datetime', name: 'lastUsed')]    
     protected ?DateTime $lastUsed = null;
 
-    /**
-     * @ORM\Column(type="string", name="class", length=100)
-     */
+    #[ORM\Column(type: 'string', name: 'class', length: 100)]    
     protected ?string $class = null;
 
-    /**
-     * @ORM\Column(type="string", name="username", length=200)
-     */
+    #[ORM\Column(type: 'string', name: 'username', length: 200)]    
     protected ?string $username = null;
 
     /**

@@ -11,13 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasNameTrait
 {
-    /**
-     * @ORM\Column(
-     *     type="string",
-     *     name="NAME",
-     *     length=180
-     * )
-     */
+    #[ORM\Column(
+        type: 'string',
+        name: 'NAME',
+        length: 180
+    )]   
     protected ?string $name = null;
 
     /**

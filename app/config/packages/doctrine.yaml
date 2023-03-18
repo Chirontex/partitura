@@ -15,6 +15,7 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'Partitura\Entity'
                 alias: Partitura
+                type: attribute
 
 when@test:
     doctrine:

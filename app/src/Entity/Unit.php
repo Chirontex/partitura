@@ -12,10 +12,9 @@ use Partitura\Repository\UnitRepository;
 /**
  * Unit entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=UnitRepository::class)
- * @ORM\Table(name=Unit::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: UnitRepository::class)]
+#[ORM\Table(name: Unit::TABLE_NAME)]
 class Unit
 {
     use HasIdTrait,
@@ -23,12 +22,10 @@ class Unit
 
     public const TABLE_NAME = "pt_units";
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="Partitura\Entity\RoleUnitReference",
-     *     mappedBy="unit"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: 'Partitura\Entity\RoleUnitReference',
+        mappedBy: 'unit'
+    )]    
     protected ?PersistentCollection $roleReferences = null;
 
     /**

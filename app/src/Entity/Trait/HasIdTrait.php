@@ -11,11 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasIdTrait
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="bigint", name="ID", options={"unsigned":true})
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue()]
+    #[ORM\Column(type: 'bigint', name: 'ID', options: ["unsigned" => true])]   
     protected int $id = 0;
 
     /**

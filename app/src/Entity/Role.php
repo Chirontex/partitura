@@ -15,10 +15,9 @@ use Partitura\Repository\RoleRepository;
 /**
  * Role entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=RoleRepository::class)
- * @ORM\Table(name=Role::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: RoleRepository::class)]
+#[ORM\Table(name: Role::TABLE_NAME)]
 class Role
 {
     use HasIdTrait,
@@ -27,20 +26,16 @@ class Role
 
     public const TABLE_NAME = "pt_roles";
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\User",
-     *     mappedBy="role"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\User',
+        mappedBy: 'role'
+    )]    
     protected ?PersistentCollection $users = null;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="Partitura\Entity\RoleUnitReference",
-     *     mappedBy="role"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: 'Partitura\Entity\RoleUnitReference',
+        mappedBy: 'role'
+    )]    
     protected ?PersistentCollection $unitReferences = null;
 
     /**

@@ -10,49 +10,42 @@ use Partitura\Repository\UserFieldValueRepository;
 /**
  * Class UserFieldValue
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=UserFieldValueRepository::class)
- * @ORM\Table(name=UserFieldValue::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: UserFieldValueRepository::class)]
+#[ORM\Table(name: UserFieldValue::TABLE_NAME)]
 class UserFieldValue
 {
     use HasIdTrait;
 
     public const TABLE_NAME = "pt_user_fields_values";
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="USER_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\User",
-     *     fetch="EAGER",
-     *     inversedBy="additionalFields"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'USER_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\User',
+        fetch: 'EAGER',
+        inversedBy: 'additionalFields'
+    )]    
     protected ?User $user = null;
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="FIELD_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\UserField",
-     *     inversedBy="values"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'FIELD_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\UserField',
+        inversedBy: 'values'
+    )]    
     protected ?UserField $userField = null;
 
-    /**
-     * @ORM\Column(
-     *     type="text",
-     *     name="VALUE"
-     * )
-     */
+    #[ORM\Column(
+        type: 'text',
+        name: 'VALUE'
+    )]    
     protected ?string $value = null;
 
     /**

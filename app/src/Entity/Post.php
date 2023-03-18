@@ -18,10 +18,9 @@ use Partitura\Repository\PostRepository;
 /**
  * Post main entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=PostRepository::class)
- * @ORM\Table(name=Post::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: PostRepository::class)]
+#[ORM\Table(name: Post::TABLE_NAME)]
 class Post
 {
     use HasIdTrait,
@@ -33,97 +32,81 @@ class Post
 
     public const TABLE_NAME = "pt_posts";
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="PARENT_ID",
-     *     referencedColumnName="ID"
-     * )
-     * @ORM\OneToOne(
-     *     targetEntity="\Partitura\Entity\Post",
-     *     fetch="EAGER",
-     *     inversedBy="child"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'PARENT_ID',
+        referencedColumnName: 'ID'
+    )]
+    #[ORM\OneToOne(
+        targetEntity: '\Partitura\Entity\Post',
+        fetch: 'EAGER',
+        inversedBy: 'child'
+    )]    
     protected ?Post $parent = null;
 
-    /**
-     * @ORM\OneToOne(
-     *     targetEntity="\Partitura\Entity\Post",
-     *     fetch="EAGER",
-     *     mappedBy="parent"
-     * )
-     */
+    #[ORM\OneToOne(
+        targetEntity: '\Partitura\Entity\Post',
+        fetch: 'EAGER',
+        mappedBy: 'parent'
+    )]    
     protected ?Post $child = null;
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="AUTHOR_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\User",
-     *     fetch="EAGER",
-     *     inversedBy="createdPosts"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'AUTHOR_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\User',
+        fetch: 'EAGER',
+        inversedBy: 'createdPosts'
+    )]    
     protected ?User $author = null;
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="LAST_EDITOR_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\User",
-     *     fetch="EAGER",
-     *     inversedBy="lastEditedPosts"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'LAST_EDITOR_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\User',
+        fetch: 'EAGER',
+        inversedBy: 'lastEditedPosts'
+    )]    
     protected ?User $lastEditor = null;
 
-    /**
-     * @ORM\Column(
-     *     type="string",
-     *     name="TYPE",
-     *     length=180
-     * )
-     */
+    #[ORM\Column(
+        type: 'string',
+        name: 'TYPE',
+        length: 180
+    )]    
     protected ?string $type = null;
 
-    /**
-     * @ORM\Column(
-     *     type="smallint",
-     *     name="IN_BLOG",
-     *     options={"default":1}
-     * )
-     */
+    #[ORM\Column(
+        type: 'smallint',
+        name: 'IN_BLOG',
+        options: ["default" => 1]
+    )]    
     protected int $inBlog = 1;
 
-    /**
-     * @ORM\Column(type="text", name="PREVIEW")
-     */
+    #[ORM\Column(type: 'text', name: 'PREVIEW')]    
     protected ?string $preview = null;
 
     /**
      * @var null|PersistentCollection<ArchivedPost>
-     * 
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\ArchivedPost",
-     *     mappedBy="post"
-     * )
-     */
+    */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\ArchivedPost',
+        mappedBy: 'post'
+    )]
     protected ?PersistentCollection $archive;
 
     /**
      * @var null|PersistentCollection<PostView>
-     * 
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\PostView",
-     *     mappedBy="post"
-     * )
      */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\PostView',
+        mappedBy: 'post'
+    )]
     protected ?PersistentCollection $views;
 
     public function __construct()

@@ -11,9 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasContentTrait
 {
-    /**
-     * @ORM\Column(type="text", name="CONTENT")
-     */
+    #[ORM\Column(type: 'text', name: 'CONTENT')]   
     protected ?string $content = null;
 
     /**

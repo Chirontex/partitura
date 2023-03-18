@@ -18,10 +18,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User main entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name=User::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: User::TABLE_NAME)]
 class User implements UserInterface, PasswordUpgradableUserInterface
 {
     use HasIdTrait,
@@ -30,85 +29,67 @@ class User implements UserInterface, PasswordUpgradableUserInterface
 
     public const TABLE_NAME = "pt_users";
 
-    /**
-     * @ORM\Column(
-     *     type="string",
-     *     name="USERNAME",
-     *     length=180,
-     *     unique=true
-     * )
-     */
+    #[ORM\Column(
+        type: 'string',
+        name: 'USERNAME',
+        length: 180,
+        unique: true
+    )]    
     protected ?string $username = null;
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="ROLE_ID",
-     *     referencedColumnName="ID"
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\Role",
-     *     fetch="EAGER",
-     *     inversedBy="users"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'ROLE_ID',
+        referencedColumnName: 'ID'
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\Role',
+        fetch: 'EAGER',
+        inversedBy: 'users'
+    )]    
     protected ?Role $role = null;
 
-    /**
-     * @ORM\Column(
-     *     type="string",
-     *     name="PASSWORD_HASH",
-     *     length=180
-     * )
-     */
+    #[ORM\Column(
+        type: 'string',
+        name: 'PASSWORD_HASH',
+        length: 180
+    )]    
     protected ?string $password = null;
 
-    /**
-     * @ORM\Column(
-     *     type="smallint",
-     *     name="ACTIVE",
-     *     options={"default":1}
-     * )
-     */
+    #[ORM\Column(
+        type: 'smallint',
+        name: 'ACTIVE',
+        options: ["default" => 1]
+    )]    
     protected int $active = 1;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\Post",
-     *     mappedBy="author"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\Post',
+        mappedBy: 'author'
+    )]    
     protected ?PersistentCollection $createdPosts = null;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\Post",
-     *     mappedBy="lastEditor"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\Post',
+        mappedBy: 'lastEditor'
+    )]    
     protected ?PersistentCollection $lastEditedPosts = null;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\ArchivedPost",
-     *     mappedBy="author"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\ArchivedPost',
+        mappedBy: 'author'
+    )]    
     protected ?PersistentCollection $archivedPosts = null;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\PostView",
-     *     mappedBy="user"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\PostView',
+        mappedBy: 'user'
+    )]    
     protected ?PersistentCollection $postsViews = null;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="\Partitura\Entity\UserFieldValue",
-     *     mappedBy="user"
-     * )
-     */
+    #[ORM\OneToMany(
+        targetEntity: '\Partitura\Entity\UserFieldValue',
+        mappedBy: 'user'
+    )]    
     protected ?PersistentCollection $additionalFields = null;
 
     public function __construct()

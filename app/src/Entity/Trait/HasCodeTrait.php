@@ -11,14 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasCodeTrait
 {
-    /**
-     * @ORM\Column(
-     *     type="string",
-     *     name="CODE",
-     *     length=180,
-     *     unique=true
-     * )
-     */
+    #[ORM\Column(
+        type: 'string',
+        name: 'CODE',
+        length: 180,
+        unique: true
+    )]   
     protected ?string $code = null;
 
     /**

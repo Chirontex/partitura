@@ -13,10 +13,9 @@ use Partitura\Repository\ArchivedPostRepository;
 /**
  * Posts archive copy entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=ArchivedPostRepository::class)
- * @ORM\Table(name=ArchivedPost::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: ArchivedPostRepository::class)]
+#[ORM\Table(name: ArchivedPost::TABLE_NAME)]
 class ArchivedPost
 {
     use HasIdTrait,
@@ -26,32 +25,28 @@ class ArchivedPost
 
     public const TABLE_NAME = "pt_posts_archive";
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="POST_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\Post",
-     *     fetch="EAGER",
-     *     inversedBy="archive"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'POST_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\Post',
+        fetch: 'EAGER',
+        inversedBy: 'archive'
+    )]
     protected ?Post $post = null;
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="AUTHOR_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\User",
-     *     fetch="EAGER",
-     *     inversedBy="archivedPosts"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'AUTHOR_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\User',
+        fetch: 'EAGER',
+        inversedBy: 'archivedPosts'
+    )]    
     protected ?User $author = null;
 
     /**

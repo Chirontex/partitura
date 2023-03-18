@@ -9,40 +9,35 @@ use Partitura\Repository\RoleUnitReferenceRepository;
 /**
  * Role unit reference entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=RoleUnitReferenceRepository::class)
- * @ORM\Table(name=RoleUnitReference::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: RoleUnitReferenceRepository::class)]
+#[ORM\Table(name: RoleUnitReference::TABLE_NAME)] 
 class RoleUnitReference
 {
     public const TABLE_NAME = "pt_role_unit_references";
 
-    /**
-     * @ORM\Id
-     * @ORM\JoinColumn(
-     *     name="ROLE_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\Role",
-     *     inversedBy="unitReferences"
-     * )
-     */
+    #[ORM\Id]
+    #[ORM\JoinColumn(
+        name: 'ROLE_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\Role',
+        inversedBy: 'unitReferences'
+    )]    
     protected ?Role $role = null;
 
-    /**
-     * @ORM\Id
-     * @ORM\JoinColumn(
-     *     name="UNIT_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\Unit",
-     *     inversedBy="roleReferences"
-     * )
-     */
+    #[ORM\Id]
+    #[ORM\JoinColumn(
+        name: 'UNIT_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\Unit',
+        inversedBy: 'roleReferences'
+    )]    
     protected ?Unit $unit = null;
 
     /**

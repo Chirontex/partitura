@@ -12,9 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasDatetimeCreatedTrait
 {
-    /**
-     * @ORM\Column(type="datetime", name="DATETIME_CREATED")
-     */
+    #[ORM\Column(type: 'datetime', name: 'DATETIME_CREATED')]   
     protected ?DateTime $datetimeCreated = null;
 
     /**

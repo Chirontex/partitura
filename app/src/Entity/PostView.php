@@ -12,10 +12,9 @@ use Partitura\Repository\PostViewRepository;
 /**
  * Post's view statistics entity.
  * @package Partitura\Entity
- * 
- * @ORM\Entity(repositoryClass=PostViewRepository::class)
- * @ORM\Table(name=PostView::TABLE_NAME)
  */
+#[ORM\Entity(repositoryClass: PostViewRepository::class)]
+#[ORM\Table(name: PostView::TABLE_NAME)]
 class PostView
 {
     use HasIdTrait,
@@ -23,39 +22,33 @@ class PostView
 
     public const TABLE_NAME = "pt_posts_views";
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="POST_ID",
-     *     referencedColumnName="ID",
-     *     nullable=false
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\Post",
-     *     fetch="EAGER",
-     *     inversedBy="views"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'POST_ID',
+        referencedColumnName: 'ID',
+        nullable: false
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\Post',
+        fetch: 'EAGER',
+        inversedBy: 'views'
+    )]    
     protected ?Post $post = null;
 
-    /**
-     * @ORM\JoinColumn(
-     *     name="USER_ID",
-     *     referencedColumnName="ID"
-     * )
-     * @ORM\ManyToOne(
-     *     targetEntity="\Partitura\Entity\User",
-     *     fetch="EAGER",
-     *     inversedBy="postsViews"
-     * )
-     */
+    #[ORM\JoinColumn(
+        name: 'USER_ID',
+        referencedColumnName: 'ID'
+    )]
+    #[ORM\ManyToOne(
+        targetEntity: '\Partitura\Entity\User',
+        fetch: 'EAGER',
+        inversedBy: 'postsViews'
+    )]    
     protected ?User $user = null;
 
-    /**
-     * @ORM\Column(
-     *     type="text",
-     *     name="IP_ADDRESS"
-     * )
-     */
+    #[ORM\Column(
+        type: 'text',
+        name: 'IP_ADDRESS'
+    )]    
     protected ?string $ipAddress = null;
 
     public function __construct()
