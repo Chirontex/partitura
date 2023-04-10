@@ -53,7 +53,7 @@ return (new PhpCsFixer\Config())
         'operator_linebreak' => true,
         'php_unit_method_casing' => true,
         'phpdoc_align' => ['align' => 'left'],
-        'phpdoc_annotation_without_dot' => true,
+        'phpdoc_summary' => true,
         'phpdoc_indent' => true,
         'phpdoc_inline_tag_normalizer' => true,
         'phpdoc_no_access' => true,

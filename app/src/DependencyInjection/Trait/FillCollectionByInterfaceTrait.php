@@ -14,13 +14,14 @@ use Symfony\Component\DependencyInjection\Reference;
 trait FillCollectionByInterfaceTrait
 {
     /**
-     * @param string $keyGetter имя метода-геттера, возвращающего ключ для помещения в коллекцию
+     * @param string $interface Название интерфейса сервисов, которые нужно объединить в коллекцию.
+     * @param string $keyGetter Имя метода-геттера, возвращающего ключ для помещения в коллекцию.
      *
      * @return ArrayCollection<string, Reference>
      */
     protected function getReferences(
         ContainerBuilder $container,
-        string $inteface,
+        string $interface,
         string $keyGetter
     ): ArrayCollection {
         $result = new ArrayCollection();
@@ -32,7 +33,7 @@ trait FillCollectionByInterfaceTrait
                 continue;
             }
 
-            if (!in_array($inteface, class_implements($class), true)) {
+            if (!in_array($interface, class_implements($class), true)) {
                 continue;
             }
 
