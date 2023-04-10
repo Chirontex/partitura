@@ -8,7 +8,7 @@ use Partitura\Controller\Profile\ProfileController;
 use Partitura\Dto\Form\AbstractFormRequestDto;
 
 /**
- * Class SecurityRequestDto
+ * Class SecurityRequestDto.
  */
 abstract class SecurityRequestDto extends AbstractFormRequestDto
 {

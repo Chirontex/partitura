@@ -9,7 +9,7 @@ use Partitura\Controller\Profile\ProfileController;
 use Partitura\Dto\Form\AbstractFormRequestDto;
 
 /**
- * Class MainInfoRequestDto
+ * Class MainInfoRequestDto.
  */
 class MainInfoRequestDto extends AbstractFormRequestDto
 {

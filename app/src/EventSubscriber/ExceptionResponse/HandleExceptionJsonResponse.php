@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 /**
- * Class HandleExceptionJsonResponse
+ * Class HandleExceptionJsonResponse.
  */
 class HandleExceptionJsonResponse extends AbstractHandleExceptionResponse
 {

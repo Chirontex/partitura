@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class ProfileController
+ * Class ProfileController.
  *
  * @Route("/profile")
  */

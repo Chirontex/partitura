@@ -34,7 +34,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Throwable;
 
 /**
- * Class AdminLoginAuthenticator
+ * Class AdminLoginAuthenticator.
  */
 class AdminLoginAuthenticator extends AbstractAuthenticator
 {

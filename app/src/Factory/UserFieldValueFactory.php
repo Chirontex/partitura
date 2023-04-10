@@ -9,7 +9,7 @@ use Partitura\Entity\UserField;
 use Partitura\Entity\UserFieldValue;
 
 /**
- * Class UserFieldValueFactory
+ * Class UserFieldValueFactory.
  */
 class UserFieldValueFactory
 {

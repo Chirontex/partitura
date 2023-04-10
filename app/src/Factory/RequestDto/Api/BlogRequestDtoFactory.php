@@ -8,7 +8,7 @@ use Partitura\Dto\Api\BlogRequestDto;
 use Partitura\Factory\RequestDto\AbstractRequestDtoFactory;
 
 /**
- * Class BlogRequestDtoFactory
+ * Class BlogRequestDtoFactory.
  */
 class BlogRequestDtoFactory extends AbstractRequestDtoFactory
 {

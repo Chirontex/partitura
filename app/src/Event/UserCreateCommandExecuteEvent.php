@@ -8,7 +8,7 @@ use Partitura\Dto\CreateUserDto;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class UserCreateCommandExecuteEvent
+ * Class UserCreateCommandExecuteEvent.
  */
 class UserCreateCommandExecuteEvent extends Event
 {

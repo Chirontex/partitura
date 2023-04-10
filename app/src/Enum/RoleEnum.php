@@ -9,7 +9,7 @@ use Partitura\Enum\Trait\GetInstanceByValueTrait;
 use Partitura\Kernel;
 
 /**
- * Enum RoleEnum
+ * Enum RoleEnum.
  */
 enum RoleEnum: string
 {

@@ -11,7 +11,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
- * Class CsrfTokenValidationService
+ * Class CsrfTokenValidationService.
  */
 class CsrfTokenValidationService
 {

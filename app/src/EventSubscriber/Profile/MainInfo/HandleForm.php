@@ -17,7 +17,7 @@ use Partitura\Service\User\UserFieldValuesSavingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class HandleForm
+ * Class HandleForm.
  */
 class HandleForm implements EventSubscriberInterface
 {

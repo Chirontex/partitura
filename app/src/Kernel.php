@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 /**
- * Class Kernel
+ * Class Kernel.
  */
 class Kernel extends BaseKernel
 {

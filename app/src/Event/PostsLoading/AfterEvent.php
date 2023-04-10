@@ -8,7 +8,7 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class AfterEvent
+ * Class AfterEvent.
  */
 class AfterEvent extends Event
 {

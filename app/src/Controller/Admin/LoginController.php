@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * Class LoginController
+ * Class LoginController.
  *
  * @Route("/admin/login")
  */

@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
 /**
- * Class UserChangePasswordCommand
+ * Class UserChangePasswordCommand.
  */
 class UserChangePasswordCommand extends Command implements LoggerAwareInterface
 {

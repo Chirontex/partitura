@@ -8,7 +8,7 @@ use Partitura\Dto\Form\Profile\Security\ChangePasswordRequestDto;
 use Partitura\Factory\RequestDto\AbstractRequestDtoFactory;
 
 /**
- * Class ChangePasswordRequestDtoFactory
+ * Class ChangePasswordRequestDtoFactory.
  */
 class ChangePasswordRequestDtoFactory extends AbstractRequestDtoFactory
 {

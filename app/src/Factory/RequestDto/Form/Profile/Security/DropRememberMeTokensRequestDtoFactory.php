@@ -8,7 +8,7 @@ use Partitura\Dto\Form\Profile\Security\DropRememberMeTokensRequestDto;
 use Partitura\Factory\RequestDto\AbstractRequestDtoFactory;
 
 /**
- * Class DropRememberMeTokensRequestDtoFactory
+ * Class DropRememberMeTokensRequestDtoFactory.
  */
 class DropRememberMeTokensRequestDtoFactory extends AbstractRequestDtoFactory
 {

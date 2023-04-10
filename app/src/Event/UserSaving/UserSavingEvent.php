@@ -8,7 +8,7 @@ use Partitura\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class UserSavingEvent
+ * Class UserSavingEvent.
  */
 abstract class UserSavingEvent extends Event
 {

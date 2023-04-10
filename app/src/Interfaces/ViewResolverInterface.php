@@ -5,7 +5,7 @@ namespace Partitura\Interfaces;
 use Partitura\Exception\CaseNotFoundException;
 
 /**
- * Interface ViewResolverInterface
+ * Interface ViewResolverInterface.
  */
 interface ViewResolverInterface
 {

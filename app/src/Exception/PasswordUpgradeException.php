@@ -6,7 +6,7 @@ use Partitura\Interfaces\PartituraExceptionInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 /**
- * Class PasswordUpgradeException
+ * Class PasswordUpgradeException.
  */
 class PasswordUpgradeException extends UnsupportedUserException implements PartituraExceptionInterface
 {

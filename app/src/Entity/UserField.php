@@ -11,7 +11,7 @@ use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Repository\UserFieldRepository;
 
 /**
- * Class UserField
+ * Class UserField.
  */
 #[ORM\Entity(repositoryClass: UserFieldRepository::class)]
 #[ORM\Table(name: UserField::TABLE_NAME)]

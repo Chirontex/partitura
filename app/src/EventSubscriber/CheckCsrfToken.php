@@ -11,7 +11,7 @@ use Partitura\Service\CsrfTokenValidationService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class CheckCsrfToken
+ * Class CheckCsrfToken.
  */
 class CheckCsrfToken implements EventSubscriberInterface
 {

@@ -5,7 +5,7 @@ namespace Partitura\Interfaces;
 use Partitura\Dto\RouteDataDto;
 
 /**
- * Interface RouteDataGettingServiceInterface
+ * Interface RouteDataGettingServiceInterface.
  */
 interface RouteDataGettingServiceInterface
 {

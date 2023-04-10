@@ -12,7 +12,7 @@ use Partitura\Service\User\CurrentUserService;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PostViewFactory
+ * Class PostViewFactory.
  */
 class PostViewFactory
 {

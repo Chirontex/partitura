@@ -12,7 +12,7 @@ use Partitura\Factory\RouteDataDtoFactory;
 use Partitura\Interfaces\RouteDataGettingServiceInterface;
 
 /**
- * Class RouteDataGettingService
+ * Class RouteDataGettingService.
  */
 class RouteDataGettingService implements RouteDataGettingServiceInterface
 {

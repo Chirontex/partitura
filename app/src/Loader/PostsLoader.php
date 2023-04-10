@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouteCollection;
 use Throwable;
 
 /**
- * Class PostsLoader
+ * Class PostsLoader.
  */
 class PostsLoader extends Loader
 {

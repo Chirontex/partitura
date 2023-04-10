@@ -7,7 +7,7 @@ namespace Partitura\Enum\Trait;
 use Partitura\Exception\CaseNotFoundException;
 
 /**
- * Trait GetInstanceByValueTrait
+ * Trait GetInstanceByValueTrait.
  *
  * @method static[] cases()
  */

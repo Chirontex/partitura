@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Partitura\Enum;
 
 /**
- * Enum CsrfTokenValidationResultEnum
+ * Enum CsrfTokenValidationResultEnum.
  */
 enum CsrfTokenValidationResultEnum: string
 {

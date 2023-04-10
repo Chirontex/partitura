@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Twig\Environment;
 
 /**
- * Class HandleArgumentExceptionResponse
+ * Class HandleArgumentExceptionResponse.
  */
 class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
 {

@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Throwable;
 
 /**
- * Class AbstractHandleExceptionResponse
+ * Class AbstractHandleExceptionResponse.
  */
 abstract class AbstractHandleExceptionResponse implements EventSubscriberInterface
 {

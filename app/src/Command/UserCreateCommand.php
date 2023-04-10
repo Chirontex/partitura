@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
 /**
- * Class UserCreateCommand
+ * Class UserCreateCommand.
  */
 class UserCreateCommand extends Command implements LoggerAwareInterface
 {

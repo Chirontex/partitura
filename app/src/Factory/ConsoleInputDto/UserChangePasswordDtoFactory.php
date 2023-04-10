@@ -7,7 +7,7 @@ namespace Partitura\Factory\ConsoleInputDto;
 use Partitura\Dto\UserChangePasswordDto;
 
 /**
- * Class UserChangePasswordDtoFactory
+ * Class UserChangePasswordDtoFactory.
  */
 class UserChangePasswordDtoFactory extends AbstractConsoleInputDtoFactory
 {

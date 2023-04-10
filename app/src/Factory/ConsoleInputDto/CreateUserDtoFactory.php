@@ -7,7 +7,7 @@ namespace Partitura\Factory\ConsoleInputDto;
 use Partitura\Dto\CreateUserDto;
 
 /**
- * Class CreateUserDtoFactory
+ * Class CreateUserDtoFactory.
  */
 class CreateUserDtoFactory extends AbstractConsoleInputDtoFactory
 {

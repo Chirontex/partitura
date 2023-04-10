@@ -7,7 +7,7 @@ namespace Partitura\Exception;
 use Throwable;
 
 /**
- * Class ArgumentException
+ * Class ArgumentException.
  */
 class ArgumentException extends LogicException
 {

@@ -3,7 +3,7 @@
 namespace Partitura\Exception;
 
 /**
- * Class PostViewException
+ * Class PostViewException.
  */
 class PostViewException extends RuntimeException
 {

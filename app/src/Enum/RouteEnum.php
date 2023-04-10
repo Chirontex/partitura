@@ -16,7 +16,7 @@ use Partitura\Interfaces\RouteDataGettingServiceInterface;
 use Partitura\Kernel;
 
 /**
- * Enum RouteEnum
+ * Enum RouteEnum.
  */
 enum RouteEnum: string
 {

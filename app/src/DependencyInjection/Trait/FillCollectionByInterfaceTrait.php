@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Trait FillCollectionByInterfaceTrait
+ * Trait FillCollectionByInterfaceTrait.
  */
 trait FillCollectionByInterfaceTrait
 {

@@ -7,7 +7,7 @@ namespace Partitura\Log\Trait;
 use Psr\Log\LoggerAwareTrait as PsrLoggerAwareTrait;
 
 /**
- * Trait LoggerAwareTrait
+ * Trait LoggerAwareTrait.
  */
 trait LoggerAwareTrait
 {

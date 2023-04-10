@@ -7,7 +7,7 @@ namespace Partitura\Exception;
 use Throwable;
 
 /**
- * Class PostsLoaderAlreadyLoadedException
+ * Class PostsLoaderAlreadyLoadedException.
  */
 class PostsLoaderAlreadyLoadedException extends SystemException
 {

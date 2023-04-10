@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
- * Class PasswordUpgradeService
+ * Class PasswordUpgradeService.
  */
 class PasswordUpgradeService implements PasswordUpgraderInterface
 {

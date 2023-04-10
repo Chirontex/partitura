@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class BeforeEvent
+ * Class BeforeEvent.
  */
 class BeforeEvent extends Event
 {

@@ -3,7 +3,7 @@
 namespace Partitura\Exception;
 
 /**
- * Class EntityNotFoundException
+ * Class EntityNotFoundException.
  */
 class EntityNotFoundException extends RuntimeException
 {

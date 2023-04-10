@@ -9,7 +9,7 @@ use Partitura\Enum\CsrfTokenValidationResultEnum;
 use Partitura\Exception\NotImplementedException;
 
 /**
- * class CsrfTokenValidationEvent
+ * class CsrfTokenValidationEvent.
  */
 class CsrfTokenValidationEvent extends FormEvent
 {

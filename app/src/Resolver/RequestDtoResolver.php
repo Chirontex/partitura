@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 /**
- * Class RequestDtoResolver
+ * Class RequestDtoResolver.
  */
 class RequestDtoResolver implements ArgumentValueResolverInterface
 {

@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Interfaces\RequestDtoFactoryInterface;
 
 /**
- * Class RequestDtoFactoryLocator
+ * Class RequestDtoFactoryLocator.
  */
 class RequestDtoFactoryLocator
 {

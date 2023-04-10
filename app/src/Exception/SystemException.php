@@ -3,7 +3,7 @@
 namespace Partitura\Exception;
 
 /**
- * Class SystemException
+ * Class SystemException.
  */
 class SystemException extends Exception
 {

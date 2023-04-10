@@ -16,7 +16,7 @@ use Partitura\Factory\UserFieldValueFactory;
 use Partitura\Repository\UserFieldRepository;
 
 /**
- * Class UserFieldValuesSavingService
+ * Class UserFieldValuesSavingService.
  */
 class UserFieldValuesSavingService
 {

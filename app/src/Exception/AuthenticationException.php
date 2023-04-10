@@ -8,7 +8,7 @@ use Partitura\Interfaces\PartituraExceptionInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException as SymfonyAuthenticationException;
 
 /**
- * Class AuthenticationException
+ * Class AuthenticationException.
  */
 class AuthenticationException extends SymfonyAuthenticationException implements PartituraExceptionInterface
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Partitura\Event\UserSaving;
 
 /**
- * Class AfterUpdateEvent
+ * Class AfterUpdateEvent.
  */
 class AfterUpdateEvent extends UserSavingEvent
 {

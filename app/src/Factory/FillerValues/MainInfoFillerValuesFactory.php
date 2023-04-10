@@ -12,7 +12,7 @@ use Partitura\Service\User\CurrentUserService;
 use Partitura\Service\User\UserFieldValuesGettingService;
 
 /**
- * Class MainInfoFillerValuesFactory
+ * Class MainInfoFillerValuesFactory.
  */
 class MainInfoFillerValuesFactory extends ProfileFillerValuesFactory
 {

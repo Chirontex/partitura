@@ -8,7 +8,7 @@ use Partitura\Dto\Form\AbstractFormRequestDto;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class FormEvent
+ * Class FormEvent.
  */
 abstract class FormEvent extends Event
 {

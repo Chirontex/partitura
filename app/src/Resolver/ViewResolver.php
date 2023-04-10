@@ -8,7 +8,7 @@ use Partitura\Enum\RouteEnum;
 use Partitura\Interfaces\ViewResolverInterface;
 
 /**
- * Class ViewResolver
+ * Class ViewResolver.
  */
 class ViewResolver implements ViewResolverInterface
 {

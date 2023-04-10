@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class BlogController
+ * Class BlogController.
  *
  * @Route("/api/blog")
  */

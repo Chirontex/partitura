@@ -9,7 +9,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class BeforePasswordValidationEvent
+ * Class BeforePasswordValidationEvent.
  */
 class BeforePasswordValidationEvent extends Event
 {

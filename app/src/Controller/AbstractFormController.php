@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Class AbstractFormController
+ * Class AbstractFormController.
  */
 abstract class AbstractFormController extends Controller
 {

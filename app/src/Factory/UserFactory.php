@@ -14,7 +14,7 @@ use Partitura\Repository\RoleRepository;
 use Partitura\Service\User\PasswordSettingService;
 
 /**
- * Class UserFactory
+ * Class UserFactory.
  */
 class UserFactory
 {

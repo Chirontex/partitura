@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Class AbstractConsoleInputDtoFactory
+ * Class AbstractConsoleInputDtoFactory.
  */
 abstract class AbstractConsoleInputDtoFactory
 {

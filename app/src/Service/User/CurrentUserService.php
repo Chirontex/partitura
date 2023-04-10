@@ -8,7 +8,7 @@ use Partitura\Entity\User;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * Class CurrentUserService
+ * Class CurrentUserService.
  */
 class CurrentUserService
 {

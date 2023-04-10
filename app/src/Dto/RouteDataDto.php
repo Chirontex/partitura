@@ -8,7 +8,7 @@ use Closure;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class RouteDataDto
+ * Class RouteDataDto.
  */
 class RouteDataDto
 {

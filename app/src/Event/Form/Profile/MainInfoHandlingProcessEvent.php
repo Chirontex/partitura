@@ -7,7 +7,7 @@ namespace Partitura\Event\Form\Profile;
 use Partitura\Event\Form\RequestDtoHandleEvent;
 
 /**
- * Class MainInfoHandlingProcessEvent
+ * Class MainInfoHandlingProcessEvent.
  */
 class MainInfoHandlingProcessEvent extends RequestDtoHandleEvent
 {

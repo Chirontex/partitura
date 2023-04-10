@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Partitura\Dto;
 
 /**
- * Class AuthenticationDto
+ * Class AuthenticationDto.
  */
 class AuthenticationDto
 {

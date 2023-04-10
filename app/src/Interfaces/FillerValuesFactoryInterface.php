@@ -7,7 +7,7 @@ namespace Partitura\Interfaces;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Interface FillerValuesFactoryInterface
+ * Interface FillerValuesFactoryInterface.
  */
 interface FillerValuesFactoryInterface
 {

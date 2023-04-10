@@ -8,7 +8,7 @@ use Partitura\Dto\UserChangePasswordDto;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class UserChangePasswordExecuteEvent
+ * Class UserChangePasswordExecuteEvent.
  */
 class UserChangePasswordExecuteEvent extends Event
 {

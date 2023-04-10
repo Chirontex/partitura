@@ -10,7 +10,7 @@ use Partitura\Exception\EntityNotFoundException;
 use Partitura\Repository\PostRepository;
 
 /**
- * Class PostManager
+ * Class PostManager.
  */
 class PostManager
 {

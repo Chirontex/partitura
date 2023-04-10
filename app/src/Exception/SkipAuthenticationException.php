@@ -3,7 +3,7 @@
 namespace Partitura\Exception;
 
 /**
- * Class SkipAuthenticationException
+ * Class SkipAuthenticationException.
  */
 class SkipAuthenticationException extends AuthenticationException
 {

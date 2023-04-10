@@ -7,7 +7,7 @@ namespace Partitura\Exception;
 use Throwable;
 
 /**
- * Class ForbiddenAccessException
+ * Class ForbiddenAccessException.
  */
 class ForbiddenAccessException extends AuthenticationException
 {

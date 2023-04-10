@@ -19,7 +19,7 @@ use Partitura\Service\User\UserSavingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class HandleForm
+ * Class HandleForm.
  */
 class HandleForm implements EventSubscriberInterface
 {

@@ -9,7 +9,7 @@ use Partitura\Entity\Post;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class PostViewEvent
+ * Class PostViewEvent.
  */
 class PostViewEvent extends Event
 {

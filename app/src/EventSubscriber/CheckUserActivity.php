@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 
 /**
- * Class CheckUserActivity
+ * Class CheckUserActivity.
  */
 class CheckUserActivity implements EventSubscriberInterface
 {

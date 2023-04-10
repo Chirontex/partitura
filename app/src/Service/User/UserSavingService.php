@@ -15,7 +15,7 @@ use Partitura\Event\UserSaving\BeforeUpdateEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class UserSavingService
+ * Class UserSavingService.
  */
 class UserSavingService
 {

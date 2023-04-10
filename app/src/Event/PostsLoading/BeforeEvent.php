@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Partitura\Event\PostsLoading;
 
 /**
- * Class BeforeEvent
+ * Class BeforeEvent.
  */
 class BeforeEvent extends AfterEvent
 {

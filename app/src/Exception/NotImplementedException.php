@@ -3,7 +3,7 @@
 namespace Partitura\Exception;
 
 /**
- * NotImplementedException
+ * NotImplementedException.
  */
 class NotImplementedException extends RuntimeException
 {

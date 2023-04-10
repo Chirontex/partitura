@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class SettingsDto
+ * Class SettingsDto.
  */
 class SettingsDto
 {

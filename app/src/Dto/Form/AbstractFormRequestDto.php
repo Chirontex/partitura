@@ -7,7 +7,7 @@ namespace Partitura\Dto\Form;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class AbstractFormRequestDto
+ * Class AbstractFormRequestDto.
  */
 abstract class AbstractFormRequestDto
 {

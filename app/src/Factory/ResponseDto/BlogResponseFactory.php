@@ -16,7 +16,7 @@ use Partitura\Repository\PostRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class BlogResponseFactory
+ * Class BlogResponseFactory.
  */
 class BlogResponseFactory
 {

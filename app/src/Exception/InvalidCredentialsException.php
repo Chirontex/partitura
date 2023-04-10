@@ -7,7 +7,7 @@ namespace Partitura\Exception;
 use Throwable;
 
 /**
- * Class InvalidCredentialsException
+ * Class InvalidCredentialsException.
  */
 class InvalidCredentialsException extends AuthenticationException
 {

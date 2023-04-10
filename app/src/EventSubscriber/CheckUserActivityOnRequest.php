@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
- * Class CheckUserActivityOnRequest
+ * Class CheckUserActivityOnRequest.
  */
 class CheckUserActivityOnRequest implements EventSubscriberInterface
 {

@@ -12,7 +12,7 @@ use Partitura\Factory\SettingsDtoFactory;
 use Partitura\Interfaces\FillerValuesFactoryInterface;
 
 /**
- * Class ProfileFillerValuesFactory
+ * Class ProfileFillerValuesFactory.
  */
 abstract class ProfileFillerValuesFactory implements FillerValuesFactoryInterface
 {

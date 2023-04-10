@@ -9,7 +9,7 @@ use Partitura\Interfaces\CsrfTokenIdResolverInterface;
 use Partitura\Service\RouteDataGettingService;
 
 /**
- * Class CsrfTokenIdResolver
+ * Class CsrfTokenIdResolver.
  */
 class CsrfTokenIdResolver implements CsrfTokenIdResolverInterface
 {

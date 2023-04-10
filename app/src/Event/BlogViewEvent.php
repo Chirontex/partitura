@@ -8,7 +8,7 @@ use Partitura\Dto\Api\BlogResponseDto;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class BlogViewEvent
+ * Class BlogViewEvent.
  */
 class BlogViewEvent extends Event
 {

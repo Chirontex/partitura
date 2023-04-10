@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PostViewsWriter
+ * Class PostViewsWriter.
  */
 class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
 {

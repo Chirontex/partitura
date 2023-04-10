@@ -5,7 +5,7 @@ namespace Partitura\Interfaces;
 use Partitura\Exception\EntityNotFoundException;
 
 /**
- * Interface CsrfTokenIdResolverInterface
+ * Interface CsrfTokenIdResolverInterface.
  */
 interface CsrfTokenIdResolverInterface
 {

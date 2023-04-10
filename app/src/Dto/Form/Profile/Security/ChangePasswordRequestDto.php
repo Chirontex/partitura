@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class ChangePasswordRequestDto
+ * Class ChangePasswordRequestDto.
  */
 class ChangePasswordRequestDto extends SecurityRequestDto
 {

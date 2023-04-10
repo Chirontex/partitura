@@ -14,7 +14,7 @@ use Partitura\Repository\UserRepository;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
 /**
- * Class UserBadgeFactory
+ * Class UserBadgeFactory.
  */
 class UserBadgeFactory
 {

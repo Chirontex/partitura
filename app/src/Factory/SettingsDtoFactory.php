@@ -13,7 +13,7 @@ use Partitura\Entity\User;
 use Partitura\Service\User\CurrentUserService;
 
 /**
- * Class SettingsDtoFactory
+ * Class SettingsDtoFactory.
  */
 class SettingsDtoFactory
 {

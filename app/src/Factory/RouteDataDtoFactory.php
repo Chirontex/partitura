@@ -10,7 +10,7 @@ use JMS\Serializer\ArrayTransformerInterface;
 use Partitura\Interfaces\FillerValuesFactoryInterface;
 
 /**
- * Class RouteDataDtoFactory
+ * Class RouteDataDtoFactory.
  */
 class RouteDataDtoFactory
 {

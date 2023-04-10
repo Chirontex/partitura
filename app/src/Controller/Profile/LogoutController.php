@@ -8,7 +8,7 @@ use Partitura\Exception\SystemException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class LogoutController
+ * Class LogoutController.
  *
  * @Route("/profile/logout")
  */

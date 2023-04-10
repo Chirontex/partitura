@@ -7,7 +7,7 @@ namespace Partitura\Event\Form\Profile;
 use Partitura\Event\Form\RequestDtoHandleEvent;
 
 /**
- * Class SecurityHandlingProcessEvent
+ * Class SecurityHandlingProcessEvent.
  */
 class SecurityHandlingProcessEvent extends RequestDtoHandleEvent
 {

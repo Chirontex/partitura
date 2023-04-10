@@ -11,7 +11,7 @@ use Partitura\Manager\PostManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class PostResponseFactory
+ * Class PostResponseFactory.
  */
 class PostResponseFactory
 {

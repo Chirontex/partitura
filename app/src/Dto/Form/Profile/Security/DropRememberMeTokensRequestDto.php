@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class DropRememberMeTokensRequestDto
+ * Class DropRememberMeTokensRequestDto.
  */
 class DropRememberMeTokensRequestDto extends SecurityRequestDto
 {

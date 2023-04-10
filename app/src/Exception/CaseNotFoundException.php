@@ -3,7 +3,7 @@
 namespace Partitura\Exception;
 
 /**
- * Class CaseNotFoundException
+ * Class CaseNotFoundException.
  */
 class CaseNotFoundException extends RuntimeException
 {

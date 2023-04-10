@@ -14,7 +14,7 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Class AbstractRequestDtoFactory
+ * Class AbstractRequestDtoFactory.
  */
 abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
 {

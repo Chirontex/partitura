@@ -9,7 +9,7 @@ use Partitura\Entity\Trait\HasIdTrait;
 use Partitura\Repository\UserFieldValueRepository;
 
 /**
- * Class UserFieldValue
+ * Class UserFieldValue.
  */
 #[ORM\Entity(repositoryClass: UserFieldValueRepository::class)]
 #[ORM\Table(name: UserFieldValue::TABLE_NAME)]

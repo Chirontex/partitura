@@ -8,7 +8,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Trait HasDatetimeUpdatedTrait
+ * Trait HasDatetimeUpdatedTrait.
  */
 trait HasDatetimeUpdatedTrait
 {

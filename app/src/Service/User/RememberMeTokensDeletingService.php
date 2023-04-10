@@ -10,7 +10,7 @@ use Partitura\Entity\User;
 use Partitura\Repository\RememberTokenRepository;
 
 /**
- * Class RememberMeTokensDeletingService
+ * Class RememberMeTokensDeletingService.
  */
 class RememberMeTokensDeletingService
 {

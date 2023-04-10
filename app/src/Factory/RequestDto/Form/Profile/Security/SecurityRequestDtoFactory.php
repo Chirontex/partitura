@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Class SecurityRequestDtoFactory
+ * Class SecurityRequestDtoFactory.
  */
 class SecurityRequestDtoFactory extends AbstractRequestDtoFactory
 {

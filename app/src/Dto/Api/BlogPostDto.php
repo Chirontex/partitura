@@ -8,7 +8,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class BlogPostDto
+ * Class BlogPostDto.
  */
 class BlogPostDto
 {

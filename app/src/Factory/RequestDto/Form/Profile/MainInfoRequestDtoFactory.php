@@ -8,7 +8,7 @@ use Partitura\Dto\Form\Profile\MainInfoRequestDto;
 use Partitura\Factory\RequestDto\AbstractRequestDtoFactory;
 
 /**
- * Class MainInfoRequestDtoFactory
+ * Class MainInfoRequestDtoFactory.
  */
 class MainInfoRequestDtoFactory extends AbstractRequestDtoFactory
 {

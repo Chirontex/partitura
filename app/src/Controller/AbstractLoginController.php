@@ -7,7 +7,7 @@ namespace Partitura\Controller;
 use Partitura\Dto\SettingsDto;
 
 /**
- * Class AbstractLoginController
+ * Class AbstractLoginController.
  */
 abstract class AbstractLoginController extends Controller
 {

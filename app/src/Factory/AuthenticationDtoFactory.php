@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * Class AuthenticationDtoFactory
+ * Class AuthenticationDtoFactory.
  */
 class AuthenticationDtoFactory
 {

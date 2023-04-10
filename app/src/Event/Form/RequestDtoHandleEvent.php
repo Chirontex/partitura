@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Partitura\Dto\Form\AbstractFormRequestDto;
 
 /**
- * Class RequestDtoHandleEvent
+ * Class RequestDtoHandleEvent.
  */
 abstract class RequestDtoHandleEvent extends CsrfTokenValidationEvent
 {

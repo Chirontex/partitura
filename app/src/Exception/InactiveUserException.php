@@ -7,7 +7,7 @@ namespace Partitura\Exception;
 use Throwable;
 
 /**
- * Class InactiveUserException
+ * Class InactiveUserException.
  */
 class InactiveUserException extends AuthenticationException
 {

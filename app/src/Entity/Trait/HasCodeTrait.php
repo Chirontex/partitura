@@ -7,7 +7,7 @@ namespace Partitura\Entity\Trait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Trait HasCodeTrait
+ * Trait HasCodeTrait.
  */
 trait HasCodeTrait
 {

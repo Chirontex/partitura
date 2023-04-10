@@ -11,7 +11,7 @@ use Partitura\Entity\UserField;
 use Partitura\Repository\UserFieldRepository;
 
 /**
- * Class UserFieldValuesGettingService
+ * Class UserFieldValuesGettingService.
  */
 class UserFieldValuesGettingService
 {

@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * Class CreateUserDto
+ * Class CreateUserDto.
  */
 class CreateUserDto
 {

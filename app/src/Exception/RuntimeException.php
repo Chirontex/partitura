@@ -3,7 +3,7 @@
 namespace Partitura\Exception;
 
 /**
- * Class RuntimeException
+ * Class RuntimeException.
  */
 class RuntimeException extends Exception
 {
