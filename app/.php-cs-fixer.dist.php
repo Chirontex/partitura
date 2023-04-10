@@ -73,7 +73,7 @@ return (new PhpCsFixer\Config())
         'single_import_per_statement' => true,
         'single_line_comment_spacing' => true,
         'single_line_comment_style' => true,
-        'single_space_around_construct' => true,
+        /*'single_space_around_construct' => true,*/
         'space_after_semicolon' => true,
         'switch_continue_to_break' => true,
         'trailing_comma_in_multiline' => true,

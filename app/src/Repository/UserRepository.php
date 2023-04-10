@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Repository;
@@ -10,11 +11,11 @@ use Partitura\Exception\EntityNotFoundException;
 
 /**
  * Users repository.
- * @package Partitura\Repository
+ *
  * @extends Repository<User>
  *
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|User find($id, $lockMode = null, $lockVersion = null)
+ * @method null|User findOneBy(array $criteria, array $orderBy = null)
  * @method ArrayCollection<int, User> findAll()
  * @method ArrayCollection<User> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -26,12 +27,10 @@ class UserRepository extends Repository
     }
 
     /**
-     * @param string $username
      *
      * @throws EntityNotFoundException
-     * @return User
      */
-    public function findByUsername(string $username) : User
+    public function findByUsername(string $username): User
     {
         $user = $this->findOneBy(["username" => $username]);
 

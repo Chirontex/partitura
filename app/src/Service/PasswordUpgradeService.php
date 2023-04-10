@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Service;
@@ -13,7 +14,6 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * Class PasswordUpgradeService
- * @package Partitura\Service
  */
 class PasswordUpgradeService implements PasswordUpgraderInterface
 {
@@ -24,15 +24,12 @@ class PasswordUpgradeService implements PasswordUpgraderInterface
     /**
      * {@inheritDoc}
      *
-     * @param PasswordAuthenticatedUserInterface $user
-     * @param string $newHashedPassword
-     * 
      * @throws PasswordUpgradeException
      */
     public function upgradePassword(
         PasswordAuthenticatedUserInterface $user,
         string $newHashedPassword
-    ) : void {
+    ): void {
         $this->eventDispatcher->dispatch(new BeforeEvent($user));
 
         if (!($user instanceof PasswordUpgradableUserInterface)) {

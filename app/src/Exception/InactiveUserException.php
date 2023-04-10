@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Exception;
@@ -7,7 +8,6 @@ use Throwable;
 
 /**
  * Class InactiveUserException
- * @package Partitura\Exception
  */
 class InactiveUserException extends AuthenticationException
 {

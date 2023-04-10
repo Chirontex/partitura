@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Service\User;
@@ -8,7 +9,6 @@ use Symfony\Component\Security\Core\Security;
 
 /**
  * Class CurrentUserService
- * @package Partitura\Service\User
  */
 class CurrentUserService
 {
@@ -16,10 +16,7 @@ class CurrentUserService
     {
     }
 
-    /**
-     * @return null|User
-     */
-    public function getCurrentUser() : ?User
+    public function getCurrentUser(): ?User
     {
         $user = $this->securityHelper->getUser();
 

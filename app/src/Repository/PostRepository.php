@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Repository;
@@ -10,11 +11,11 @@ use Partitura\Enum\PostTypeEnum;
 
 /**
  * Posts repository.
- * @package Partitura\Repository
+ *
  * @extends Repository<Post>
- * 
- * @method Post|null find($id, $lockMode = null, $lockVersion = null)
- * @method Post|null findOneBy(array $criteria, array $orderBy = null)
+ *
+ * @method null|Post find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Post findOneBy(array $criteria, array $orderBy = null)
  * @method ArrayCollection<int, Post> findAll()
  * @method ArrayCollection<Post> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -26,11 +27,10 @@ class PostRepository extends Repository
     }
 
     /**
-     * @param string $name
      *
      * @return ArrayCollection<Post>
      */
-    public function findPublishedByName(string $name) : ArrayCollection
+    public function findPublishedByName(string $name): ArrayCollection
     {
         return $this->findBy([
             "name" => $name,
@@ -41,7 +41,7 @@ class PostRepository extends Repository
     /**
      * @return ArrayCollection<Post>
      */
-    public function findAllPublished() : ArrayCollection
+    public function findAllPublished(): ArrayCollection
     {
         return $this->findBy(["type" => PostTypeEnum::PUBLISHED->value]);
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Service\User;
@@ -16,7 +17,6 @@ use Partitura\Repository\UserFieldRepository;
 
 /**
  * Class UserFieldValuesSavingService
- * @package Partitura\Service\User
  */
 class UserFieldValuesSavingService
 {
@@ -33,12 +33,11 @@ class UserFieldValuesSavingService
     }
 
     /**
-     * @param User $user
      * @param ArrayCollection<string, mixed> $newValues
-     * 
+     *
      * @throws EntityNotFoundException
      */
-    public function saveFromCollection(User $user, ArrayCollection $newValues) : void
+    public function saveFromCollection(User $user, ArrayCollection $newValues): void
     {
         $existUserFieldValues = $user->getAdditionalFields();
         $userFields = $this->getUserFields($existUserFieldValues, $newValues);
@@ -80,7 +79,7 @@ class UserFieldValuesSavingService
      *
      * @return ArrayCollection<string, UserField>
      */
-    protected function getUserFields(?PersistentCollection $existUserFieldValues, ArrayCollection $newValues) : ArrayCollection
+    protected function getUserFields(?PersistentCollection $existUserFieldValues, ArrayCollection $newValues): ArrayCollection
     {
         /** @var string[] */
         $userFieldCodes = $newValues->getKeys();
@@ -113,14 +112,12 @@ class UserFieldValuesSavingService
 
     /**
      * @param PersistentCollection<UserFieldValue> $existUserFieldValues
-     * @param string $userFieldCode
      *
-     * @return null|UserFieldValue
      */
     protected function findExistUserFieldValueByCode(
         PersistentCollection $existUserFieldValues,
         string $userFieldCode
-    ) : ?UserFieldValue {
+    ): ?UserFieldValue {
         foreach ($existUserFieldValues as $userFieldValue) {
             $userField = $userFieldValue->getField();
 

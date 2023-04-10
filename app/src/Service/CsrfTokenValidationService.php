@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Service;
@@ -11,7 +12,6 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * Class CsrfTokenValidationService
- * @package Partitura\Service
  */
 class CsrfTokenValidationService
 {
@@ -22,12 +22,10 @@ class CsrfTokenValidationService
     }
 
     /**
-     * @param AbstractFormRequestDto $requestDto
      *
-     * @throws LogicException Throws if token is empty.
-     * @return bool
+     * @throws LogicException throws if token is empty
      */
-    public function isFormRequestDtoTokenValid(AbstractFormRequestDto $requestDto) : bool
+    public function isFormRequestDtoTokenValid(AbstractFormRequestDto $requestDto): bool
     {
         return $this->isTokenValid(
             $this->csrfTokenIdResolver->resolveCsrfTokenIdByRouteName($requestDto->getRouteName()),
@@ -36,13 +34,10 @@ class CsrfTokenValidationService
     }
 
     /**
-     * @param string $id
-     * @param string $token
      *
-     * @throws LogicException Throws if token is empty.
-     * @return bool
+     * @throws LogicException throws if token is empty
      */
-    public function isTokenValid(string $id, string $token) : bool
+    public function isTokenValid(string $id, string $token): bool
     {
         if (empty($token)) {
             throw new LogicException("CSRF token is empty.");

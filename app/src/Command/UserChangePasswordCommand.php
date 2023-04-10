@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Command;
@@ -22,7 +23,6 @@ use Throwable;
 
 /**
  * Class UserChangePasswordCommand
- * @package Partitura\Command
  */
 class UserChangePasswordCommand extends Command implements LoggerAwareInterface
 {
@@ -46,7 +46,7 @@ class UserChangePasswordCommand extends Command implements LoggerAwareInterface
     }
 
     /** {@inheritDoc} */
-    protected function configure() : void
+    protected function configure(): void
     {
         $this
             ->setName(self::COMMAND_NAME)
@@ -59,7 +59,7 @@ class UserChangePasswordCommand extends Command implements LoggerAwareInterface
     }
 
     /** {@inheritDoc} */
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             /** @var UserChangePasswordDto */

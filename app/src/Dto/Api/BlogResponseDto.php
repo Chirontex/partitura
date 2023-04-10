@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Dto\Api;
@@ -8,12 +9,11 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class BlogResponseDto
- * @package Partitura\Dto\Api
  */
 class BlogResponseDto
 {
     #[Serializer\Type('int')]
-    #[Serializer\SerializedName('pages')]   
+    #[Serializer\SerializedName('pages')]
     protected ?int $pages = null;
 
     /** @var ArrayCollection<BlogPostDto> */
@@ -26,20 +26,16 @@ class BlogResponseDto
         $this->posts = new ArrayCollection();
     }
 
-    /**
-     * @return int
-     */
-    public function getPages() : int
+    public function getPages(): int
     {
         return (int)$this->pages;
     }
 
     /**
-     * @param int $pages
      *
      * @return $this
      */
-    public function setPages(int $pages) : static
+    public function setPages(int $pages): static
     {
         $this->pages = $pages;
 
@@ -49,7 +45,7 @@ class BlogResponseDto
     /**
      * @return ArrayCollection<BlogPostDto>
      */
-    public function getPosts() : ArrayCollection
+    public function getPosts(): ArrayCollection
     {
         return $this->posts;
     }
@@ -59,7 +55,7 @@ class BlogResponseDto
      *
      * @return $this
      */
-    public function setPosts(ArrayCollection $posts) : static
+    public function setPosts(ArrayCollection $posts): static
     {
         $this->posts = $posts;
 

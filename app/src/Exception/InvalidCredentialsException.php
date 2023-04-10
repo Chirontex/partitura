@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Exception;
@@ -7,7 +8,6 @@ use Throwable;
 
 /**
  * Class InvalidCredentialsException
- * @package Partitura\Exception
  */
 class InvalidCredentialsException extends AuthenticationException
 {

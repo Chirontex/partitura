@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity;
@@ -17,15 +18,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User main entity.
- * @package Partitura\Entity
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: User::TABLE_NAME)]
 class User implements UserInterface, PasswordUpgradableUserInterface
 {
-    use HasIdTrait,
-        HasDatetimeCreatedTrait,
-        HasDatetimeUpdatedTrait;
+    use HasIdTrait;
+    use HasDatetimeCreatedTrait;
+    use HasDatetimeUpdatedTrait;
 
     public const TABLE_NAME = "pt_users";
 
@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
         name: 'USERNAME',
         length: 180,
         unique: true
-    )]    
+    )]
     protected ?string $username = null;
 
     #[ORM\JoinColumn(
@@ -45,51 +45,51 @@ class User implements UserInterface, PasswordUpgradableUserInterface
         targetEntity: '\Partitura\Entity\Role',
         fetch: 'EAGER',
         inversedBy: 'users'
-    )]    
+    )]
     protected ?Role $role = null;
 
     #[ORM\Column(
         type: 'string',
         name: 'PASSWORD_HASH',
         length: 180
-    )]    
+    )]
     protected ?string $password = null;
 
     #[ORM\Column(
         type: 'smallint',
         name: 'ACTIVE',
         options: ["default" => 1]
-    )]    
+    )]
     protected int $active = 1;
 
     #[ORM\OneToMany(
         targetEntity: '\Partitura\Entity\Post',
         mappedBy: 'author'
-    )]    
+    )]
     protected ?PersistentCollection $createdPosts = null;
 
     #[ORM\OneToMany(
         targetEntity: '\Partitura\Entity\Post',
         mappedBy: 'lastEditor'
-    )]    
+    )]
     protected ?PersistentCollection $lastEditedPosts = null;
 
     #[ORM\OneToMany(
         targetEntity: '\Partitura\Entity\ArchivedPost',
         mappedBy: 'author'
-    )]    
+    )]
     protected ?PersistentCollection $archivedPosts = null;
 
     #[ORM\OneToMany(
         targetEntity: '\Partitura\Entity\PostView',
         mappedBy: 'user'
-    )]    
+    )]
     protected ?PersistentCollection $postsViews = null;
 
     #[ORM\OneToMany(
         targetEntity: '\Partitura\Entity\UserFieldValue',
         mappedBy: 'user'
-    )]    
+    )]
     protected ?PersistentCollection $additionalFields = null;
 
     public function __construct()
@@ -97,20 +97,16 @@ class User implements UserInterface, PasswordUpgradableUserInterface
         $this->datetimeCreated = new DateTime();
     }
 
-    /**
-     * @return string
-     */
-    public function getUsername() : string
+    public function getUsername(): string
     {
         return (string)$this->username;
     }
 
     /**
-     * @param string $username
      *
      * @return $this
      */
-    public function setUsername(string $username) : static
+    public function setUsername(string $username): static
     {
         $this->username = $username;
 
@@ -120,28 +116,25 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * A visual identifier that represents this user.
      * {@inheritDoc}
+     *
      * @see UserInterface
      */
-    public function getUserIdentifier() : string
+    public function getUserIdentifier(): string
     {
         return $this->getUsername();
     }
 
-    /**
-     * @param RoleEnum $roleEnum
-     *
-     * @return bool
-     */
-    public function hasRole(RoleEnum $roleEnum) : bool
+    public function hasRole(RoleEnum $roleEnum): bool
     {
         return in_array($roleEnum->value, $this->getRoles(), true);
     }
 
     /**
      * {@inheritDoc}
+     *
      * @see UserInterface
      */
-    public function getRoles() : array
+    public function getRoles(): array
     {
         if ($this->role === null) {
             return [RoleEnum::ROLE_USER->value];
@@ -150,20 +143,16 @@ class User implements UserInterface, PasswordUpgradableUserInterface
         return $this->prepareRoles();
     }
 
-    /**
-     * @return Role
-     */
-    public function getRole() : Role
+    public function getRole(): Role
     {
         return $this->role;
     }
 
     /**
-     * @param Role $role
      *
      * @return $this
      */
-    public function setRole(Role $role) : static
+    public function setRole(Role $role): static
     {
         $this->role = $role;
 
@@ -172,9 +161,10 @@ class User implements UserInterface, PasswordUpgradableUserInterface
 
     /**
      * {@inheritDoc}
+     *
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -184,27 +174,23 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      *
      * @return $this
      */
-    public function setPassword(string $password) : static
+    public function setPassword(string $password): static
     {
         $this->password = $password;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isActive() : bool
+    public function isActive(): bool
     {
         return $this->active === 1;
     }
 
     /**
-     * @param bool $active
      *
      * @return $this
      */
-    public function setActive(bool $active) : static
+    public function setActive(bool $active): static
     {
         $this->active = $active ? 1 : 0;
 
@@ -214,17 +200,16 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * @return null|PersistentCollection<Post>
      */
-    public function getCreatedPosts() : ?PersistentCollection
+    public function getCreatedPosts(): ?PersistentCollection
     {
         return $this->createdPosts;
     }
 
     /**
-     * @param Post $post
      *
      * @return $this
      */
-    public function addCreatedPost(Post $post) : static
+    public function addCreatedPost(Post $post): static
     {
         if (!$this->createdPosts->contains($post)) {
             $this->createdPosts->add($post);
@@ -236,17 +221,16 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * @return null|PersistentCollection<Post>
      */
-    public function getLastEditedPosts() : ?PersistentCollection
+    public function getLastEditedPosts(): ?PersistentCollection
     {
         return $this->lastEditedPosts;
     }
 
     /**
-     * @param Post $post
      *
      * @return $this
      */
-    public function addLastEditedPost(Post $post) : static
+    public function addLastEditedPost(Post $post): static
     {
         if (!$this->lastEditedPosts->contains($post)) {
             $this->lastEditedPosts->add($post);
@@ -258,7 +242,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * @return null|PersistentCollection<ArchivedPost>
      */
-    public function getArchivedPosts() : ?PersistentCollection
+    public function getArchivedPosts(): ?PersistentCollection
     {
         return $this->archivedPosts;
     }
@@ -266,7 +250,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * @return null|PersistentCollection<PostView>
      */
-    public function getPostsViews() : ?PersistentCollection
+    public function getPostsViews(): ?PersistentCollection
     {
         return $this->postsViews;
     }
@@ -274,21 +258,21 @@ class User implements UserInterface, PasswordUpgradableUserInterface
     /**
      * @return null|PersistentCollection<UserFieldValue>
      */
-    public function getAdditionalFields() : ?PersistentCollection
+    public function getAdditionalFields(): ?PersistentCollection
     {
         return $this->additionalFields;
     }
 
     /** {@inheritDoc} */
-    public function eraseCredentials() : void
+    public function eraseCredentials(): void
     {
-        /** Nothing to erase. */
+        // Nothing to erase.
     }
 
     /**
      * @return string[]
      */
-    protected function prepareRoles() : array
+    protected function prepareRoles(): array
     {
         /** @var ArrayCollection<string> */
         $roles = new ArrayCollection();
@@ -302,7 +286,7 @@ class User implements UserInterface, PasswordUpgradableUserInterface
      * @param RoleEnum[] $parentRoles
      * @param ArrayCollection<string> $roles
      */
-    private function handleParentRoles(array $parentRoles, ArrayCollection $roles) : void
+    private function handleParentRoles(array $parentRoles, ArrayCollection $roles): void
     {
         foreach ($parentRoles as $parentRole) {
             $roles->add($parentRole->value);

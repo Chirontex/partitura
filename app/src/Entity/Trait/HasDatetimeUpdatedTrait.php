@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity\Trait;
@@ -8,27 +9,22 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait HasDatetimeUpdatedTrait
- * @package Partitura\Entity\Trait
  */
 trait HasDatetimeUpdatedTrait
 {
-    #[ORM\Column(type: 'datetime', name: 'DATETIME_UPDATED', nullable: true)]   
+    #[ORM\Column(type: 'datetime', name: 'DATETIME_UPDATED', nullable: true)]
     protected ?DateTime $datetimeUpdated = null;
 
-    /**
-     * @return null|DateTime
-     */
-    public function getDatetimeUpdated() : ?DateTime
+    public function getDatetimeUpdated(): ?DateTime
     {
         return $this->datetimeUpdated;
     }
 
     /**
-     * @param DateTime $datetimeUpdated
      *
      * @return $this
      */
-    public function setDatetimeUpdated(DateTime $datetimeUpdated) : static
+    public function setDatetimeUpdated(DateTime $datetimeUpdated): static
     {
         $this->datetimeUpdated = $datetimeUpdated;
 

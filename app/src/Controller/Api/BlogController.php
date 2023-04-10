@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller\Api;
@@ -12,8 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class BlogController
- * @package Partitura\Controller\Api
- * 
+ *
  * @Route("/api/blog")
  */
 class BlogController extends AbstractController
@@ -27,13 +27,11 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param BlogRequestDto $request
-     * 
-     * @return JsonResponse
-     * 
+     *
+     *
      * @Route("/", name=BlogController::ROUTE_API_BLOG, methods={"GET"})
      */
-    public function blog(BlogRequestDto $request) : JsonResponse
+    public function blog(BlogRequestDto $request): JsonResponse
     {
         return $this->json($this->arrayTransformer->toArray(
             $this->blogResponseFactory->createBlogResponseDto($request)

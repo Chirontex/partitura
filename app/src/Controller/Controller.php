@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller;
@@ -12,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Abstract Partitura Controller.
- * @package Partitura\Controller
  */
 abstract class Controller extends AbstractController
 {
@@ -21,7 +21,7 @@ abstract class Controller extends AbstractController
         string $view,
         array $parameters = [],
         ?Response $response = null
-    ) : Response {
+    ): Response {
         return parent::render($view, $this->prepareParameters($parameters), $response);
     }
 
@@ -30,31 +30,22 @@ abstract class Controller extends AbstractController
      *
      * @return array<string, mixed>
      */
-    protected function prepareParameters(array $parameters = []) : array
+    protected function prepareParameters(array $parameters = []): array
     {
         return array_merge($parameters, $this->getSettings());
     }
 
-    /**
-     * @return Serializer
-     */
-    protected function getSerializer() : Serializer
+    protected function getSerializer(): Serializer
     {
         return Kernel::getInstance()->getService("jms_serializer");
     }
 
-    /**
-     * @return SettingsDtoFactory
-     */
-    protected function getSettingsDtoFactory() : SettingsDtoFactory
+    protected function getSettingsDtoFactory(): SettingsDtoFactory
     {
         return Kernel::getInstance()->getService(SettingsDtoFactory::class);
     }
 
-    /**
-     * @return SettingsDto
-     */
-    protected function createSettingsDto() : SettingsDto
+    protected function createSettingsDto(): SettingsDto
     {
         return $this->getSettingsDtoFactory()->createDto();
     }
@@ -62,7 +53,7 @@ abstract class Controller extends AbstractController
     /**
      * @return array<string, mixed>
      */
-    protected function getSettings() : array
+    protected function getSettings(): array
     {
         return $this->getSerializer()->toArray($this->createSettingsDto());
     }

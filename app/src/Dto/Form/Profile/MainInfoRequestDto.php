@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Dto\Form\Profile;
@@ -9,52 +10,43 @@ use Partitura\Dto\Form\AbstractFormRequestDto;
 
 /**
  * Class MainInfoRequestDto
- * @package Partitura\Dto\Form\Profile
  */
 class MainInfoRequestDto extends AbstractFormRequestDto
 {
     #[Serializer\Type('string')]
-    #[Serializer\SerializedName('first_name')]   
+    #[Serializer\SerializedName('first_name')]
     protected ?string $firstName = null;
 
     #[Serializer\Type('string')]
-    #[Serializer\SerializedName('last_name')]    
+    #[Serializer\SerializedName('last_name')]
     protected ?string $lastName = null;
 
-    /**
-     * @return string
-     */
-    public function getFirstName() : string
+    public function getFirstName(): string
     {
         return (string)$this->firstName;
     }
 
     /**
-     * @param string $firstName
      *
      * @return $this
      */
-    public function setFirstName(string $firstName) : static
+    public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastName() : string
+    public function getLastName(): string
     {
         return (string)$this->lastName;
     }
 
     /**
-     * @param string $lastName
      *
      * @return $this
      */
-    public function setLastName(string $lastName) : static
+    public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
 
@@ -62,7 +54,7 @@ class MainInfoRequestDto extends AbstractFormRequestDto
     }
 
     /** {@inheritDoc} */
-    public function getRouteName() : string
+    public function getRouteName(): string
     {
         return ProfileController::ROUTE_MAIN_INFO;
     }

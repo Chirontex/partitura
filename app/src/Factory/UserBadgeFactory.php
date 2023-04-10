@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory;
@@ -14,21 +15,18 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
 /**
  * Class UserBadgeFactory
- * @package Partitura\Factory
  */
 class UserBadgeFactory
 {
     /**
-     * @param AuthenticationDto $authenticationDto
      *
      * @throws InvalidCredentialsException
-     * @return UserBadge
      */
-    public function createUserBadge(AuthenticationDto $authenticationDto) : UserBadge
+    public function createUserBadge(AuthenticationDto $authenticationDto): UserBadge
     {
         return new UserBadge(
             $authenticationDto->getUsername(),
-            static function (string $username) : User {
+            static function (string $username): User {
                 /** @var ObjectManager */
                 $objectManager = Kernel::getInstance()->getService("doctrine");
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Service\User;
@@ -15,7 +16,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class UserSavingService
- * @package Partitura\Service\User
  */
 class UserSavingService
 {
@@ -33,10 +33,9 @@ class UserSavingService
     }
 
     /**
-     * @param User $user
      * @param bool $flush Warning: previously given users and other entities under EntityManager control will be flushed too!
      */
-    public function saveUser(User $user, bool $flush = false) : void
+    public function saveUser(User $user, bool $flush = false): void
     {
         $user->getId() === 0 ? $this->add($user) : $this->update($user);
 
@@ -49,7 +48,7 @@ class UserSavingService
      * Applies all changes in users to database.
      * Warning: all changes in other entities will be flushed too!
      */
-    public function flush() : void
+    public function flush(): void
     {
         $this->entityManager->flush();
 
@@ -57,7 +56,7 @@ class UserSavingService
          * @param ArrayCollection<User> $userCollection
          * @param string $eventClass
          */
-        $dispatchEventsFn = function (ArrayCollection $userCollection, string $eventClass) : void {
+        $dispatchEventsFn = function (ArrayCollection $userCollection, string $eventClass): void {
             foreach ($userCollection as $user) {
                 $this->eventDispatcher->dispatch(new $eventClass($user));
             }
@@ -69,10 +68,7 @@ class UserSavingService
         $this->initializeCollections();
     }
 
-    /**
-     * @param User $user
-     */
-    protected function add(User $user) : void
+    protected function add(User $user): void
     {
         $this->entityManager->persist($user);
 
@@ -80,10 +76,7 @@ class UserSavingService
         $this->eventDispatcher->dispatch(new BeforeAddEvent($user));
     }
 
-    /**
-     * @param User $user
-     */
-    protected function update(User $user) : void
+    protected function update(User $user): void
     {
         $user->setDatetimeUpdated(new DateTime());
 
@@ -91,7 +84,7 @@ class UserSavingService
         $this->eventDispatcher->dispatch(new BeforeUpdateEvent($user));
     }
 
-    protected function initializeCollections() : void
+    protected function initializeCollections(): void
     {
         $this->newUsers = new ArrayCollection();
         $this->updatedUsers = new ArrayCollection();

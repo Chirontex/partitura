@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event;
@@ -8,7 +9,6 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class BlogViewEvent
- * @package Partitura\Event
  */
 class BlogViewEvent extends Event
 {
@@ -16,20 +16,16 @@ class BlogViewEvent extends Event
     {
     }
 
-    /**
-     * @return BlogResponseDto
-     */
-    public function getBlogResponseDto() : BlogResponseDto
+    public function getBlogResponseDto(): BlogResponseDto
     {
         return $this->blogResponseDto;
     }
 
     /**
-     * @param BlogResponseDto $blogResponseDto
      *
      * @return $this
      */
-    public function setBlogResponseDto(BlogResponseDto $blogResponseDto) : static
+    public function setBlogResponseDto(BlogResponseDto $blogResponseDto): static
     {
         $this->blogResponseDto = $blogResponseDto;
 

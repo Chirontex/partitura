@@ -20,7 +20,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class HandleForm
- * @package Partitura\EventSubscriber\Profile\Security
  */
 class HandleForm implements EventSubscriberInterface
 {
@@ -34,17 +33,16 @@ class HandleForm implements EventSubscriberInterface
     }
 
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [SecurityHandlingProcessEvent::class => "handleEvent"];
     }
 
     /**
-     * @param SecurityHandlingProcessEvent $event
      *
      * @throws ForbiddenAccessException
      */
-    public function handleEvent(SecurityHandlingProcessEvent $event) : void
+    public function handleEvent(SecurityHandlingProcessEvent $event): void
     {
         $requestDto = $event->getRequestDto();
 
@@ -67,15 +65,13 @@ class HandleForm implements EventSubscriberInterface
     }
 
     /**
-     * @param SecurityHandlingProcessEvent $event
-     * @param User $currentUser
      *
      * @throws PasswordUpgradeException
      */
     public function handlePasswordChanging(
         SecurityHandlingProcessEvent $event,
         User $currentUser
-    ) : void {
+    ): void {
         /** @var ChangePasswordRequestDto $requestDto */
         $requestDto = $event->getRequestDto();
 
@@ -91,14 +87,10 @@ class HandleForm implements EventSubscriberInterface
         $event->setResponseParameter("message", "Password changed successfully! All remember-me tokens was removed.");
     }
 
-    /**
-     * @param SecurityHandlingProcessEvent $event
-     * @param User $currentUser
-     */
     public function handleDropRememberMeTokens(
         SecurityHandlingProcessEvent $event,
         User $currentUser
-    ) : void {
+    ): void {
         $this->rememberMeTokensDeletingService->clearAllUserTokens($currentUser);
 
         $this->registry->getManager()->flush();

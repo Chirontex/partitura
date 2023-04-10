@@ -13,7 +13,6 @@ use Partitura\Interfaces\FillerValuesFactoryInterface;
 
 /**
  * Class ProfileFillerValuesFactory
- * @package Partitura\Factory\FillerValues
  */
 abstract class ProfileFillerValuesFactory implements FillerValuesFactoryInterface
 {
@@ -24,17 +23,14 @@ abstract class ProfileFillerValuesFactory implements FillerValuesFactoryInterfac
     }
 
     /** {@inheritDoc} */
-    public function getFillerValuesCollection() : ArrayCollection
+    public function getFillerValuesCollection(): ArrayCollection
     {
         return new ArrayCollection(
             $this->arrayTransformer->toArray($this->createSettingsDto())
         );
     }
 
-    /**
-     * @return SettingsDto
-     */
-    protected function createSettingsDto() : SettingsDto
+    protected function createSettingsDto(): SettingsDto
     {
         $settingsDto = $this->settingsDtoFactory->createDto();
 

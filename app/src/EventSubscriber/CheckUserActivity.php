@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\EventSubscriber;
@@ -10,12 +11,11 @@ use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 
 /**
  * Class CheckUserActivity
- * @package Partitura\EventSubscriber
  */
 class CheckUserActivity implements EventSubscriberInterface
 {
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [
             CheckPassportEvent::class => ["throwIfUserInactive", -10],
@@ -23,11 +23,10 @@ class CheckUserActivity implements EventSubscriberInterface
     }
 
     /**
-     * @param CheckPassportEvent $event
-     * 
+     *
      * @throws AuthenticationException
      */
-    public function throwIfUserInactive(CheckPassportEvent $event) : void
+    public function throwIfUserInactive(CheckPassportEvent $event): void
     {
         $user = $event->getPassport()->getUser();
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Dto\Api;
@@ -8,16 +9,15 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class BlogPostDto
- * @package Partitura\Dto\Api
  */
 class BlogPostDto
 {
     #[Serializer\Type('string')]
-    #[Serializer\SerializedName('title')]   
+    #[Serializer\SerializedName('title')]
     protected ?string $title = null;
 
     #[Serializer\Type('string')]
-    #[Serializer\SerializedName('preview')]    
+    #[Serializer\SerializedName('preview')]
     protected ?string $preview = null;
 
     #[Serializer\Type('string')]
@@ -32,100 +32,80 @@ class BlogPostDto
     #[Serializer\SerializedName('date_created')]
     protected ?string $dateCreated = null;
 
-    /**
-     * @return string
-     */
-    public function getTitle() : string
+    public function getTitle(): string
     {
         return (string)$this->title;
     }
 
     /**
-     * @param string $title
      *
      * @return $this
      */
-    public function setTitle(string $title) : static
+    public function setTitle(string $title): static
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPreview() : string
+    public function getPreview(): string
     {
         return (string)$this->preview;
     }
 
     /**
-     * @param string $preview
      *
      * @return $this
      */
-    public function setPreview(string $preview) : static
+    public function setPreview(string $preview): static
     {
         $this->preview = $preview;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAuthor() : string
+    public function getAuthor(): string
     {
         return (string)$this->author;
     }
 
     /**
-     * @param string $author
      *
      * @return $this
      */
-    public function setAuthor(string $author) : static
+    public function setAuthor(string $author): static
     {
         $this->author = $author;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getUri() : string
+    public function getUri(): string
     {
         return (string)$this->uri;
     }
 
     /**
-     * @param string $uri
      *
      * @return $this
      */
-    public function setUri(string $uri) : static
+    public function setUri(string $uri): static
     {
         $this->uri = $uri;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDateCreated() : string
+    public function getDateCreated(): string
     {
         return (string)$this->dateCreated;
     }
 
     /**
-     * @param null|DateTime $dateCreated
      *
      * @return $this
      */
-    public function setDateCreated(?DateTime $dateCreated) : static
+    public function setDateCreated(?DateTime $dateCreated): static
     {
         $this->dateCreated = $dateCreated?->format("Y-m-d H:i");
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event;
@@ -9,7 +10,6 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class PostViewEvent
- * @package Partitura\Event
  */
 class PostViewEvent extends Event
 {
@@ -19,28 +19,21 @@ class PostViewEvent extends Event
     ) {
     }
 
-    /**
-     * @return Post
-     */
-    public function getPost() : Post
+    public function getPost(): Post
     {
         return $this->post;
     }
 
-    /**
-     * @return PostResponseDto
-     */
-    public function getPostResponseDto() : PostResponseDto
+    public function getPostResponseDto(): PostResponseDto
     {
         return $this->postResponseDto;
     }
 
     /**
-     * @param PostResponseDto $postResponseDto
      *
      * @return $this
      */
-    public function setPostResponseDto(PostResponseDto $postResponseDto) : static
+    public function setPostResponseDto(PostResponseDto $postResponseDto): static
     {
         $this->postResponseDto = $postResponseDto;
 

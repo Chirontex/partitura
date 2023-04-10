@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\EventSubscriber\Profile\MainInfo;
@@ -17,7 +18,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class HandleForm
- * @package Partitura\EventSubscriber\Profile\MainInfo
  */
 class HandleForm implements EventSubscriberInterface
 {
@@ -30,18 +30,17 @@ class HandleForm implements EventSubscriberInterface
     }
 
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [MainInfoHandlingProcessEvent::class => "handleEvent"];
     }
 
     /**
-     * @param MainInfoHandlingProcessEvent $event
-     * 
+     *
      * @throws EntityNotFoundException
      * @throws ForbiddenAccessException
      */
-    public function handleEvent(MainInfoHandlingProcessEvent $event) : void
+    public function handleEvent(MainInfoHandlingProcessEvent $event): void
     {
         $requestDto = $event->getRequestDto();
 
@@ -82,7 +81,7 @@ class HandleForm implements EventSubscriberInterface
 
         $this->userFieldValuesSavingService->saveFromCollection($currentUser, $formFieldsCollection);
 
-        /** @var string $userFieldCode */
+        // @var string $userFieldCode
         foreach (array_diff(
             $userFieldValues->getKeys(),
             $formFieldsCollection->getKeys()
@@ -96,11 +95,10 @@ class HandleForm implements EventSubscriberInterface
     }
 
     /**
-     * @param AbstractFormRequestDto $requestDto
      *
      * @return ArrayCollection<string, mixed>
      */
-    protected function createFormFieldsCollection(AbstractFormRequestDto $requestDto) : ArrayCollection
+    protected function createFormFieldsCollection(AbstractFormRequestDto $requestDto): ArrayCollection
     {
         $formFieldsCollection = new ArrayCollection($this->arrayTransformer->toArray($requestDto));
 

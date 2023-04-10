@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity;
@@ -12,16 +13,15 @@ use Partitura\Repository\ArchivedPostRepository;
 
 /**
  * Posts archive copy entity.
- * @package Partitura\Entity
  */
 #[ORM\Entity(repositoryClass: ArchivedPostRepository::class)]
 #[ORM\Table(name: ArchivedPost::TABLE_NAME)]
 class ArchivedPost
 {
-    use HasIdTrait,
-        HasTitleTrait,
-        HasContentTrait,
-        HasDatetimeCreatedTrait;
+    use HasIdTrait;
+    use HasTitleTrait;
+    use HasContentTrait;
+    use HasDatetimeCreatedTrait;
 
     public const TABLE_NAME = "pt_posts_archive";
 
@@ -46,43 +46,35 @@ class ArchivedPost
         targetEntity: '\Partitura\Entity\User',
         fetch: 'EAGER',
         inversedBy: 'archivedPosts'
-    )]    
+    )]
     protected ?User $author = null;
 
-    /**
-     * @return null|Post
-     */
-    public function getPost() : ?Post
+    public function getPost(): ?Post
     {
         return $this->post;
     }
 
     /**
-     * @param Post $post
      *
      * @return $this
      */
-    public function setPost(Post $post) : static
+    public function setPost(Post $post): static
     {
         $this->post = $post;
 
         return $this;
     }
 
-    /**
-     * @return null|User
-     */
-    public function getAuthor() : ?User
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
     /**
-     * @param User $author
      *
      * @return $this
      */
-    public function setAuthor(User $author) : static
+    public function setAuthor(User $author): static
     {
         $this->author = $author;
 

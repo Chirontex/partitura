@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Dto\Form\Profile\Security;
@@ -8,12 +9,11 @@ use Partitura\Dto\Form\AbstractFormRequestDto;
 
 /**
  * Class SecurityRequestDto
- * @package Partitura\Dto\Form\Profile\Security
  */
 abstract class SecurityRequestDto extends AbstractFormRequestDto
 {
     /** {@inheritDoc} */
-    public function getRouteName() : string
+    public function getRouteName(): string
     {
         return ProfileController::ROUTE_SECURITY;
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Service\User;
@@ -11,7 +12,6 @@ use Partitura\Repository\UserFieldRepository;
 
 /**
  * Class UserFieldValuesGettingService
- * @package Partitura\Service\User
  */
 class UserFieldValuesGettingService
 {
@@ -23,11 +23,10 @@ class UserFieldValuesGettingService
     }
 
     /**
-     * @param User $user
      *
      * @return ArrayCollection<string, string>
      */
-    public function getValuesWithEmpty(User $user) : ArrayCollection
+    public function getValuesWithEmpty(User $user): ArrayCollection
     {
         $result = new ArrayCollection();
         $userFields = $this->userFieldRepository->findAll();

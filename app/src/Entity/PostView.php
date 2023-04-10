@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity;
@@ -11,14 +12,13 @@ use Partitura\Repository\PostViewRepository;
 
 /**
  * Post's view statistics entity.
- * @package Partitura\Entity
  */
 #[ORM\Entity(repositoryClass: PostViewRepository::class)]
 #[ORM\Table(name: PostView::TABLE_NAME)]
 class PostView
 {
-    use HasIdTrait,
-        HasDatetimeCreatedTrait;
+    use HasIdTrait;
+    use HasDatetimeCreatedTrait;
 
     public const TABLE_NAME = "pt_posts_views";
 
@@ -31,7 +31,7 @@ class PostView
         targetEntity: '\Partitura\Entity\Post',
         fetch: 'EAGER',
         inversedBy: 'views'
-    )]    
+    )]
     protected ?Post $post = null;
 
     #[ORM\JoinColumn(
@@ -42,13 +42,13 @@ class PostView
         targetEntity: '\Partitura\Entity\User',
         fetch: 'EAGER',
         inversedBy: 'postsViews'
-    )]    
+    )]
     protected ?User $user = null;
 
     #[ORM\Column(
         type: 'text',
         name: 'IP_ADDRESS'
-    )]    
+    )]
     protected ?string $ipAddress = null;
 
     public function __construct()
@@ -56,60 +56,48 @@ class PostView
         $this->datetimeCreated = new DateTime();
     }
 
-    /**
-     * @return null|Post
-     */
-    public function getPost() : ?Post
+    public function getPost(): ?Post
     {
         return $this->post;
     }
 
     /**
-     * @param Post $post
      *
      * @return $this
      */
-    public function setPost(Post $post) : static
+    public function setPost(Post $post): static
     {
         $this->post = $post;
 
         return $this;
     }
 
-    /**
-     * @return null|User
-     */
-    public function getUser() : ?User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
      *
      * @return $this
      */
-    public function setUser(User $user) : static
+    public function setUser(User $user): static
     {
         $this->user = $user;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getIpAddress() : string
+    public function getIpAddress(): string
     {
         return (string)$this->ipAddress;
     }
 
     /**
-     * @param string $ipAddress
      *
      * @return $this
      */
-    public function setIpAddress(string $ipAddress) : static
+    public function setIpAddress(string $ipAddress): static
     {
         $this->ipAddress = $ipAddress;
 

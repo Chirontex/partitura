@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory;
@@ -11,17 +12,14 @@ use Symfony\Component\Security\Core\Security;
 
 /**
  * Class AuthenticationDtoFactory
- * @package Partitura\Factory
  */
 class AuthenticationDtoFactory
 {
     /**
-     * @param Request $request
      *
      * @throws AuthenticationException
-     * @return AuthenticationDto
      */
-    public function createAuthenticationDto(Request $request) : AuthenticationDto
+    public function createAuthenticationDto(Request $request): AuthenticationDto
     {
         $username = (string)$request->get("_username");
         $password = (string)$request->get("_password");

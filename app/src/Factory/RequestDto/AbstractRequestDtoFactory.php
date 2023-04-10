@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory\RequestDto;
@@ -14,7 +15,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class AbstractRequestDtoFactory
- * @package Partitura\Factory\RequestDto
  */
 abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
 {
@@ -26,24 +26,23 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @throws ArgumentException
      */
-    public function createFromRequest(Request $request) : object
+    public function createFromRequest(Request $request): object
     {
         $dto = $this->createDto($this->prepareDataFromRequest($request));
-        
+
         $this->validate($dto);
 
         return $dto;
     }
 
     /**
-     * @param object $dto
-     * 
+     *
      * @throws ArgumentException
      */
-    protected function validate(object $dto) : void
+    protected function validate(object $dto): void
     {
         $errors = $this->validator->validate($dto);
 
@@ -64,9 +63,8 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
     /**
      * @param ArrayCollection<string, mixed> $data
      *
-     * @return object
      */
-    protected function createDto(ArrayCollection $data) : object
+    protected function createDto(ArrayCollection $data): object
     {
         return $this->arrayTransformer->fromArray($data->toArray(), static::getDtoClass());
     }
@@ -74,7 +72,7 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
     /**
      * @return string[]
      */
-    protected function getFieldNames() : array
+    protected function getFieldNames(): array
     {
         $dto = $this->arrayTransformer->toArray(
             new (static::getDtoClass()),
@@ -85,11 +83,10 @@ abstract class AbstractRequestDtoFactory implements RequestDtoFactoryInterface
     }
 
     /**
-     * @param Request $request
      *
      * @return ArrayCollection<string, mixed>
      */
-    protected function prepareDataFromRequest(Request $request) : ArrayCollection
+    protected function prepareDataFromRequest(Request $request): ArrayCollection
     {
         $result = new ArrayCollection();
 

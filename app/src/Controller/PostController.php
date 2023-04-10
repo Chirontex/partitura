@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller;
@@ -11,7 +12,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class PostController
- * @package Partitura\Controller
  */
 class PostController extends Controller
 {
@@ -20,13 +20,11 @@ class PostController extends Controller
     }
 
     /**
-     * @param Request $request
-     * 
+     *
      * @throws NotFoundHttpException
      *
-     * @return Response
      */
-    public function showPost(Request $request) : Response
+    public function showPost(Request $request): Response
     {
         try {
             return $this->render(

@@ -10,14 +10,13 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 /**
  * Class HandleExceptionJsonResponse
- * @package Partitura\EventSubscriber\ExceptionResponse
  */
 class HandleExceptionJsonResponse extends AbstractHandleExceptionResponse
 {
     use RequestEventSubscriberTrait;
 
     /** {@inheritDoc} */
-    public function handleExceptionResponse(ExceptionEvent $event) : void
+    public function handleExceptionResponse(ExceptionEvent $event): void
     {
         if (!$this->isSubscriberRelevant($event)) {
             return;
@@ -32,7 +31,7 @@ class HandleExceptionJsonResponse extends AbstractHandleExceptionResponse
     }
 
     /** {@inheritDoc} */
-    protected function isSubscriberRelevant(ExceptionEvent $event) : bool
+    protected function isSubscriberRelevant(ExceptionEvent $event): bool
     {
         return $this->isNeedJsonResponse($event->getRequest());
     }

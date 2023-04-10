@@ -6,17 +6,17 @@ use Partitura\Exception\CaseNotFoundException;
 
 /**
  * Interface ViewResolverInterface
- * @package Partitura\Interfaces
  */
 interface ViewResolverInterface
 {
     /**
      * Returns view template path by route name.
      *
-     * @param string $route Route name.
+     * @param string $route route name
      *
-     * @throws CaseNotFoundException Throws if view or route was not found.
-     * @return string View template file path.
+     * @throws CaseNotFoundException throws if view or route was not found
+     *
+     * @return string view template file path
      */
-    public function resolveViewByRoute(string $route) : string;
+    public function resolveViewByRoute(string $route): string;
 }

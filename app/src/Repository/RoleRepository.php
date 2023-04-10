@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Repository;
@@ -10,11 +11,11 @@ use Partitura\Exception\EntityNotFoundException;
 
 /**
  * Roles repository.
- * @package Partitura\Repository
+ *
  * @extends Repository<Role>
- * 
- * @method Role|null find($id, $lockMode = null, $lockVersion = null)
- * @method Role|null findOneBy(array $criteria, array $orderBy = null)
+ *
+ * @method null|Role find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Role findOneBy(array $criteria, array $orderBy = null)
  * @method ArrayCollection<int, Role> findAll()
  * @method ArrayCollection<Role> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -26,12 +27,10 @@ class RoleRepository extends Repository
     }
 
     /**
-     * @param string $code
      *
      * @throws EntityNotFoundException
-     * @return Role
      */
-    public function findByCode(string $code) : Role
+    public function findByCode(string $code): Role
     {
         $role = $this->findOneBy(["code" => $code]);
 

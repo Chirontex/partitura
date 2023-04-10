@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Repository;
@@ -9,7 +10,6 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Basic common repository. Direct use not welcome but possible if need to.
- * @package Partitura\Repository
  */
 class Repository extends ServiceEntityRepository
 {
@@ -20,10 +20,10 @@ class Repository extends ServiceEntityRepository
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return ArrayCollection<object>
      */
-    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null) : ArrayCollection
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null): ArrayCollection
     {
         return new ArrayCollection(parent::findBy($criteria, $orderBy, $limit, $offset));
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Repository;
@@ -9,11 +10,11 @@ use Partitura\Entity\RoleUnitReference;
 
 /**
  * Role unit references repository.
- * @package Partitura\Repository
+ *
  * @extends Repository<RoleUnitReference>
- * 
- * @method RoleUnitReference|null find($id, $lockMode = null, $lockVersion = null)
- * @method RoleUnitReference|null findOneBy(array $criteria, array $orderBy = null)
+ *
+ * @method null|RoleUnitReference find($id, $lockMode = null, $lockVersion = null)
+ * @method null|RoleUnitReference findOneBy(array $criteria, array $orderBy = null)
  * @method ArrayCollection<int, RoleUnitReference> findAll()
  * @method ArrayCollection<RoleUnitReference> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */

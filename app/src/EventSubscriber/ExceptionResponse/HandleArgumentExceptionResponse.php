@@ -13,7 +13,6 @@ use Twig\Environment;
 
 /**
  * Class HandleArgumentExceptionResponse
- * @package Partitura\EventSubscriber\ExceptionResponse
  */
 class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
 {
@@ -24,13 +23,13 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
     }
 
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return ["kernel.exception" => ["handleExceptionResponse", -2]];
     }
 
     /** {@inheritDoc} */
-    public function handleExceptionResponse(ExceptionEvent $event) : void
+    public function handleExceptionResponse(ExceptionEvent $event): void
     {
         if (!$this->isSubscriberRelevant($event)) {
             return;
@@ -62,7 +61,7 @@ class HandleArgumentExceptionResponse extends AbstractHandleExceptionResponse
     }
 
     /** {@inheritDoc} */
-    protected function isSubscriberRelevant(ExceptionEvent $event) : bool
+    protected function isSubscriberRelevant(ExceptionEvent $event): bool
     {
         return $event->getResponse() === null
             && $event->getThrowable() instanceof ArgumentException;

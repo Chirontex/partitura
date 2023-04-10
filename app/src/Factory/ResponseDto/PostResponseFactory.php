@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory\ResponseDto;
@@ -11,7 +12,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class PostResponseFactory
- * @package Partitura\Factory\ResponseDto
  */
 class PostResponseFactory
 {
@@ -22,13 +22,11 @@ class PostResponseFactory
     }
 
     /**
-     * @param string $uri
-     * 
+     *
      * @throws EntityNotFoundException
      *
-     * @return PostResponseDto
      */
-    public function createResponseByUri(string $uri) : PostResponseDto
+    public function createResponseByUri(string $uri): PostResponseDto
     {
         $post = $this->postManager->getPostByUri($uri);
         $postViewEvent = new PostViewEvent(

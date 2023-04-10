@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event\UserSaving;
@@ -8,7 +9,6 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class UserSavingEvent
- * @package Partitura\Event\UserSaving
  */
 abstract class UserSavingEvent extends Event
 {
@@ -16,10 +16,7 @@ abstract class UserSavingEvent extends Event
     {
     }
 
-    /**
-     * @return User
-     */
-    public function getUser() : User
+    public function getUser(): User
     {
         return $this->user;
     }

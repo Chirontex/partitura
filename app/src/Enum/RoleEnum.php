@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Enum;
@@ -9,9 +10,8 @@ use Partitura\Kernel;
 
 /**
  * Enum RoleEnum
- * @package Partitura\Enum
  */
-enum RoleEnum : string
+enum RoleEnum: string
 {
     use GetInstanceByValueTrait;
 
@@ -21,10 +21,7 @@ enum RoleEnum : string
     case ROLE_ADMIN = "ROLE_ADMIN";
     case ROLE_ROOT = "ROLE_ROOT";
 
-    /**
-     * @return string
-     */
-    public function getName() : string
+    public function getName(): string
     {
         return match ($this) {
             self::ROLE_USER => "Пользователь",
@@ -38,7 +35,7 @@ enum RoleEnum : string
     /**
      * @return self[]
      */
-    public function getParents() : array
+    public function getParents(): array
     {
         /** @var ArrayCollection<string, string[]> */
         $roleHierarchy = new ArrayCollection(

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory\ResponseDto;
@@ -16,7 +17,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class BlogResponseFactory
- * @package Partitura\Factory\ResponseDto
  */
 class BlogResponseFactory
 {
@@ -29,18 +29,13 @@ class BlogResponseFactory
         $this->postRepository = $registry->getRepository(Post::class);
     }
 
-    /**
-     * @param BlogRequestDto $requestDto
-     *
-     * @return BlogResponseDto
-     */
-    public function createBlogResponseDto(BlogRequestDto $requestDto) : BlogResponseDto
+    public function createBlogResponseDto(BlogRequestDto $requestDto): BlogResponseDto
     {
         $postsCount = $this->postRepository->count([
             "type" => PostTypeEnum::PUBLISHED->value,
             "inBlog" => 1,
         ]);
-        
+
         if ($requestDto->getLimit() > 0) {
             $fullPages = (int)($postsCount / $requestDto->getLimit());
             $pages = $postsCount % $requestDto->getLimit() > 0 ? $fullPages + 1 : $fullPages;
@@ -60,11 +55,10 @@ class BlogResponseFactory
     }
 
     /**
-     * @param BlogRequestDto $requestDto
      *
      * @return ArrayCollection<BlogPostDto>
      */
-    protected function createBlogPostCollection(BlogRequestDto $requestDto) : ArrayCollection
+    protected function createBlogPostCollection(BlogRequestDto $requestDto): ArrayCollection
     {
         $result = new ArrayCollection();
         $limit = $requestDto->getLimit();

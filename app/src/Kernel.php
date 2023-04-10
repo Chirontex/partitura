@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura;
@@ -16,7 +17,6 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 /**
  * Class Kernel
- * @package Partitura
  */
 class Kernel extends BaseKernel
 {
@@ -24,9 +24,8 @@ class Kernel extends BaseKernel
 
     /**
      * @throws SystemException
-     * @return static
      */
-    public static function getInstance() : static
+    public static function getInstance(): static
     {
         global $app;
 
@@ -42,30 +41,26 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * @param string $id
      *
      * @throws ServiceCircularReferenceException
      * @throws ServiceNotFoundException
-     * @return object
      */
-    public function getService(string $id) : object
+    public function getService(string $id): object
     {
         return $this->getContainer()->get($id);
     }
 
     /**
-     * @param string $name
      *
      * @throws InvalidArgumentException
-     * @return mixed
      */
-    public function getParameter(string $name) : mixed
+    public function getParameter(string $name): mixed
     {
         return $this->getContainer()->getParameter($name);
     }
 
     /** {@inheritDoc} */
-    protected function build(ContainerBuilder $container) : void
+    protected function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

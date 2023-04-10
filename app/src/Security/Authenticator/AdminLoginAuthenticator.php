@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Security\Authenticator;
@@ -34,7 +35,6 @@ use Throwable;
 
 /**
  * Class AdminLoginAuthenticator
- * @package Partitura\Security\Authenticator
  */
 class AdminLoginAuthenticator extends AbstractAuthenticator
 {
@@ -50,13 +50,13 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     }
 
     /** {@inheritDoc} */
-    public function supports(Request $request) : ?bool
+    public function supports(Request $request): ?bool
     {
         return $request->attributes->get("_route") === LoginController::ROUTE_LOGIN;
     }
 
     /** {@inheritDoc} */
-    public function authenticate(Request $request) : Passport
+    public function authenticate(Request $request): Passport
     {
         $authneticationDto = $this->authenticationDtoFactory->createAuthenticationDto($request);
         $userBadge = $this->userBadgeFactory->createUserBadge($authneticationDto);
@@ -104,13 +104,13 @@ class AdminLoginAuthenticator extends AbstractAuthenticator
     }
 
     /** {@inheritDoc} */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName) : ?Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         return new RedirectResponse($this->router->generate(DashboardController::ROUTE_DASHBOARD));
     }
 
     /** {@inheritDoc} */
-    public function onAuthenticationFailure(Request $request, SymfonyAuthenticationException $exception) : ?Response
+    public function onAuthenticationFailure(Request $request, SymfonyAuthenticationException $exception): ?Response
     {
         if ((!$exception instanceof SkipAuthenticationException)) {
             $request->attributes->set(Security::AUTHENTICATION_ERROR, $exception);

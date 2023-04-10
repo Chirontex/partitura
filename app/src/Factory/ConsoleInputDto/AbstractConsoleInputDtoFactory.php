@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory\ConsoleInputDto;
@@ -11,7 +12,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class AbstractConsoleInputDtoFactory
- * @package Partitura\Factory\ConsoleInputDto
  */
 abstract class AbstractConsoleInputDtoFactory
 {
@@ -22,13 +22,11 @@ abstract class AbstractConsoleInputDtoFactory
     }
 
     /**
-     * @param InputInterface $input
-     * 
+     *
      * @throws ArgumentException
      *
-     * @return object
      */
-    public function createByConsoleInput(InputInterface $input) : object
+    public function createByConsoleInput(InputInterface $input): object
     {
         $dtoArr = [];
 
@@ -39,7 +37,7 @@ abstract class AbstractConsoleInputDtoFactory
         $dto = $this->arrayTransformer->fromArray($dtoArr, $this->getDtoClass());
         $validationErrors = $this->validator->validate($dto);
 
-        if (count($validationErrors) <= 0 ) {
+        if (count($validationErrors) <= 0) {
             return $dto;
         }
 
@@ -49,7 +47,7 @@ abstract class AbstractConsoleInputDtoFactory
     /**
      * @return string[]
      */
-    protected function getKeys() : array
+    protected function getKeys(): array
     {
         return array_keys($this->arrayTransformer->toArray(
             new ($this->getDtoClass()),
@@ -57,8 +55,5 @@ abstract class AbstractConsoleInputDtoFactory
         ));
     }
 
-    /**
-     * @return string
-     */
-    abstract protected function getDtoClass() : string;
+    abstract protected function getDtoClass(): string;
 }

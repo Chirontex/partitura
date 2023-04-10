@@ -7,7 +7,6 @@ use Partitura\Interfaces\PartituraExceptionInterface;
 
 /**
  * Class Exception
- * @package Partitura\Exception
  */
 class Exception extends BaseException implements PartituraExceptionInterface
 {

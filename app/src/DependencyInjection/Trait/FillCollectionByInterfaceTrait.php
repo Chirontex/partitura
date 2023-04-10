@@ -10,14 +10,11 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Trait FillCollectionByInterfaceTrait
- * @package Partitura\DependencyInjection\Trait
  */
 trait FillCollectionByInterfaceTrait
 {
     /**
-     * @param ContainerBuilder $container
-     * @param string $interface Название интерфейса сервисов, которые нужно объединить в коллекцию.
-     * @param string $keyGetter Имя метода-геттера, возвращающего ключ для помещения в коллекцию.
+     * @param string $keyGetter имя метода-геттера, возвращающего ключ для помещения в коллекцию
      *
      * @return ArrayCollection<string, Reference>
      */
@@ -25,7 +22,7 @@ trait FillCollectionByInterfaceTrait
         ContainerBuilder $container,
         string $inteface,
         string $keyGetter
-    ) : ArrayCollection {
+    ): ArrayCollection {
         $result = new ArrayCollection();
 
         foreach ($container->getDefinitions() as $definition) {

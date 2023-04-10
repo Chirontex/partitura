@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Resolver;
@@ -10,7 +11,6 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 /**
  * Class RequestDtoResolver
- * @package Partitura\Resolver
  */
 class RequestDtoResolver implements ArgumentValueResolverInterface
 {

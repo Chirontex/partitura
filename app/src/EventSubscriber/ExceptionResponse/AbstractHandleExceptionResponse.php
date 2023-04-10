@@ -13,32 +13,23 @@ use Throwable;
 
 /**
  * Class AbstractHandleExceptionResponse
- * @package Partitura\EventSubscriber\ExceptionResponse
  */
 abstract class AbstractHandleExceptionResponse implements EventSubscriberInterface
 {
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return ["kernel.exception" => ["handleExceptionResponse", -1]];
     }
 
-    /**
-     * @param ExceptionEvent $event
-     */
-    abstract public function handleExceptionResponse(ExceptionEvent $event) : void;
+    abstract public function handleExceptionResponse(ExceptionEvent $event): void;
 
-    /**
-     * @param ExceptionEvent $event
-     *
-     * @return bool
-     */
-    protected function isSubscriberRelevant(ExceptionEvent $event) : bool
+    protected function isSubscriberRelevant(ExceptionEvent $event): bool
     {
         return true;
     }
 
-    protected function getResponseCode(Throwable $exception) : int
+    protected function getResponseCode(Throwable $exception): int
     {
         if ($exception->getCode() > 399) {
             return $exception->getCode();

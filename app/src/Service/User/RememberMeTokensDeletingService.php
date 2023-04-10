@@ -11,7 +11,6 @@ use Partitura\Repository\RememberTokenRepository;
 
 /**
  * Class RememberMeTokensDeletingService
- * @package Partitura\Service\User
  */
 class RememberMeTokensDeletingService
 {
@@ -26,9 +25,8 @@ class RememberMeTokensDeletingService
      * Vipes out all user remember-me tokens.
      * Note: this method will not flush the changes in ObjectManager.
      *
-     * @param User $user
      */
-    public function clearAllUserTokens(User $user) : void
+    public function clearAllUserTokens(User $user): void
     {
         $tokens = $this->rememberTokensRepository->findByUsername($user->getUsername());
 

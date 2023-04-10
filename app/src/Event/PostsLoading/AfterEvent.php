@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event\PostsLoading;
@@ -8,7 +9,6 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class AfterEvent
- * @package Partitura\Event\PostsLoading
  */
 class AfterEvent extends Event
 {
@@ -16,10 +16,7 @@ class AfterEvent extends Event
     {
     }
 
-    /**
-     * @return RouteCollection
-     */
-    public function getRoutes() : RouteCollection
+    public function getRoutes(): RouteCollection
     {
         return $this->routes;
     }

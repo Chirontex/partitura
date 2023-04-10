@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Exception;
@@ -7,7 +8,6 @@ use Throwable;
 
 /**
  * Class ArgumentException
- * @package Partitura\Exception
  */
 class ArgumentException extends LogicException
 {
@@ -27,7 +27,7 @@ class ArgumentException extends LogicException
     /**
      * @return string[]
      */
-    public function getErrorMessages() : array
+    public function getErrorMessages(): array
     {
         return $this->errorMessages;
     }

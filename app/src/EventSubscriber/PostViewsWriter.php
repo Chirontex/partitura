@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\EventSubscriber;
@@ -20,7 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PostViewsWriter
- * @package Partitura\EventSubscriber
  */
 class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
 {
@@ -40,15 +40,12 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
     }
 
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [PostViewEvent::class => "writePostView"];
     }
 
-    /**
-     * @param PostViewEvent $event
-     */
-    public function writePostView(PostViewEvent $event) : void
+    public function writePostView(PostViewEvent $event): void
     {
         $post = $event->getPost();
         $request = Request::createFromGlobals();
@@ -68,11 +65,7 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         }
     }
 
-    /**
-     * @param Post $post
-     * @param PostView $postView
-     */
-    protected function updateRelateCollections(Post $post, PostView $postView) : void
+    protected function updateRelateCollections(Post $post, PostView $postView): void
     {
         $collections = [$post->getViews()];
         $currentUser = $this->currentUserService->getCurrentUser();
@@ -88,13 +81,7 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         }
     }
 
-    /**
-     * @param Post $post
-     * @param Request $request
-     *
-     * @return bool
-     */
-    protected function isPostViewWritingAvailable(Post $post, Request $request) : bool
+    protected function isPostViewWritingAvailable(Post $post, Request $request): bool
     {
         if ($this->isItBotViewing($request)) {
             return false;
@@ -126,12 +113,7 @@ class PostViewsWriter implements EventSubscriberInterface, LoggerAwareInterface
         return true;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
-    protected function isItBotViewing(Request $request) : bool
+    protected function isItBotViewing(Request $request): bool
     {
         $userAgent = (string)$request->server->get("HTTP_USER_AGENT");
 

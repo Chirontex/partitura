@@ -11,7 +11,6 @@ use Partitura\Interfaces\FillerValuesFactoryInterface;
 
 /**
  * Class RouteDataDtoFactory
- * @package Partitura\Factory
  */
 class RouteDataDtoFactory
 {
@@ -24,15 +23,13 @@ class RouteDataDtoFactory
     }
 
     /**
-     * @param string $view
-     * @param FillerValuesFactoryInterface $factory
      *
      * @return $this
      */
     public function setFillerValueFactory(
         string $view,
         FillerValuesFactoryInterface $factory
-    ) : static {
+    ): static {
         $this->fillerValuesFactoryCollection->set($view, $factory);
 
         return $this;
@@ -40,11 +37,12 @@ class RouteDataDtoFactory
 
     /**
      * Возвращает коллекцию DTO, созданных на основе данных из параметра routes_data.
+     *
      * @param array<string, array<string, mixed>> $data
      *
-     * @return array<string, RouteDataDto> Имя маршрута также служит ключом для соответствующего DTO в массиве.
+     * @return array<string, RouteDataDto> имя маршрута также служит ключом для соответствующего DTO в массиве
      */
-    public function createRouteDataDtoCollection(array $data) : array
+    public function createRouteDataDtoCollection(array $data): array
     {
         if (empty($data)) {
             return [];
@@ -68,7 +66,7 @@ class RouteDataDtoFactory
             /** @var FillerValuesFactoryInterface $fillerValuesFactory */
             $fillerValuesFactory = $this->fillerValuesFactoryCollection->get($view);
 
-            $dto->setFillerCallback(static function() use ($fillerValuesFactory) : ArrayCollection {
+            $dto->setFillerCallback(static function () use ($fillerValuesFactory): ArrayCollection {
                 return $fillerValuesFactory->getFillerValuesCollection();
             });
         }

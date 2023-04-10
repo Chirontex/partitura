@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\DependencyInjection;
@@ -14,7 +15,7 @@ class RequestDtoFactoryCompilerPass implements CompilerPassInterface
     use FillCollectionByInterfaceTrait;
 
     /** {@inheritDoc} */
-    public function process(ContainerBuilder $container) : void
+    public function process(ContainerBuilder $container): void
     {
         $locatorDefinition = $container->getDefinition(RequestDtoFactoryLocator::class);
         $references = $this->getReferences(

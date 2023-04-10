@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\EventSubscriber;
@@ -18,7 +19,6 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * Class CheckUserActivityOnRequest
- * @package Partitura\EventSubscriber
  */
 class CheckUserActivityOnRequest implements EventSubscriberInterface
 {
@@ -32,24 +32,21 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
     }
 
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [
             "kernel.request" => ["handleChecking", 0],
         ];
     }
 
-    /**
-     * @param RequestEvent $event
-     */
-    public function handleChecking(RequestEvent $event) : void
+    public function handleChecking(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {
             return;
         }
 
         $request = $event->getRequest();
-        
+
         if (!$this->isRequestAbleToCheck($request)) {
             return;
         }
@@ -71,12 +68,7 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
         );
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
-    protected function isRequestAbleToCheck(Request $request) : bool
+    protected function isRequestAbleToCheck(Request $request): bool
     {
         $requestUri = $request->getRequestUri();
         $bannedUri = $this->getRouteUri(BannedController::ROUTE_BANNED);
@@ -85,20 +77,12 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
         return $requestUri !== $bannedUri && $requestUri !== $logoutUri;
     }
 
-    /**
-     * @param string $routeName
-     * 
-     * @return string
-     */
-    protected function getRouteUri(string $routeName) : string
+    protected function getRouteUri(string $routeName): string
     {
         return $this->router->generate($routeName);
     }
 
-    /**
-     * @return JsonResponse
-     */
-    protected function createJsonResponse() : JsonResponse
+    protected function createJsonResponse(): JsonResponse
     {
         return new JsonResponse(
             [
@@ -109,10 +93,7 @@ class CheckUserActivityOnRequest implements EventSubscriberInterface
         );
     }
 
-    /**
-     * @return RedirectResponse
-     */
-    protected function createRedirectResponse() : RedirectResponse
+    protected function createRedirectResponse(): RedirectResponse
     {
         return new RedirectResponse($this->getRouteUri(BannedController::ROUTE_BANNED));
     }

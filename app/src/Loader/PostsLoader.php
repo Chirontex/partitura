@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Loader;
@@ -19,7 +20,6 @@ use Throwable;
 
 /**
  * Class PostsLoader
- * @package Partitura\Loader
  */
 class PostsLoader extends Loader
 {
@@ -36,10 +36,10 @@ class PostsLoader extends Loader
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @throws PostsLoaderAlreadyLoadedException
      */
-    public function load(mixed $resource, ?string $type = null) : RouteCollection
+    public function load(mixed $resource, ?string $type = null): RouteCollection
     {
         if ($this->loaded) {
             throw new PostsLoaderAlreadyLoadedException();
@@ -82,7 +82,7 @@ class PostsLoader extends Loader
     }
 
     /** {@inheritDoc} */
-    public function supports(mixed $resource, ?string $type = null) : bool
+    public function supports(mixed $resource, ?string $type = null): bool
     {
         return $type === "posts";
     }

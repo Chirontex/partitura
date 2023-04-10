@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller\Profile;
@@ -17,13 +18,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ProfileController
- * @package Partitura\Controller\Profile
- * 
+ *
  * @Route("/profile")
  */
 class ProfileController extends AbstractFormController
 {
     public const ROUTE_MAIN_INFO = "partitura_profile_main_info";
+
     public const ROUTE_SECURITY = "partitura_profile_security";
 
     public function __construct(
@@ -35,13 +36,11 @@ class ProfileController extends AbstractFormController
     }
 
     /**
-     * @param MainInfoRequestDto $requestDto 
      *
-     * @return Response
-     * 
+     *
      * @Route("/", name=ProfileController::ROUTE_MAIN_INFO, methods={"GET", "POST"})
      */
-    public function mainInfo(MainInfoRequestDto $requestDto) : Response
+    public function mainInfo(MainInfoRequestDto $requestDto): Response
     {
         $parameters = array_merge(
             $this->processForm(new MainInfoHandlingProcessEvent($requestDto)),
@@ -55,13 +54,11 @@ class ProfileController extends AbstractFormController
     }
 
     /**
-     * @param SecurityRequestDto $requestDto
      *
-     * @return Response
-     * 
+     *
      * @Route("/security", name=ProfileController::ROUTE_SECURITY, methods={"GET", "POST"})
      */
-    public function security(SecurityRequestDto $requestDto) : Response
+    public function security(SecurityRequestDto $requestDto): Response
     {
         $parameters = array_merge(
             $this->processForm(new SecurityHandlingProcessEvent($requestDto)),
@@ -74,10 +71,7 @@ class ProfileController extends AbstractFormController
         );
     }
 
-    /**
-     * @param SettingsDto $settingsDto
-     */
-    public static function completeSettingsDto(SettingsDto $settingsDto) : void
+    public static function completeSettingsDto(SettingsDto $settingsDto): void
     {
         $routes = $settingsDto->getRoutes();
 
@@ -85,7 +79,7 @@ class ProfileController extends AbstractFormController
     }
 
     /** {@inheritDoc} */
-    protected function createSettingsDto() : SettingsDto
+    protected function createSettingsDto(): SettingsDto
     {
         $settingsDto = parent::createSettingsDto();
 

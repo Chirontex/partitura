@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Repository;
@@ -9,11 +10,11 @@ use Partitura\Entity\PostView;
 
 /**
  * Posts views repository.
- * @package Partitura\Repository
+ *
  * @extends Repository<PostView>
- * 
- * @method PostView|null find($id, $lockMode = null, $lockVersion = null)
- * @method PostView|null findOneBy(array $criteria, array $orderBy = null)
+ *
+ * @method null|PostView find($id, $lockMode = null, $lockVersion = null)
+ * @method null|PostView findOneBy(array $criteria, array $orderBy = null)
  * @method ArrayCollection<int, PostView> findAll()
  * @method ArrayCollection<PostView> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */

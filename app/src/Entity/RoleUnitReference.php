@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity;
@@ -8,10 +9,9 @@ use Partitura\Repository\RoleUnitReferenceRepository;
 
 /**
  * Role unit reference entity.
- * @package Partitura\Entity
  */
 #[ORM\Entity(repositoryClass: RoleUnitReferenceRepository::class)]
-#[ORM\Table(name: RoleUnitReference::TABLE_NAME)] 
+#[ORM\Table(name: RoleUnitReference::TABLE_NAME)]
 class RoleUnitReference
 {
     public const TABLE_NAME = "pt_role_unit_references";
@@ -25,7 +25,7 @@ class RoleUnitReference
     #[ORM\ManyToOne(
         targetEntity: '\Partitura\Entity\Role',
         inversedBy: 'unitReferences'
-    )]    
+    )]
     protected ?Role $role = null;
 
     #[ORM\Id]
@@ -37,43 +37,35 @@ class RoleUnitReference
     #[ORM\ManyToOne(
         targetEntity: '\Partitura\Entity\Unit',
         inversedBy: 'roleReferences'
-    )]    
+    )]
     protected ?Unit $unit = null;
 
-    /**
-     * @return Role
-     */
-    public function getRole() : Role
+    public function getRole(): Role
     {
         return $this->role;
     }
 
     /**
-     * @param Role $role
      *
      * @return $this
      */
-    public function setRole(Role $role) : static
+    public function setRole(Role $role): static
     {
         $this->role = $role;
 
         return $this;
     }
 
-    /**
-     * @return Unit
-     */
-    public function getUnit() : Unit
+    public function getUnit(): Unit
     {
         return $this->unit;
     }
 
     /**
-     * @param Unit $unit
      *
      * @return $this
      */
-    public function setUnit(Unit $unit) : static
+    public function setUnit(Unit $unit): static
     {
         $this->unit = $unit;
 

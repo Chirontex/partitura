@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory;
@@ -13,7 +14,6 @@ use Partitura\Service\User\CurrentUserService;
 
 /**
  * Class SettingsDtoFactory
- * @package Partitura\Factory
  */
 class SettingsDtoFactory
 {
@@ -21,10 +21,7 @@ class SettingsDtoFactory
     {
     }
 
-    /**
-     * @return SettingsDto
-     */
-    public function createDto() : SettingsDto
+    public function createDto(): SettingsDto
     {
         /** @var null|User */
         $user = $this->currentUserService->getCurrentUser();
@@ -43,12 +40,7 @@ class SettingsDtoFactory
             ));
     }
 
-    /**
-     * @param string $actionRoute
-     *
-     * @return SettingsDto
-     */
-    public function createDtoForLoginForm(string $actionRoute) : SettingsDto
+    public function createDtoForLoginForm(string $actionRoute): SettingsDto
     {
         $dto = $this->createDto();
 

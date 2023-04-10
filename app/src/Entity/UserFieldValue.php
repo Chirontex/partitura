@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity;
@@ -9,7 +10,6 @@ use Partitura\Repository\UserFieldValueRepository;
 
 /**
  * Class UserFieldValue
- * @package Partitura\Entity
  */
 #[ORM\Entity(repositoryClass: UserFieldValueRepository::class)]
 #[ORM\Table(name: UserFieldValue::TABLE_NAME)]
@@ -28,7 +28,7 @@ class UserFieldValue
         targetEntity: '\Partitura\Entity\User',
         fetch: 'EAGER',
         inversedBy: 'additionalFields'
-    )]    
+    )]
     protected ?User $user = null;
 
     #[ORM\JoinColumn(
@@ -39,69 +39,57 @@ class UserFieldValue
     #[ORM\ManyToOne(
         targetEntity: '\Partitura\Entity\UserField',
         inversedBy: 'values'
-    )]    
+    )]
     protected ?UserField $userField = null;
 
     #[ORM\Column(
         type: 'text',
         name: 'VALUE'
-    )]    
+    )]
     protected ?string $value = null;
 
-    /**
-     * @return User
-     */
-    public function getUser() : User
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
      *
      * @return $this
      */
-    public function setUser(User $user) : static
+    public function setUser(User $user): static
     {
         $this->user = $user;
 
         return $this;
     }
 
-    /**
-     * @return UserField
-     */
-    public function getField() : UserField
+    public function getField(): UserField
     {
         return $this->userField;
     }
 
     /**
-     * @param UserField $userField
      *
      * @return $this
      */
-    public function setField(UserField $userField) : static
+    public function setField(UserField $userField): static
     {
         $this->userField = $userField;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getValue() : string
+    public function getValue(): string
     {
         return (string)$this->value;
     }
 
     /**
-     * @param string $value
      *
      * @return $this
      */
-    public function setValue(string $value) : static
+    public function setValue(string $value): static
     {
         $this->value = $value;
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller\Profile;
@@ -8,8 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class LogoutController
- * @package Partitura\Controller\Profile
- * 
+ *
  * @Route("/profile/logout")
  */
 class LogoutController
@@ -19,7 +19,7 @@ class LogoutController
     /**
      * @Route("/", name=LogoutController::ROUTE_LOGOUT, methods={"GET"})
      */
-    public function logout() : void
+    public function logout(): void
     {
         throw new SystemException("Something is wrong with logout.");
     }

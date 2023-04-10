@@ -15,7 +15,7 @@ class FillerValuesFactoryCompilerPass implements CompilerPassInterface
     use FillCollectionByInterfaceTrait;
 
     /** {@inheritDoc} */
-    public function process(ContainerBuilder $container) : void
+    public function process(ContainerBuilder $container): void
     {
         $routeDataDtoFactoryDefinition = $container->getDefinition(RouteDataDtoFactory::class);
         $references = $this->getReferences(

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity;
@@ -17,18 +18,17 @@ use Partitura\Repository\PostRepository;
 
 /**
  * Post main entity.
- * @package Partitura\Entity
  */
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\Table(name: Post::TABLE_NAME)]
 class Post
 {
-    use HasIdTrait,
-        HasNameTrait,
-        HasTitleTrait,
-        HasContentTrait,
-        HasDatetimeCreatedTrait,
-        HasDatetimeUpdatedTrait;
+    use HasIdTrait;
+    use HasNameTrait;
+    use HasTitleTrait;
+    use HasContentTrait;
+    use HasDatetimeCreatedTrait;
+    use HasDatetimeUpdatedTrait;
 
     public const TABLE_NAME = "pt_posts";
 
@@ -40,14 +40,14 @@ class Post
         targetEntity: '\Partitura\Entity\Post',
         fetch: 'EAGER',
         inversedBy: 'child'
-    )]    
+    )]
     protected ?Post $parent = null;
 
     #[ORM\OneToOne(
         targetEntity: '\Partitura\Entity\Post',
         fetch: 'EAGER',
         mappedBy: 'parent'
-    )]    
+    )]
     protected ?Post $child = null;
 
     #[ORM\JoinColumn(
@@ -59,7 +59,7 @@ class Post
         targetEntity: '\Partitura\Entity\User',
         fetch: 'EAGER',
         inversedBy: 'createdPosts'
-    )]    
+    )]
     protected ?User $author = null;
 
     #[ORM\JoinColumn(
@@ -71,29 +71,29 @@ class Post
         targetEntity: '\Partitura\Entity\User',
         fetch: 'EAGER',
         inversedBy: 'lastEditedPosts'
-    )]    
+    )]
     protected ?User $lastEditor = null;
 
     #[ORM\Column(
         type: 'string',
         name: 'TYPE',
         length: 180
-    )]    
+    )]
     protected ?string $type = null;
 
     #[ORM\Column(
         type: 'smallint',
         name: 'IN_BLOG',
         options: ["default" => 1]
-    )]    
+    )]
     protected int $inBlog = 1;
 
-    #[ORM\Column(type: 'text', name: 'PREVIEW')]    
+    #[ORM\Column(type: 'text', name: 'PREVIEW')]
     protected ?string $preview = null;
 
     /**
      * @var null|PersistentCollection<ArchivedPost>
-    */
+     */
     #[ORM\OneToMany(
         targetEntity: '\Partitura\Entity\ArchivedPost',
         mappedBy: 'post'
@@ -114,20 +114,16 @@ class Post
         $this->type = PostTypeEnum::DRAFT->value;
     }
 
-    /**
-     * @return null|static
-     */
-    public function getParent() : ?static
+    public function getParent(): ?static
     {
         return $this->parent;
     }
 
     /**
-     * @param null|Post $parent
      *
      * @return $this
      */
-    public function setParent(?Post $parent) : static
+    public function setParent(?Post $parent): static
     {
         if ($this->parent !== null) {
             $this->parent->setChild(null);
@@ -142,62 +138,49 @@ class Post
         return $this;
     }
 
-    /**
-     * @return null|static
-     */
-    public function getChild() : ?static
+    public function getChild(): ?static
     {
         return $this->child;
     }
 
     /**
      * This method did not update relation. Use setParent() of the child post to do it.
-     * 
-     * @param null|Post $child
      *
      * @return $this
      */
-    public function setChild(?Post $child) : static
+    public function setChild(?Post $child): static
     {
         $this->child = $child;
 
         return $this;
     }
 
-    /**
-     * @return null|User
-     */
-    public function getAuthor() : ?User
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
     /**
-     * @param User $author
      *
      * @return $this
      */
-    public function setAuthor(User $author) : static
+    public function setAuthor(User $author): static
     {
         $this->author = $author;
 
         return $this;
     }
 
-    /**
-     * @return null|User
-     */
-    public function getLastEditor() : ?User
+    public function getLastEditor(): ?User
     {
         return $this->lastEditor;
     }
 
     /**
-     * @param User $lastEditor
      *
      * @return $this
      */
-    public function setLastEditor(User $lastEditor) : static
+    public function setLastEditor(User $lastEditor): static
     {
         $this->lastEditor = $lastEditor;
 
@@ -206,59 +189,49 @@ class Post
 
     /**
      * @throws CaseNotFoundException
-     * @return PostTypeEnum
      */
-    public function getType() : PostTypeEnum
+    public function getType(): PostTypeEnum
     {
         return PostTypeEnum::getInstanceByValue($this->type);
     }
 
     /**
-     * @param PostTypeEnum $type
      *
      * @return $this
      */
-    public function setType(PostTypeEnum $type) : static
+    public function setType(PostTypeEnum $type): static
     {
         $this->type = $type->value;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isInBlog() : bool
+    public function isInBlog(): bool
     {
         return $this->inBlog === 1;
     }
 
     /**
-     * @param bool $isInBlog
      *
      * @return $this
      */
-    public function setInBlog(bool $isInBlog) : static
+    public function setInBlog(bool $isInBlog): static
     {
         $this->inBlog = $isInBlog ? 1 : 0;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPreview() : string
+    public function getPreview(): string
     {
         return (string)$this->preview;
     }
 
     /**
-     * @param string $preview
      *
      * @return $this
      */
-    public function setPreview(string $preview) : static
+    public function setPreview(string $preview): static
     {
         $this->preview = $preview;
 
@@ -268,7 +241,7 @@ class Post
     /**
      * @return null|PersistentCollection<ArchivedPost>
      */
-    public function getArchive() : ?PersistentCollection
+    public function getArchive(): ?PersistentCollection
     {
         return $this->archive;
     }
@@ -276,15 +249,12 @@ class Post
     /**
      * @return null|PersistentCollection<PostView>
      */
-    public function getViews() : ?PersistentCollection
+    public function getViews(): ?PersistentCollection
     {
         return $this->views;
     }
 
-    /**
-     * @return string
-     */
-    public function getUri() : string
+    public function getUri(): string
     {
         $names = [];
         $post = $this;

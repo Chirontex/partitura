@@ -12,7 +12,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class CheckCsrfToken
- * @package Partitura\EventSubscriber
  */
 class CheckCsrfToken implements EventSubscriberInterface
 {
@@ -21,15 +20,12 @@ class CheckCsrfToken implements EventSubscriberInterface
     }
 
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [CsrfTokenValidationEvent::class => ["checkToken", PHP_INT_MAX]];
     }
 
-    /**
-     * @param CsrfTokenValidationEvent $event
-     */
-    public function checkToken(CsrfTokenValidationEvent $event) : void
+    public function checkToken(CsrfTokenValidationEvent $event): void
     {
         $requestDto = $event->getRequestDto();
 

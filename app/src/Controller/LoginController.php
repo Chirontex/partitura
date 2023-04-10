@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller;
@@ -11,8 +12,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class LoginController
- * @package Partitura\Controller
- * 
+ *
  * @Route("/login")
  */
 class LoginController extends AbstractLoginController
@@ -26,13 +26,11 @@ class LoginController extends AbstractLoginController
     }
 
     /**
-     * @param AuthenticationUtils $authenticationUtils
-     * 
-     * @return Response
-     * 
+     *
+     *
      * @Route("/", name=LoginController::ROUTE_LOGIN, methods={"GET", "POST"})
      */
-    public function login(AuthenticationUtils $authenticationUtils) : Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser() !== null) {
             return $this->redirectToRoute(MainController::ROUTE_INDEX);
@@ -50,7 +48,7 @@ class LoginController extends AbstractLoginController
     }
 
     /** {@inheritDoc} */
-    protected function getActionRoute() : string
+    protected function getActionRoute(): string
     {
         return static::ROUTE_LOGIN;
     }

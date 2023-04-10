@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory;
@@ -9,18 +10,10 @@ use Partitura\Entity\UserFieldValue;
 
 /**
  * Class UserFieldValueFactory
- * @package Partitura\Factory
  */
 class UserFieldValueFactory
 {
-    /**
-     * @param UserField $userField
-     * @param User $user
-     * @param string $value
-     *
-     * @return UserFieldValue
-     */
-    public function create(UserField $userField, User $user, string $value) : UserFieldValue
+    public function create(UserField $userField, User $user, string $value): UserFieldValue
     {
         return (new UserFieldValue())
             ->setField($userField)

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Factory;
@@ -12,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PostViewFactory
- * @package Partitura\Factory
  */
 class PostViewFactory
 {
@@ -21,18 +21,15 @@ class PostViewFactory
     }
 
     /**
-     * @param Post $post
-     * @param Request $request
-     * 
+     *
      * @throws PostViewException
      *
-     * @return PostView
      */
-    public function createByPostRequest(Post $post, Request $request) : PostView
+    public function createByPostRequest(Post $post, Request $request): PostView
     {
         $clientIp = $request->getClientIp();
         $currentUser = $this->currentUserService->getCurrentUser();
-        
+
         if (empty($clientIp) && !($currentUser instanceof User)) {
             throw new PostViewException("Requesting party cannot be identified by IP or user data.");
         }

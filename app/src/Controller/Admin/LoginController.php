@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller\Admin;
@@ -15,8 +16,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class LoginController
- * @package Partitura\Controller\Admin
- * 
+ *
  * @Route("/admin/login")
  */
 class LoginController extends AbstractLoginController
@@ -30,13 +30,11 @@ class LoginController extends AbstractLoginController
     }
 
     /**
-     * @param AuthenticationUtils $authenticationUtils
-     * 
-     * @return Response
-     * 
+     *
+     *
      * @Route("/", name=LoginController::ROUTE_LOGIN, methods={"GET", "POST"})
      */
-    public function login(AuthenticationUtils $authenticationUtils) : Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         /** @var null|User */
         $user = $this->getUser();
@@ -61,7 +59,7 @@ class LoginController extends AbstractLoginController
     }
 
     /** {@inheritDoc} */
-    protected function getActionRoute() : string
+    protected function getActionRoute(): string
     {
         return static::ROUTE_LOGIN;
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Entity;
@@ -14,45 +15,43 @@ use Partitura\Repository\RoleRepository;
 
 /**
  * Role entity.
- * @package Partitura\Entity
  */
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 #[ORM\Table(name: Role::TABLE_NAME)]
 class Role
 {
-    use HasIdTrait,
-        HasCodeTrait,
-        HasNameTrait;
+    use HasIdTrait;
+    use HasCodeTrait;
+    use HasNameTrait;
 
     public const TABLE_NAME = "pt_roles";
 
     #[ORM\OneToMany(
         targetEntity: '\Partitura\Entity\User',
         mappedBy: 'role'
-    )]    
+    )]
     protected ?PersistentCollection $users = null;
 
     #[ORM\OneToMany(
         targetEntity: 'Partitura\Entity\RoleUnitReference',
         mappedBy: 'role'
-    )]    
+    )]
     protected ?PersistentCollection $unitReferences = null;
 
     /**
      * @return null|PersistentCollection<User>
      */
-    public function getUsers() : ?PersistentCollection
+    public function getUsers(): ?PersistentCollection
     {
         return $this->users;
     }
 
     /**
      * Remove user from old role's list and add to this role.
-     * @param User $user
      *
      * @return $this
      */
-    public function addUser(User $user) : static
+    public function addUser(User $user): static
     {
         $user->getRole()->getUsers()->removeElement($user);
         $user->setRole($this);
@@ -65,16 +64,15 @@ class Role
     /**
      * @return null|PersistentCollection<RoleUnitReference>
      */
-    public function getUnitReferences() : ?PersistentCollection
+    public function getUnitReferences(): ?PersistentCollection
     {
         return $this->unitReferences;
     }
 
     /**
      * @throws CaseNotFoundException
-     * @return RoleEnum
      */
-    public function getEnumInstance() : RoleEnum
+    public function getEnumInstance(): RoleEnum
     {
         return RoleEnum::getInstanceByValue($this->getCode());
     }

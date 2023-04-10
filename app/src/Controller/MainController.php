@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller;
@@ -9,8 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class MainController
- * @package Partitura\Controller
- * 
+ *
  * @Route("/")
  */
 class MainController extends Controller
@@ -22,11 +22,10 @@ class MainController extends Controller
     }
 
     /**
-     * @return Response
-     * 
+     *
      * @Route("/", name=MainController::ROUTE_INDEX, methods={"GET"})
      */
-    public function index() : Response
+    public function index(): Response
     {
         // TODO: Добавить title для шаблона.
         return $this->render($this->viewResolver->resolveViewByRoute(static::ROUTE_INDEX));

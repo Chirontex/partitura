@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller;
@@ -12,7 +13,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Class AbstractFormController
- * @package Partitura\Controller
  */
 abstract class AbstractFormController extends Controller
 {
@@ -21,13 +21,13 @@ abstract class AbstractFormController extends Controller
     }
 
     /**
-     * @param RequestDtoHandleEvent $requestDtoHandleEvent
      *
      * @throws AccessDeniedException
      * @throws InvalidArgumentException
+     *
      * @return array<string, mixed>
      */
-    protected function processForm(RequestDtoHandleEvent $requestDtoHandleEvent) : array
+    protected function processForm(RequestDtoHandleEvent $requestDtoHandleEvent): array
     {
         $requestDto = $requestDtoHandleEvent->getRequestDto();
 

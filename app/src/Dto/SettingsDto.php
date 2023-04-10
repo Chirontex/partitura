@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Dto;
@@ -8,7 +9,6 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class SettingsDto
- * @package Partitura\Dto
  */
 class SettingsDto
 {
@@ -30,40 +30,32 @@ class SettingsDto
     #[Serializer\SerializedName('user')]
     protected ArrayCollection $userData;
 
-    /**
-     * @return string
-     */
-    public function getSitename() : string
+    public function getSitename(): string
     {
         return (string)$this->sitename;
     }
 
     /**
-     * @param string $sitename
      *
      * @return $this
      */
-    public function setSitename(string $sitename) : static
+    public function setSitename(string $sitename): static
     {
         $this->sitename = $sitename;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isUserPanelAvailable() : bool
+    public function isUserPanelAvailable(): bool
     {
         return (bool)$this->isUserPanelAvailable;
     }
 
     /**
-     * @param bool $isUserPanelAvailable
      *
      * @return $this
      */
-    public function setUserPanelAvailable(bool $isUserPanelAvailable) : static
+    public function setUserPanelAvailable(bool $isUserPanelAvailable): static
     {
         $this->isUserPanelAvailable = $isUserPanelAvailable;
 
@@ -73,7 +65,7 @@ class SettingsDto
     /**
      * @return ArrayCollection<string, string>
      */
-    public function getRoutes() : ArrayCollection
+    public function getRoutes(): ArrayCollection
     {
         if (!($this->routes instanceof ArrayCollection)) {
             $this->routes = new ArrayCollection();
@@ -87,7 +79,7 @@ class SettingsDto
      *
      * @return $this
      */
-    public function setRoutes(ArrayCollection $routes) : static
+    public function setRoutes(ArrayCollection $routes): static
     {
         $this->routes = $routes;
 
@@ -97,7 +89,7 @@ class SettingsDto
     /**
      * @return ArrayCollection<string, mixed>
      */
-    public function getUserData() : ArrayCollection
+    public function getUserData(): ArrayCollection
     {
         if (!($this->userData instanceof ArrayCollection)) {
             $this->userData = new ArrayCollection();
@@ -111,7 +103,7 @@ class SettingsDto
      *
      * @return $this
      */
-    public function setUserData(ArrayCollection $userData) : static
+    public function setUserData(ArrayCollection $userData): static
     {
         $this->userData = $userData;
 

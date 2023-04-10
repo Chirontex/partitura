@@ -13,7 +13,6 @@ use Partitura\Service\User\UserFieldValuesGettingService;
 
 /**
  * Class MainInfoFillerValuesFactory
- * @package Partitura\Factory\FillerValues
  */
 class MainInfoFillerValuesFactory extends ProfileFillerValuesFactory
 {
@@ -46,7 +45,7 @@ class MainInfoFillerValuesFactory extends ProfileFillerValuesFactory
     }
 
     /** {@inheritDoc} */
-    public static function getView() : string
+    public static function getView(): string
     {
         return "genesis/profile/main_info.html.twig";
     }

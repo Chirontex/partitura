@@ -13,7 +13,6 @@ use Partitura\Interfaces\RouteDataGettingServiceInterface;
 
 /**
  * Class RouteDataGettingService
- * @package Partitura\Service
  */
 class RouteDataGettingService implements RouteDataGettingServiceInterface
 {
@@ -26,7 +25,7 @@ class RouteDataGettingService implements RouteDataGettingServiceInterface
     }
 
     /** {@inheritDoc} */
-    public function getRouteDataByName(string $name) : ?RouteDataDto
+    public function getRouteDataByName(string $name): ?RouteDataDto
     {
         $this->initializeRouteDataDtoCollection();
 
@@ -39,7 +38,7 @@ class RouteDataGettingService implements RouteDataGettingServiceInterface
         return null;
     }
 
-    protected function initializeRouteDataDtoCollection() : void
+    protected function initializeRouteDataDtoCollection(): void
     {
         if (
             $this->routeDataDtoCollection instanceof ArrayCollection
@@ -58,7 +57,7 @@ class RouteDataGettingService implements RouteDataGettingServiceInterface
     /**
      * @return array<string, array<string, mixed>>
      */
-    protected function getRoutesDataFromContainer() : array
+    protected function getRoutesDataFromContainer(): array
     {
         try {
             $data = $this->getRawRoutesDataFromContainer();
@@ -75,9 +74,10 @@ class RouteDataGettingService implements RouteDataGettingServiceInterface
 
     /**
      * @throws InvalidArgumentException
+     *
      * @return array<string, array<string, mixed>>
      */
-    protected function getRawRoutesDataFromContainer() : array
+    protected function getRawRoutesDataFromContainer(): array
     {
         $dataRaw = Kernel::getInstance()->getParameter("routes_data");
 

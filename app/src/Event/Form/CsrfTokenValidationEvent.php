@@ -10,7 +10,6 @@ use Partitura\Exception\NotImplementedException;
 
 /**
  * class CsrfTokenValidationEvent
- * @package Partitura\Event\Form
  */
 class CsrfTokenValidationEvent extends FormEvent
 {
@@ -21,20 +20,16 @@ class CsrfTokenValidationEvent extends FormEvent
         $this->requestDto = $requestDto;
     }
 
-    /**
-     * @return null|CsrfTokenValidationResultEnum
-     */
-    public function getCsrfTokenValidationResult() : ?CsrfTokenValidationResultEnum
+    public function getCsrfTokenValidationResult(): ?CsrfTokenValidationResultEnum
     {
         return $this->csrfTokenValidationResult;
     }
 
     /**
-     * @param CsrfTokenValidationResultEnum $csrfTokenValidationResult
      *
      * @return $this
      */
-    public function setCsrfTokenValidationResult(CsrfTokenValidationResultEnum $csrfTokenValidationResult) : static
+    public function setCsrfTokenValidationResult(CsrfTokenValidationResultEnum $csrfTokenValidationResult): static
     {
         $this->csrfTokenValidationResult = $csrfTokenValidationResult;
 
@@ -43,10 +38,10 @@ class CsrfTokenValidationEvent extends FormEvent
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @throws NotImplementedException
      */
-    public function setRequestDto(AbstractFormRequestDto $requestDto) : static
+    public function setRequestDto(AbstractFormRequestDto $requestDto): static
     {
         throw new NotImplementedException("Cannot set request DTO in handling event object.");
     }

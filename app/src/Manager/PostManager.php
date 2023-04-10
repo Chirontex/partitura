@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Manager;
@@ -10,7 +11,6 @@ use Partitura\Repository\PostRepository;
 
 /**
  * Class PostManager
- * @package Partitura\Manager
  */
 class PostManager
 {
@@ -22,13 +22,11 @@ class PostManager
     }
 
     /**
-     * @param string $uri
-     * 
+     *
      * @throws EntityNotFoundException
      *
-     * @return Post
      */
-    public function getPostByUri(string $uri) : Post
+    public function getPostByUri(string $uri): Post
     {
         if (empty($uri)) {
             throw new EntityNotFoundException("Post cannot be found by empty uri.");

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event\Form\Profile;
@@ -7,7 +8,6 @@ use Partitura\Event\Form\RequestDtoHandleEvent;
 
 /**
  * Class MainInfoHandlingProcessEvent
- * @package Partitura\Event\Form\Profile
  */
 class MainInfoHandlingProcessEvent extends RequestDtoHandleEvent
 {
@@ -16,7 +16,7 @@ class MainInfoHandlingProcessEvent extends RequestDtoHandleEvent
      *
      * @return $this
      */
-    public function setFieldsToResponseParameters(array $fields) : static
+    public function setFieldsToResponseParameters(array $fields): static
     {
         $this->responseParameters->set("fields", $fields);
 

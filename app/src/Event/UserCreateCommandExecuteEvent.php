@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event;
@@ -8,7 +9,6 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class UserCreateCommandExecuteEvent
- * @package Partitura\Event
  */
 class UserCreateCommandExecuteEvent extends Event
 {
@@ -16,10 +16,7 @@ class UserCreateCommandExecuteEvent extends Event
     {
     }
 
-    /**
-     * @return CreateUserDto
-     */
-    public function getCreateUserDto() : CreateUserDto
+    public function getCreateUserDto(): CreateUserDto
     {
         return $this->createUserDto;
     }

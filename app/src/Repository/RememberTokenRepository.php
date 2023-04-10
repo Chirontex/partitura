@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Repository;
@@ -9,11 +10,11 @@ use Partitura\Entity\RememberToken;
 
 /**
  * Remember-me-tokens repository.
- * @package Partitura\Repository
+ *
  * @extends Repository<RememberToken>
  *
- * @method RememberToken|null find($id, $lockMode = null, $lockVersion = null)
- * @method RememberToken|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|RememberToken find($id, $lockMode = null, $lockVersion = null)
+ * @method null|RememberToken findOneBy(array $criteria, array $orderBy = null)
  * @method ArrayCollection<int, RememberToken> findAll()
  * @method ArrayCollection<RememberToken> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -25,11 +26,10 @@ class RememberTokenRepository extends Repository
     }
 
     /**
-     * @param string $username
      *
      * @return ArrayCollection<RememberToken>
      */
-    public function findByUsername(string $username) : ArrayCollection
+    public function findByUsername(string $username): ArrayCollection
     {
         return $this->findBy(["username" => $username]);
     }

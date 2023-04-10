@@ -10,17 +10,16 @@ use Partitura\Service\RouteDataGettingService;
 
 /**
  * Class CsrfTokenIdResolver
- * @package Partitura\Resolver
  */
 class CsrfTokenIdResolver implements CsrfTokenIdResolverInterface
 {
     public function __construct(
         protected RouteDataGettingService $routeDataGettingService
-    ) { 
+    ) {
     }
 
     /** {@inheritDoc} */
-    public function resolveCsrfTokenIdByRouteName(string $routeName) : string
+    public function resolveCsrfTokenIdByRouteName(string $routeName): string
     {
         $routeDataDto = $this->routeDataGettingService->getRouteDataByName($routeName);
 

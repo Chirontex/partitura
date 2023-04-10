@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Interface FillerValuesFactoryInterface
- * @package Partitura\Interfaces
  */
 interface FillerValuesFactoryInterface
 {
@@ -17,12 +16,11 @@ interface FillerValuesFactoryInterface
      *
      * @return ArrayCollection<string, mixed>
      */
-    public function getFillerValuesCollection() : ArrayCollection;
+    public function getFillerValuesCollection(): ArrayCollection;
 
     /**
      * Возвращает представление, значения для полей которого необходимо генерировать данному классу.
      *
-     * @return string
      */
-    public static function getView() : string;
+    public static function getView(): string;
 }

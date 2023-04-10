@@ -17,9 +17,8 @@ use Partitura\Kernel;
 
 /**
  * Enum RouteEnum
- * @package Partitura\Enum
  */
-enum RouteEnum : string
+enum RouteEnum: string
 {
     use GetInstanceByValueTrait;
 
@@ -32,10 +31,9 @@ enum RouteEnum : string
     case DASHBOARD = DashboardController::ROUTE_DASHBOARD;
 
     /**
-     * @throws CaseNotFoundException Throws if view was not found by route.
-     * @return string
+     * @throws CaseNotFoundException throws if view was not found by route
      */
-    public function getView() : string
+    public function getView(): string
     {
         /** @var RouteDataGettingServiceInterface $routeDataGettingService */
         $routeDataGettingService = Kernel::getInstance()->getService(RouteDataGettingServiceInterface::class);

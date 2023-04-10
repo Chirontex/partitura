@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event\Form;
@@ -8,7 +9,6 @@ use Partitura\Dto\Form\AbstractFormRequestDto;
 
 /**
  * Class RequestDtoHandleEvent
- * @package Partitura\Event\Form
  */
 abstract class RequestDtoHandleEvent extends CsrfTokenValidationEvent
 {
@@ -24,7 +24,7 @@ abstract class RequestDtoHandleEvent extends CsrfTokenValidationEvent
     /**
      * @return ArrayCollection<string, mixed>
      */
-    public function getResponseParameters() : ArrayCollection
+    public function getResponseParameters(): ArrayCollection
     {
         return $this->responseParameters;
     }
@@ -34,7 +34,7 @@ abstract class RequestDtoHandleEvent extends CsrfTokenValidationEvent
      *
      * @return $this
      */
-    public function setResponseParameters(ArrayCollection $responseParameters) : static
+    public function setResponseParameters(ArrayCollection $responseParameters): static
     {
         $this->responseParameters = $responseParameters;
 
@@ -42,12 +42,10 @@ abstract class RequestDtoHandleEvent extends CsrfTokenValidationEvent
     }
 
     /**
-     * @param string $key
-     * @param string $value
      *
      * @return $this
      */
-    public function setResponseParameter(string $key, string $value) : static
+    public function setResponseParameter(string $key, string $value): static
     {
         $this->responseParameters->set($key, $value);
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Event\AdminLogin;
@@ -9,7 +10,6 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class BeforePasswordValidationEvent
- * @package Partitura\Event\AdminLogin
  */
 class BeforePasswordValidationEvent extends Event
 {
@@ -19,18 +19,12 @@ class BeforePasswordValidationEvent extends Event
     ) {
     }
 
-    /**
-     * @return User
-     */
-    public function getUser() : User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @return PasswordCredentials
-     */
-    public function getPasswordCredentials() : PasswordCredentials
+    public function getPasswordCredentials(): PasswordCredentials
     {
         return $this->passwordCredentials;
     }

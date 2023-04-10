@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Partitura\Controller\Profile;
@@ -10,8 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class BannedController
- * @package Partitura\Controller\Profile
- * 
+ *
  * @Route("profile/banned")
  */
 class BannedController extends Controller
@@ -23,11 +23,10 @@ class BannedController extends Controller
     }
 
     /**
-     * @return Response
-     * 
+     *
      * @Route("/", name=BannedController::ROUTE_BANNED)
      */
-    public function banned() : Response
+    public function banned(): Response
     {
         return $this->render($this->viewResolver->resolveViewByRoute(self::ROUTE_BANNED));
     }
