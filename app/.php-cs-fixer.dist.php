@@ -72,7 +72,7 @@ return (new PhpCsFixer\Config())
         'protected_to_private' => true,
         'single_import_per_statement' => true,
         'single_line_comment_spacing' => true,
-        'single_line_comment_style' => true,
+        'single_line_comment_style' => ['comment_types' => ['hash']],
         //'single_space_around_construct' => true,
         'space_after_semicolon' => true,
         'switch_continue_to_break' => true,

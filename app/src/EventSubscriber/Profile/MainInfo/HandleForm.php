@@ -81,7 +81,7 @@ class HandleForm implements EventSubscriberInterface
 
         $this->userFieldValuesSavingService->saveFromCollection($currentUser, $formFieldsCollection);
 
-        // @var string $userFieldCode
+        /** @var string $code */
         foreach (array_diff(
             $userFieldValues->getKeys(),
             $formFieldsCollection->getKeys()
