@@ -69,7 +69,7 @@ class CreateUserDto
 
     public function getRole(): string
     {
-        return empty($this->role) ? RoleEnum::ROLE_USER->value : (string)$this->role;
+        return (string)$this->role;
     }
 
     /**

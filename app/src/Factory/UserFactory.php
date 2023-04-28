@@ -33,8 +33,11 @@ class UserFactory
      */
     public function createUser(CreateUserDto $createUserDto): User
     {
-        if (empty($roleCode)) {
-            $roleCode = RoleEnum::ROLE_USER->value;
+        /*
+         * У пользователя обязательно должна быть роль, поэтому если она до сих пор не была определена, то определяем её здесь.
+         */
+        if (empty($createUserDto->getRole())) {
+            $createUserDto->setRole(RoleEnum::ROLE_USER);
         }
 
         $user = (new User())
