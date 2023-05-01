@@ -76,6 +76,6 @@ composer phpstan-analyse
 ### Контроллеры
 
 1. Определить DTO запроса, прописать атрибуты JMS Serializer для его свойств.
-2. Определить наследника `Partitura\Factory\RequestDto\AbstractRequestDtoFactory`, метод `getDtoClass()` должен возвращать полное имя ранее определённого DTO.
+2. Определить наследника `Partitura\Factory\RequestDto\AbstractRequestDtoFactory`. Метод `getDtoClass()` должен возвращать полное имя ранее определённого DTO.
 
 Теперь можно указывать ранее определённый DTO как аргумент в экшне контроллера.
