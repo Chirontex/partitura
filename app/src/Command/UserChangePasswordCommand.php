@@ -27,8 +27,7 @@ class UserChangePasswordCommand extends Command implements LoggerAwareInterface
 
     protected const COMMAND_NAME = "partitura:user:change-password";
 
-    /** @var UserRepository */
-    protected $userRepository;
+    protected UserRepository $userRepository;
 
     public function __construct(
         ManagerRegistry $registry,
