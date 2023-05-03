@@ -11,10 +11,7 @@ use Partitura\Factory\UserFactory;
 use Partitura\Log\Trait\LoggerAwareTrait;
 use Partitura\Service\User\UserSavingService;
 use Psr\Log\LoggerAwareInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
@@ -28,12 +25,12 @@ class UserCreateCommand extends Command implements LoggerAwareInterface
     protected const COMMAND_NAME = "partitura:user:create";
 
     public function __construct(
+        CreateUserDtoFactory $createUserDtoFactory,
         protected UserSavingService $userSavingService,
         protected UserFactory $userFactory,
-        protected CreateUserDtoFactory $createUserDtoFactory,
         protected EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct();
+        parent::__construct($createUserDtoFactory);
     }
 
     /** {@inheritDoc} */
@@ -43,20 +40,24 @@ class UserCreateCommand extends Command implements LoggerAwareInterface
             ->setName(self::COMMAND_NAME)
             ->setDescription("Creates a new user.")
             ->setHidden(false)
-            ->setAliases(["user:create", "create:user", "partitura:create:user"])
+            ->setAliases([
+                "partitura:create:user",
+                "partitura:user:create",
+                "user:create",
+                "create:user",
+            ])
             ->setHelp("This command helps you to create a new user. Firstly must be used to create a root user.")
             ->addArgument(CreateUserDto::USERNAME, InputArgument::REQUIRED, "Username. Required. Must be unique.")
             ->addArgument(CreateUserDto::PASSWORD, InputArgument::REQUIRED, "Users's password. Required.")
             ->addArgument(CreateUserDto::ROLE, InputArgument::OPTIONAL, "User's role code. Optional. ROLE_USER by default.");
     }
 
-    /** {@inheritDoc} */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    /**
+     * @param CreateUserDto $dto
+     */
+    protected function doExecute(object $dto): void
     {
         try {
-            /** @var CreateUserDto */
-            $dto = $this->createUserDtoFactory->createByConsoleInput($input);
-
             $this->eventDispatcher->dispatch(
                 new UserCreateCommandExecuteEvent($dto)
             );
@@ -72,13 +73,11 @@ class UserCreateCommand extends Command implements LoggerAwareInterface
                 $user->getDatetimeCreated()?->format("Y-m-d H:i:s")
             ));
         } catch (Throwable $e) {
-            $output->writeln($e->getMessage());
+            $this->output->writeln($e->getMessage());
 
-            return static::FAILURE;
+            throw $e;
         }
 
-        $output->writeln("User created successfully!");
-
-        return static::SUCCESS;
+        $this->output->writeln("User created successfully!");
     }
 }
