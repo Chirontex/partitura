@@ -20,8 +20,8 @@ git clone https://<username>:<personal_access_token>@github.com/chirontex/partit
 3. Скопировать файл __/partitura/app/.env-example__ в __/partitura/.env__ и указать секретные данные.
 4. Выполнить команды:
 ```bash
-docker build -t partitura:latest .
-docker run --rm -it -p 80:80/tcp -p 3306:3306/tcp -p 9003:9003/tcp partitura:latest
+docker build -t <name>/partitura:latest .
+docker run --rm -it -p 80:80/tcp -p 3306:3306/tcp -p 9003:9003/tcp <name>/partitura:latest
 ```
 Проброс портов можно варьировать в зависимости от ваших технических возможностей и предпочтений.
 
