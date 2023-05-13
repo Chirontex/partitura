@@ -10,12 +10,12 @@
 ### Быстрое создание dev-среды в docker-контейнере
 
 0. Создать форк этого репозитория.
-1. Создать пустую директорию (например, __/partitura__) и клонировать в неё репозиторий: `git clone https://github.com/chirontex/partitura /partitura`.
+1. Создать пустую директорию (например, __/partitura__) и клонировать в неё репозиторий: `git clone https://github.com/<username>/partitura /partitura`.
 2. Создать файл __/partitura/git-clone.sh__ следующего вида:
 ```bash
 git config --global user.name <name>
 git config --global user.email <email>
-git clone https://<username>:<personal_access_token>@github.com/chirontex/partitura /www
+git clone https://<username>:<personal_access_token>@github.com/<username>/partitura /www
 ```
 3. Скопировать файл __/partitura/app/.env-example__ в __/partitura/.env__ и указать секретные данные.
 4. Выполнить команды:
@@ -32,8 +32,6 @@ docker run --rm -it -p 80:80/tcp -p 3306:3306/tcp -p 9003:9003/tcp <name>/partit
 Клиентская часть CMS будет доступна по указанному выше адресу.
 
 После этого можно подключаться к docker-контейнеру.
-
-__P.S.__ Оригинальный адрес репозитория везде заменяем на адрес своего форка, конечно же.
 
 ## Команды CLI
 
