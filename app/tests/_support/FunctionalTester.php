@@ -1,5 +1,5 @@
 <?php
-namespace App\Tests;
+namespace Partitura\Tests;
 
 /**
  * Inherited Methods

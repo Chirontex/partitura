@@ -8,5 +8,5 @@ actor: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://localhost:8000
-        - \App\Tests\Helper\Acceptance
+            url: http://partitura.loc
+        - \Partitura\Tests\Helper\Acceptance
