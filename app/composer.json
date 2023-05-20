@@ -104,6 +104,7 @@
     },
     "require-dev": {
         "codeception/codeception": "^5.0",
+        "codeception/module-asserts": "^3.0",
         "codeception/module-phpbrowser": "^3.0",
         "codeception/module-symfony": "^3.1",
         "friendsofphp/php-cs-fixer": "^3.14",
