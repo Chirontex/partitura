@@ -7,3 +7,9 @@ modules:
     enabled:
         - Asserts
         - \Partitura\Tests\Helper\Unit
+        - Symfony:
+            app_path: 'src'
+            environment: 'test'
+            kernel_class: 'Partitura\Kernel'
+        - Doctrine2:
+            depends: Symfony
