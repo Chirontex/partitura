@@ -89,7 +89,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "php-cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --path-mode=intersection ./src --config=./.php-cs-fixer.dist.php",
+        "php-cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --path-mode=intersection ./src ./tests/Builder ./tests/acceptance ./tests/functional ./tests/unit --config=./.php-cs-fixer.dist.php",
         "phpstan-analyse": "php ./vendor/bin/phpstan analyse -c ./phpstan.neon",
         "unit": "php ./vendor/bin/codecept run unit"
     },

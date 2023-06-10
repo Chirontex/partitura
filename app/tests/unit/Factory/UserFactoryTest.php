@@ -15,6 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @internal
+ *
  * @covers \Partitura\Factory\UserFactory
  */
 final class UserFactoryTest extends Unit
