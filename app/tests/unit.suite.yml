@@ -11,5 +11,5 @@ modules:
             app_path: 'src'
             environment: 'test'
             kernel_class: 'Partitura\Kernel'
-        - Doctrine2:
-            depends: Symfony
+#        - Doctrine2:
+#            depends: Symfony
