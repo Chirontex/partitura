@@ -8,8 +8,6 @@ use Partitura\Exception\CaseNotFoundException;
 
 /**
  * Trait GetInstanceByValueTrait.
- *
- * @method static[] cases()
  */
 trait GetInstanceByValueTrait
 {
@@ -19,7 +17,10 @@ trait GetInstanceByValueTrait
      */
     public static function getInstanceByValue($value): self
     {
-        foreach (self::cases() as $case) {
+        /** @var static[] $cases */
+        $cases = self::cases();
+
+        foreach ($cases as $case) {
             if ($case->value === $value) {
                 return $case;
             }
