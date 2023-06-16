@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Partitura\Tests\Unit;
+namespace Partitura\Tests\Unit\Factory;
 
 use Partitura\Exception\AuthenticationException;
 use Partitura\Factory\AuthenticationDtoFactory;
