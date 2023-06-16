@@ -7,8 +7,8 @@ namespace Partitura\Factory;
 use Partitura\Dto\AuthenticationDto;
 use Partitura\Exception\AuthenticationException;
 use Partitura\Exception\SkipAuthenticationException;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 
 /**
  * Class AuthenticationDtoFactory.
