@@ -8,6 +8,8 @@ use Partitura\Dto\CreateUserDto;
 use Partitura\Enum\RoleEnum;
 use Partitura\Factory\UserFactory;
 use Partitura\Tests\Builder\Factory\UserFactoryBuilder;
+use Partitura\Tests\Traits\GeneratePasswordTrait;
+use Partitura\Tests\Traits\GenerateUsernameTrait;
 use Partitura\Tests\Unit\SymfonyUnitTemplate;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -18,6 +20,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 final class UserFactoryTest extends SymfonyUnitTemplate
 {
+    use GeneratePasswordTrait;
+    use GenerateUsernameTrait;
+
     protected UserFactory $userFactory;
 
     protected function _before(): void
@@ -78,30 +83,6 @@ final class UserFactoryTest extends SymfonyUnitTemplate
             $user,
             $createUserDto->getPassword()
         ));
-    }
-
-    private function generateUsername(int $length = 10): string
-    {
-        return $this->generateString($length, range('a', 'z'));
-    }
-
-    private function generatePassword(int $length = 10): string
-    {
-        return $this->generateString(
-            $length,
-            array_merge(range('a', 'z'), range(0, 9))
-        );
-    }
-
-    private function generateString(int $length, array $chars): string
-    {
-        $string = [];
-
-        for ($i = 0; $i < $length; ++$i) {
-            $string[] = $chars[rand(0, count($chars) - 1)];
-        }
-
-        return implode('', $string);
     }
 
     private function getPasswordHasher(): UserPasswordHasherInterface
