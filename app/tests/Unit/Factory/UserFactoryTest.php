@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Partitura\Tests\Unit\Factory;
 
-use Codeception\Module\Symfony;
-use Codeception\Test\Unit;
 use Partitura\Dto\CreateUserDto;
 use Partitura\Enum\RoleEnum;
 use Partitura\Factory\UserFactory;
 use Partitura\Tests\Builder\Factory\UserFactoryBuilder;
-use Partitura\Tests\UnitTester;
+use Partitura\Tests\Unit\SymfonyUnitTemplate;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
@@ -18,32 +16,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  *
  * @covers \Partitura\Factory\UserFactory
  */
-final class UserFactoryTest extends Unit
+final class UserFactoryTest extends SymfonyUnitTemplate
 {
-    protected UnitTester $tester;
-
-    protected Symfony $symfony;
-
     protected UserFactory $userFactory;
 
     protected function _before(): void
     {
-        $this->symfony->_before($this);
+        parent::_before();
 
         $this->userFactory = (new UserFactoryBuilder(
             $this->symfony,
             $this
         ))->createUserFactory();
-    }
-
-    protected function _after(): void
-    {
-        $this->symfony->_after($this);
-    }
-
-    protected function _inject(Symfony $symfony): void
-    {
-        $this->symfony = $symfony;
     }
 
     public function testCreateUser(): void
