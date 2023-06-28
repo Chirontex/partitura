@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Partitura\Service\User;
 
 use Partitura\Entity\User;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * Class CurrentUserService.
