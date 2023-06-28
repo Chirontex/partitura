@@ -54,4 +54,38 @@ final class PostViewFactoryTest extends SymfonyUnitTemplate
         $this->assertEquals($user, $postView->getUser());
         $this->assertEmpty($postView->getIpAddress());
     }
+
+    public function testCreateByPostRequestWithIpAddress(): void
+    {
+        $ip = '127.0.0.1';
+        $request = new Request(server: ['REMOTE_ADDR' => $ip]);
+        $post = new Post();
+        $postView = $this->postViewFactory->createByPostRequest(
+            $post,
+            $request
+        );
+
+        $this->assertEquals($post, $postView->getPost());
+        $this->assertEquals($ip, $postView->getIpAddress());
+        $this->assertNull($postView->getUser());
+    }
+
+    public function testCreateByPostRequestWithIpAndUser(): void
+    {
+        $ip = '127.0.0.1';
+        $request = new Request(server: ['REMOTE_ADDR' => $ip]);
+        $post = new Post();
+        $user = new User();
+
+        $this->currentUserService->setCurrentUser($user);
+
+        $postView = $this->postViewFactory->createByPostRequest(
+            $post,
+            $request
+        );
+
+        $this->assertEquals($post, $postView->getPost());
+        $this->assertEquals($user, $postView->getUser());
+        $this->assertEquals($ip, $postView->getIpAddress());
+    }
 }
