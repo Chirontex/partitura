@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Partitura\Tests\Builder\Factory;
+namespace Partitura\Tests\Unit\Builder\Factory;
 
 use Codeception\Module\Symfony;
 use Codeception\Test\Unit;
-use Doctrine\Persistence\AbstractManagerRegistry;
 use Partitura\Entity\Role;
 use Partitura\Factory\UserFactory;
 use Partitura\Repository\RoleRepository;
 use Partitura\Service\User\PasswordSettingService;
-use PHPUnit\Framework\MockObject\MockObject;
+use Partitura\Tests\Unit\Builder\Registry\MockManagerRegistryBuilder;
 
 class UserFactoryBuilder
 {
@@ -23,16 +22,8 @@ class UserFactoryBuilder
 
     public function createUserFactory(): UserFactory
     {
-        /** @var AbstractManagerRegistry|MockObject $mockManagerRegistry */
-        $mockManagerRegistry = $this->codeception->getMockBuilder(AbstractManagerRegistry::class)
-            ->onlyMethods(['getRepository'])
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass()
-        ;
-
-        $mockManagerRegistry
-            ->method('getRepository')
-            ->willReturnCallback(function () {
+        $mockManagerRegistry = (new MockManagerRegistryBuilder($this->codeception))
+            ->createMockManagerRegistry(function () {
                 return $this->codeception->make(
                     RoleRepository::class,
                     [

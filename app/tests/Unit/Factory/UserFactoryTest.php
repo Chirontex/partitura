@@ -7,7 +7,7 @@ namespace Partitura\Tests\Unit\Factory;
 use Partitura\Dto\CreateUserDto;
 use Partitura\Enum\RoleEnum;
 use Partitura\Factory\UserFactory;
-use Partitura\Tests\Builder\Factory\UserFactoryBuilder;
+use Partitura\Tests\Unit\Builder\Factory\UserFactoryBuilder;
 use Partitura\Tests\Traits\GeneratePasswordTrait;
 use Partitura\Tests\Traits\GenerateUsernameTrait;
 use Partitura\Tests\Unit\SymfonyUnitTemplate;
