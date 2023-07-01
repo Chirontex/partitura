@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Partitura\Tests\Unit\Factory;
 
+use Codeception\Test\Unit;
 use Partitura\Entity\Post;
 use Partitura\Entity\User;
 use Partitura\Exception\PostViewException;
 use Partitura\Factory\PostViewFactory;
 use Partitura\Tests\Unit\Mock\CurrentUserService;
-use Partitura\Tests\Unit\SymfonyUnitTemplate;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @covers \Partitura\Factory\PostViewFactory
  */
-final class PostViewFactoryTest extends SymfonyUnitTemplate
+final class PostViewFactoryTest extends Unit
 {
     protected CurrentUserService $currentUserService;
 
@@ -25,8 +25,6 @@ final class PostViewFactoryTest extends SymfonyUnitTemplate
 
     protected function _before(): void
     {
-        parent::_before();
-
         $this->currentUserService = new CurrentUserService();
         $this->postViewFactory = new PostViewFactory($this->currentUserService);
     }
