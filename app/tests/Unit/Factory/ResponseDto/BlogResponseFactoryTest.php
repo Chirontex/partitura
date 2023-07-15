@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\AbstractManagerRegistry;
 use Partitura\Dto\Api\BlogRequestDto;
 use Partitura\Entity\Post;
+use Partitura\Enum\PostTypeEnum;
 use Partitura\Factory\ResponseDto\BlogResponseFactory;
 use Partitura\Repository\PostRepository;
 use Partitura\Tests\Unit\Builder\Registry\MockManagerRegistryBuilder;
@@ -36,6 +37,24 @@ final class BlogResponseFactoryTest extends Unit
 
         $this->assertCount(0, $blogResponseDto->getPosts());
         $this->assertEquals(1, $blogResponseDto->getPages());
+    }
+
+    public function testCreateBlogResponseDtoByTypeIrrelevantPostCollection(): void
+    {
+        $this->posts[1] = (new Post())
+            ->setId(1)
+            ->setType(PostTypeEnum::DRAFT)
+            ->setInBlog(true)
+        ;
+
+        $blogResponseDto = $this->createBlogResponseFactory()
+            ->createBlogResponseDto((new BlogRequestDto())
+                ->setPage(1)
+                ->setLimit(20))
+        ;
+
+        $this->assertCount(0, $blogResponseDto->getPosts());
+        $this->assertEquals(0, $blogResponseDto->getPages());
     }
 
     private function createBlogResponseFactory(): BlogResponseFactory
@@ -78,7 +97,7 @@ final class BlogResponseFactoryTest extends Unit
                         ));
 
                         if (!empty($criteria)) {
-                            $posts->filter(function (Post $post) use ($criteria): bool {
+                            $posts = $posts->filter(function (Post $post) use ($criteria): bool {
                                 return $this->isEntityMeetsCriteria($post, $criteria);
                             });
                         }
