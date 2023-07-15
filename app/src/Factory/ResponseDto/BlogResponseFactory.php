@@ -40,7 +40,7 @@ class BlogResponseFactory
             $fullPages = (int)($postsCount / $requestDto->getLimit());
             $pages = $postsCount % $requestDto->getLimit() > 0 ? $fullPages + 1 : $fullPages;
         } else {
-            $pages = 1;
+            $pages = $postsCount > 0 ? 1 : 0;
         }
 
         $blogViewEvent = new BlogViewEvent(

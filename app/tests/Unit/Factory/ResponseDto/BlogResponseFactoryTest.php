@@ -36,7 +36,7 @@ final class BlogResponseFactoryTest extends Unit
         ;
 
         $this->assertCount(0, $blogResponseDto->getPosts());
-        $this->assertEquals(1, $blogResponseDto->getPages());
+        $this->assertEquals(0, $blogResponseDto->getPages());
     }
 
     public function testCreateBlogResponseDtoByTypeIrrelevantPostCollection(): void
