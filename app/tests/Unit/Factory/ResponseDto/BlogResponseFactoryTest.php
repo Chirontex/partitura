@@ -28,7 +28,7 @@ final class BlogResponseFactoryTest extends Unit
     /** @var ?Post[] */
     private array $posts = [];
 
-    public function testCreateEmptyBlogPostCollection(): void
+    public function testCreateBlogResponseDtoByEmptyPostCollection(): void
     {
         $blogResponseDto = $this->createBlogResponseFactory()
             ->createBlogResponseDto(new BlogRequestDto())
