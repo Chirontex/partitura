@@ -57,6 +57,24 @@ final class BlogResponseFactoryTest extends Unit
         $this->assertEquals(0, $blogResponseDto->getPages());
     }
 
+    public function testCreateBlogResponseDtoByInBlogIrrelevantPostCollection(): void
+    {
+        $this->posts[1] = (new Post())
+            ->setId(1)
+            ->setType(PostTypeEnum::PUBLISHED)
+            ->setInBlog(false)
+        ;
+
+        $blogResponseDto = $this->createBlogResponseFactory()
+            ->createBlogResponseDto((new BlogRequestDto())
+                ->setPage(1)
+                ->setLimit(20))
+        ;
+
+        $this->assertCount(0, $blogResponseDto->getPosts());
+        $this->assertEquals(0, $blogResponseDto->getPages());
+    }
+
     private function createBlogResponseFactory(): BlogResponseFactory
     {
         /** @var MockObject|TraceableEventDispatcher $eventDispatcher */
