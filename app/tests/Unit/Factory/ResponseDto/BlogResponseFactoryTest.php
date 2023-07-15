@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Partitura\Tests\Unit\Builder\Factory\ResponseDto;
 
 use Codeception\Test\Unit;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\AbstractManagerRegistry;
+use Partitura\Dto\Api\BlogPostDto;
 use Partitura\Dto\Api\BlogRequestDto;
 use Partitura\Entity\Post;
+use Partitura\Entity\User;
 use Partitura\Enum\PostTypeEnum;
 use Partitura\Factory\ResponseDto\BlogResponseFactory;
 use Partitura\Repository\PostRepository;
@@ -75,6 +78,140 @@ final class BlogResponseFactoryTest extends Unit
         $this->assertEquals(0, $blogResponseDto->getPages());
     }
 
+    public function testCreateBlogResponseDtoWithOnePost(): void
+    {
+        $author = (new User())->setUsername('Author');
+
+        $this->posts[1] = (new Post())
+            ->setId(1)
+            ->setType(PostTypeEnum::PUBLISHED)
+            ->setInBlog(true)
+            ->setDateTimeCreated((new DateTime())->setTimestamp(1))
+            ->setTitle('Post 1')
+            ->setPreview('Post 1 preview')
+            ->setName('post_1')
+            ->setAuthor($author)
+        ;
+
+        $blogResponseDto = $this->createBlogResponseFactory()
+            ->createBlogResponseDto((new BlogRequestDto())
+                ->setPage(1)
+                ->setLimit(1))
+        ;
+
+        $this->assertCount(1, $blogResponseDto->getPosts());
+        $this->assertBlogPostDtoEqualsPost(
+            $this->posts[1],
+            $blogResponseDto->getPosts()->first()
+        );
+        $this->assertEquals(1, $blogResponseDto->getPages());
+    }
+
+    public function testCreateBlogResponseDtoWithPostsCorrelatingWithLimit(): void
+    {
+        $limit = 3;
+        $pages = 3;
+        $author = (new User())->setUsername('Author');
+
+        for ($i = 1; $i <= $limit * $pages; ++$i) {
+            $this->posts[$i] = (new Post())
+                ->setId($i)
+                ->setType(PostTypeEnum::PUBLISHED)
+                ->setInBlog(true)
+                ->setDateTimeCreated((new DateTime())->setTimestamp(1 + $i))
+                ->setTitle(sprintf('Post %u', $i))
+                ->setPreview(sprintf('Post %u preview', $i))
+                ->setName(sprintf('post_%u', $i))
+                ->setAuthor($author)
+            ;
+        }
+
+        $blogResponseDto = $this->createBlogResponseFactory()
+            ->createBlogResponseDto((new BlogRequestDto())
+                ->setPage(1)
+                ->setLimit($limit))
+        ;
+
+        $this->assertCount($limit, $blogResponseDto->getPosts());
+
+        $i = 0;
+
+        /** @var BlogPostDto $blogPostDto */
+        foreach ($blogResponseDto->getPosts() as $blogPostDto) {
+            $post = $this->posts[count($this->posts) - $i];
+
+            $this->assertBlogPostDtoEqualsPost($post, $blogPostDto);
+
+            ++$i;
+        }
+
+        $this->assertEquals($pages, $blogResponseDto->getPages());
+    }
+
+    public function testCreateBlogResponseDtoWithPostsNotCorrelatingWithLimit(): void
+    {
+        $limit = 3;
+        $pages = 4;
+        $author = (new User())->setUsername('Author');
+
+        for ($i = 1; $i <= $limit * ($pages - 1) + 1; ++$i) {
+            $this->posts[$i] = (new Post())
+                ->setId($i)
+                ->setType(PostTypeEnum::PUBLISHED)
+                ->setInBlog(true)
+                ->setDateTimeCreated((new DateTime())->setTimestamp(1 + $i))
+                ->setTitle(sprintf('Post %u', $i))
+                ->setPreview(sprintf('Post %u preview', $i))
+                ->setName(sprintf('post_%u', $i))
+                ->setAuthor($author)
+            ;
+        }
+
+        $blogResponseDto = $this->createBlogResponseFactory()
+            ->createBlogResponseDto((new BlogRequestDto())
+                ->setPage(1)
+                ->setLimit($limit))
+        ;
+
+        $this->assertCount($limit, $blogResponseDto->getPosts());
+
+        $i = 0;
+
+        /** @var BlogPostDto $blogPostDto */
+        foreach ($blogResponseDto->getPosts() as $blogPostDto) {
+            $post = $this->posts[count($this->posts) - $i];
+
+            $this->assertBlogPostDtoEqualsPost($post, $blogPostDto);
+
+            ++$i;
+        }
+
+        $this->assertEquals($pages, $blogResponseDto->getPages());
+    }
+
+    private function assertBlogPostDtoEqualsPost(
+        Post $post,
+        BlogPostDto $blogPostDto
+    ): void {
+        $this->assertEquals($post->getTitle(), $blogPostDto->getTitle());
+        $this->assertEquals(
+            $post->getPreview(),
+            $blogPostDto->getPreview()
+        );
+        $this->assertEquals(
+            $post->getAuthor()->getUsername(),
+            $blogPostDto->getAuthor()
+        );
+        $this->assertEquals($post->getUri(), $blogPostDto->getUri());
+        $this->assertEquals(
+            $post
+                ->getDatetimeCreated()
+                ->format(BlogPostDto::DATE_CREATED_FORMAT)
+            ,
+            $blogPostDto->getDateCreated()
+        );
+    }
+
     private function createBlogResponseFactory(): BlogResponseFactory
     {
         /** @var MockObject|TraceableEventDispatcher $eventDispatcher */
@@ -107,26 +244,23 @@ final class BlogResponseFactoryTest extends Unit
                         ?int $limit = null,
                         ?int $offset = null
                     ): ArrayCollection {
-                        $posts = new ArrayCollection(array_slice(
-                            $this->posts,
-                            (int)$offset,
-                            (int)$limit,
-                            true
-                        ));
-
                         if (!empty($criteria)) {
-                            $posts = $posts->filter(function (Post $post) use ($criteria): bool {
-                                return $this->isEntityMeetsCriteria($post, $criteria);
-                            });
+                            $posts = array_filter(
+                                $this->posts,
+                                function (Post $post) use ($criteria): bool {
+                                    return $this->isEntityMeetsCriteria($post, $criteria);
+                                }
+                            );
+                        } else {
+                            $posts = $this->posts;
                         }
 
                         if (!empty($orderBy)) {
-                            $posts = $posts->toArray();
-
                             uasort(
                                 $posts,
                                 static function (Post $a, Post $b) use ($orderBy): int {
-                                    $propertyName = reset(array_keys($orderBy));
+                                    $orderByKeys = array_keys($orderBy);
+                                    $propertyName = reset($orderByKeys);
                                     $method = $orderBy[$propertyName];
 
                                     $aValue = (new ReflectionProperty($a, $propertyName))->getValue($a);
@@ -148,7 +282,12 @@ final class BlogResponseFactoryTest extends Unit
                                 }
                             );
 
-                            $posts = new ArrayCollection($posts);
+                            $posts = new ArrayCollection(array_slice(
+                                $posts,
+                                (int) $offset,
+                                (int) $limit,
+                                true
+                            ));
                         }
 
                         return $posts;

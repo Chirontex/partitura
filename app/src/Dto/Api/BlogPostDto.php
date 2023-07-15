@@ -12,6 +12,8 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class BlogPostDto
 {
+    public const DATE_CREATED_FORMAT = 'Y-m-d H:i';
+
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('title')]
     protected ?string $title = null;
@@ -107,7 +109,7 @@ class BlogPostDto
      */
     public function setDateCreated(?DateTime $dateCreated): static
     {
-        $this->dateCreated = $dateCreated?->format("Y-m-d H:i");
+        $this->dateCreated = $dateCreated?->format(static::DATE_CREATED_FORMAT);
 
         return $this;
     }
