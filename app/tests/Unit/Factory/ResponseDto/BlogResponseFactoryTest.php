@@ -40,7 +40,7 @@ final class BlogResponseFactoryTest extends Unit
 
     private function createBlogResponseFactory(): BlogResponseFactory
     {
-        /** @var TraceableEventDispatcher $eventDispatcher */
+        /** @var MockObject|TraceableEventDispatcher $eventDispatcher */
         $eventDispatcher = $this->makeEmpty(TraceableEventDispatcher::class);
 
         return new BlogResponseFactory(
