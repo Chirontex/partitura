@@ -242,8 +242,7 @@ final class BlogResponseFactoryTest extends Unit
         $this->assertEquals(
             $post
                 ->getDatetimeCreated()
-                ->format(BlogPostDto::DATE_CREATED_FORMAT)
-            ,
+                ->format(BlogPostDto::DATE_CREATED_FORMAT),
             $blogPostDto->getDateCreated()
         );
     }
@@ -320,8 +319,8 @@ final class BlogResponseFactoryTest extends Unit
 
                             $posts = new ArrayCollection(array_slice(
                                 $posts,
-                                (int) $offset,
-                                (int) $limit,
+                                (int)$offset,
+                                (int)$limit,
                                 true
                             ));
                         }
