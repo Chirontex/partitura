@@ -29,6 +29,8 @@ use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
  */
 final class BlogResponseFactoryTest extends Unit
 {
+    private const MAX_PAGES = 10;
+
     /** @var ?Post[] */
     private array $posts = [];
 
@@ -107,10 +109,14 @@ final class BlogResponseFactoryTest extends Unit
         $this->assertEquals(1, $blogResponseDto->getPages());
     }
 
-    public function testCreateBlogResponseDtoWithPostsCorrelatingWithLimit(): void
-    {
+    /**
+     * @dataProvider getManyPostsArgs
+     */
+    public function testCreateBlogResponseDtoWithPostsCorrelatingWithLimit(
+        int $pages,
+        int $page
+    ): void {
         $limit = 3;
-        $pages = 3;
         $author = (new User())->setUsername('Author');
 
         for ($i = 1; $i <= $limit * $pages; ++$i) {
@@ -128,30 +134,39 @@ final class BlogResponseFactoryTest extends Unit
 
         $blogResponseDto = $this->createBlogResponseFactory()
             ->createBlogResponseDto((new BlogRequestDto())
-                ->setPage(1)
+                ->setPage($page)
                 ->setLimit($limit))
         ;
 
         $this->assertCount($limit, $blogResponseDto->getPosts());
 
-        $i = 0;
+        $offset = 0;
 
         /** @var BlogPostDto $blogPostDto */
         foreach ($blogResponseDto->getPosts() as $blogPostDto) {
-            $post = $this->posts[count($this->posts) - $i];
+            $postId = $this->calculatePostIdForBlogPostDto(
+                $limit,
+                $offset,
+                $page
+            );
+            $post = $this->posts[$postId];
 
             $this->assertBlogPostDtoEqualsPost($post, $blogPostDto);
 
-            ++$i;
+            ++$offset;
         }
 
         $this->assertEquals($pages, $blogResponseDto->getPages());
     }
 
-    public function testCreateBlogResponseDtoWithPostsNotCorrelatingWithLimit(): void
-    {
+    /**
+     * @dataProvider getManyPostsArgs
+     */
+    public function testCreateBlogResponseDtoWithPostsNotCorrelatingWithLimit(
+        int $pages,
+        int $page
+    ): void {
         $limit = 3;
-        $pages = 4;
         $author = (new User())->setUsername('Author');
 
         for ($i = 1; $i <= $limit * ($pages - 1) + 1; ++$i) {
@@ -169,24 +184,45 @@ final class BlogResponseFactoryTest extends Unit
 
         $blogResponseDto = $this->createBlogResponseFactory()
             ->createBlogResponseDto((new BlogRequestDto())
-                ->setPage(1)
+                ->setPage($page)
                 ->setLimit($limit))
         ;
 
-        $this->assertCount($limit, $blogResponseDto->getPosts());
+        $this->assertCount(
+            $pages === $page ? 1 : $limit,
+            $blogResponseDto->getPosts()
+        );
 
-        $i = 0;
+        $offset = 0;
 
         /** @var BlogPostDto $blogPostDto */
         foreach ($blogResponseDto->getPosts() as $blogPostDto) {
-            $post = $this->posts[count($this->posts) - $i];
+            $postId = $this->calculatePostIdForBlogPostDto(
+                $limit,
+                $offset,
+                $page
+            );
+            $post = $this->posts[$postId];
 
             $this->assertBlogPostDtoEqualsPost($post, $blogPostDto);
 
-            ++$i;
+            ++$offset;
         }
 
         $this->assertEquals($pages, $blogResponseDto->getPages());
+    }
+
+    public function getManyPostsArgs(): array
+    {
+        $data = [];
+
+        for ($pages = 1; $pages <= self::MAX_PAGES; ++$pages) {
+            for ($page = 1; $page <= $pages; ++$page) {
+                $data[] = [$pages, $page];
+            }
+        }
+
+        return $data;
     }
 
     private function assertBlogPostDtoEqualsPost(
@@ -313,5 +349,15 @@ final class BlogResponseFactoryTest extends Unit
         }
 
         return true;
+    }
+
+    private function calculatePostIdForBlogPostDto(
+        int $limit,
+        int $offset,
+        int $page
+    ): int {
+        return count($this->posts) - $offset - (
+            $page > 0 ? ($page - 1) * $limit : 0
+        );
     }
 }
