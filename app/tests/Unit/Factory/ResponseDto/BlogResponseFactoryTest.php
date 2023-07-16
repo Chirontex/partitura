@@ -24,8 +24,6 @@ use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
  * @internal
  *
  * @covers \Partitura\Factory\ResponseDto\BlogResponseFactory
- *
- * TODO реализовать другие кейсы
  */
 final class BlogResponseFactoryTest extends Unit
 {
